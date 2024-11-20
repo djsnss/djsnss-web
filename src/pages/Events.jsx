@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Landing = () => {
+const Events = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const Landing = () => {
   )
 }
 
-export default Landing
+export default Events
