@@ -30,7 +30,7 @@ const getIcon = (name) => {
 // Main Footer Component
 function FooterComponent() {
   return (
-    <Footer className="bg-black text-gray-300 rounded-none">
+    <Footer className="bg-blue-950 text-gray-300 rounded-none">
       <div className="w-full">
         {/* Footer Top Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 px-6 sm:px-12 py-10">
