@@ -19,7 +19,7 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <ScrollToTop/>
+      <ScrollToTop />
       
       <div className="flex flex-row justify-center min-h-screen w-screen">
         <Suspense

@@ -45,7 +45,7 @@ function FooterComponent() {
             </p>
             <div className="mt-5 text-sm sm:text-base md:text-lg text-white">
               <p>📍 Address: DJSCE, Sector 5, Vile Parle West, Mumbai, Maharashtra, India</p>
-              <p>📞 Contact: 9876543210</p>
+              <p>📞 Contact: +91 81693 88352</p>
             </div>
           </div>
 
