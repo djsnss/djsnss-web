@@ -18,22 +18,25 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <div className="flex flex-col justify-between min-h-screen">
+      <div className="flex flex-row justify-center min-h-screen w-screen">
         <Suspense
           fallback={
-            <div className="min-h-screen flex items-center justify-center bg-cream">
+            <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
               <Loader className="h-40" />
             </div>
           }>
-            
-          <Sidebar />
+            <div className="w-max">
+              <Sidebar />          
+            </div>
 
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/events" element={<Events />} />
-          </Routes>
+          <div className="w-full h-screen overflow-y-scroll">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/events" element={<Events />} />
+            </Routes>
 
-          <Footer/>
+            <Footer/>
+          </div>
           
         </Suspense>
       </div>

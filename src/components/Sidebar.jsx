@@ -46,16 +46,14 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 h-max sm:h-screen bg-forest-green p-2 shadow-lg transition-all duration-300 ease-in-out ${open ? "w-40 sm:w-48" : "w-12 sm:w-16"} z-50 font-poppins rounded-r-xl`}
+      className={`absolute sm:relative h-max sm:h-screen w-max sm:w-full bg-forest-green p-2 shadow-lg transition-all duration-300 ease-in-out ${open ? "w-40 sm:w-48" : "w-12 sm:w-16"} z-50 font-poppins rounded-br-lg sm:rounded-none`}
     >
       <button
         onClick={() => setOpen(!open)}
         className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
       >
-        <div className="flex items-center justify-center">
-          <FiChevronsRight
-            className={`text-xl transition-transform duration-300 ${open ?"rotate-180" : ""}`}
-          />
+        <div className="flex h-full items-center justify-center">
+          <img src={Logo} alt="DJSNSS" className="h-full flex m-auto my-2"/>
         </div>
       </button>
 
@@ -63,8 +61,6 @@ const Sidebar = () => {
       
 
       <div className={`flex flex-col space-y-2 ${open?"block":"hidden sm:block"}`}>
-        
-        <img src={Logo} alt="DJSNSS" className={`${open ? "w-16 ":"w-16"} flex m-auto my-2`}/>
         
         {navigationLinks.map(({ Icon, title, path }) => (
           <Link
