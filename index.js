@@ -3,6 +3,8 @@ import ConnectMongoDb from "./config/connection.js";
 import env from "dotenv";
 import cors from "cors";
 import volunteerRoutes from "./routes/volunteerRoutes.js"
+import volunteerRouter from "./routes/volunteerR.js";
+
 env.config();
 const PORT = process.env.Port;
 const URL = process.env.Connect_URI;
@@ -23,7 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/volunteers', volunteerRoutes);
+app.use("/volunteer", volunteerRouter);
 
 app.listen(PORT, () => {
-    console.log(`Server connected at PORT ${PORT}`);
-  });
+  console.log(`Server connected at PORT ${PORT}`);
+});
