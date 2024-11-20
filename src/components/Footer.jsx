@@ -34,14 +34,14 @@ function FooterComponent() {
       <div className="w-full">
         {/* Footer Top Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 px-6 sm:px-12 py-10">
-          {/* DJSCE Ecell Section */}
+          {/* DJSNSS Section */}
           <div className="lg:w-1/2">
             <FooterTitle
               className="text-xl sm:text-2xl md:text-3xl pb-3 font-extrabold text-gold"
-              title="DJSCE E-Cell"
+              title="DJS NSS"
             />
             <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed">
-              The Entrepreneurship Cell of DJSCE, fostering innovation, collaboration, and entrepreneurship among students.
+              For You, With You, Always!
             </p>
             <div className="mt-5 text-sm sm:text-base md:text-lg text-white">
               <p>📍 Address: DJSCE, Sector 5, Vile Parle West, Mumbai, Maharashtra, India</p>
@@ -100,7 +100,7 @@ function FooterComponent() {
         <div className="w-full bg-darkgray text-white px-4 sm:px-10 py-4 flex items-center justify-between">
           <FooterCopyright
             href="/"
-            by="DJSCE_E-Cell™"
+            by="DJS NSS™"
             year={2024}
             className="text-xs sm:text-sm md:text-base"
           />
