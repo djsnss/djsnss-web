@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import EventDetails from "./pages/EventDetails";
 
 
 const Home = React.lazy(() => import("./pages/Landing"))
@@ -35,7 +36,8 @@ const App = () => {
           <div className="w-full h-screen overflow-y-scroll">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/events" element={<Events />} />
+              <Route path="/events" element={<Events />}/>
+              <Route path="/eventdetails/:slug" element={<EventDetails />} />
             </Routes>
 
             <Footer/>
