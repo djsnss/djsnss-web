@@ -46,11 +46,11 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`fixed top-0 left-0 h-screen bg-forest-green p-4 shadow-lg transition-all duration-300 ease-in-out ${open ? "w-48" : "w-16"} z-50 font-poppins rounded-r-xl`}
+      className={`fixed top-0 left-0 h-max sm:h-screen bg-forest-green p-2 shadow-lg transition-all duration-300 ease-in-out ${open ? "w-40 sm:w-48" : "w-12 sm:w-16"} z-50 font-poppins rounded-r-xl`}
     >
       <button
         onClick={() => setOpen(!open)}
-        className="w-full h-10 mb-6 rounded-lg bg-slate-100 transition-colors duration-200"
+        className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
       >
         <div className="flex items-center justify-center">
           <FiChevronsRight
@@ -62,9 +62,9 @@ const Sidebar = () => {
     
       
 
-      <div className="flex flex-col space-y-2">
+      <div className={`flex flex-col space-y-2 ${open?"block":"hidden sm:block"}`}>
         
-        <img src={Logo} alt="DJSNSS" className={`${open ? "w-16":"w-16"} flex m-auto`}/>
+        <img src={Logo} alt="DJSNSS" className={`${open ? "w-16 ":"w-16"} flex m-auto my-2`}/>
         
         {navigationLinks.map(({ Icon, title, path }) => (
           <Link
@@ -73,9 +73,9 @@ const Sidebar = () => {
             onClick={() => handleNavigation(path)}
             className={`flex items-center p-2 rounded-lg transition-all duration-200 ${activeRoute === path? "bg-indigo-100 text-jade": "text-white hover:text-indigo-600 hover:bg-slate-100"}`}
           >
-            <Icon className="text-xl sm:text-base " />
+            <Icon className="text-lg sm:text-xl" />
             {open && (
-              <span className="ml-3 text-sm sm:text-xs font-medium whitespace-nowrap">
+              <span className="ml-3 text-sm sm:text-base font-medium whitespace-nowrap">
                 {title}
               </span>
             )}

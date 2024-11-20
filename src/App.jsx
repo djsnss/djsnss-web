@@ -1,10 +1,11 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loaders/loader2/CustomLoader2";
-import Sidebar from "./pages/Sidebar";
+import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
-import Footer from "./pages/Footer";
-import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import Footer from "./components/Footer";
+
+
 const Home = React.lazy(() => import("./pages/Landing"))
 
 
@@ -24,7 +25,7 @@ const App = () => {
               <Loader className="h-40" />
             </div>
           }>
-
+            
           <Sidebar />
 
           <Routes>
@@ -32,7 +33,8 @@ const App = () => {
             <Route path="/events" element={<Events />} />
           </Routes>
 
-          <Footer />
+          <Footer/>
+          
         </Suspense>
       </div>
     </Router>
