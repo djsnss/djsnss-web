@@ -109,7 +109,7 @@ const volunteerSchema = new mongoose.Schema(
       },
       hobbies: {
         type: [String],
-        validate: [arrayLimit, "Exactly 2 hobbies required"],
+        validate: ["Exactly 2 hobbies required"],
       },
       volunteerHours: {
         type: Number,
