@@ -4,6 +4,7 @@ import Loader from "./components/Loaders/loader2/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 
 const Home = React.lazy(() => import("./pages/Landing"))
@@ -18,6 +19,8 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
+      <ScrollToTop/>
+      
       <div className="flex flex-row justify-center min-h-screen w-screen">
         <Suspense
           fallback={
