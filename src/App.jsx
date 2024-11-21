@@ -5,6 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import TimelineComponent from "./components/Timeline";
 
 
 const Home = React.lazy(() => import("./pages/Landing"))
@@ -13,38 +14,38 @@ const Home = React.lazy(() => import("./pages/Landing"))
 const App = () => {
 
   return (
-    <Router
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
-      <ScrollToTop/>
+    // <Router
+    //   future={{
+    //     v7_startTransition: true,
+    //     v7_relativeSplatPath: true,
+    //   }}
+    // >
+    //   <ScrollToTop/>
       
-      <div className="flex flex-row justify-center min-h-screen w-screen">
-        <Suspense
-          fallback={
-            <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
-              <Loader className="h-40" />
-            </div>
-          }>
-            <div className="w-max">
-              <Sidebar />          
-            </div>
+    //   <div className="flex flex-row justify-center min-h-screen w-screen">
+    //     <Suspense
+    //       fallback={
+    //         <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
+    //           <Loader className="h-40" />
+    //         </div>
+    //       }>
+    //         <div className="w-max">
+    //           <Sidebar />          
+    //         </div>
 
-          <div className="w-full h-screen overflow-y-scroll">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/events" element={<Events />} />
-            </Routes>
+    //       <div className="w-full h-screen overflow-y-scroll">
+    //         <Routes>
+    //           <Route path="/" element={<Home />} />
+    //           <Route path="/events" element={<Events />} />
+    //         </Routes>
 
-            <Footer/>
-          </div>
+    //         <Footer/>
+    //       </div>
           
-        </Suspense>
-      </div>
-    </Router>
-
+    //     </Suspense>
+    //   </div>
+    // </Router>
+    <TimelineComponent/>
   )
 }
 

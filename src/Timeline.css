@@ -1,0 +1,18 @@
+.timeline-date {
+  color: rgba(255, 255, 255, 0.893) !important;
+  font-style: italic;
+}
+
+.vertical-timeline-element-title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.vertical-timeline-element-content {
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.vertical-timeline-element-content:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 40px rgba(0, 0, 0, 0.4);
+}

@@ -8,6 +8,9 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
       },
+      backgroundImage: {
+        'waves-bg': "url('./src/assets/Timeline/waves.gif')", // Replace with your image path
+      },
       colors: {
         'dark-navy': '#000e23',
         'deep-teal': '#213951',
