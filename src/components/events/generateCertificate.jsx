@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const generateCertificate = () => {
+const GenerateCertificate = () => {
     return (
-        <div className="w-full text-white flex flex-col">
+        <div className="w-full text-white my-4 flex flex-col justify-center items-center">
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -25,7 +25,7 @@ const generateCertificate = () => {
                     className="text-center mb-12"
                 >
                     <Link
-                        to=""
+                        to="https://nsss-certificate.vercel.app/"
                         className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out text-lg"
                         target="_blank" rel="noreferrer">
                         Generate Certificate
@@ -37,4 +37,4 @@ const generateCertificate = () => {
     );
 }
 
-export default generateCertificate;
+export default GenerateCertificate;
