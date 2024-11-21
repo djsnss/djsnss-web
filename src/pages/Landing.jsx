@@ -29,7 +29,7 @@ const Landing = () => {
                 href={d.link}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-white bg-opacity-20 hover:bg-opacity-30 duration-300 rounded-full p-2 md:mr-6 flex backdrop-blur-sm shadow-lg border border-white/20"
+                className="bg-white bg-opacity-20 hover:bg-opacity-30 duration-300 rounded-full p-2 mx-1 md:mr-6 flex backdrop-blur-sm shadow-lg border border-white/20"
                 initial={{ scale: 0.8, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1.2 }}

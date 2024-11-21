@@ -1,5 +1,8 @@
 import React from 'react'
-
+import generateCertificate from '../components/events/generateCertificate'
+import LargeEvents from '../components/events/LargeEvents'
+import LocalEvents from '../components/events/LocalEvents'
+import UniversityEvents from '../components/events/UniversityEvents'
 const Events = () => {
   return (
     <div className='h-max w-full '>
@@ -13,7 +16,10 @@ const Events = () => {
         <div className="bg-slate-800 sm:col-span-2 rounded-lg"></div>
       </div>
 
-      
+      <generateCertificate/>
+      <LargeEvents/>
+      <LocalEvents/>
+      <UniversityEvents/>
     </div>
   )
 }

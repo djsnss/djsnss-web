@@ -6,6 +6,7 @@ import Events from "./pages/Events";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./components/Timeline";
+import EventDetails from "./pages/EventDetails";
 
 
 const Home = React.lazy(() => import("./pages/Landing"))

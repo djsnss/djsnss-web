@@ -15,6 +15,7 @@ export default {
         'dark-navy': '#000e23',
         'deep-teal': '#213951',
         'forest-green': '#3a6667',
+        'gold': '#f9a825',
         'jade': '#497d67',
         'golden': '#cc9900',
         'aqua': '#00c3b5',
