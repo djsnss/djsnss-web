@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -12,7 +12,7 @@ import "../Timeline.css";
 const TimelineComponent = () => {
   const timelineData = [
     {
-      date: "November",
+      date: "March",
       title: "Blood Donation Drive",
       description: "Organized a successful blood donation campaign in collaboration with NSS.",
       icon: <FaHandsHelping />,
@@ -46,6 +46,13 @@ const TimelineComponent = () => {
       icon: <AiFillExperiment />,
       color: "#6A4C93", 
     },
+    {
+      date: "June",
+      title: "Web Development Workshop",
+      description: "Conducted a workshop on web development for students.",
+      icon: <FaChalkboardTeacher />,
+      color: "#2A9D8F",
+    }
   ];
 
   const [visibleItems, setVisibleItems] = useState(2);
@@ -56,17 +63,7 @@ const TimelineComponent = () => {
   
 
   return (
-    // <div
-    //   style={{
-    //     padding: "20px",
-    //     background: "linear-gradient(145deg, #121212, #1e1e1e)",
-    //     minHeight: "100vh",
-    //     color: "white",
-    //   }}
-    // >
-    // <div class="min-h-screen inset-0 z-[-2] h-full w-full bg-[#2a2a2a] bg-[radial-gradient(#ffffff33_1px,#162033_1px)] bg-[size:20px_20px]">
-
-    <div class="bg-waves-bg inset-0 -z-10 h-full w-full py-24 bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm">
+    <div className="bg-waves-bg inset-0 -z-10 h-full w-full py-24 bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm overflow-y-scroll">
       <div className="inset-0 backdrop-blur-sm w-full h-full">
       <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">
         {timelineData.slice(0, visibleItems).map((item, index) => (

@@ -12,7 +12,7 @@ const EventDetails = () => {
   const eventDetail = allEventsData.find((event) => event.slug === slug);
 
   return (
-    <div className="flex flex-col items-center justify-center pt-16">
+    <div className="flex flex-col items-center justify-center ">
       <div>
         {eventDetail ? (
           <motion.div
