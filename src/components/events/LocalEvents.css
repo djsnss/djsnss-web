@@ -1,0 +1,22 @@
+/* Override carousel indicators */
+.carousel-indicators [data-coreui-target] {
+    background-color: black; /* Black color for indicators */
+  }
+  
+  /* Active indicator */
+  .carousel-indicators .active {
+    background-color: black; /* Ensure the active indicator is also black */
+  }
+  
+  /* Override control buttons (prev/next) */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: brightness(0); /* Turn the icons black */
+  }
+  
+  /* Optional: Hover effect for controls */
+  .carousel-control-prev-icon:hover,
+  .carousel-control-next-icon:hover {
+    filter: brightness(0.2); /* Darker hover effect */
+  }
+  
