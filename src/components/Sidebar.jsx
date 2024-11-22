@@ -57,9 +57,8 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`absolute sm:relative h-max sm:h-screen w-max sm:w-full p-2 shadow-lg border border-white/20 sm:border-none backdrop-blur-lg transition-all duration-300 ease-in-out ${
-        open ? "w-40 sm:w-60" : "w-12 sm:w-16"
-      } z-50 font-poppins rounded-br-lg sm:rounded-none`}
+      className={`absolute sm:relative h-max sm:h-screen w-max sm:w-full p-2 shadow-lg border border-white/20 sm:border-none backdrop-blur-lg transition-all duration-300 ease-in-out ${open ? "w-40 sm:w-60" : "w-12 sm:w-16"
+        } z-50 font-poppins rounded-br-lg sm:rounded-none`}
       style={{
         background: isSmallScreen
           ? "transparent"
@@ -83,11 +82,10 @@ const Sidebar = () => {
             key={path}
             to={path}
             onClick={() => { handleNavigation(path); setOpen(false); }}
-            className={`flex items-center p-2 rounded-lg transition-all duration-200 ${
-              activeRoute === path
+            className={`flex items-center p-2 rounded-lg transition-all duration-200 ${activeRoute === path
                 ? "bg-indigo-100 text-indigo-600"
                 : "text-white hover:text-indigo-600 hover:bg-gray-100"
-            }`}
+              }`}
           >
             <Icon className="text-lg sm:text-xl" />
             {open && (

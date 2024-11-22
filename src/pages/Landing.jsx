@@ -3,6 +3,7 @@ import DJSLogo from '../assets/DJSLogo.png';
 import DJSNSSLogo from '../assets/DJSNSSLogo.png';
 import NSSLogo from '../assets/NSSLogo.png';
 import Background from '../assets/Events/TreePlantation.png';
+import About from '../components/home/About';
 
 const data = [
   { src: DJSNSSLogo, alt: 'NSS DJSCE Logo', link: '/' },
@@ -58,27 +59,7 @@ const Landing = () => {
         </div>
       </motion.div>
       <div className="flex flex-col items-center justify-center">
-        <motion.h1
-          className="text-2xl md:text-4xl font-bold my-5"
-          initial={{ y: -50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5 }}
-        >
-          About Us
-        </motion.h1>
-        <motion.p
-          className="text-md md:text-2xl text-center my-5"
-          initial={{ y: 50, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1.5 }}
-        >
-          The National Service Scheme (NSS) is an Indian government-sponsored
-          public service program conducted by the Ministry of Youth Affairs and
-          Sports of the Government of India. The NSS unit of Dwarkadas J.
-          Sanghvi College of Engineering was established in 2003. Since then,
-          the unit has been actively participating in various social service
-          activities.
-        </motion.p>
+        <About />
       </div>
     </div>
   );
