@@ -10,7 +10,7 @@ const Events = () => {
     <div className='h-max w-full font-poppins'>
       <h1 className='flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw]'>EVENTS</h1>
 
-      <div className='h-[30vh] md:h-[75vh] w-[95%] mx-auto my-6 rounded-xl relative z-0 overflow-hidden'>
+      <div className='h-[30vh] md:h-[75vh] max-w-full mx-4 my-6 rounded-xl relative z-0 overflow-hidden'>
         <img src={Pic} alt='Recent Event' className='absolute left-0 w-full top-[-20%] -z-10' />
 
         <div
@@ -29,17 +29,18 @@ const Events = () => {
         </div>
       </div>
 
-      <div className="min-h-[80vh] w-full mx-auto my-2 p-4 grid grid-cols-1 grid-rows-6 sm:grid-cols-5 sm:grid-rows-2 gap-4">
-        <div className="bg-lightblue sm:col-span-2 rounded-lg"></div>
-        <div className="bg-bright-yellow rounded-lg"></div>
-        <div className="bg-black row-span-2 sm:col-span-2 rounded-lg"></div>
-        <div className="bg-bright-yellow rounded-lg"></div>
-        <div className="bg-lightblue sm:col-span-2 rounded-lg"></div>
+      <div className="min-h-[80vh] w-full mx-auto my-2 p-4 grid grid-cols-1 grid-rows-6 sm:grid-cols-5 sm:grid-rows-2 gap-3">
+        <div className="bg-lightblue sm:col-span-2 rounded-xl"></div>
+        <div className="bg-bright-yellow rounded-xl"></div>
+        <div className="bg-black row-span-2 sm:col-span-2 rounded-xl"></div>
+        <div className="bg-bright-yellow rounded-xl"></div>
+        <div className="bg-lightblue sm:col-span-2 rounded-xl"></div>
       </div>
 
-      <GenerateCertificate />
 
       <LargeEvents />
+      
+      <GenerateCertificate />
 
       <LocalEvents />
 

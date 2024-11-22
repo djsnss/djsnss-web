@@ -60,7 +60,7 @@ const Features = () => {
 
               {/* Color overlay that fades out on hover */}
               <div
-                className={`absolute inset-0 ${feature.background} opacity-50 group-hover:opacity-0 transition-opacity duration-500`}
+                className={`absolute inset-0 ${feature.background} opacity-60 group-hover:opacity-0 transition-opacity duration-500`}
               ></div>
 
               {/* Content with hover effect for background */}

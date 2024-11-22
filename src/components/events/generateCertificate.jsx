@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const GenerateCertificate = () => {
     return (
-        <div className="w-full text-white my-4 flex flex-col justify-center items-center">
+        <div className="w-full text-white mt-14 mb-2 flex flex-col justify-center items-center">
             <motion.div
                 initial={{ opacity: 0, y: -50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -22,7 +22,7 @@ const GenerateCertificate = () => {
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: 'easeOut' }}
-                    className="text-center mb-12"
+                    className="text-center mb-6"
                 >
                     <Link
                         to="https://nsss-certificate.vercel.app/"

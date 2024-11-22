@@ -40,7 +40,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
-              <Route path="/team" element={<Team/ >} />
+              <Route path="/team" element={<Team/>} />
               <Route path="/timeline" element={<TimelineComponent />} />
             </Routes>
 

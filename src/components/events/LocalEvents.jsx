@@ -231,7 +231,7 @@ const LocalEvents = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 sm:mt-24 mb-5">
+    <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 mb-5">
       <h1 className='text-2xl md:text-3xl font-bold'>
         Local Events :-
       </h1>
