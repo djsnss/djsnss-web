@@ -5,7 +5,7 @@ import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import TimelineComponent from "./components/Timeline";
+import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
 
 
@@ -39,6 +39,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
+              <Route path="/timeline" element={<TimelineComponent />} />
             </Routes>
 
             <Footer/>
