@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loaders/loader2/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
+import Team from "./pages/Team";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./components/Timeline";
@@ -39,6 +40,7 @@ const App = () => {
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
+              <Route path="/team" element={<Team/ >} />
             </Routes>
 
             <Footer/>

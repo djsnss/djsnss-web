@@ -44,7 +44,7 @@ const Sidebar = () => {
     { Icon: MdEventNote, title: "Events", path: "/events" },
     { Icon: GrProjects, title: "Projects", path: "/projects" },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
-    { Icon: IoIosPeople, title: "Volunteer", path: "/volunteer" }
+    { Icon: IoIosPeople, title: "Team", path: "/team" }
   ];
 
   const handleNavigation = (path) => {

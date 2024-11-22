@@ -17,8 +17,8 @@ const MenuLinks = [
   },
   {
     id:4,
-    name: 'Volunteer',
-    link: 'volunteer',
+    name: 'Team',
+    link: 'team',
   },
   {
     id: 5,

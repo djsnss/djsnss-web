@@ -22,7 +22,7 @@ const Landing = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className="w-full h-full bg-black bg-opacity-55 flex flex-col items-center justify-center">
+        <div className="w-full h-full bg-black bg-opacity-75 flex flex-col items-center justify-center">
           <div className="flex flex-row justify-evenly items-center">
             {data.map((d, idx) => (
               <motion.a

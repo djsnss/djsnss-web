@@ -1,0 +1,88 @@
+{
+  "faculty": {
+    "principal": [
+      { "name": "Dr. Hari Vasudevan", "position": "Principal", "image": "path/to/image1.jpg" }
+    ],
+    "Program Officers": [
+      { "name": "Prof. Vyankatesh Bagal", "position": "Program Officer", "image": "path/to/image2.jpg" },
+      { "name": "Prof. Rahul Taware", "position": "Program Officer", "image": "path/to/image2.jpg" },
+      { "name": "Prof. Alisha Banz", "position": "Program Officer", "image": "path/to/image2.jpg" }
+    ]
+  },
+  "upperCore": {
+    "chairperson": [
+      { "name": "Dev Popat", "position": "Chairperson", "image": "path/to/image1.jpg" }
+    ],
+    "vice Chairpersons": [
+      { "name": "Shashank Naik", "position": "Vice Chairperson", "image": "path/to/image2.jpg" },
+      { "name": "Parna Mishra", "position": "Vice Chairperson", "image": "path/to/image3.jpg" }
+    ],
+    "secretary": [
+      { "name": "Rushabh Mehta", "position": "Secretary", "image": "path/to/image4.jpg" }
+    ],
+    "joint Secretaries": [
+      { "name": "Yash Dalvi", "position": "Joint Secretary", "image": "path/to/image5.jpg" },
+      { "name": "Bhavy Shah", "position": "Joint Secretary", "image": "path/to/image6.jpg" }
+    ],
+    "treasurer": [
+      { "name": "Cleon Lopes", "position": "Treasurer", "image": "path/to/image7.jpg" }
+    ],
+    "joint Treasurers": [
+      { "name": "Archi Patel", "position": "Joint Treasurer", "image": "path/to/image8.jpg" },
+      { "name": "Manit Rathod", "position": "Joint Treasurer", "image": "path/to/image9.jpg" }
+    ]
+  },
+  "heads": {
+    "departments": [
+      {
+        "name": "Publicity",
+        "members": [
+          { "name": "Umang Duwani", "position": "Head of Publicity", "image": "path/to/image10.jpg" },
+          { "name": "Agam Kamdar", "position": "Head of Publicity", "image": "path/to/image11.jpg" },
+          { "name": "Neet Jain", "position": "Head of Publicity", "image": "path/to/image12.jpg" },
+          { "name": "Jaiwin Mehta", "position": "Head of Publicity", "image": "path/to/image13.jpg" }
+        ]
+      },
+      {
+        "name": "Technical",
+        "members": [
+          { "name": "Ansh Shah", "position": "Head of Technical", "image": "path/to/image14.jpg" },
+          { "name": "Jainam Shah", "position": "Head of Technical", "image": "path/to/image15.jpg" },
+          { "name": "Harsheel Sharma", "position": "Head of Technical", "image": "path/to/image16.jpg" }
+        ]
+      },
+      {
+        "name": "Events",
+        "members": [
+          { "name": "Jheel Patel", "position": "Head of Events", "image": "path/to/image17.jpg" },
+          { "name": "Shrirang Deshmukh", "position": "Head of Events", "image": "path/to/image18.jpg" },
+          { "name": "Dev Shah", "position": "Head of Events", "image": "path/to/image19.jpg" },
+          { "name": "Mahek Sureja", "position": "Head of Events", "image": "path/to/image20.jpg" }
+        ]
+      },
+      {
+        "name": "Creatives",
+        "members": [
+          { "name": "Asmi Savla", "position": "Head of Creatives", "image": "path/to/image21.jpg" },
+          { "name": "Harsh Keniya", "position": "Head of Creatives", "image": "path/to/image22.jpg" }
+        ]
+      },
+      {
+        "name": "Social Media",
+        "members": [
+          { "name": "Asvi Shah", "position": "Head of Social Media", "image": "path/to/image23.jpg" },
+          { "name": "Deep Doshi", "position": "Head of Social Media", "image": "path/to/image24.jpg" }
+        ]
+      },
+      {
+        "name": "Editorial",
+        "members": [
+          { "name": "Shriya Kela", "position": "Head of Editorial", "image": "path/to/image25.jpg" },
+          { "name": "Diyan Mehta", "position": "Head of Editorial", "image": "path/to/image26.jpg" },
+          { "name": "Hitanshu Shah", "position": "Head of Editorial", "image": "path/to/image27.jpg" },
+          { "name": "Dhruvi Shah", "position": "Head of Editorial", "image": "path/to/image28.jpg" }
+        ]
+      }
+    ]
+  }
+}
