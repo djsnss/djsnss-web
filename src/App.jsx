@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Loader from "./components/Loaders/loader2/CustomLoader2";
+import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Events from "./pages/Events";
 import Team from "./pages/Team";
@@ -54,7 +54,6 @@ const App = () => {
         </Suspense>
       </div>
     </Router>
-    // <TimelineComponent/>
   );
 };
 
