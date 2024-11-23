@@ -1,8 +1,8 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { motion, useAnimation } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
-import { largeEventsData } from '../../data/largeEvents';
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { largeEventsData } from "../../data/largeEvents";
 const Features = () => {
   const controls = useAnimation();
   const { ref, inView } = useInView({
@@ -12,17 +12,19 @@ const Features = () => {
 
   useEffect(() => {
     if (inView) {
-      controls.start('visible');
+      controls.start("visible");
     } else {
-      controls.start('hidden');
+      controls.start("hidden");
     }
   }, [controls, inView]);
 
   const getWidthClasses = (index, length) => {
     if (index === length - 1 && length % 2 !== 0) {
-      return 'w-full';
+      return "w-full";
     }
-    return index % 4 === 0 || index % 4 === 3 ? 'w-full md:w-2/3' : 'w-full md:w-1/3';
+    return index % 4 === 0 || index % 4 === 3
+      ? "w-full md:w-2/3"
+      : "w-full md:w-1/3";
   };
 
   const cardVariants = {
@@ -46,15 +48,15 @@ const Features = () => {
               key={feature.id}
               className={`${getWidthClasses(index, largeEventsData.length)} relative py-24 flex flex-col justify-center items-center transition-all duration-500 ease-in-out group`}
               variants={cardVariants}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
             >
               {/* Background image with dark overlay */}
               <div
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-500 opacity-70 group-hover:opacity-100"
                 style={{
                   backgroundImage: `url(${feature.imageURL})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
                 }}
               ></div>
 
@@ -68,7 +70,10 @@ const Features = () => {
                 <h2 className="text-2xl font-bold mb-4">{feature.title}</h2>
                 <div className="w-full mx-auto border-slate-800 mb-2 border-b-4"></div>
                 <p className="mb-1">{feature.description}</p>
-                <Link to={feature.link} className="hover:text-blue-500 font-semibold">
+                <Link
+                  to={feature.link}
+                  className="hover:text-blue-500 font-semibold"
+                >
                   View Details &rarr;
                 </Link>
               </div>

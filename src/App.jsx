@@ -8,12 +8,12 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
+import { useRef } from "react";
 
-
-const Home = React.lazy(() => import("./pages/Landing"))
-
+const Home = React.lazy(() => import("./pages/Landing"));
 
 const App = () => {
+  const scrollContainerRef = useRef(null);
 
   return (
     <Router
@@ -22,36 +22,39 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <ScrollToTop/>
-      
+      <ScrollToTop />
+
       <div className="flex flex-row justify-center min-h-screen w-screen">
         <Suspense
           fallback={
             <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
               <Loader className="h-40" />
             </div>
-          }>
-            <div className="w-max">
-              <Sidebar />          
-            </div>
+          }
+        >
+          <div className="w-max">
+            <Sidebar />
+          </div>
 
-          <div className="w-full h-screen overflow-y-scroll">
+          <div
+            ref={scrollContainerRef}
+            className="w-full h-screen overflow-y-scroll"
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
-              <Route path="/team" element={<Team/ >} />
+              <Route path="/eventdetails/:slug" element={<EventDetails />} />
+              <Route path="/team" element={<Team />} />
               <Route path="/timeline" element={<TimelineComponent />} />
             </Routes>
 
-            <Footer/>
+            <Footer />
           </div>
-          
         </Suspense>
       </div>
     </Router>
     // <TimelineComponent/>
-  )
-}
+  );
+};
 
 export default App;

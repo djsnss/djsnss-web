@@ -9,7 +9,9 @@
 }
 
 .vertical-timeline-element-content {
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  transition:
+    transform 0.2s ease-in-out,
+    box-shadow 0.2s ease-in-out;
 }
 
 .vertical-timeline-element-content:hover {

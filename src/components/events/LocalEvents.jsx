@@ -83,8 +83,6 @@
 
 // export default Features;
 
-
-
 // import React, { useState, useEffect } from 'react';
 // import { ChevronLeft, ChevronRight, MapPin, CalendarDays } from 'lucide-react';
 // import { localEventsData } from '../../data/localEvents';
@@ -99,7 +97,7 @@
 //     const handleResize = () => {
 //       const width = window.innerWidth;
 //       setVisiblePosts(
-//         width < 640 ? 1 : 
+//         width < 640 ? 1 :
 //         width < 1024 ? 2 : 3
 //       );
 //     };
@@ -110,7 +108,7 @@
 //   }, []);
 
 //   const nextSlide = () => {
-//     setCurrentIndex((prev) => 
+//     setCurrentIndex((prev) =>
 //       Math.min(prev + 1, localEventsData.length - visiblePosts)
 //     );
 //   };
@@ -127,25 +125,25 @@
 //             Local Events
 //           </h2>
 //           <div className="flex space-x-2">
-//             <button 
-//               onClick={prevSlide} 
+//             <button
+//               onClick={prevSlide}
 //               disabled={currentIndex === 0}
 //               className={`
-//                 p-2 rounded-lg border border-neutral-300 
-//                 ${currentIndex === 0 
-//                   ? 'opacity-50 cursor-not-allowed' 
+//                 p-2 rounded-lg border border-neutral-300
+//                 ${currentIndex === 0
+//                   ? 'opacity-50 cursor-not-allowed'
 //                   : 'hover:bg-neutral-200 transition-colors'}
 //               `}
 //             >
 //               <ChevronLeft className="text-neutral-700" />
 //             </button>
-//             <button 
-//               onClick={nextSlide} 
+//             <button
+//               onClick={nextSlide}
 //               disabled={currentIndex >= localEventsData.length - visiblePosts}
 //               className={`
-//                 p-2 rounded-lg border border-neutral-300 
-//                 ${currentIndex >= localEventsData.length - visiblePosts 
-//                   ? 'opacity-50 cursor-not-allowed' 
+//                 p-2 rounded-lg border border-neutral-300
+//                 ${currentIndex >= localEventsData.length - visiblePosts
+//                   ? 'opacity-50 cursor-not-allowed'
 //                   : 'hover:bg-neutral-200 transition-colors'}
 //               `}
 //             >
@@ -153,35 +151,35 @@
 //             </button>
 //           </div>
 //         </div>
-        
+
 //         <div className="overflow-x-hidden">
-//           <div 
+//           <div
 //             className="flex gap-4 transition-transform duration-500 ease-in-out"
-//             style={{ 
-//               transform: `translateX(-${(currentIndex * 100) / visiblePosts}%)` 
+//             style={{
+//               transform: `translateX(-${(currentIndex * 100) / visiblePosts}%)`
 //             }}
 //           >
 //             {localEventsData.map((event) => (
-//               <div 
-//                 key={event.id} 
+//               <div
+//                 key={event.id}
 //                 className={`
-//                   flex-shrink-0 w-full 
-//                   ${visiblePosts === 1 ? 'md:w-full' : 
+//                   flex-shrink-0 w-full
+//                   ${visiblePosts === 1 ? 'md:w-full' :
 //                     visiblePosts === 2 ? 'md:w-1/2' : 'lg:w-1/3'}
 //                   mb-4
 //                 `}
-//                 style={{ 
-//                   width: visiblePosts === 1 ? '100%' : 
-//                          visiblePosts === 2 ? 'calc(50% - 1rem)' : 
-//                          'calc(33.333% - 1.33rem)' 
+//                 style={{
+//                   width: visiblePosts === 1 ? '100%' :
+//                          visiblePosts === 2 ? 'calc(50% - 1rem)' :
+//                          'calc(33.333% - 1.33rem)'
 //                 }}
 //               >
 //                 <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow h-full flex flex-col">
 //                   <div className="relative">
-//                     <img 
-//                       src={event.imageURL} 
-//                       alt={event.title} 
-//                       className="w-full h-48 object-cover" 
+//                     <img
+//                       src={event.imageURL}
+//                       alt={event.title}
+//                       className="w-full h-48 object-cover"
 //                     />
 //                     <div className="absolute top-2 right-2 bg-white/80 rounded-full p-2">
 //                       <CalendarDays className="w-5 h-5 text-neutral-700" />
@@ -189,7 +187,7 @@
 //                   </div>
 //                   <div className="p-4 flex-grow flex flex-col">
 //                     <h3
-//                       onClick={() => navigate(`/eventdetails/${event.slug}`)} 
+//                       onClick={() => navigate(`/eventdetails/${event.slug}`)}
 //                       className="text-lg font-semibold text-neutral-800 mb-2 flex-grow hover:cursor-pointer">
 //                       {event.title}
 //                     </h3>
@@ -217,25 +215,26 @@
 
 // export default LocalEvents;
 
-
-
-import React from 'react';
-import { CCarousel, CCarouselItem, CImage, CCarouselCaption } from '@coreui/react';
-import { localEventsData } from '../../data/localEvents';
-import { useNavigate } from 'react-router-dom';
-import '@coreui/coreui/dist/css/coreui.min.css';
-import { MapPin, CalendarDays } from 'lucide-react';
-import './LocalEvents.css';
+import React from "react";
+import {
+  CCarousel,
+  CCarouselItem,
+  CImage,
+  CCarouselCaption,
+} from "@coreui/react";
+import { localEventsData } from "../../data/localEvents";
+import { useNavigate } from "react-router-dom";
+import "@coreui/coreui/dist/css/coreui.min.css";
+import { MapPin, CalendarDays } from "lucide-react";
+import "./LocalEvents.css";
 
 const LocalEvents = () => {
   const navigate = useNavigate();
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 sm:mt-24 mb-5">
-      <h1 className='text-2xl md:text-3xl font-bold'>
-        Local Events :-
-      </h1>
-      
+      <h1 className="text-2xl md:text-3xl font-bold">Local Events :-</h1>
+
       <CCarousel controls indicators>
         {localEventsData.map((event) => (
           <CCarouselItem key={event.id}>
@@ -244,16 +243,16 @@ const LocalEvents = () => {
               src={event.imageURL}
               alt={event.title}
             />
-            <CCarouselCaption
-              className="text-shadow p-4 bg-white/60 rounded-lg"
-            >
+            <CCarouselCaption className="text-shadow p-4 bg-white/60 rounded-lg">
               <h5
                 onClick={() => navigate(`/eventdetails/${event.slug}`)}
                 className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"
               >
                 {event.title}
               </h5>
-              <p className="text-black text-xs sm:text-sm">{event.description}</p>
+              <p className="text-black text-xs sm:text-sm">
+                {event.description}
+              </p>
               <div className="flex justify-center text-xs sm:text-sm text-black">
                 <MapPin className="w-4 h-4 mr-2" />
                 <span>{event.location}</span>

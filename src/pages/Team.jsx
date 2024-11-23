@@ -18,11 +18,10 @@ const Team = () => {
   let sectionIndex = 0;
 
   return (
-    <div className="team-page">
+    <div className="team-page relative">
       <h1>Meet Our Team</h1>
-
       {/* Faculty Section */}
-      <div>
+      <div className="relative">
         <h2 className="team-heading">Faculty</h2>
         {Object.entries(teamData.faculty).map(([title, members]) => {
           sectionIndex++;
@@ -38,7 +37,7 @@ const Team = () => {
       </div>
 
       {/* Upper Core Section */}
-      <div>
+      <div className="relative">
         <h2 className="team-heading">Upper Core</h2>
         {Object.entries(teamData.upperCore).map(([title, members]) => {
           sectionIndex++;
@@ -54,7 +53,7 @@ const Team = () => {
       </div>
 
       {/* Heads Section */}
-      <div>
+      <div className="relative">
         <h2 className="team-heading">Heads</h2>
         {teamData.heads.departments.map((department) => {
           sectionIndex++;
