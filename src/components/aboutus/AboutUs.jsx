@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Aboutusimg from '../../assets/aboutus.jpg'
 
 const AboutUs = () => {
   return (
@@ -10,7 +11,7 @@ const AboutUs = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="relative flex flex-col items-center justify-center w-full h-screen bg-black/60 p-8 bg-cover bg-center"
-        style={{ backgroundImage: "url('/path/to/your/aboutus.jpg')" }}
+        style={{ backgroundImage: `url(${Aboutusimg})` }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for darkening the background */}
         <h1 className="text-7xl text-white mt-16 mb-10">ABOUT US</h1> {/* Increased margin-top */}
