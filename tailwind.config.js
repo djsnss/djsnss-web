@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./src/**/*.{js,ts,jsx,tsx}", // Adjust paths based on your project structure
+    "./src/**/*.{js,ts,jsx,tsx}", 
   ],
   theme: {
     extend: {
@@ -9,7 +9,7 @@ export default {
         poppins: ["Poppins", "sans-serif"],
       },
       backgroundImage: {
-        'waves-bg': "url('./src/assets/Timeline/waves.gif')", // Replace with your image path
+        'timeline': "url('./src/assets/Timeline/waves.gif')", 
       },
       colors: {
         'dark-navy': '#000e23',
