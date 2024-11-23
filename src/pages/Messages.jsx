@@ -69,7 +69,7 @@ const Messages = () => {
             className="message-container w-full min-h-screen bg-cover bg-fixed bg-center"
             style={{ backgroundImage: `url(${Background})` }}
         >
-            <div className='w-full h-full backdrop-blur-3xl p-10'>
+            <div className='w-full min-h-screen backdrop-blur-3xl p-10'>
             <h1 className="text-3xl font-bold mb-4">{messageData.name}</h1>
             <h2 className="text-xl font-semibold text-white mb-6">{messageData.role}</h2>
             <img src={messageData.image} alt={messageData.name} className="w-full h-64 object-cover mb-6 text-white" />
