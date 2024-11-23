@@ -1,0 +1,231 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Dark background */
+    color: #fff; /* Default text color */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .calendar-container {
+    width: 60%;
+    background-color: #1a1a1a; /* Darker section background */
+    border: 1px solid #044c5e; /* Neon pink border */
+    border-radius: 8px;
+    box-shadow: 0 0 15px #093f76; /* Glowing effect */
+    padding: 20px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #152c9e; /* Neon pink text for header */
+  }
+  
+  .calendar-header button {
+    background-color: #152c9e; /* Neon pink buttons */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .calendar-header button:hover {
+    background-color: rgb(100, 176, 246); /* Slightly lighter pink */
+  }
+  
+  .calendar-header h2 {
+    margin: 0;
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .day-header {
+    text-align: center;
+    font-weight: bold;
+    color: #152c9e; /* Neon pink for day headers */
+  }
+  
+  
+  
+  .day {
+    border: 1px solid #333; /* Muted gray border for calendar days */
+    padding: 5px;
+    text-align: center;
+    position: relative;
+    height: 70px;
+    cursor: pointer;
+    background-color: #1a1a1a; /* Match background color */
+    color: #fff; /* White text */
+  }
+  
+  .day:hover {
+    background-color: #04265a; /* Slightly lighter gray on hover */
+    transform: scale(1.2);
+    z-index: 1;
+  }
+  
+  
+  
+  
+  .selected {
+    background-color: #024693; /* Neon pink background for selected day */
+    color: #000; /* Black text for contrast */
+  }
+  
+  .empty {
+    border: none;
+  }
+  
+  .event {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background: #152c9e; /* Neon pink event background */
+    color: #000; /* Black text for contrast */
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #152c9e; /* Glowing effect for events */
+  }
+  
+  .sidebar {
+    width: 35%;
+    background-color: #1a1a1a; /* Darker sidebar background */
+    border: 1px solid #044c5e; /* Neon pink border */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #093f76; /* Glowing effect */
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 10px;
+    color: #152c9e; /* Neon pink */
+  }
+  
+  .sidebar input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #152c9e; /* Neon pink border */
+    background: #000; /* Black background for input */
+    color: #fff; /* White text */
+    border-radius: 5px;
+  }
+  
+  .sidebar input::placeholder {
+    color: #888; /* Muted gray placeholder text */
+  }
+  
+  .sidebar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #152c9e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .sidebar button:hover {
+    background-color: #787cea;
+  }
+  
+  .event-list {
+    margin-top: 20px;
+  }
+  
+  .event-item {
+    background: #152c9e; /* Neon pink background */
+    color: black; /* Black text for contrast */
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #152c9e; /* Glowing effect */
+  }
+  
+  
+  
+  /* General Hover Effect for Interactive Elements */
+  button:hover,
+  input:hover {
+    box-shadow: 0 0 10px #152c9e, 0 0 20px #4d88ff; /* Neon glow on hover */
+    transform: scale(1.05); /* Slight zoom effect */
+    transition: all 0.3s ease; /* Smooth animation */
+  }
+  
+  /* Calendar Day Hover */
+  .day:hover {
+    background-color: #3a172c; /* Slightly lighter background */
+    color: #152c9e; /* Neon pink text */
+    border-color: #152c9e; /* Neon border on hover */
+    transition: all 0.3s ease; /* Smooth transition */
+  }
+  
+  /* Selected Day Hover Effect */
+  .day.selected:hover {
+    background-color: #4d5cff; /* Brighter pink when hovering over selected day */
+    color: #fff; /* White text */
+    transform: scale(1.05); /* Slight zoom */
+    transition: all 0.3s ease;
+  }
+  
+  /* Event Hover Effect */
+  .event:hover {
+    background: #4d5cff; /* Brighter pink for events on hover */
+    color: white; /* Change text color */
+    box-shadow: 0 0 15px #152c9e, 0 0 25px #4d5cff; /* Glow effect */
+    transition: all 0.3s ease;
+  }
+  
+  /* Sidebar Button Hover */
+  .sidebar button:hover {
+    background-color: #4d5cff; /* Slightly brighter pink */
+    box-shadow: 0 0 10px #152c9e, 0 0 15px #4d5cff; /* Neon glow */
+    color: #fff; /* Ensure text remains white */
+    transform: scale(1.05); /* Slight zoom */
+  }
+  
+  /* Input Hover Effect */
+  .sidebar input:hover {
+    border-color: #4d5cff; /* Brighter border */
+    box-shadow: 0 0 8px #152c9e; /* Subtle neon glow */
+    transition: all 0.3s ease;
+  }
+  
+  /* Sidebar Event List Hover */
+  .event-item:hover {
+    background-color: #4d5cff; /* Brighter background for sidebar events */
+    color: #fff; /* White text */
+    box-shadow: 0 0 15px #152c9e, 0 0 25px #4d5cff; /* Strong neon glow */
+    transform: translateY(-2px); /* Slight upward movement */
+    transition: all 0.3s ease;
+  }
+  
+  /* Header Hover Effect */
+  .calendar-header h2:hover {
+    text-shadow: 0 0 10px #152c9e, 0 0 20px #4d5cff; /* Neon text glow */
+    cursor: pointer; /* Optional: make the header clickable */
+    transition: all 0.3s ease;
+  }
+  
+  /* Day Header Hover Effect (Weekdays) */
+  .day-header:hover {
+    color: #4d5cff; /* Bright pink on hover */
+    text-shadow: 0 0 10px #152c9e; /* Neon glow */
+    transition: all 0.3s ease;
+  }
+  

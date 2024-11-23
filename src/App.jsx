@@ -56,5 +56,4 @@ const App = () => {
     // <TimelineComponent/>
   )
 }
-
 export default App;
