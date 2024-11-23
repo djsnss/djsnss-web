@@ -5,9 +5,15 @@ import {
   FooterLinkGroup,
   FooterTitle,
 } from "flowbite-react";
-import { BsFacebook, BsGithub, BsInstagram, BsTwitter, BsLinkedin } from "react-icons/bs";
-import {MenuLinks,SocialLinks} from '../data/index'
-import { Link } from 'react-router-dom';
+import {
+  BsFacebook,
+  BsGithub,
+  BsInstagram,
+  BsTwitter,
+  BsLinkedin,
+} from "react-icons/bs";
+import { MenuLinks, SocialLinks } from "../data/index";
+import { Link } from "react-router-dom";
 
 // Helper function to return icons based on social media names
 const getIcon = (name) => {
@@ -44,7 +50,10 @@ function FooterComponent() {
               For You, With You, Always!
             </p>
             <div className="mt-5 text-sm sm:text-base md:text-lg text-white">
-              <p>📍 Address: DJSCE, Sector 5, Vile Parle West, Mumbai, Maharashtra, India</p>
+              <p>
+                📍 Address: DJSCE, Sector 5, Vile Parle West, Mumbai,
+                Maharashtra, India
+              </p>
               <p>📞 Contact: +91 81693 88352</p>
             </div>
           </div>

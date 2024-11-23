@@ -1,14 +1,14 @@
-import { motion } from 'framer-motion';
-import DJSLogo from '../assets/DJSLogo.png';
-import DJSNSSLogo from '../assets/DJSNSSLogo.png';
-import NSSLogo from '../assets/NSSLogo.png';
-import Background from '../assets/Events/TreePlantation.png';
-import About from '../components/home/About';
+import { motion } from "framer-motion";
+import DJSLogo from "../assets/DJSLogo.png";
+import DJSNSSLogo from "../assets/DJSNSSLogo.png";
+import NSSLogo from "../assets/NSSLogo.png";
+import Background from "../assets/Events/TreePlantation.png";
+import About from "../components/home/About";
 
 const data = [
-  { src: DJSNSSLogo, alt: 'NSS DJSCE Logo', link: '/' },
-  { src: DJSLogo, alt: 'DJS Logo', link: 'https://djsce.ac.in/' },
-  { src: NSSLogo, alt: 'NSS Logo', link: 'https://nss.gov.in/' },
+  { src: DJSNSSLogo, alt: "NSS DJSCE Logo", link: "/" },
+  { src: DJSLogo, alt: "DJS Logo", link: "https://djsce.ac.in/" },
+  { src: NSSLogo, alt: "NSS Logo", link: "https://nss.gov.in/" },
 ];
 
 const Landing = () => {

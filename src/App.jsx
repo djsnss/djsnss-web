@@ -11,10 +11,10 @@ import EventDetails from "./pages/EventDetails";
 import AboutUs from "./components/aboutus/AboutUs";
 import MessageDetails from "./pages/Messages";
 
-const Home = React.lazy(() => import("./pages/Landing"))
+
+const Home = React.lazy(() => import("./pages/Landing"));
 
 const App = () => {
-
   return (
     <Router
       future={{
@@ -22,20 +22,23 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <ScrollToTop/>
-      
+      <ScrollToTop />
+
       <div className="flex flex-row justify-center min-h-screen w-screen">
         <Suspense
           fallback={
             <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
               <Loader className="h-40" />
             </div>
-          }>
-            <div className="w-max">
-              <Sidebar />          
-            </div>
+          }
+        >
+          <div className="w-max">
+            <Sidebar />
+          </div>
 
-          <div className="w-full h-screen overflow-y-scroll">
+          <div
+            className="w-full h-screen overflow-y-scroll"
+          >
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
@@ -46,14 +49,13 @@ const App = () => {
               <Route path="/messages/:slug" element={<MessageDetails />} />
             </Routes>
 
-            <Footer/>
+            <Footer />
           </div>
-          
         </Suspense>
       </div>
     </Router>
     // <TimelineComponent/>
-  )
-}
+  );
+};
 
 export default App;
