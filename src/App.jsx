@@ -35,7 +35,6 @@ const App = () => {
           </div>
 
           <div
-            ref={scrollContainerRef}
             className="w-full h-screen overflow-y-scroll"
           >
             <Routes>
