@@ -1,6 +1,7 @@
 /* General Page Styling */
-.team-page {
+.team-page-bg {
   font-family: "Poppins", sans-serif;
+  position: absolute;
   margin: 0;
   padding: 0;
   background-color: #d9d9d9;
