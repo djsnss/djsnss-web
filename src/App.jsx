@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
+import AboutUs from "./components/aboutus/AboutUs";
 
 
 const Home = React.lazy(() => import("./pages/Landing"))
@@ -42,6 +43,8 @@ const App = () => {
               <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
               <Route path="/team" element={<Team/>} />
               <Route path="/timeline" element={<TimelineComponent />} />
+              <Route path="/aboutus" element={<AboutUs />} />
+
             </Routes>
 
             <Footer/>

@@ -41,7 +41,7 @@ const Sidebar = () => {
 
   const navigationLinks = [
     { Icon: FiHome, title: "Home", path: "/" },
-    { Icon: SiRotaryinternational, title: "About NSS", path: "/about" },
+    { Icon: SiRotaryinternational, title: "About NSS", path: "/aboutus" },
     { Icon: MdEventNote, title: "Events", path: "/events" },
     { Icon: GrProjects, title: "Projects", path: "/projects" },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
