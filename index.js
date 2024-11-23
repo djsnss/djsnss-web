@@ -2,7 +2,7 @@ import express from "express";
 import ConnectMongoDb from "./config/connection.js";
 import env from "dotenv";
 import cors from "cors";
-import volunteerRoutes from "./routes/volunteerRoutes.js"
+import adminRouter from "./routes/adminR.js";
 import volunteerRouter from "./routes/volunteerR.js";
 
 env.config();
@@ -24,7 +24,7 @@ app.options("*", cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/volunteers', volunteerRoutes);
+app.use("/admin", adminRouter);
 app.use("/volunteer", volunteerRouter);
 
 app.listen(PORT, () => {

@@ -1,7 +1,8 @@
-import Volunteer from '../models/volunteer.js';
-import cloudinary from '../config/cloudinary.js';
+import Volunteer from "../models/volunteer.js";
+import cloudinary from "../config/cloudinary.js";
+import EventModel from "../models/event.js";
 
-export const createVolunteer = async (req, res) => {
+/* export const createVolunteer = async (req, res) => {
   try {
     const { 
       passportPhoto, 
@@ -42,7 +43,7 @@ export const createVolunteer = async (req, res) => {
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
-};
+}; */
 
 export const getVolunteers = async (req, res) => {
   try {
@@ -50,14 +51,14 @@ export const getVolunteers = async (req, res) => {
     const volunteers = await Volunteer.find()
       .limit(limit * 1)
       .skip((page - 1) * limit)
-      .populate('connectedEvents');
-    
+      .populate("connectedEvents");
+
     const total = await Volunteer.countDocuments();
 
     res.json({
       volunteers,
       totalPages: Math.ceil(total / limit),
-      currentPage: page
+      currentPage: page,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -66,13 +67,14 @@ export const getVolunteers = async (req, res) => {
 
 export const getVolunteerById = async (req, res) => {
   try {
-    const volunteer = await Volunteer.findById(req.params.id)
-      .populate('connectedEvents');
-    
+    const volunteer = await Volunteer.findById(req.params.id).populate(
+      "connectedEvents"
+    );
+
     if (!volunteer) {
-      return res.status(404).json({ message: 'Volunteer not found' });
+      return res.status(404).json({ message: "Volunteer not found" });
     }
-    
+
     res.json(volunteer);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -90,10 +92,12 @@ export const updateVolunteer = async (req, res) => {
       if (oldVolunteer.passportPhoto.public_id) {
         await cloudinary.uploader.destroy(oldVolunteer.passportPhoto.public_id);
       }
-      const uploadResult = await cloudinary.uploader.upload(updateData.passportPhoto);
+      const uploadResult = await cloudinary.uploader.upload(
+        updateData.passportPhoto
+      );
       updateData.passportPhoto = {
         url: uploadResult.secure_url,
-        public_id: uploadResult.public_id
+        public_id: uploadResult.public_id,
       };
     }
 
@@ -102,14 +106,13 @@ export const updateVolunteer = async (req, res) => {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
-    const updatedVolunteer = await Volunteer.findByIdAndUpdate(
-      id, 
-      updateData, 
-      { new: true, runValidators: true }
-    );
+    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedVolunteer) {
-      return res.status(404).json({ message: 'Volunteer not found' });
+      return res.status(404).json({ message: "Volunteer not found" });
     }
 
     res.json(updatedVolunteer);
@@ -121,27 +124,68 @@ export const updateVolunteer = async (req, res) => {
 export const deleteVolunteer = async (req, res) => {
   try {
     const { id } = req.params;
-    
+
     // Find volunteer to delete associated cloudinary images
     const volunteerToDelete = await Volunteer.findById(id);
-    
+
     if (!volunteerToDelete) {
-      return res.status(404).json({ message: 'Volunteer not found' });
+      return res.status(404).json({ message: "Volunteer not found" });
     }
 
     // Delete cloudinary images
     if (volunteerToDelete.passportPhoto.public_id) {
-      await cloudinary.uploader.destroy(volunteerToDelete.passportPhoto.public_id);
+      await cloudinary.uploader.destroy(
+        volunteerToDelete.passportPhoto.public_id
+      );
     }
     if (volunteerToDelete.normalPhoto.public_id) {
-      await cloudinary.uploader.destroy(volunteerToDelete.normalPhoto.public_id);
+      await cloudinary.uploader.destroy(
+        volunteerToDelete.normalPhoto.public_id
+      );
     }
 
     // Delete volunteer
     await Volunteer.findByIdAndDelete(id);
-    
-    res.json({ message: 'Volunteer deleted successfully' });
+
+    res.json({ message: "Volunteer deleted successfully" });
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const createEvent = async (req, res) => {
+  try {
+    const {
+      name,
+      description,
+      startHours,
+      endHours,
+      TotalNoOfHours,
+      date,
+      location,
+      maxVolunteers,
+    } = req.body;
+    const existingEvent = await EventModel.findOne({ name });
+    if (existingEvent) {
+      return res.status(400).json({ message: "Event already exists" });
+    }
+    const newEvent = new EventModel({
+      name,
+      description,
+      startHours,
+      endHours,
+      TotalNoOfHours,
+      date,
+      location,
+      maxVolunteers,
+    });
+    await newEvent.save();
+    return res.status(201).json({
+      message: "Successfully created new Event",
+      Event: newEvent,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: err.message });
   }
 };

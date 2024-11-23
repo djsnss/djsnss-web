@@ -1,10 +1,34 @@
 import express from "express";
-import { authVolunteer } from "../middlewares/authVerify.js";
-import { signup, login } from "../controllers/volunteerC.js";
+import {authVolunteer} from "../middlewares/authVerify.js";
 
-const Router = express.Router();
+import {
+  signup,
+  login,
+  registerEvent,
+  uploadNormalPhoto,
+  updateNormalPhoto,
+} from "../controllers/volunteerC.js";
 
-Router.post("/signup", signup);
-Router.post("/login", login);
+import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
 
-export default Router;
+const router = express.Router();
+
+router.post("/signup", uploadPassport.single("passport"), signup);
+router.post("/login", login);
+router.post("/events/:eventId/register", authVolunteer, registerEvent);
+
+router.post(
+  "/upload-normalPhoto",
+  uploadNormal.single("image"),
+  authVolunteer,
+  uploadNormalPhoto
+);
+
+router.post(
+  "/update-normalPhoto",
+  uploadNormal.single("image"),
+  authVolunteer,
+  updateNormalPhoto
+);
+
+export default router;

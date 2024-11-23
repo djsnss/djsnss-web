@@ -3,6 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
 import { sendLogin, sendSignup } from "./nodemailerC.js";
+import EventModel from "../models/event.js";
+import sharp from "sharp";
 
 env.config();
 const Secret = process.env.SecretKey;
@@ -22,6 +24,11 @@ const signup = async (req, res) => {
       password,
       hobbies,
     } = req.body;
+    const filePath = req.file.path;
+    const metadata = await sharp(filePath).metadata();
+    const isSquare = metadata.width === metadata.height; // Check if it's square
+    const isValidSize = metadata.width === 300 && metadata.height === 300; // Passport size in pixels
+
     const ExistingVolunteer = await VolunteerModel.findOne({ sapId });
     if (ExistingVolunteer) {
       return res
@@ -30,6 +37,19 @@ const signup = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
+
+    if (!isSquare) {
+      return res
+        .status(400)
+        .send("Image is not square (1:1 aspect ratio required)");
+    }
+
+    if (!isValidSize) {
+      return res.status(400).send("Image dimensions should be 300x300 pixels");
+    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "PassportPhoto",
+    });
     const newVolunteer = new VolunteerModel({
       description,
       parentDetails: {
@@ -43,6 +63,10 @@ const signup = async (req, res) => {
         sapId,
         phoneNumber,
         email,
+      },
+      passportPhoto: {
+        url: result.secure_url,
+        public_id: result.public_id,
       },
       password: hashedPassword,
       hobbies,
@@ -79,4 +103,75 @@ const login = async (req, res) => {
   }
 };
 
-export { signup, login };
+const registerEvent = async (req, res) => {
+  try {
+    const volunteer = req.volunteer;
+    const eventId = req.params.eventId;
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).send("Event not found");
+    }
+    volunteer.connectedEvents.push(eventId);
+    event.registeredVolunteers.push({ volunteerId: volunteer._id });
+    await volunteer.save();
+    await event.save();
+    res
+      .status(200)
+      .send({ message: `Successfully registered for ${event.name}` });
+  } catch (err) {
+    console.error("Login Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+const uploadNormalPhoto = async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).send("File not found");
+    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "normalPhoto",
+    });
+    const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
+    if (!volunteer) {
+      return res.status(404).send("Volunteer not found.");
+    }
+    volunteer.normalPhoto.url = result.secure_url;
+    volunteer.normalPhoto.public_id = result.public_id;
+    await volunteer.save();
+    return res.status(200).json({
+      message: "Volunteer normal photo uploaded",
+      normalPhoto: volunteer.normalPhoto,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error uploading image");
+  }
+};
+
+const updateNormalPhoto = async (req, res) => {
+  try {
+    const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
+    if (!volunteer) {
+      return res.status(404).send("Volunteer not found");
+    }
+    if (volunteer.normalPhoto && volunteer.normalPhoto.public_id) {
+      await cloudinary.uploader.destroy(volunteer.normalPhoto.public_id);
+    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "normalPhoto",
+    });
+    volunteer.normalPhoto.url = result.secure_url;
+    volunteer.normalPhoto.public_id = result.public_id;
+    await volunteer.save();
+    return res.status(200).json({
+      message: "Volunteer normal photo updated",
+      normalPhoto: volunteer.normalPhoto,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error updating image");
+  }
+};
+
+export { signup, login, registerEvent, uploadNormalPhoto, updateNormalPhoto };
