@@ -17,6 +17,25 @@ const Sidebar = () => {
   const [activeRoute, setActiveRoute] = useState(location.pathname);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 768) {
+        setOpen(false); // Mobile view
+      } else {
+        setOpen(true); // Other views
+      }
+    };
+
+    // Set the initial state based on the current width
+    handleResize();
+
+    // Add event listener to listen for window resize
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup the event listener on component unmount
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   // Update active route when location changes
   useEffect(() => {
     setActiveRoute(location.pathname);
