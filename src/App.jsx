@@ -8,13 +8,11 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
-import { useRef } from "react";
+import AboutUs from "./components/aboutus/AboutUs";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
 const App = () => {
-  const scrollContainerRef = useRef(null);
-
   return (
     <Router
       future={{
@@ -43,9 +41,10 @@ const App = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/eventdetails/:slug" element={<EventDetails />} />
-              <Route path="/team" element={<Team />} />
+              <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
+              <Route path="/team" element={<Team/>} />
               <Route path="/timeline" element={<TimelineComponent />} />
+              <Route path="/aboutus" element={<AboutUs />} />
             </Routes>
 
             <Footer />
