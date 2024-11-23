@@ -9,10 +9,9 @@ import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
 import AboutUs from "./components/aboutus/AboutUs";
-
+import MessageDetails from "./pages/Messages";
 
 const Home = React.lazy(() => import("./pages/Landing"))
-
 
 const App = () => {
 
@@ -44,7 +43,7 @@ const App = () => {
               <Route path="/team" element={<Team/>} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
-
+              <Route path="/messages/:slug" element={<MessageDetails />} />
             </Routes>
 
             <Footer/>
