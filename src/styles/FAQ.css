@@ -1,6 +1,8 @@
 body {
   background-color: #fff;
   color: #333; 
+  margin: 0;
+  padding: 0;
 }
 
 .faq-container {
@@ -20,11 +22,13 @@ body {
   background-color: #f1f1f1;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-wrap: wrap; /* Allow wrapping in small screens */
 }
 
 .profile {
   display: flex;
   align-items: center;
+  flex: 1; /* Allow profile to take space */
 }
 
 .profile-img {
@@ -43,6 +47,8 @@ body {
 .icons {
   display: flex;
   gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .icon {
@@ -149,4 +155,84 @@ body {
   font-size: 24px;
   color: #333; 
   cursor: pointer;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .faq-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .profile {
+    flex: 0 1 auto; /* Allow profile to shrink */
+    justify-content: flex-start;
+  }
+
+  .profile-name {
+    font-size: 16px;
+  }
+
+  .icons {
+    justify-content: flex-start;
+    margin-top: 10px;
+    gap: 8px;
+  }
+
+  .faq-date {
+    font-size: 14px;
+    padding: 6px 10px;
+  }
+
+  .faq-question, .faq-answer {
+    font-size: 14px;
+  }
+
+  .chat-section {
+    margin-top: 10px;
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .chat-icon {
+    font-size: 28px;
+    padding: 10px;
+  }
+
+  .chat-input {
+    font-size: 14px;
+    height: 35px;
+  }
+
+  .mic-icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq-header {
+    padding: 10px;
+  }
+
+  .faq-question, .faq-answer {
+    font-size: 13px;
+  }
+
+  .chat-section {
+    padding: 8px;
+  }
+
+  .chat-icon {
+    font-size: 24px;
+    padding: 8px;
+  }
+
+  .chat-input {
+    font-size: 12px;
+    height: 30px;
+  }
+
+  .mic-icon {
+    font-size: 18px;
+  }
 }
