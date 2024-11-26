@@ -10,7 +10,7 @@ import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
 import AboutUs from "./components/aboutus/AboutUs";
 import MessageDetails from "./pages/Messages";
-
+import FAQ from "./pages/FAQ";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
@@ -36,17 +36,16 @@ const App = () => {
             <Sidebar />
           </div>
 
-          <div
-            className="w-full h-screen overflow-y-scroll"
-          >
+          <div className="w-full h-screen overflow-y-scroll">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />
-              <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
-              <Route path="/team" element={<Team/>} />
+              <Route path="/eventdetails/:slug" element={<EventDetails />} />
+              <Route path="/team" element={<Team />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
+              <Route path="/faq" element={<FAQ />} />a
             </Routes>
 
             <Footer />
