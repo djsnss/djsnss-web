@@ -10,6 +10,7 @@ import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
 import AboutUs from "./components/aboutus/AboutUs";
 import MessageDetails from "./pages/Messages";
+import Gallery from "./pages/Gallery";
 
 
 const Home = React.lazy(() => import("./pages/Landing"));
@@ -46,6 +47,7 @@ const App = () => {
               <Route path="/team" element={<Team/>} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
+              <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
             </Routes>
 

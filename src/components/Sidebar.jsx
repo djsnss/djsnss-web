@@ -10,6 +10,7 @@ import { MdOutlineRateReview } from "react-icons/md";
 import { GrGallery } from "react-icons/gr";
 import { FaQuestion } from "react-icons/fa";
 import { IoPeople } from "react-icons/io5";
+import { GiCampfire } from "react-icons/gi";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -99,6 +100,7 @@ const Sidebar = () => {
       ],
     },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
+    { Icon: GiCampfire, title: "Camp", path: "/camp" },
   ];
 
   const handleNavigation = (path) => {
