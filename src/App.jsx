@@ -12,6 +12,7 @@ import AboutUs from "./components/aboutus/AboutUs";
 import MessageDetails from "./pages/Messages";
 import FAQ from "./pages/FAQ";
 import Gallery from "./pages/Gallery";
+import Volunteer from "./pages/Volunteer";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
@@ -43,6 +44,7 @@ const App = () => {
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />
+              <Route path="/volunteer" element={<Volunteer />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/gallery" element={<Gallery />} />
