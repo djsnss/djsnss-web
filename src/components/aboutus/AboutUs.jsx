@@ -49,9 +49,11 @@ const AboutUs = () => {
         className="relative flex flex-col items-center justify-center w-full h-screen bg-black/60 p-4 bg-cover bg-center"
         style={{ backgroundImage: `url(${Aboutusimg})` }}
       >
-        <div className="absolute inset-0 bg-black opacity-40"></div>
-        <h1 className="text-3xl md:text-7xl text-cyan-400 text-center p-4">
-          <strong>ABOUT US</strong>
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for darkening the background */}
+        <h1 className="text-2xl md:text-7xl text-white/100 z-1000">
+          <strong>
+            ABOUT US
+          </strong>
         </h1>
         <div className="flex flex-col md:flex-row justify-center items-center gap-6 px-4">
           <div className="relative bg-gray-600/40 p-6 rounded-lg shadow-[0_0_4px_rgba(255,255,255,0.7),0_0_4px_rgba(200,239,255,0.7)] backdrop-blur-sm hover:backdrop-blur-lg transition-all duration-300 hover:shadow-[0_0_4px_rgb(171,249,236),0_0_5px_rgba(183,244,255,0.8)] max-w-4xl w-full">
