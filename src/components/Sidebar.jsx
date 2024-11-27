@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  FiHome,
-  FiChevronsRight,
-} from "react-icons/fi";
+import { FiHome, FiChevronsRight } from "react-icons/fi";
 import { GrProjects } from "react-icons/gr";
 import { LuContact2 } from "react-icons/lu";
 import { SiRotaryinternational } from "react-icons/si";
 import { IoIosPeople } from "react-icons/io";
 import { MdEventNote } from "react-icons/md";
-import Logo from '/DJSNSSLogo.png';
+import Logo from "/DJSNSSLogo.png";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -64,7 +61,7 @@ const Sidebar = () => {
     { Icon: MdEventNote, title: "Events", path: "/events" },
     { Icon: GrProjects, title: "Projects", path: "/projects" },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
-    { Icon: IoIosPeople, title: "Team", path: "/team" }
+    { Icon: IoIosPeople, title: "Team", path: "/team" },
   ];
 
   const handleNavigation = (path) => {
@@ -94,14 +91,16 @@ const Sidebar = () => {
         className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
       >
         <FiChevronsRight
-            className={`flex px-2 w-full sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
-          />
+          className={`flex px-2 w-full sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
+        />
         {/* <div className="flex h-full items-center justify-center my-2">
           <img src={Logo} alt="DJSNSS" className="h-full flex m-auto my-2" />
         </div> */}
       </button>
 
-      <div className={`flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}>
+      <div
+        className={`flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}
+      >
         {navigationLinks.map(({ Icon, title, path }) => (
           <Link
             key={path}
