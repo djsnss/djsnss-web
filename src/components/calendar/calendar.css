@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #000; /* Dark background */
-    color: #fff; /* Default text color */
+    background-color: #0e1726; /* Muted dark blue background */
+    color: #e5efff; /* Subtle off-white text */
     margin: 0;
     padding: 0;
   }
@@ -14,10 +14,10 @@ body {
   
   .calendar-container {
     width: 60%;
-    background-color: #1a1a1a; /* Darker section background */
-    border: 1px solid #044c5e; /* Neon pink border */
+    background-color: #1a2e45; /* Dark blue */
+    border: 1px solid #044c5e; /* Neon blue border */
     border-radius: 8px;
-    box-shadow: 0 0 15px #093f76; /* Glowing effect */
+    box-shadow: 0 0 15px #044c5e; /* Neon blue glowing effect */
     padding: 20px;
   }
   
@@ -25,25 +25,28 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
-    color: #152c9e; /* Neon pink text for header */
+    margin-bottom: 20px;
+    color: #c7d7ea; /* Subtle light text */
   }
   
   .calendar-header button {
-    background-color: #152c9e; /* Neon pink buttons */
-    color: #fff;
+    background-color: #044c5e; /* Neon blue */
+    color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   
   .calendar-header button:hover {
-    background-color: rgb(100, 176, 246); /* Slightly lighter pink */
+    background-color: #0a6eb6; /* Brighter blue */
+    box-shadow: 0 0 8px #0a6eb6; /* Glow effect */
   }
   
   .calendar-header h2 {
     margin: 0;
+    font-size: 1.5rem;
   }
   
   .calendar {
@@ -55,34 +58,31 @@ body {
   .day-header {
     text-align: center;
     font-weight: bold;
-    color: #152c9e; /* Neon pink for day headers */
+    color: #c7d7ea; /* Lighter text for weekday headers */
   }
   
-  
-  
   .day {
-    border: 1px solid #333; /* Muted gray border for calendar days */
-    padding: 5px;
+    border: 1px solid #333; /* Muted border for days */
+    padding: 10px;
     text-align: center;
     position: relative;
     height: 70px;
     cursor: pointer;
-    background-color: #1a1a1a; /* Match background color */
-    color: #fff; /* White text */
+    background-color: #2c3e5c; /* Subtle dark blue */
+    color: #e5efff; /* Off-white text */
+    transition: all 0.3s ease;
   }
   
   .day:hover {
-    background-color: #04265a; /* Slightly lighter gray on hover */
-    transform: scale(1.2);
+    background-color: #044c5e; /* Neon blue on hover */
+    box-shadow: 0 0 8px #044c5e;
+    transform: scale(1.10);
     z-index: 1;
   }
   
-  
-  
-  
   .selected {
-    background-color: #024693; /* Neon pink background for selected day */
-    color: #000; /* Black text for contrast */
+    background-color: #356182; /* Bright blue for selected day */
+    color: #fff; /* White text */
   }
   
   .empty {
@@ -94,36 +94,37 @@ body {
     bottom: 5px;
     left: 5px;
     right: 5px;
-    background: #152c9e; /* Neon pink event background */
-    color: #000; /* Black text for contrast */
+    background: #044c5e; /* Neon blue for events */
+    color: #e5efff; /* Off-white text */
     padding: 2px 5px;
     font-size: 12px;
     border-radius: 3px;
-    box-shadow: 0 0 8px #152c9e; /* Glowing effect for events */
+    box-shadow: 0 0 8px #044c5e; /* Glow for events */
   }
   
   .sidebar {
     width: 35%;
-    background-color: #1a1a1a; /* Darker sidebar background */
-    border: 1px solid #044c5e; /* Neon pink border */
+    background-color: #1a2e45; /* Matching sidebar background */
+    border: 1px solid #044c5e; /* Neon blue border */
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 0 15px #093f76; /* Glowing effect */
+    box-shadow: 0 0 15px #044c5e; /* Glowing effect */
   }
   
   .sidebar h2 {
     margin-bottom: 10px;
-    color: #152c9e; /* Neon pink */
+    color: #e5efff; /* Subtle light text */
   }
   
   .sidebar input {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #152c9e; /* Neon pink border */
-    background: #000; /* Black background for input */
-    color: #fff; /* White text */
+    border: 1px solid #044c5e; /* Neon blue border */
+    background: #0e1726; /* Darker background for input */
+    color: #e5efff; /* Off-white text */
     border-radius: 5px;
+    transition: all 0.3s ease;
   }
   
   .sidebar input::placeholder {
@@ -133,15 +134,17 @@ body {
   .sidebar button {
     width: 100%;
     padding: 10px;
-    background-color: #152c9e;
+    background-color: #044c5e; /* Neon blue */
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.3s ease;
   }
   
   .sidebar button:hover {
-    background-color: #787cea;
+    background-color: #0a6eb6; /* Brighter blue */
+    box-shadow: 0 0 8px #0a6eb6; /* Glow effect */
   }
   
   .event-list {
@@ -149,83 +152,18 @@ body {
   }
   
   .event-item {
-    background: #152c9e; /* Neon pink background */
-    color: black; /* Black text for contrast */
+    background: #044c5e; /* Neon blue for events in sidebar */
+    color: white;
     padding: 5px;
     margin: 5px 0;
     border-radius: 3px;
-    box-shadow: 0 0 8px #152c9e; /* Glowing effect */
+    box-shadow: 0 0 8px #044c5e; /* Glow effect */
   }
   
-  
-  
-  /* General Hover Effect for Interactive Elements */
-  button:hover,
-  input:hover {
-    box-shadow: 0 0 10px #152c9e, 0 0 20px #4d88ff; /* Neon glow on hover */
-    transform: scale(1.05); /* Slight zoom effect */
-    transition: all 0.3s ease; /* Smooth animation */
-  }
-  
-  /* Calendar Day Hover */
-  .day:hover {
-    background-color: #3a172c; /* Slightly lighter background */
-    color: #152c9e; /* Neon pink text */
-    border-color: #152c9e; /* Neon border on hover */
-    transition: all 0.3s ease; /* Smooth transition */
-  }
-  
-  /* Selected Day Hover Effect */
-  .day.selected:hover {
-    background-color: #4d5cff; /* Brighter pink when hovering over selected day */
-    color: #fff; /* White text */
-    transform: scale(1.05); /* Slight zoom */
-    transition: all 0.3s ease;
-  }
-  
-  /* Event Hover Effect */
-  .event:hover {
-    background: #4d5cff; /* Brighter pink for events on hover */
-    color: white; /* Change text color */
-    box-shadow: 0 0 15px #152c9e, 0 0 25px #4d5cff; /* Glow effect */
-    transition: all 0.3s ease;
-  }
-  
-  /* Sidebar Button Hover */
-  .sidebar button:hover {
-    background-color: #4d5cff; /* Slightly brighter pink */
-    box-shadow: 0 0 10px #152c9e, 0 0 15px #4d5cff; /* Neon glow */
-    color: #fff; /* Ensure text remains white */
-    transform: scale(1.05); /* Slight zoom */
-  }
-  
-  /* Input Hover Effect */
-  .sidebar input:hover {
-    border-color: #4d5cff; /* Brighter border */
-    box-shadow: 0 0 8px #152c9e; /* Subtle neon glow */
-    transition: all 0.3s ease;
-  }
-  
-  /* Sidebar Event List Hover */
   .event-item:hover {
-    background-color: #4d5cff; /* Brighter background for sidebar events */
-    color: #fff; /* White text */
-    box-shadow: 0 0 15px #152c9e, 0 0 25px #4d5cff; /* Strong neon glow */
-    transform: translateY(-2px); /* Slight upward movement */
+    background-color: #0a6eb6; /* Brighter blue on hover */
+    transform: translateY(-2px);
     transition: all 0.3s ease;
   }
   
-  /* Header Hover Effect */
-  .calendar-header h2:hover {
-    text-shadow: 0 0 10px #152c9e, 0 0 20px #4d5cff; /* Neon text glow */
-    cursor: pointer; /* Optional: make the header clickable */
-    transition: all 0.3s ease;
-  }
-  
-  /* Day Header Hover Effect (Weekdays) */
-  .day-header:hover {
-    color: #4d5cff; /* Bright pink on hover */
-    text-shadow: 0 0 10px #152c9e; /* Neon glow */
-    transition: all 0.3s ease;
-  }
   
