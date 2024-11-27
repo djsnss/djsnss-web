@@ -50,7 +50,7 @@ const AboutUs = () => {
         style={{ backgroundImage: `url(${Aboutusimg})` }}
       >
         <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for darkening the background */}
-        <h1 className="text-2xl md:text-7xl text-bright-blue">
+        <h1 className="text-2xl md:text-7xl text-white/100 z-1000">
           <strong>
             ABOUT US
           </strong>

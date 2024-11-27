@@ -50,7 +50,7 @@ const About = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-dark-navy min-h-screen p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row items-center justify-center"
+        className="bg-dark-navy min-h-full p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row items-center justify-center"
       >
         <Initiatives />
       </motion.div>

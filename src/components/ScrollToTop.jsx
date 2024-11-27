@@ -6,7 +6,7 @@ const ScrollToTop = () => {
 
   useEffect(() => {
     const scrollingElement = document.querySelector(
-      ".w-full.h-screen.overflow-y-scroll",
+      ".w-full.h-screen.overflow-y-scroll.z-100",
     );
     if (scrollingElement) {
       scrollingElement.scrollTo(0, 0);
