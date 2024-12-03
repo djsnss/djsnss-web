@@ -13,6 +13,7 @@ import MessageDetails from "./pages/Messages";
 import FAQ from "./pages/FAQ";
 import Gallery from "./pages/Gallery";
 import Volunteer from "./pages/Volunteer";
+import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
 import Calendar from "./components/calendar/Calendar";
 
 const Home = React.lazy(() => import("./pages/Landing"));
@@ -46,12 +47,13 @@ const App = () => {
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/volunteer" element={<Volunteer />} />
+              <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
-              <Route path="/faq" element={<FAQ />} />a
+              <Route path="/faq" element={<FAQ />} />
             </Routes>
 
             <Footer />

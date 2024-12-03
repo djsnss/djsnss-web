@@ -11,6 +11,7 @@ import { GrGallery } from "react-icons/gr";
 import { FaQuestion } from "react-icons/fa";
 import { IoPeople } from "react-icons/io5";
 import { GiCampfire } from "react-icons/gi";
+import { FaRegCalendarAlt } from "react-icons/fa";
 
 const Sidebar = () => {
   const location = useLocation();
@@ -96,13 +97,12 @@ const Sidebar = () => {
       subLinks: [
         { title: "Check Hours", path: "/volunteer/checkhours" },
         { title: "Volunteer Registration", path: "/volunteer/volregistration" },
-        { title: "Volunteer Policy", path: "/volunteer/volpolicy" },
+        { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
     { Icon: GiCampfire, title: "Camp", path: "/camp" },
-    { Icon: GiCampfire, title: "Camp", path: "/camp" },
-
+    { Icon: FaRegCalendarAlt, title: "Calendar", path: "/calendar" },
   ];
 
   const handleNavigation = (path) => {
