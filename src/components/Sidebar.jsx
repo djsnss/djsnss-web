@@ -101,6 +101,8 @@ const Sidebar = () => {
     },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
     { Icon: GiCampfire, title: "Camp", path: "/camp" },
+    { Icon: GiCampfire, title: "Camp", path: "/camp" },
+
   ];
 
   const handleNavigation = (path) => {
