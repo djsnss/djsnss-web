@@ -97,7 +97,7 @@ const Sidebar = () => {
       subLinks: [
         { title: "Check Hours", path: "/volunteer/checkhours" },
         { title: "Volunteer Registration", path: "/volunteer/volregistration" },
-        { title: "Volunteer Policy", path: "/volunteer/volpolicy" },
+        { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
     { Icon: LuContact2, title: "Contact", path: "/contact" },
