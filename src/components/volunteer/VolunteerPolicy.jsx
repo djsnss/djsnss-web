@@ -1,14 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
-
-const VolunteerPolicyImg = "https://via.placeholder.com/1920x1080";
+import PolicyImg from "../../assets/policy.png"; 
 
 const sectionColors = [
   "#a2b9d8", 
   "#387fa8", 
   "#cce7ff", 
   "#003b5c", 
-  "#003366",
+  "#003366", 
   "#005a8e", 
 ];
 
@@ -60,14 +59,14 @@ const VolunteerPolicy = () => {
 
   return (
     <div className="w-full h-screen flex flex-col md:flex-row">
-      {/* Left Half - Volunteer Policy Title (Scrollable on small screens) */}
+      {/* Left Half - Volunteer Policy Title */}
       <section
         className="relative w-full md:w-1/2 min-h-screen bg-black/60 p-4 bg-cover bg-center"
-        style={{ backgroundImage: `url(${VolunteerPolicyImg})` }}
+        style={{ backgroundImage: `url(${PolicyImg})` }} 
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl md:text-7xl font-bold tracking-wide">Volunteer Policy</h1>
+          <h1 className="text-4xl md:text-7xl font-bold text-white tracking-wide">Volunteer Policy</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             NSS aims to instill a sense of responsibility, leadership, and community development among volunteers.
             Learn about our mission and impact below.
