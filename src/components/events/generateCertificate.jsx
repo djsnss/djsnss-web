@@ -8,13 +8,13 @@ const GenerateCertificate = () => {
                 initial={{ opacity: 0, y: -50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                className="max-w-6xl"
+                className="max-w-6xl "
             >
                 <div className="text-center mb-12">
-                    <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-6">
+                    <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-6 text-white">
                         Generate Certificate for Past Events
                     </h1>
-                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-800">
+                    <p className="text-lg sm:text-xl lg:text-2xl">
                         Generate certificates for the events you have participated in.
                     </p>
                 </div>

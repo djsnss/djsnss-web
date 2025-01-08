@@ -79,17 +79,11 @@ const Sidebar = () => {
       title: "Events",
       path: "/events",
       subLinks: [
-        { title: "Event Details", path: "/events/eventdetail" },
-        { title: "Upcoming Events", path: "/events/upcoming" },
-        { title: "Past Events", path: "/events/past" },
-        { title: "Ongoing Events", path: "/events/ongoing" },
+        { title: "Upcoming Events", path: "/events/#upcoming" },
+        { title: "Past Events", path: "/events/#past" },
       ],
     },
-    {
-      Icon: IoIosPeople,
-      title: "Team",
-      path: "/team",
-    },
+    { Icon: IoIosPeople, title: "Team", path: "/team",},
     {
       Icon: IoPeople,
       title: "Volunteer",
@@ -135,7 +129,7 @@ const Sidebar = () => {
         className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
       >
         <FiChevronsRight
-          className={`flex px-2 w-full text-lg sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
+          className={`flex px-2 w-full text-black  text-lg sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
         />
       </button>
 

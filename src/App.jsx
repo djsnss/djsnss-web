@@ -41,7 +41,7 @@ const App = () => {
             <Sidebar />
           </div>
 
-          <div className="w-full h-screen overflow-y-scroll">
+          <div className="w-full h-screen overflow-y-scroll scroll-smooth">
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/events" element={<Events />} />

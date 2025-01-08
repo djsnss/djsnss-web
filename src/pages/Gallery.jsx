@@ -13,7 +13,7 @@ const allEventsData = [
 const Gallery = () => {
   return (
     <div className="h-max w-full font-poppins">
-        <h1 className="flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw]">
+        <h1 className="flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw] text-white">
             NSS MEMORIES
         </h1>
 
