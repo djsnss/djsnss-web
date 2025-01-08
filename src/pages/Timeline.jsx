@@ -10,6 +10,7 @@ import { FaHeart, FaLightbulb, FaLaptopCode, FaRegSmileBeam } from "react-icons/
 import { GiWheat, GiTreehouse } from "react-icons/gi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Timeline.css";
+import TimelineBg from "../assets/Events/TirangaRally/IMG_4530.jpg";
 
 const TimelineComponent = () => {
   const timelineData = [
@@ -84,8 +85,10 @@ const TimelineComponent = () => {
   };
 
   return (
-    <div className="bg-timeline inset-0 -z-10 min-h-screen w-full bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm select-none">
-      <div className="absolute inset-0 backdrop-blur-sm w-full min-h-screen"></div>
+    <div className="bg-timeline inset-0 -z-10 min-h-screen w-full bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm select-none"
+    style={{ backgroundImage: `url(${TimelineBg})` }}
+>
+      <div className="absolute inset-0 backdrop-blur-sm w-full bg-black/50 min-h-screen"></div>
 
       <div className="relative overflow-y-scroll py-10">
         <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">

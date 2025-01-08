@@ -7,12 +7,12 @@ import { MapPin, CalendarDays } from "lucide-react";
 import Pic from "../assets/Core.jpg";
 const Events = () => {
   return (
-    <div className="h-max w-full font-poppins">
-      <h1 className="flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw]">
+    <div className="h-max w-full font-poppins scroll-smooth">
+      <h1 className="flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw] text-white">
         EVENTS
       </h1>
 
-      <div className='h-[30vh] md:h-[75vh] max-w-full mx-4 my-6 rounded-xl relative z-0 overflow-hidden'>
+      <div id="upcoming" className='h-[30vh] md:h-[75vh] max-w-full mx-4 my-10 rounded-xl relative z-0 overflow-hidden'>
         <img src={Pic} alt='Recent Event' className='absolute left-0 w-full top-[-20%] -z-10' />
 
         <div className="h-full w-[30vw] flex flex-col justify-center items-start rounded-l-xl p-6 bg-gradient-to-tr from-white/30 backdrop-blur-sm bg-blend-overlay to-transparent before:absolute before:inset-0 before:bg-gradient-to-r before:from-white/20 before:to-transparent before:z-0">
@@ -29,15 +29,7 @@ const Events = () => {
         </div>
       </div>
 
-      <div className="min-h-[80vh] w-full mx-auto my-2 p-4 grid grid-cols-1 grid-rows-6 sm:grid-cols-5 sm:grid-rows-2 gap-3">
-        <div className="bg-lightblue sm:col-span-2 rounded-xl"></div>
-        <div className="bg-bright-yellow rounded-xl"></div>
-        <div className="bg-black row-span-2 sm:col-span-2 rounded-xl"></div>
-        <div className="bg-bright-yellow rounded-xl"></div>
-        <div className="bg-lightblue sm:col-span-2 rounded-xl"></div>
-      </div>
-
-
+      <span id="past"></span>
       <LargeEvents />
       
       <GenerateCertificate />

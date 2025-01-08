@@ -1,0 +1,169 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #0e1726; /* Muted dark blue background */
+    color: #e5efff; /* Subtle off-white text */
+    margin: 0;
+    padding: 0;
+  }
+  
+  .app {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .calendar-container {
+    width: 60%;
+    background-color: #1a2e45; /* Dark blue */
+    border: 1px solid #044c5e; /* Neon blue border */
+    border-radius: 8px;
+    box-shadow: 0 0 15px #044c5e; /* Neon blue glowing effect */
+    padding: 20px;
+  }
+  
+  .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: #c7d7ea; /* Subtle light text */
+  }
+  
+  .calendar-header button {
+    background-color: #044c5e; /* Neon blue */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .calendar-header button:hover {
+    background-color: #0a6eb6; /* Brighter blue */
+    box-shadow: 0 0 8px #0a6eb6; /* Glow effect */
+  }
+  
+  .calendar-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+  }
+  
+  .day-header {
+    text-align: center;
+    font-weight: bold;
+    color: #c7d7ea; /* Lighter text for weekday headers */
+  }
+  
+  .day {
+    border: 1px solid #333; /* Muted border for days */
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    height: 70px;
+    cursor: pointer;
+    background-color: #2c3e5c; /* Subtle dark blue */
+    color: #e5efff; /* Off-white text */
+    transition: all 0.3s ease;
+  }
+  
+  .day:hover {
+    background-color: #044c5e; /* Neon blue on hover */
+    box-shadow: 0 0 8px #044c5e;
+    transform: scale(1.10);
+    z-index: 1;
+  }
+  
+  .selected {
+    background-color: #356182; /* Bright blue for selected day */
+    color: #fff; /* White text */
+  }
+  
+  .empty {
+    border: none;
+  }
+  
+  .event {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    right: 5px;
+    background: #044c5e; /* Neon blue for events */
+    color: #e5efff; /* Off-white text */
+    padding: 2px 5px;
+    font-size: 12px;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #044c5e; /* Glow for events */
+  }
+  
+  .sidebar {
+    width: 35%;
+    background-color: #1a2e45; /* Matching sidebar background */
+    border: 1px solid #044c5e; /* Neon blue border */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #044c5e; /* Glowing effect */
+  }
+  
+  .sidebar h2 {
+    margin-bottom: 10px;
+    color: #e5efff; /* Subtle light text */
+  }
+  
+  .sidebar input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #044c5e; /* Neon blue border */
+    background: #0e1726; /* Darker background for input */
+    color: #e5efff; /* Off-white text */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar input::placeholder {
+    color: #888; /* Muted gray placeholder text */
+  }
+  
+  .sidebar button {
+    width: 100%;
+    padding: 10px;
+    background-color: #044c5e; /* Neon blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .sidebar button:hover {
+    background-color: #0a6eb6; /* Brighter blue */
+    box-shadow: 0 0 8px #0a6eb6; /* Glow effect */
+  }
+  
+  .event-list {
+    margin-top: 20px;
+  }
+  
+  .event-item {
+    background: #044c5e; /* Neon blue for events in sidebar */
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 3px;
+    box-shadow: 0 0 8px #044c5e; /* Glow effect */
+  }
+  
+  .event-item:hover {
+    background-color: #0a6eb6; /* Brighter blue on hover */
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+  }
+  
+  
