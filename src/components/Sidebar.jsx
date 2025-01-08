@@ -80,7 +80,7 @@ const Sidebar = () => {
       path: "/events",
       subLinks: [
         { title: "Upcoming Events", path: "/events/#upcoming" },
-        { title: "Past Events", path: "/events/#past" },
+        { title: "Past Events", path: "/events/#past" },  
       ],
     },
     { Icon: IoIosPeople, title: "Team", path: "/team",},
@@ -133,10 +133,10 @@ const Sidebar = () => {
         />
       </button>
 
-      <div className={`flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}>
+      <div className={`w-full flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}>
         {navigationLinks.map(({ Icon, title, path, subLinks }) => (
-          <div key={path} className="relative">
-            <div className="flex items-center justify-between">
+          <div key={path} className="w-full relative">
+            <div className="w-full flex items-center justify-between">
               <Link
                 to={path}
                 onClick={() => {
@@ -146,7 +146,7 @@ const Sidebar = () => {
                     setDropdowns({});
                   }
                 }}
-                className={`flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${
+                className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${
                   activeRoute === path
                     ? "bg-indigo-100 text-indigo-600"
                     : "text-white hover:text-black hover:bg-gray-100/40"
@@ -158,19 +158,19 @@ const Sidebar = () => {
                     {title}
                   </span>
                 )}
+                {subLinks && (
+                  <button
+                    onClick={() => {toggleDropdown(title);setOpen(true)}} // Toggle dropdown for the specific menu
+                    className={`${open? "block":"hidden"} ml-1 p-1 focus:outline-none transition-all duration-300 ease-in-out`}
+                  >
+                    <span>
+                      <IoIosArrowDown
+                        className={`transition-transform ${ activeRoute === path? "text-indigo-600": "text-white"} ${dropdowns[title] && "rotate-180"}`}
+                      />
+                    </span>
+                  </button>
+                )}
               </Link>
-              {subLinks && (
-                <button
-                  onClick={() => {toggleDropdown(title);setOpen(true)}} // Toggle dropdown for the specific menu
-                  className="ml-1 p-1 focus:outline-none transition-all duration-300 ease-in-out"
-                >
-                  <span>
-                    <IoIosArrowDown
-                      className={`transition-transform text-white ${dropdowns[title] && "rotate-180"}`}
-                    />
-                  </span>
-                </button>
-              )}
             </div>
 
             {/* Dropdown Menu */}
@@ -186,6 +186,7 @@ const Sidebar = () => {
                         ...prev,
                         [title]: false, // Close dropdown after navigation
                       }));
+                      setOpen(false);
                     }}
                     className="block p-2 text-sm sm:text-base font-medium text-white no-underline rounded-lg hover:bg-white/20"
                   >
