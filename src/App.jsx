@@ -9,6 +9,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
 import AboutUs from "./components/aboutus/AboutUs";
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
@@ -39,6 +41,8 @@ const App = () => {
           >
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails/>}/>
               <Route path="/team" element={<Team/>} />
