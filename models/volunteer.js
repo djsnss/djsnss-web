@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import validator from "validator";
-
 const volunteerSchema = new mongoose.Schema(
   {
     passportPhoto: {
@@ -43,7 +42,7 @@ const volunteerSchema = new mongoose.Schema(
         trim: true,
         validate(value) {
           if (!validator.isEmail(value)) {
-            throw new error("Invalid email-id");
+            throw new Error("Invalid email-id");
           }
         },
       },
@@ -54,12 +53,16 @@ const volunteerSchema = new mongoose.Schema(
         trim: true,
         validate(value) {
           if (!validator.isEmail(value)) {
-            throw new error("Invalid email-id");
+            throw new Error("Invalid email-id");
           }
         },
       },
     },
     studentDetails: {
+      name: {
+        type: String,
+        required: true,
+      },
       branch: {
         type: String,
         required: true,
@@ -81,7 +84,7 @@ const volunteerSchema = new mongoose.Schema(
         unique: true,
         validate(value) {
           if (!validator.isEmail(value)) {
-            throw new error("Invalid email-id");
+            throw new Error("Invalid email-id");
           }
         },
       },
@@ -99,29 +102,30 @@ const volunteerSchema = new mongoose.Schema(
             minSymbols: 1,
           })
         ) {
-          throw new error("Enter a strong password");
+          throw new Error("Enter a strong password");
         }
       },
-      roles: {
-        type: [String],
-        enum: ["admin", "core", "cocomm", "volunteer", "coordinator"],
-        default: ["volunteer"],
-      },
-      hobbies: {
-        type: [String],
-      },
-      volunteerHours: {
-        type: Number,
-        default: 0,
-        min: 0,
-      },
-      connectedEvents: [
-        {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "Event",
-        },
-      ],
     },
+    roles: {
+      type: [String],
+      enum: ["admin", "core", "cocomm", "volunteer", "coordinator"],
+      default: ["volunteer"],
+    },
+    hobbies: {
+      type: [String],
+      default: [],
+    },
+    volunteerHours: {
+      type: Number,
+      default: 0,
+      min: 0,
+    },
+    connectedEvents: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+      },
+    ],
   },
   { timestamps: true }
 );

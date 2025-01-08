@@ -5,6 +5,7 @@ import env from "dotenv";
 import { sendLogin, sendSignup } from "./nodemailerC.js";
 import EventModel from "../models/event.js";
 import sharp from "sharp";
+import cloudinary from "../config/cloudinary.js";
 
 env.config();
 const Secret = process.env.SecretKey;
@@ -86,7 +87,15 @@ const signup = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { sapId, email, password } = req.body;
-    const volunteer = await VolunteerModel.findOne({ sapId, email });
+    if (!sapId || !email || !password) {
+      return res
+        .status(400)
+        .json({ message: "sapId, email, and password are required" });
+    }
+    const volunteer = await VolunteerModel.findOne({
+      "studentDetails.sapId": sapId,
+      "studentDetails.email": email,
+    });
     if (!volunteer) {
       return res.status(400).send("Invalid sapId or email");
     }
@@ -105,21 +114,43 @@ const login = async (req, res) => {
 
 const registerEvent = async (req, res) => {
   try {
-    const volunteer = req.volunteer;
+    const volunteerId = req.volunteer?.volunteerId;
+    if (!volunteerId) {
+      return res.status(400).send("Volunteer not found in request");
+    }
+    const volunteer = await VolunteerModel.findById(volunteerId);
+    if (!volunteer) {
+      return res.status(404).send("Volunteer not found");
+    }
     const eventId = req.params.eventId;
     const event = await EventModel.findById(eventId);
     if (!event) {
       return res.status(404).send("Event not found");
     }
+    // Ensure arrays exist
+    if (!Array.isArray(volunteer.connectedEvents)) {
+      volunteer.connectedEvents = [];
+    }
+    if (!Array.isArray(event.registeredVolunteers)) {
+      event.registeredVolunteers = [];
+    }
+    // Avoid duplicate registration
+    if (volunteer.connectedEvents.includes(eventId)) {
+      return res
+        .status(400)
+        .send({ message: `Already registered for ${event.name}` });
+    }
+    // Register the volunteer
     volunteer.connectedEvents.push(eventId);
     event.registeredVolunteers.push({ volunteerId: volunteer._id });
+    // Save changes
     await volunteer.save();
     await event.save();
     res
       .status(200)
       .send({ message: `Successfully registered for ${event.name}` });
   } catch (err) {
-    console.error("Login Error:", err);
+    console.error("Register Event Error:", err);
     return res.status(500).json({ message: "Server error" });
   }
 };

@@ -1,59 +1,53 @@
-import Volunteer from "../models/volunteer.js";
 import cloudinary from "../config/cloudinary.js";
 import EventModel from "../models/event.js";
+import VolunteerModel from "../models/volunteer.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import env from "dotenv";
+import { sendLogin } from "./nodemailerC.js";
+env.config();
+const Secret = process.env.SecretKey;
 
-/* export const createVolunteer = async (req, res) => {
+export const login = async (req, res) => {
   try {
-    const { 
-      passportPhoto, 
-      normalPhoto, 
-      description, 
-      parentDetails, 
-      studentDetails, 
-      password,
-      roles,
-      hobbies
-    } = req.body;
-
-    // Handle photo uploads to Cloudinary
-    let passportPhotoResult = passportPhoto ? 
-      await cloudinary.uploader.upload(passportPhoto) : null;
-    let normalPhotoResult = normalPhoto ? 
-      await cloudinary.uploader.upload(normalPhoto) : null;
-
-    const newVolunteer = new Volunteer({
-      passportPhoto: {
-        url: passportPhotoResult?.secure_url || '',
-        public_id: passportPhotoResult?.public_id || ''
-      },
-      normalPhoto: {
-        url: normalPhotoResult?.secure_url || '',
-        public_id: normalPhotoResult?.public_id || ''
-      },
-      description,
-      parentDetails,
-      studentDetails,
-      password: await bcrypt.hash(password, 10),
-      roles,
-      hobbies
+    const { sapId, email, password } = req.body;
+    if (!sapId || !email || !password) {
+      return res
+        .status(400)
+        .json({ message: "sapId, email, and password are required" });
+    }
+    const volunteer = await VolunteerModel.findOne({
+      "studentDetails.sapId": sapId,
+      "studentDetails.email": email,
     });
-
-    await newVolunteer.save();
-    res.status(201).json(newVolunteer);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+    if (!volunteer) {
+      return res.status(400).send("Invalid sapId or email");
+    }
+    if (!volunteer.roles.includes("admin")) {
+      return res.status(403).json({ message: "The volunteer is not an admin" });
+    }
+    const match = await bcrypt.compare(password, volunteer.password);
+    if (!match) {
+      return res.status(400).send("Invalid password");
+    }
+    const token = jwt.sign({ volunteerId: volunteer._id }, Secret);
+    sendLogin(req, res);
+    return res.status(200).json({ token, volunteer });
+  } catch (err) {
+    console.error("Login Error:", err);
+    return res.status(500).json({ message: "Server error" });
   }
-}; */
+};
 
 export const getVolunteers = async (req, res) => {
   try {
     const { page = 1, limit = 10 } = req.query;
-    const volunteers = await Volunteer.find()
+    const volunteers = await VolunteerModel.find()
       .limit(limit * 1)
       .skip((page - 1) * limit)
       .populate("connectedEvents");
 
-    const total = await Volunteer.countDocuments();
+    const total = await VolunteerModel.countDocuments();
 
     res.json({
       volunteers,
@@ -65,9 +59,39 @@ export const getVolunteers = async (req, res) => {
   }
 };
 
+export const getVolunteersByEvent = async (req, res) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const { eventId } = req.params;
+
+    // Find the event by its ID
+    const event = await EventModel.findById(eventId).populate(
+      "registeredVolunteers.volunteerId"
+    );
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Extract registered volunteers
+    const totalVolunteers = event.registeredVolunteers.length;
+    const volunteers = event.registeredVolunteers
+      .slice((page - 1) * limit, page * limit)
+      .map((entry) => entry.volunteerId); // Extract the volunteer details
+
+    res.json({
+      volunteers,
+      totalPages: Math.ceil(totalVolunteers / limit),
+      currentPage: page,
+    });
+  } catch (error) {
+    console.error("Error fetching volunteers by event:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+};
+
 export const getVolunteerById = async (req, res) => {
   try {
-    const volunteer = await Volunteer.findById(req.params.id).populate(
+    const volunteer = await VolunteerModel.findById(req.params.id).populate(
       "connectedEvents"
     );
 
@@ -88,7 +112,7 @@ export const updateVolunteer = async (req, res) => {
 
     // Handle photo updates
     if (updateData.passportPhoto) {
-      const oldVolunteer = await Volunteer.findById(id);
+      const oldVolunteer = await VolunteerModel.findById(id);
       if (oldVolunteer.passportPhoto.public_id) {
         await cloudinary.uploader.destroy(oldVolunteer.passportPhoto.public_id);
       }
@@ -106,10 +130,14 @@ export const updateVolunteer = async (req, res) => {
       updateData.password = await bcrypt.hash(updateData.password, 10);
     }
 
-    const updatedVolunteer = await Volunteer.findByIdAndUpdate(id, updateData, {
-      new: true,
-      runValidators: true,
-    });
+    const updatedVolunteer = await VolunteerModel.findByIdAndUpdate(
+      id,
+      updateData,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
 
     if (!updatedVolunteer) {
       return res.status(404).json({ message: "Volunteer not found" });
@@ -126,7 +154,7 @@ export const deleteVolunteer = async (req, res) => {
     const { id } = req.params;
 
     // Find volunteer to delete associated cloudinary images
-    const volunteerToDelete = await Volunteer.findById(id);
+    const volunteerToDelete = await VolunteerModel.findById(id);
 
     if (!volunteerToDelete) {
       return res.status(404).json({ message: "Volunteer not found" });
@@ -145,7 +173,7 @@ export const deleteVolunteer = async (req, res) => {
     }
 
     // Delete volunteer
-    await Volunteer.findByIdAndDelete(id);
+    await VolunteerModel.findByIdAndDelete(id);
 
     res.json({ message: "Volunteer deleted successfully" });
   } catch (error) {
