@@ -1,5 +1,5 @@
 import ReactDOM from "react-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -10,9 +10,46 @@ import { FaHeart, FaLightbulb, FaLaptopCode, FaRegSmileBeam } from "react-icons/
 import { GiWheat, GiTreehouse } from "react-icons/gi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Timeline.css";
-import TimelineBg from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import TirangaRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import GrainAThon from "../assets/Events/GrainAThon.png";
+import BorivaliTP from "../assets/Events/TreePlantation.png";
+import NSSCamp from "../assets/Events/NSSCamp.jpg";
+import AnnualCharity from "../assets/Events/AnnualCharity.png";
+import VoterRegistration from "../assets/Events/VoterRegistration.png";
+import BDD from "../assets/Events/BDD.jpg";
+import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
+import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
 
 const TimelineComponent = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const backgroundImages = [
+    TirangaRally,
+    GrainAThon,
+    BorivaliTP,
+    NSSCamp,
+    AnnualCharity,
+    VoterRegistration,
+    BDD,
+    NewspaperCollectionDrive,
+    IndependenceDayRally
+  ];
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => 
+          (prevIndex + 1) % backgroundImages.length
+        );
+        setIsTransitioning(false);
+      }, 500);
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   const timelineData = [
     {
       date: "March",
@@ -69,7 +106,6 @@ const TimelineComponent = () => {
       color: "#2A9D8F",
     },
   ];
-  
 
   const [visibleItems, setVisibleItems] = useState(2);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,10 +121,23 @@ const TimelineComponent = () => {
   };
 
   return (
-    <div className="bg-timeline inset-0 -z-10 min-h-screen w-full bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm select-none"
-    style={{ backgroundImage: `url(${TimelineBg})` }}
->
-      <div className="absolute inset-0 backdrop-blur-sm w-full bg-black/50 min-h-screen"></div>
+    <div className="relative min-h-screen w-full overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentImageIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{
+            backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
+            zIndex: -1
+          }}
+        />
+      </AnimatePresence>
+
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/50" />
 
       <div className="relative overflow-y-scroll py-10">
         <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">
@@ -196,6 +245,5 @@ const EventModal = ({ isOpen, setIsOpen, data }) => {
     </AnimatePresence>
   );
 };
-
 
 export default TimelineComponent;

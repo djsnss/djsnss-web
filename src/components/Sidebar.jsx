@@ -74,7 +74,14 @@ const Sidebar = () => {
     { Icon: MdOutlineRateReview, title: "Testimonial", path: "/testimonial" },
     { Icon: GrGallery, title: "Gallery", path: "/gallery" },
     { Icon: FaQuestion, title: "FAQ", path: "/faq" },
-    { Icon: MdEventNote, title: "Events", path: "/events"},
+    {
+      Icon: MdEventNote,
+      title: "Events",
+      path: "/events",
+      subLinks: [
+        { title: "Timeline", path: "/timeline" },  
+      ],
+    },
     { Icon: IoIosPeople, title: "Team", path: "/team"},
     {
       Icon: IoPeople,
