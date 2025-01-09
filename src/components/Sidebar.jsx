@@ -81,6 +81,7 @@ const Sidebar = () => {
       subLinks: [
         { title: "Upcoming Events", path: "/events/#upcoming" },
         { title: "Past Events", path: "/events/#past" },  
+        { title: "Timeline", path: "/timeline" },  
       ],
     },
     { Icon: IoIosPeople, title: "Team", path: "/team",},
