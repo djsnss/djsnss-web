@@ -10,9 +10,13 @@ import {
   removeVolunteerFromEvent,
   updateVolunteerHours,
   getEventStats,
+  updateEventPhoto,
+  uploadEventPhoto,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
+
+import { uploadNormal } from "../middlewares/multer.js";
 
 const router = express.Router();
 
@@ -20,18 +24,38 @@ const router = express.Router();
 router.post("/login", login);
 
 // Volunteer routes
-router.get("/", getVolunteers);  // Get all volunteers
-router.get("/:id", getVolunteerById);  // Get a specific volunteer by ID
-router.patch("/:id", authAdmin, updateVolunteer);  // Update a volunteer by ID
-router.delete("/:id", authAdmin, deleteVolunteer);  // Delete a volunteer by ID
+router.get("/", getVolunteers); // Get all volunteers
+router.get("/:id", getVolunteerById); // Get a specific volunteer by ID
+router.patch("/:id", authAdmin, updateVolunteer); // Update a volunteer by ID
+router.delete("/:id", authAdmin, deleteVolunteer); // Delete a volunteer by ID
 
 // Event routes
-router.post("/createEvent", authAdmin, createEvent);  // Create a new event
-router.get("/events/:eventId/volunteers", authAdmin, getVolunteersByEvent);  // Get volunteers by event
+router.post("/createEvent", authAdmin, createEvent); // Create a new event
+router.get("/events/:eventId/volunteers", authAdmin, getVolunteersByEvent); // Get volunteers by event
+router.post(
+  "/events/:id/uploadPhoto",
+  authAdmin,
+  uploadNormal.single("image"),
+  uploadEventPhoto
+);
+router.post(
+  "/events/:id/updatePhoto",
+  authAdmin,
+  uploadNormal.single("image"),
+  updateEventPhoto
+);
 
 // New event-related routes
-router.delete("/events/:eventId/volunteers/:volunteerId", authAdmin, removeVolunteerFromEvent);  // Remove a volunteer from an event
-router.patch("/events/:eventId/volunteers/hours", authAdmin, updateVolunteerHours);  // Update volunteer hours for an event
-router.get("/events/:eventId/stats", authAdmin, getEventStats);  // Get event registration stats
+router.delete(
+  "/events/:eventId/volunteers/:volunteerId",
+  authAdmin,
+  removeVolunteerFromEvent
+); // Remove a volunteer from an event
+router.patch(
+  "/events/:eventId/volunteers/hours",
+  authAdmin,
+  updateVolunteerHours
+); // Update volunteer hours for an event
+router.get("/events/:eventId/stats", authAdmin, getEventStats); // Get event registration stats
 
 export default router;

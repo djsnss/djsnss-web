@@ -197,6 +197,17 @@ export const createEvent = async (req, res) => {
     if (existingEvent) {
       return res.status(400).json({ message: "Event already exists" });
     }
+    const currentDate = new Date();
+    const eventDate = new Date(date);
+    let status;
+
+    if (eventDate > currentDate) {
+      status = "Upcoming";
+    } else if (eventDate.toDateString() === currentDate.toDateString()) {
+      status = "Ongoing";
+    } else {
+      status = "Past";
+    }
     const newEvent = new EventModel({
       name,
       description,
@@ -206,6 +217,7 @@ export const createEvent = async (req, res) => {
       date,
       location,
       maxVolunteers,
+      status,
     });
     await newEvent.save();
     return res.status(201).json({
@@ -300,7 +312,7 @@ export const updateVolunteerHours = async (req, res) => {
       totalHours: volunteer.volunteerHours,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message});
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -334,5 +346,57 @@ export const getEventStats = async (req, res) => {
     res.status(200).json(stats);
   } catch (error) {
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const uploadEventPhoto = async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    if (!req.file) {
+      return res.status(400).send("File not found");
+    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "EventPhoto",
+    });
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).send("Event not found.");
+    }
+    event.photo.url = result.secure_url;
+    event.photo.public_id = result.public_id;
+    await event.save();
+    return res.status(200).json({
+      message: "Event normal photo uploaded",
+      photo: event.photo,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error uploading image");
+  }
+};
+
+export const updateEventPhoto = async (req, res) => {
+  try {
+    const eventId = req.params.id;
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).send("event not found");
+    }
+    if (event.photo && event.photo.public_id) {
+      await cloudinary.uploader.destroy(event.photo.public_id);
+    }
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "EventPhoto",
+    });
+    event.photo.url = result.secure_url;
+    event.photo.public_id = result.public_id;
+    await event.save();
+    return res.status(200).json({
+      message: "event normal photo updated",
+      photo: event.photo,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error updating image");
   }
 };
