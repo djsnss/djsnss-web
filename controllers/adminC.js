@@ -217,3 +217,122 @@ export const createEvent = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
+
+// Remove a volunteer from an event
+export const removeVolunteerFromEvent = async (req, res) => {
+  try {
+    const { volunteerId, eventId } = req.params;
+
+    const [event, volunteer] = await Promise.all([
+      EventModel.findById(eventId),
+      VolunteerModel.findById(volunteerId),
+    ]);
+
+    if (!event || !volunteer) {
+      return res.status(404).json({
+        message: !event ? "Event not found" : "Volunteer not found",
+      });
+    }
+
+    // Remove volunteer from event
+    event.registeredVolunteers = event.registeredVolunteers.filter(
+      (registration) => registration.volunteerId.toString() !== volunteerId
+    );
+
+    // Remove event from volunteer's connected events
+    volunteer.connectedEvents = volunteer.connectedEvents.filter(
+      (eventRef) => eventRef.toString() !== eventId
+    );
+
+    await Promise.all([event.save(), volunteer.save()]);
+
+    res
+      .status(200)
+      .json({ message: "Volunteer removed from event successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// Update volunteer hours for an event
+export const updateVolunteerHours = async (req, res) => {
+  try {
+    const { volunteerId, eventId, hoursCompleted } = req.body;
+
+    if (hoursCompleted < 0) {
+      return res.status(400).json({ message: "Hours cannot be negative" });
+    }
+
+    const [volunteer, event] = await Promise.all([
+      VolunteerModel.findById(volunteerId),
+      EventModel.findById(eventId),
+    ]);
+
+    if (!volunteer || !event) {
+      return res.status(404).json({
+        message: !volunteer ? "Volunteer not found" : "Event not found",
+      });
+    }
+
+    // Verify volunteer is registered for this event
+    const isRegistered = event.registeredVolunteers.some(
+      (registration) => registration.volunteerId.toString() === volunteerId
+    );
+    if (!isRegistered) {
+      return res
+        .status(400)
+        .json({ message: "Volunteer is not registered for this event" });
+    }
+
+    // Verify hours don't exceed event's total hours
+    if (hoursCompleted > event.TotalNoOfHours) {
+      return res.status(400).json({
+        message: `Hours cannot exceed events total hours of ${event.TotalNoOfHours}`,
+      });
+    }
+
+    // Update volunteer's total hours
+    volunteer.volunteerHours = (volunteer.volunteerHours || 0) + hoursCompleted;
+    await volunteer.save();
+
+    res.status(200).json({
+      message: "Volunteer hours updated successfully",
+      totalHours: volunteer.volunteerHours,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message});
+  }
+};
+
+// Get event registration statistics
+export const getEventStats = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+
+    const event = await EventModel.findById(eventId).populate(
+      "registeredVolunteers.volunteerId",
+      "studentDetails.sapId studentDetails.email"
+    );
+
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    const stats = {
+      totalSpots: event.maxVolunteers,
+      registeredCount: event.registeredVolunteers.length,
+      availableSpots: event.maxVolunteers - event.registeredVolunteers.length,
+      registrationPercentage:
+        (event.registeredVolunteers.length / event.maxVolunteers) * 100,
+      registeredVolunteers: event.registeredVolunteers.map((registration) => ({
+        sapId: registration.volunteerId.studentDetails.sapId,
+        email: registration.volunteerId.studentDetails.email,
+        registeredAt: registration.registeredAt,
+      })),
+    };
+
+    res.status(200).json(stats);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
