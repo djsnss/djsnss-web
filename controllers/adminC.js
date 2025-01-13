@@ -199,12 +199,12 @@ export const createEvent = async (req, res) => {
     }
     const currentDate = new Date();
     const eventDate = new Date(date);
+    const isSameDay =
+      currentDate.toISOString().split("T")[0] === eventDate.toISOString().split("T")[0];
+    // Determine the status
     let status;
-
-    if (eventDate > currentDate) {
+    if (eventDate > currentDate || isSameDay) {
       status = "Upcoming";
-    } else if (eventDate.toDateString() === currentDate.toDateString()) {
-      status = "Ongoing";
     } else {
       status = "Past";
     }
@@ -398,5 +398,34 @@ export const updateEventPhoto = async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error updating image");
+  }
+};
+
+export const getUpcomingEvents = async (req, res) => {
+  try {
+    const upcomingEvents = await EventModel.find({ status: "Upcoming" }).sort({
+      date: 1,
+    });
+    return res.status(200).json({
+      message: "Upcoming events fetched successfully",
+      events: upcomingEvents,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error fetching upcoming events");
+  }
+};
+export const getPastEvents = async (req, res) => {
+  try {
+    const pastEvents = await EventModel.find({ status: "Past" }).sort({
+      date: 1,
+    });
+    return res.status(200).json({
+      message: "Past events fetched successfully",
+      events: pastEvents,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error fetching past events");
   }
 };

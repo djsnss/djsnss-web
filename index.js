@@ -4,6 +4,7 @@ import env from "dotenv";
 import cors from "cors";
 import adminRouter from "./routes/adminR.js";
 import volunteerRouter from "./routes/volunteerR.js";
+import eventRouter from "./routes/eventR.js";
 
 env.config();
 const PORT = process.env.Port;
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/admin", adminRouter);
 app.use("/volunteer", volunteerRouter);
+app.use("/events", eventRouter);
 
 app.listen(PORT, () => {
   console.log(`Server connected at PORT ${PORT}`);
