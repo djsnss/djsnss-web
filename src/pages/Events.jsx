@@ -42,13 +42,13 @@ const Events = () => {
   }, [] )
 
   return (
-    <div className="h-max w-full font-poppins scroll-smooth">
-      <h1 className="flex mx-auto my-2 h-max w-full justify-center items-center text-[6vw] text-white">
+    <div className="h-max w-full font-poppins scroll-smooth bg-white">
+      <h1 className="flex mx-auto mb-2 py-2 h-max w-full justify-center items-center text-[6vw]">
         EVENTS
       </h1>
 
       <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 mb-5">
-        <h1 className="text-2xl md:text-3xl font-bold text-white">
+        <h1 className="text-2xl md:text-3xl font-bold">
           Upcoming Events :-
         </h1>
 
@@ -67,7 +67,7 @@ const Events = () => {
                   src={event.imageURL}
                   alt={event.name}
                 />
-                <CCarouselCaption className="text-shadow p-4 bg-white/60 rounded-lg">
+                <CCarouselCaption className="text-shadow p-4 bg-white/70 rounded-lg shadow-md">
                   <h5
                     // onClick={() => navigate(`/eventdetails/${event.slug}`)}
                     className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"

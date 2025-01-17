@@ -233,7 +233,7 @@ const LocalEvents = () => {
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 mb-5">
-      <h1 className='text-2xl md:text-3xl font-bold text-white'>
+      <h1 className='text-2xl md:text-3xl font-bold'>
         Local Events :-
       </h1>
       
@@ -245,7 +245,7 @@ const LocalEvents = () => {
               src={event.imageURL}
               alt={event.title}
             />
-            <CCarouselCaption className="text-shadow p-4 bg-white/60 rounded-lg">
+            <CCarouselCaption className="text-shadow p-4 bg-white/70 rounded-lg shadow-md">
               <h5
                 onClick={() => navigate(`/eventdetails/${event.slug}`)}
                 className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"
