@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import Aboutusimg from '../assets/Events/IndependenceDay.jpg';
+import Aboutusimg from '../assets/Events/IndependenceDay.png';
 import Card from '../components/aboutus/Card';
 const AboutUs = () => {
 
