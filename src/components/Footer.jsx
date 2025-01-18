@@ -36,14 +36,14 @@ const getIcon = (name) => {
 // Main Footer Component
 function FooterComponent() {
   return (
-    <Footer className="bg-blue-950 text-gray-300 rounded-none">
+    <Footer className="bg-light-navy text-gray-300 rounded-none">
       <div className="w-full">
         {/* Footer Top Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 px-6 sm:px-12 py-10">
           {/* DJSNSS Section */}
           <div className="lg:w-1/2">
             <FooterTitle
-              className="text-xl sm:text-2xl md:text-3xl pb-3 font-extrabold text-gold"
+              className="text-xl sm:text-2xl md:text-3xl pb-3 font-extrabold text-sky-300"
               title="DJS NSS"
             />
             <p className="text-sm sm:text-base md:text-lg text-gray-400 leading-relaxed">
@@ -63,26 +63,28 @@ function FooterComponent() {
             {/* Useful Links Section */}
             <div className="flex flex-col lg:w-1/2">
               <FooterTitle
-                className="text-lg sm:text-xl md:text-2xl pb-3 font-extrabold text-gold"
+                className="text-lg sm:text-xl md:text-2xl pb-3 font-extrabold text-sky-300"
                 title="Useful Links"
               />
               <FooterLinkGroup col>
-                {MenuLinks.map((link) => (
-                  <Link
-                    key={link.id}
-                    to={`/${link.link}`}
-                    className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-gold transition duration-300"
-                  >
-                    {link.name}
-                  </Link>
-                ))}
+                <div className="flex flex-wrap gap-4">
+                  {MenuLinks.map((link) => (
+                    <Link
+                      key={link.id}
+                      to={`/${link.link}`}
+                      className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-sky-300 transition duration-300"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
               </FooterLinkGroup>
             </div>
 
             {/* Social Links Section */}
             <div className="flex flex-col">
               <FooterTitle
-                className="text-lg sm:text-xl md:text-2xl pb-3 font-extrabold text-gold"
+                className="text-lg sm:text-xl md:text-2xl pb-3 font-extrabold text-sky-300"
                 title="Follow Us"
               />
               <div className="flex space-x-6 justify-start sm:justify-center">
@@ -94,7 +96,7 @@ function FooterComponent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       key={social.id}
-                      className="text-white hover:text-gold transition duration-300 text-xl sm:text-2xl md:text-3xl"
+                      className="text-white hover:text-sky-300 transition duration-300 text-xl sm:text-2xl md:text-3xl"
                     >
                       {IconComponent}
                     </a>
