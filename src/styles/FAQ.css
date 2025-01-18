@@ -88,16 +88,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 40px;
+  margin-top: 30px;
+  padding: 5px;
+  background-color: #f1f1f1;
+  border-radius: 20px;
 }
 
 .faq-question {
   background-color: #f7f7f7; 
   color: black;
   padding: 12px 20px;
-  border-radius: 20px;
+  border-radius: 15px;
   width: 100%; 
-  max-width: 500px; 
+  max-width: 600px; 
   margin-bottom: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
 }
@@ -106,9 +109,9 @@ body {
   background-color: #3b82f6;
   color: white;
   padding: 12px 20px;
-  border-radius: 20px;
+  border-radius: 15px;
   width: 100%; 
-  max-width: 500px;
+  max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   margin-left: auto; 
 }
@@ -160,7 +163,6 @@ body {
 /* Responsive Design for Smaller Screens */
 @media (max-width: 768px) {
   .faq-header {
-    flex-direction: column;
     gap: 15px;
   }
 
@@ -190,7 +192,6 @@ body {
 
   .chat-section {
     margin-top: 10px;
-    flex-direction: column;
     padding: 10px;
   }
 

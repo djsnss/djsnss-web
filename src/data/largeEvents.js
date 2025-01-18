@@ -6,6 +6,8 @@ import VoterRegistration from "../assets/Events/VoterRegistration.png";
 import BDD from "../assets/Events/BDD.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
 import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
+import { GiTreehouse, GiWheat } from "react-icons/gi";
 
 export const largeEventsData = [
   {
@@ -22,6 +24,8 @@ export const largeEventsData = [
     duration: "6 days",
     location: "Dahanu",
     date: "26th Jan - 31st Jan 2024",
+    icon: FaFlag,
+    color: "#4C9D8F",
   },
   {
     id: 2,
@@ -37,6 +41,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "14th Feb 2024",
+    icon: FaHeart,
+    color: "#D72638",
   },
   {
     id: 3,
@@ -52,6 +58,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "15th Aug 2024",
+    icon: GiWheat,
+    color: "#F4A261",
   },
   {
     id: 4,
@@ -67,6 +75,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "Veer Savarkar Udhyan, Borivali West",
     date: "9th Aug 2024",
+    icon: GiTreehouse,
+    color: "#2E8B57",
   },
   {
     id: 5,
@@ -82,6 +92,8 @@ export const largeEventsData = [
     duration: "5 days",
     location: "DJ Sanghvi College",
     date: "20th Feb - 24th Feb 2024",
+    icon: FaHandHoldingHeart,
+    color: "#4CAF50",
   },
   {
     id: 6,
@@ -97,6 +109,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "15th Sep 2024",
+    icon: GiTreehouse,
+    color: "#9C27B0",
   },
   {
     id: 7,
@@ -112,6 +126,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "5th June 2024",
+    icon: GiTreehouse,
+    color: "#2E8B57",
   },
   {
     id: 8,
@@ -127,6 +143,8 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "15th Aug 2024",
+    icon: FaFlag ,
+    color: "#FFA500",
   },
   {
     id: 9,
@@ -142,5 +160,7 @@ export const largeEventsData = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "16th Aug 2024",
+    icon: FaHeart,
+    color: "#F4A261",
   },
 ];

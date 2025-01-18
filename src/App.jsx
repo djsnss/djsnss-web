@@ -8,7 +8,9 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import TimelineComponent from "./pages/Timeline";
 import EventDetails from "./pages/EventDetails";
-import AboutUs from "./components/aboutus/AboutUs";
+import AboutUs from "./pages/AboutUs";
+import Registration from "./pages/Registration";
+import Login from "./pages/Login";
 import MessageDetails from "./pages/Messages";
 import FAQ from "./pages/FAQ";
 import Gallery from "./pages/Gallery";
@@ -17,6 +19,7 @@ import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
 import Calendar from "./components/calendar/Calendar";
 import CheckHours from "./components/volunteer/CheckHours";
 import VolunteerRegistration from "./components/volunteer/VolunteerRegistration";
+import ScrollTT from "./components/ScrollTT";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
@@ -29,8 +32,9 @@ const App = () => {
       }}
     >
       <ScrollToTop />
+      <ScrollTT />
 
-      <div className="flex flex-row justify-center min-h-screen w-screen">
+      <div className="flex flex-row justify-center min-h-screen w-screen bg-white">
         <Suspense
           fallback={
             <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
@@ -42,9 +46,11 @@ const App = () => {
             <Sidebar />
           </div>
 
-          <div className="w-full h-screen overflow-y-scroll">
+          <div className="w-full h-screen overflow-y-scroll scroll-smooth">
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/registration" element={<Registration />} />
+              <Route path="/login" element={<Login />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />

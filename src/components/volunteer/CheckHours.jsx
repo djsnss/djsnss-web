@@ -106,6 +106,9 @@ export default function CheckHours() {
             <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
               {userData.displayName}
             </CardTitle>
+            <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
+              {userData.displayName}
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent>

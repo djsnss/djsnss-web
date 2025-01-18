@@ -1,75 +1,55 @@
 import ReactDOM from "react-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
 } from "react-vertical-timeline-component";
 import { AnimatePresence, motion } from "framer-motion";
 import "react-vertical-timeline-component/style.min.css";
-import { FaHeart, FaLightbulb, FaLaptopCode, FaRegSmileBeam } from "react-icons/fa";
-import { GiWheat, GiTreehouse } from "react-icons/gi";
 import { AiOutlinePlus } from "react-icons/ai";
 import "../Timeline.css";
-import TimelineBg from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import TirangaRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import GrainAThon from "../assets/Events/GrainAThon.png";
+import BorivaliTP from "../assets/Events/TreePlantation.png";
+import NSSCamp from "../assets/Events/NSSCamp.jpg";
+import AnnualCharity from "../assets/Events/AnnualCharity.png";
+import VoterRegistration from "../assets/Events/VoterRegistration.png";
+import BDD from "../assets/Events/BDD.jpg";
+import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
+import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import { largeEventsData } from "../data/largeEvents";
 
 const TimelineComponent = () => {
-  const timelineData = [
-    {
-      date: "March",
-      title: "Blood Donation Drive",
-      description: "Organized a successful blood donation campaign in collaboration with NSS.",
-      longDescription:
-        "The blood donation drive in March witnessed 200+ participants donating over 150 units of blood. Organized in collaboration with NSS, it included health checkups and awareness sessions about the importance of blood donation.",
-      icon: <FaHeart />,
-      color: "#D72638",
-    },
-    {
-      date: "October",
-      title: "Grain-A-Thon",
-      description: "Collected grains for the underprivileged as part of a community service drive.",
-      longDescription:
-        "Grain-A-Thon was a month-long initiative where over 500 kg of grains were collected to support underprivileged communities. It involved active participation from students and faculty alike.",
-      icon: <GiWheat />,
-      color: "#F4A261",
-    },
-    {
-      date: "September",
-      title: "Tree Plantation Drive",
-      description: "Planted over 200 saplings around the campus to promote sustainability.",
-      longDescription:
-        "The tree plantation drive was a significant step towards a greener campus, with workshops on climate change and sustainable practices complementing the plantation efforts.",
-      icon: <GiTreehouse />,
-      color: "#2E8B57",
-    },
-    {
-      date: "August",
-      title: "Freshers' Welcome",
-      description: "Hosted a vibrant event to welcome the new batch of students.",
-      longDescription:
-        "Freshers' Welcome was a grand affair with performances, games, and a formal introduction to campus life. It set the tone for an exciting academic year ahead.",
-      icon: <FaRegSmileBeam />,
-      color: "#FFC107",
-    },
-    {
-      date: "July",
-      title: "Innovation Fest",
-      description: "Displayed groundbreaking projects and experiments by students.",
-      longDescription:
-        "Innovation Fest showcased the creativity and technical expertise of students, featuring 50+ innovative projects across various domains.",
-      icon: <FaLightbulb />,
-      color: "#6A4C93",
-    },
-    {
-      date: "June",
-      title: "Web Development Workshop",
-      description: "Conducted a workshop on web development for students.",
-      longDescription:
-        "The workshop focused on modern web technologies like React, Tailwind CSS, and backend frameworks, attracting over 100 participants.",
-      icon: <FaLaptopCode />,
-      color: "#2A9D8F",
-    },
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+
+  const backgroundImages = [
+    TirangaRally,
+    GrainAThon,
+    BorivaliTP,
+    NSSCamp,
+    AnnualCharity,
+    VoterRegistration,
+    BDD,
+    NewspaperCollectionDrive,
+    IndependenceDayRally
   ];
-  
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setIsTransitioning(true);
+      setTimeout(() => {
+        setCurrentImageIndex((prevIndex) => 
+          (prevIndex + 1) % backgroundImages.length
+        );
+        setIsTransitioning(false);
+      }, 500);
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const timelineData = largeEventsData;
 
   const [visibleItems, setVisibleItems] = useState(2);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -85,10 +65,23 @@ const TimelineComponent = () => {
   };
 
   return (
-    <div className="bg-timeline inset-0 -z-10 min-h-screen w-full bg-cover bg-no-repeat bg-center bg-fixed backdrop-blur-sm select-none"
-    style={{ backgroundImage: `url(${TimelineBg})` }}
->
-      <div className="absolute inset-0 backdrop-blur-sm w-full bg-black/50 min-h-screen"></div>
+    <div className="relative min-h-screen w-full overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentImageIndex}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{
+            backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
+            zIndex: -1
+          }}
+        />
+      </AnimatePresence>
+
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/50" />
 
       <div className="relative overflow-y-scroll py-10">
         <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">
@@ -97,7 +90,7 @@ const TimelineComponent = () => {
               key={index}
               date={item.date}
               dateClassName="timeline-date"
-              icon={item.icon}
+              icon={<item.icon/>}
               iconStyle={{
                 background: item.color,
                 color: "white",
@@ -172,22 +165,29 @@ const EventModal = ({ isOpen, setIsOpen, data }) => {
             animate={{ scale: 1, rotate: "0deg" }}
             exit={{ scale: 0, rotate: "0deg" }}
             onClick={(e) => e.stopPropagation()}
-            className="bg-white/10 backdrop-blur-lg border border-white/20 text-white p-6 rounded-2xl w-full max-w-lg shadow-xl cursor-default relative overflow-hidden"
+            className="bg-white/10 backdrop-blur-lg border border-white/20 text-white p-6 rounded-2xl w-full max-w-6xl lg:max-w-5xl md:max-w-4xl sm:max-w-3xl shadow-xl cursor-default relative overflow-hidden"
           >
-            <div className="relative z-10 text-center">
-              <h3 className="text-3xl font-bold mb-2">{data?.title}</h3>
-              <p className="mb-6">{data?.longDescription}</p>
-              <div className="flex justify-center">
-                <button
-                  onClick={() => setIsOpen(false)}
-                  className="w-[25%] py-2 rounded font-semibold text-white transition-all"
-                  style={{
-                    background: data?.color,
-                    borderColor: data?.color,
-                  }}
-                >
-                  Close
-                </button>
+            <div className="relative flex flex-col lg:flex-row">
+              <img
+                src={data?.imageURL}
+                alt={data?.title}
+                className="w-full lg:w-1/2 lg:h-[300px] object-cover rounded-lg mb-4 lg:mb-0"
+              />
+              <div className="relative z-10 text-center flex flex-col justify-center lg:pl-6 lg:text-left">
+                <h3 className="text-2xl font-bold mb-2">{data?.title}</h3>
+                <p className="mb-6 text-sm lg:text-base">{data?.longDescription}</p>
+                <div className="flex justify-center">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-1/2 lg:w-[25%] py-2 rounded font-semibold text-white transition-all"
+                    style={{
+                      background: data?.color,
+                      borderColor: data?.color,
+                    }}
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -196,6 +196,9 @@ const EventModal = ({ isOpen, setIsOpen, data }) => {
     </AnimatePresence>
   );
 };
+
+
+
 
 
 export default TimelineComponent;

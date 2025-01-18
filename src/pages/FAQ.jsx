@@ -3,26 +3,62 @@ import "../styles/FAQ.css";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 
 // Import icons here
-import { FaVideo, FaPhoneAlt, FaEllipsisV, FaMicrophoneAlt, FaPlus } from "react-icons/fa";
+import {
+  FaVideo,
+  FaPhoneAlt,
+  FaEllipsisV,
+  FaMicrophoneAlt,
+  FaPlus,
+} from "react-icons/fa";
 
 const FAQ = () => {
   const [scrollY, setScrollY] = useState(0);
 
   const faqs = [
     {
-      question: "What is NSS?",
+      question: "Is Volunteer Registration free?",
       answer:
-        "NSS is a student body focused on social service and community development.",
+        "Yes, Volunteer Registration is free. All the NSS events are absolutely free. 🎉",
     },
     {
-      question: "How can I volunteer?",
+      question: "How many volunteers will be selected?",
       answer:
-        "You can volunteer by registering on the NSS website or contacting us directly.",
+        "We take in around 200 volunteers, with 140 spots reserved for second-year students (SEs). Selection is on a first-come, first-served basis, so make sure to register on Friday! Co-com members will be chosen from the 140 SE volunteers. To apply for Co-com, register on Friday and attend interviews on Saturday. Co-com departments include Creatives, Technical, Publicity, and Editorial.",
     },
     {
-      question: "What events are organized by NSS?",
+      question: "What are our flagship events?",
       answer:
-        "NSS organizes various community service events, workshops, and awareness programs.",
+        "The Blood Donation Drive 🩸 and the 7-Day Camp 🏕 are our flagship events!",
+    },
+    {
+      question: "Is CSR connected to NSS?",
+      answer: "No, CSR and NSS are completely separate entities.",
+    },
+    {
+      question: "How is NSS different from other committees?",
+      answer:
+        "NSS events push you out of your comfort zone, helping you build connections across various departments. It helps you discover abilities you never knew you had.",
+    },
+    {
+      question:
+        "What unique benefits does NSS offer that other committees don’t?",
+      answer:
+        "After completing 120 hours of service, you earn an additional 10 marks. Complete 240 hours, and you’ll receive a National-level certificate with our emblem, which is great for placements and higher studies, making you stand out from the crowd. 🎓✨",
+    },
+    {
+      question: "How frequently do events happen?",
+      answer: "We organize around 3-4 events per month. 📅",
+    },
+    {
+      question: "Is it difficult to complete 120 hours of service?",
+      answer:
+        "Not at all! The 120 hours can be easily completed throughout your tenure in NSS. 💪",
+    },
+    {
+      question:
+        "What’s the difference between a Volunteer and a Co-com member?",
+      answer:
+        "As a volunteer, you simply participate in events. But as a Co-com member, you have a say in planning and executing events. You can propose new ideas 💡, make decisions, and have your voice heard in shaping the events.",
     },
   ];
 
@@ -71,7 +107,7 @@ const FAQ = () => {
         </div>
         {faqs.map((faq, index) => (
           <div className="faq-item" key={index}>
-            <div className="faq-question">{faq.question}</div>
+            <div className="faq-question">Q. {faq.question}</div>
             <div className="faq-answer">{faq.answer}</div>
           </div>
         ))}
@@ -80,7 +116,11 @@ const FAQ = () => {
       {/* Chat Section */}
       <div className="chat-section">
         <FaPlus className="chat-icon" />
-        <input type="text" className="chat-input" placeholder="Type your message..." />
+        <input
+          type="text"
+          className="chat-input"
+          placeholder="Type your message..."
+        />
         <FaMicrophoneAlt className="mic-icon" />
       </div>
     </div>
