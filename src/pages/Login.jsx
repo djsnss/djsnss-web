@@ -72,7 +72,7 @@ const Login = () => {
               id="email"
               type="email"
               {...register('email')}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              className="w-full px-3 py-2 border text-black border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
               placeholder="johndoe@example.com"
             />
             {errors.email && (
@@ -81,7 +81,7 @@ const Login = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-black mb-1">
               Password
             </label>
             <div className="relative">
@@ -89,7 +89,7 @@ const Login = () => {
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 {...register('password')}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm text-black  focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="Enter your password"
               />
               <button
@@ -98,9 +98,9 @@ const Login = () => {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <EyeOff className="h-5 w-5 text-gray-400" />
+                  <EyeOff className="h-5 w-5 text-black" />
                 ) : (
-                  <Eye className="h-5 w-5 text-gray-400" />
+                  <Eye className="h-5 w-5 text-black" />
                 )}
               </button>
             </div>
@@ -115,7 +115,7 @@ const Login = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                className="h-4 w-4 text-blue-600 focus:ring-black border-gray-300 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                 Remember me
@@ -123,7 +123,7 @@ const Login = () => {
             </div>
 
             <div className="text-sm">
-              <a href="#" className="font-medium text-blue-600 hover:text-blue-500">
+              <a href="#" className="font-medium text-blue-600 hover:text-black">
                 Forgot your password?
               </a>
             </div>
@@ -132,18 +132,11 @@ const Login = () => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Logging in...' : 'Log in'}
           </button>
         </form>
-
-        <p className="mt-8 text-center text-sm text-gray-600">
-          Not a member?{' '}
-          <NavLink to="/register" className="font-medium text-blue-600 hover:text-blue-500">
-            Register now
-          </NavLink>
-        </p>
       </main>
       <Footer />
     </div>

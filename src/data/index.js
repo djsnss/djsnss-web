@@ -22,7 +22,7 @@ const MenuLinks = [
   {
     id: 5,
     name: "Admin",
-    link: "admin",
+    link: "login",
   },
 ];
 
