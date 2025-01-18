@@ -70,7 +70,7 @@ const AboutUs = () => {
       >
         <div className='absolute inset-0 bg-black opacity-40 z-20'></div>{' '}
         {/* Overlay for darkening the background */}
-        <h1 className='text-2xl md:text-7xl text-white z-50'>
+        <h1 className='text-3xl md:text-7xl text-white z-50 mb-10 sm:mb-20'>
           <strong>ABOUT US</strong>
         </h1>
         <div className='flex flex-col md:flex-row justify-center items-center gap-6 px-4 z-30'>

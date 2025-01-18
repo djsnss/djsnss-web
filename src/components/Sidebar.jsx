@@ -2,6 +2,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome, FiChevronsRight } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
+import { FaTimes } from "react-icons/fa";
 
 // Manual Icon Mapping
 const iconMap = {
@@ -14,6 +15,7 @@ const iconMap = {
   IoPeople: React.lazy(() => import("react-icons/io5").then(module => ({ default: module.IoPeople }))),
   GiCampfire: React.lazy(() => import("react-icons/gi").then(module => ({ default: module.GiCampfire }))),
   FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
+  FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
 };
 
 const Sidebar = () => {
@@ -92,6 +94,7 @@ const Sidebar = () => {
     },
     { Icon: "GiCampfire", title: "Camp", path: "/camp" },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
+    { Icon: "FaTimes", title: "Timeline", path: "/timeline" },
   ];
 
   const handleNavigation = (path) => {

@@ -22,6 +22,7 @@ import { largeEventsData } from "../data/largeEvents";
 const TimelineComponent = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false); // Track if the image has loaded
 
   const backgroundImages = [
     TirangaRally,
@@ -64,6 +65,11 @@ const TimelineComponent = () => {
     setIsModalOpen(true);
   };
 
+  // Function to handle image load completion
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
+
   return (
     <div className="relative min-h-screen w-full overflow-hidden">
       <AnimatePresence mode="wait">
@@ -73,14 +79,23 @@ const TimelineComponent = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-all duration-500 ${!imageLoaded ? 'bg-dark-navy' : ''}`}
           style={{
             backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
           }}
-        />
+        >
+          {/* Image will load lazily and update state once loaded */}
+          <img
+            src={backgroundImages[currentImageIndex]}
+            alt="background"
+            loading="lazy"
+            className="hidden"
+            onLoad={handleImageLoad} // Handle image load
+          />
+        </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 backdrop-blur-sm bg-black/50" />
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/90" />
 
       <div className="relative overflow-y-scroll py-10">
         <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">
@@ -89,7 +104,7 @@ const TimelineComponent = () => {
               key={index}
               date={item.date}
               dateClassName="timeline-date"
-              icon={<item.icon/>}
+              icon={<item.icon />}
               iconStyle={{
                 background: item.color,
                 color: "white",
@@ -108,7 +123,7 @@ const TimelineComponent = () => {
               }}
             >
               <h3
-                className="vertical-timeline-element-title"
+                className="vertical-timeline-element-title pb-0"
                 style={{ color: item.color }}
               >
                 {item.title}
@@ -147,6 +162,8 @@ const TimelineComponent = () => {
     </div>
   );
 };
+
+import PropTypes from 'prop-types';
 
 const EventModal = ({ isOpen, setIsOpen, data }) => {
   return (
@@ -194,10 +211,16 @@ const EventModal = ({ isOpen, setIsOpen, data }) => {
       )}
     </AnimatePresence>
   );
+}
+EventModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    imageURL: PropTypes.string,
+    title: PropTypes.string,
+    longDescription: PropTypes.string,
+    color: PropTypes.string,
+  }),
 };
-
-
-
-
 
 export default TimelineComponent;
