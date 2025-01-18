@@ -71,7 +71,6 @@ const Sidebar = () => {
   const navigationLinks = [
     { Icon: FiHome, title: "Home", path: "/" },
     { Icon: SiRotaryinternational, title: "About NSS", path: "/aboutus" },
-    { Icon: MdOutlineRateReview, title: "Testimonial", path: "/testimonial" },
     { Icon: GrGallery, title: "Gallery", path: "/gallery" },
     { Icon: FaQuestion, title: "FAQ", path: "/faq" },
     {
@@ -93,7 +92,6 @@ const Sidebar = () => {
         { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
-    { Icon: LuContact2, title: "Contact", path: "/contact" },
     { Icon: GiCampfire, title: "Camp", path: "/camp" },
     { Icon: FaRegCalendarAlt, title: "Calendar", path: "/calendar" },
   ];

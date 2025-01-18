@@ -35,7 +35,7 @@ const Gallery = () => {
                     <img
                     src={event.imageURL}
                     alt={event.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110 z-0" 
+                    className="w-full h-full object-cover transition-transform duration-300 md:group-hover:scale-110 z-0" 
                     />
                     
                     {/* Hover Overlay with Description */}
@@ -47,9 +47,9 @@ const Gallery = () => {
 
                 {/* Permanent Title */}
                 <div className="absolute top-0 left-0 right-0 h-max w-full 
-                    flex flex-col justify-center items-center 
-                    bg-black/40 text-white p-2 z-20">
-                    <h3 className="text-xs sm:text-lg font-bold text-center">
+                    flex flex-col justify-center pt-2 px-2 items-center 
+                    bg-black/60 text-white z-20">
+                    <h3 className="text-xs sm:text-lg font-bold">
                         {event.title}
                     </h3>
                 </div>

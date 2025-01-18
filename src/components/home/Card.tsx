@@ -22,7 +22,7 @@ function ProfileCard({ name, imageUrl, link, shortDesc }) {
         <h3 className="team-card-name">{name}</h3>
         <a
           href={link}
-          className="no-underline text-white bg-blue-500 px-4 py-0 mt-2 rounded-full"
+          className="no-underline text-xs sm:text-sm text-white bg-dark-navy px-4 py-1 mt-2 rounded-full"
         >
           View Details
         </a>

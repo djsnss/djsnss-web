@@ -2,7 +2,9 @@ import BandraBeachCleanup from "../assets/Events/BandraBC.png";
 import VersovaBeachCleanup from "../assets/Events/VersovaBeachCleanup.jpg";
 import CyberSavvy from "../assets/Events/CyberSavvy.png";
 import SensoryBoard from "../assets/Events/SensoryBoardEvent.png";
-
+import OrphanageVisit2023 from "../assets/Events/OrphanageVisit2023.jpg";
+import JuhuBeachCleanup from "../assets/Events/JuhuBeachCleanup.jpg";
+import Aabhar2022 from "../assets/Events/Aabhar2022.jpg";
 export const localEventsData = [
   {
     id: 1,
@@ -71,7 +73,7 @@ export const localEventsData = [
     slug: "aabhar-2022",
     link: "/eventdetails/aabhar-2022",
     background: "bg-purple-500",
-    imageURL: "",
+    imageURL: Aabhar2022,
     longDescription:
       "Aabhar 2022, held on 20th December 2022, was a heartwarming event organized by the NSS unit of Dwarkadas J. Sanghvi College of Engineering to express gratitude towards the unsung heroes of the society. The event featured performances by students, heartfelt speeches, and the distribution of appreciation tokens to sanitation workers, security personnel, and other support staff. The event was a beautiful reminder of the importance of acknowledging and appreciating those who work behind the scenes to make our lives better.",
     scale: "Area-Level",
@@ -86,7 +88,7 @@ export const localEventsData = [
     slug: "juhu-beach-cleanup",
     link: "/eventdetails/juhu-beach-cleanup",
     background: "bg-yellow-500",
-    imageURL: "",
+    imageURL: JuhuBeachCleanup,
     longDescription:
       "The NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a cleanup drive at Juhu Beach on 25th February 2024. The event focused on removing litter and raising awareness about the impact of pollution on marine ecosystems. Volunteers participated enthusiastically, collecting several bags of waste. The event not only contributed to a cleaner beach but also helped instill a sense of responsibility towards environmental conservation among participants.",
     scale: "Area-Level",
@@ -101,7 +103,7 @@ export const localEventsData = [
     slug: "orphanage-visit",
     link: "/eventdetails/orphanage-visit",
     background: "bg-green-500",
-    imageURL: "",
+    imageURL: OrphanageVisit2023,
     longDescription:
       "On 14th January 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering visited an orphanage in Andheri. The visit aimed to bring joy to the children by organizing fun activities, games, and a small gift distribution. Volunteers spent quality time with the children, engaging in meaningful interactions that left a lasting impact on both the visitors and the children. The event highlighted the importance of compassion and community service in making a difference in the lives of the less fortunate.",
     scale: "Area-Level",
