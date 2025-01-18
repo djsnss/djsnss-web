@@ -122,8 +122,18 @@ const volunteerSchema = new mongoose.Schema(
     },
     connectedEvents: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Event",
+        eventId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Event",
+        },
+        attended: {
+          type: Boolean,
+          default: false, // Tracks attendance for each event separately
+        },
+        hoursCompleted: {
+          type: Number,
+          default: 0, // Tracks hours completed for this specific event
+        },
       },
     ],
   },

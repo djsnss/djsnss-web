@@ -211,8 +211,12 @@ const checkHours = async (req, res) => {
     if (!volunteer) {
       return res.status(404).send("Volunteer not found");
     }
-    const hours = volunteer.volunteerHours;
-    return res.status(200).json({ hours: hours });
+    return res
+      .status(200)
+      .json({
+        name: volunteer.studentDetails.name,
+        hours: volunteer.volunteerHours,
+      });
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error checking hours");

@@ -14,24 +14,24 @@ import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.post("/signup", uploadPassport.single("passport"), signup);
-router.post("/login", login);
-router.post("/events/:eventId/register", authVolunteer, registerEvent);
+router.post("/signup", uploadPassport.single("passport"), signup); //volunteer registration
+router.post("/login", login); //volunteer login
+router.post("/events/:eventId/register", authVolunteer, registerEvent); //register volunteer for a particular event
 
 router.post(
   "/upload-normalPhoto",
   uploadNormal.single("image"),
   authVolunteer,
   uploadNormalPhoto
-);
+); //upload normal photo(profile photo) of volunteer
 
 router.post(
   "/update-normalPhoto",
   uploadNormal.single("image"),
   authVolunteer,
   updateNormalPhoto
-);
+); //update normal photo(profile photo) of volunteer
 
-router.get("/checkHours", authVolunteer, checkHours);
+router.get("/checkHours", authVolunteer, checkHours); //Check number of volunteered hours
 
 export default router;

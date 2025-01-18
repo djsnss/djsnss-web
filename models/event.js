@@ -57,6 +57,17 @@ const EventSchema = new mongoose.Schema({
     enum: ["Upcoming", "Ongoing", "Past"],
     required: true,
   },
+  scope: {
+    type: String,
+    enum: ["Local", "University"],
+    required: true,
+  },
+  attendance: [
+    {
+      volunteerId: { type: mongoose.Schema.Types.ObjectId, ref: "Volunteer" },
+      attended: { type: Boolean, default: false },
+    },
+  ],
 });
 
 export default mongoose.model("Event", EventSchema);
