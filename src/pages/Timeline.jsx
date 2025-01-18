@@ -76,7 +76,6 @@ const TimelineComponent = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{
             backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
-            zIndex: -1
           }}
         />
       </AnimatePresence>

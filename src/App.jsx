@@ -31,7 +31,7 @@ const App = () => {
         v7_relativeSplatPath: true,
       }}
     >
-      <ScrollToTop />
+
       <ScrollTT />
 
       <div className="flex flex-row justify-center min-h-screen w-screen bg-white">
