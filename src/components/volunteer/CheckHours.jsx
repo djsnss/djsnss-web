@@ -51,9 +51,9 @@ const ProfileSummary = ({ events }) => {
 }
 
 export default function CheckHours() {
-  const [userData, setUserData] = useState(null)
-  const [events, setEvents] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [userData, setUserData] = useState(UserData)
+  const [events, setEvents] = useState(UserData.eventsAttended)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -78,8 +78,8 @@ export default function CheckHours() {
         setLoading(false)
       }
     }
-
-    fetchUserData()
+    
+    // fetchUserData()
   }, [])
 
   if (loading || !userData) {
