@@ -15,7 +15,8 @@ import Gallery from "./pages/Gallery";
 import Volunteer from "./pages/Volunteer";
 import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
 import Calendar from "./components/calendar/Calendar";
-import CheckHours from "./components/volunteer/checkhours";
+import CheckHours from "./components/volunteer/CheckHours";
+import VolunteerRegistration from "./components/volunteer/VolunteerRegistration";
 
 const Home = React.lazy(() => import("./pages/Landing"));
 
@@ -49,6 +50,7 @@ const App = () => {
               <Route path="/team" element={<Team />} />
               <Route path="/volunteer" element={<Volunteer />} />
               <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
+              <Route path="/volunteer/VolunteerRegistration" element={<VolunteerRegistration />} />
               <Route path="/volunteer/CheckHours" element={<CheckHours />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />

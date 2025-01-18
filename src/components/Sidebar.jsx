@@ -96,7 +96,7 @@ const Sidebar = () => {
       path: "/volunteer",
       subLinks: [
         { title: "Check Hours", path: "/volunteer/checkhours" },
-        { title: "Volunteer Registration", path: "/volunteer/volregistration" },
+        { title: "Volunteer Registration", path: "/volunteer/VolunteerRegistration" },
         { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
