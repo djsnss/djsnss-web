@@ -17,21 +17,10 @@ const UserData = {
   ]
 }
 
-//  Event = {
-//   name: string
-//   hours: number
-// }
-
-// type UserData = {
-//   displayName: string
-//   avatar: string
-//   eventsAttended: Event[]
-// }
-
 const EventCard = ({ event }) => (
-  <div className="bg-secondary p-4 rounded-lg">
-    <h3 className="font-serif font-semibold">{event.name}</h3>
-    <p className=" font-sans text-sky-100 text-sm text-muted-foreground">Hours: {event.hours}</p>
+  <div className="bg-black/40 shadow-lg p-4 rounded-lg flex flex-col items-center justify-center text-center">
+    <h3 className="font-serif font-semibold text-white">{event.name}</h3>
+    <p className="font-sans text-sky-100 text-sm">Hours: {event.hours}</p>
   </div>
 )
 
@@ -48,14 +37,14 @@ const ProfileSummary = ({ events }) => {
   const totalHours = events.reduce((sum, event) => sum + event.hours, 0)
 
   return (
-    <div className="bg-primary/10 p-4 rounded-lg mb-6 flex justify-around">
-      <div className="text-center">
+    <div className="bg-black/40 p-4 rounded-lg mb-6 flex justify-around">
+      <div className="text-center flex flex-col items-center justify-center text-white">
         <p className="text-2xl font-bold">{totalEvents}</p>
-        <p className="font-sans text-sm text-muted-foreground">Events Attended</p>
+        <p className="font-sans text-sm">Events Attended</p>
       </div>
-      <div className="text-center">
+      <div className="text-center flex flex-col items-center justify-center text-white">
         <p className="text-2xl font-bold">{totalHours}</p>
-        <p className="font-sans text-sm text-muted-foreground">Total Hours</p>
+        <p className="font-sans text-sm">Total Hours</p>
       </div>
     </div>
   )
@@ -65,12 +54,7 @@ export default function CheckHours() {
   const [userData, setUserData] = useState(UserData)
 
   useEffect(() => {
-    // Simulating an API call
     const fetchUserData = async () => {
-      // const response = await fetch('/api/user-profile')
-      // const data = await response.json()
-      // setUserData(data)
-
       setUserData(UserData)
     }
 
@@ -82,20 +66,30 @@ export default function CheckHours() {
   }
 
   return (
-    <div className="min-h-screen bg-background p-4 flex items-center justify-center">
-      <Card className="w-full max-w-4xl">
+    <div 
+      className="min-h-screen bg-cover bg-center bg-no-repeat p-4 flex items-center justify-center"
+      style={{
+        backgroundImage: "url('/src/assets/Events/TreePlantation.png')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+      }}
+    >
+      <Card className="w-full max-w-4xl backdrop-blur-sm bg-white/30 shadow-lg">
         <CardHeader>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Avatar className="w-24 h-24">
               <AvatarImage src={userData.avatar} alt={userData.displayName} />
               <AvatarFallback>{userData.displayName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
             </Avatar>
-            <CardTitle className="text-2xl md:text-3xl text-center md:text-left">{userData.displayName}</CardTitle>
+            <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
+              {userData.displayName}
+            </CardTitle>
           </div>
         </CardHeader>
         <CardContent>
           <ProfileSummary events={userData.eventsAttended} />
-          <h2 className="text-xl font-semibold mb-4">Events Attended</h2>
+          <h2 className="text-xl font-semibold mb-7 text-white text-center">Events Attended</h2>
           <EventList events={userData.eventsAttended} />
         </CardContent>
       </Card>

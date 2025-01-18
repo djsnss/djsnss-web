@@ -96,14 +96,14 @@ const App = () => {
       {/* Calendar Section */}
       <div className="calendar-container flex-grow p-5 bg-sky-700 border border-blue-500 rounded-lg shadow-lg">
         <div className="calendar-header flex justify-between items-center mb-5">
-          <button onClick={() => handleMonthChange(-1)} className="text-lg hover:text-blue-700">
+          <button onClick={() => handleMonthChange(-1)} className="text-lg text-white hover:text-blue-700">
             ❮
           </button>
           <h2 className="text-xl font-bold">
             {new Date(currentYear, currentMonth).toLocaleString("default", { month: "long" })}{" "}
             {currentYear}
           </h2>
-          <button onClick={() => handleMonthChange(1)} className="text-lg hover:text-blue-700">
+          <button onClick={() => handleMonthChange(1)} className="text-lg text-white hover:text-blue-700">
             ❯
           </button>
         </div>
