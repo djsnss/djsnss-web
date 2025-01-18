@@ -4,14 +4,14 @@ import Initiatives from "./Initiatives";
 
 const About = () => {
   return (
-    <div>
+    <div className="bg- text-black">
       {/* Decorative Line */}
       <div className="h-1 bg-dark-navy-blue m-6"></div>
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="bg-white p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row items-center justify-center"
+        className="p-4 sm:p-6 md:p-8 flex flex-col lg:flex-row items-center justify-center"
       >
         <img
           src={Image1}

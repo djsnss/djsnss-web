@@ -243,7 +243,7 @@ const UniversityEvents = () => {
               src={event.imageURL}
               alt={event.title}
             />
-            <CCarouselCaption className="text-shadow p-4 bg-white/60 rounded-lg">
+            <CCarouselCaption className="text-shadow p-4 bg-white/70 rounded-lg shadow-md">
               <h5
                 onClick={() => navigate(`/eventdetails/${event.slug}`)}
                 className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"
