@@ -1,36 +1,49 @@
 "use client";
 import { FaLongArrowAltUp } from 'react-icons/fa';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [scrollableElement, setScrollableElement] = useState<Element | null>(null);
 
-  const handleScroll = () => {
-    // Check scroll position of the scrollable container
-    const scrollableElement = document.querySelector('.overflow-y-scroll');
-    if (scrollableElement) {
-      setIsVisible(scrollableElement.scrollTop > 0);
-    }
-  };
-
+  // Find scrollable element after component mounts
   useEffect(() => {
-    // Find the scrollable container
-    const scrollableElement = document.querySelector('.overflow-y-scroll');
-    
+    const findScrollableElement = () => {
+      const element = document.querySelector('.overflow-y-scroll');
+      setScrollableElement(element);
+    };
+
+    // Initial find
+    findScrollableElement();
+
+    // Retry a few times in case of dynamic loading
+    const retryTimes = [100, 500, 1000]; // Retry after 100ms, 500ms, and 1000ms
+    retryTimes.forEach(delay => {
+      setTimeout(findScrollableElement, delay);
+    });
+  }, []);
+
+  const handleScroll = useCallback(() => {
     if (scrollableElement) {
-      scrollableElement.addEventListener("scroll", handleScroll);
-      
+      setIsVisible(scrollableElement.scrollTop > 100);
+    }
+  }, [scrollableElement]);
+
+  // Set up scroll listener
+  useEffect(() => {
+    if (scrollableElement) {
       // Initial check
       handleScroll();
+      
+      scrollableElement.addEventListener("scroll", handleScroll);
       
       return () => {
         scrollableElement.removeEventListener("scroll", handleScroll);
       };
     }
-  }, []);
+  }, [scrollableElement, handleScroll]);
 
   const scrollToTop = () => {
-    const scrollableElement = document.querySelector('.overflow-y-scroll');
     if (scrollableElement) {
       scrollableElement.scrollTo({
         top: 0,
@@ -38,6 +51,8 @@ const ScrollToTop = () => {
       });
     }
   };
+
+  if (!scrollableElement) return null;
 
   return (
     <button
