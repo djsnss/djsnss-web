@@ -1,5 +1,5 @@
 import express from "express";
-import {authVolunteer} from "../middlewares/authVerify.js";
+import { authVolunteer } from "../middlewares/authVerify.js";
 
 import {
   signup,
@@ -7,6 +7,7 @@ import {
   registerEvent,
   uploadNormalPhoto,
   updateNormalPhoto,
+  checkHours,
 } from "../controllers/volunteerC.js";
 
 import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
@@ -30,5 +31,7 @@ router.post(
   authVolunteer,
   updateNormalPhoto
 );
+
+router.get("/checkHours", authVolunteer, checkHours);
 
 export default router;
