@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -25,6 +25,8 @@ const Events = React.lazy(() => import("./pages/Events"));
 const Registration = React.lazy(() => import("./pages/Registration"));
 const Team = React.lazy(() => import("./pages/Team"));
 const Login = React.lazy(() => import("./pages/Login"));
+const Dashboard = React.lazy(() => import("./components/admin/Dashboard"));
+const AdminEvents = React.lazy(() => import("./components/admin/CreateEvent"));
 
 const App = () => {
   return (
@@ -57,7 +59,7 @@ const App = () => {
               <Route path="/volunteer" element={<Volunteer />} />
               <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
               <Route path="/volunteer/VolunteerRegistration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/CheckHours" element={<CheckHours />} />
+              <Route path="/volunteer/CheckHours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
