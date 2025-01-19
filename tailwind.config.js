@@ -13,6 +13,7 @@ export default {
       },
       colors: {
         "dark-navy": "#000e23",
+        "light-navy": "#000e2c",
         "deep-teal": "#213951",
         "forest-green": "#3a6667",
         gold: "#f9a825",

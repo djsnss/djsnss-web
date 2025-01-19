@@ -1,53 +1,53 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
-import Events from "./pages/Events";
-import Team from "./pages/Team";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import TimelineComponent from "./pages/Timeline";
-import EventDetails from "./pages/EventDetails";
-import AboutUs from "./pages/AboutUs";
-import Registration from "./pages/Registration";
-import Login from "./pages/Login";
-import MessageDetails from "./pages/Messages";
-import FAQ from "./pages/FAQ";
-import Gallery from "./pages/Gallery";
-import Volunteer from "./pages/Volunteer";
-import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
-import Calendar from "./components/calendar/Calendar";
-import CheckHoursNew from "./components/volunteer/CheckHoursNew";
-import VolunteerRegistration from "./components/volunteer/VolunteerRegistration";
 import ScrollTT from "./components/ScrollTT";
+import { propsData } from "./data/dynamicPageData"; // Import data
+import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
 
+// Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
+const Volunteer = React.lazy(() => import("./pages/Volunteer"));
+const VolunteerPolicy = React.lazy(() => import("./components/volunteer/VolunteerPolicy"));
+const VolunteerRegistration = React.lazy(() => import("./components/volunteer/VolunteerRegistration"));
+const CheckHours = React.lazy(() => import("./components/volunteer/CheckHours"));
+const MessageDetails = React.lazy(() => import("./pages/Messages"));
+const FAQ = React.lazy(() => import("./pages/FAQ"));
+const Gallery = React.lazy(() => import("./pages/Gallery"));
+const TimelineComponent = React.lazy(() => import("./pages/Timeline"));
+const AboutUs = React.lazy(() => import("./pages/AboutUs"));
+const Calendar = React.lazy(() => import("./components/calendar/Calendar"));
+const EventDetails = React.lazy(() => import("./pages/EventDetails"));
+const Events = React.lazy(() => import("./pages/Events"));
+const Registration = React.lazy(() => import("./pages/Registration"));
+const Team = React.lazy(() => import("./pages/Team"));
+const Login = React.lazy(() => import("./pages/Login"));
 
 const App = () => {
   return (
-    <Router
-      future={{
-        v7_startTransition: true,
-        v7_relativeSplatPath: true,
-      }}
-    >
-      <ScrollToTop />
+    <Router>
+      {/* Scroll to top and Scroll tracking components */}
       <ScrollTT />
+      <ScrollToTop />
 
-      <div className="flex flex-row justify-center min-h-screen w-screen bg-white">
-        <Suspense
-          fallback={
-            <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
-              <Loader className="h-40" />
-            </div>
-          }
-        >
-          <div className="w-max">
-            <Sidebar />
-          </div>
+      <div className="flex flex-row justify-start min-h-screen w-screen bg-white">
+        {/* Sidebar */}
+        <Sidebar />
 
-          <div className="w-full h-screen overflow-y-scroll scroll-smooth">
+        <div className="w-full h-screen overflow-y-scroll scroll-smooth">
+          {/* Suspense to handle lazy-loaded components */}
+          <Suspense
+            fallback={
+              <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
+                <Loader className="h-40" />
+              </div>
+            }
+          >
             <Routes>
+              {/* Existing routes */}
               <Route path="/" element={<Home />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
@@ -64,11 +64,21 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
-            </Routes>
 
-            <Footer />
-          </div>
-        </Suspense>
+              {/* Dynamic routes for events */}
+              {propsData.map((event) => (
+                <Route
+                  key={event.id}
+                  path={`/${event.slug}`}
+                  element={<DynamicPage event={event} />}
+                />
+              ))}
+            </Routes>
+          </Suspense>
+
+          {/* Footer */}
+          <Footer />
+        </div>
       </div>
     </Router>
   );

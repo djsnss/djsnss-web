@@ -7,7 +7,7 @@ import JuhuBeachCleanup from "../assets/Events/JuhuBeachCleanup.jpg";
 import Aabhar2022 from "../assets/Events/Aabhar2022.jpg";
 export const localEventsData = [
   {
-    id: 1,
+    id: 10,
     title: "Bandra Beach Cleanup",
     description: "Restoring our shores",
     slug: "bandra-beach-cleanup",
@@ -22,7 +22,7 @@ export const localEventsData = [
     date: "12th March 2024",
   },
   {
-    id: 2,
+    id:11,
     title: "Versova Beach Cleanup",
     description: "Join hands for a cleaner coast",
     slug: "versova-beach-cleanup",
@@ -37,7 +37,7 @@ export const localEventsData = [
     date: "18th March 2024",
   },
   {
-    id: 6,
+    id: 12,
     title: "Connect for Sensory Board Event",
     description: "Empowering differently-abled children",
     slug: "connect-for-sensory-board-event",
@@ -52,7 +52,7 @@ export const localEventsData = [
     date: "5th Apr 2024",
   },
   {
-    id: 7,
+    id: 13,
     title: "Cybersavvy",
     description: "Navigating the digital world safely",
     slug: "cybersavvy",
@@ -67,7 +67,7 @@ export const localEventsData = [
     date: "28th Feb 2024",
   },
   {
-    id: 3,
+    id: 14,
     title: "Aabhar 2022",
     description: "Celebrating the spirit of gratitude",
     slug: "aabhar-2022",
@@ -82,7 +82,7 @@ export const localEventsData = [
     date: "20th Dec 2022",
   },
   {
-    id: 4,
+    id: 15,
     title: "Juhu Beach Cleanup",
     description: "Keeping our beaches pristine",
     slug: "juhu-beach-cleanup",
@@ -97,7 +97,7 @@ export const localEventsData = [
     date: "25th Feb 2024",
   },
   {
-    id: 5,
+    id: 16,
     title: "Orphanage Visit",
     description: "Spreading smiles and joy",
     slug: "orphanage-visit",

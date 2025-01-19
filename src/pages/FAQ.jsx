@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/FAQ.css";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 
 // Import icons here
 import {
-  FaVideo,
-  FaPhoneAlt,
   FaEllipsisV,
   FaMicrophoneAlt,
   FaPlus,
@@ -85,10 +83,6 @@ const FAQ = () => {
           <span className="profile-name">DJSNSS</span>
         </div>
         <div className="icons">
-          {/* Video Call Icon */}
-          <FaVideo className="icon" />
-          {/* Phone Call Icon */}
-          <FaPhoneAlt className="icon" />
           {/* 3 Dots Icon */}
           <FaEllipsisV className="icon" />
         </div>

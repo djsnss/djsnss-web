@@ -233,7 +233,7 @@ const UniversityEvents = () => {
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 my-5 sm:my-10">
-      <h1 className="text-2xl md:text-3xl font-bold">University Events :-</h1>
+      <h1 className="text-2xl md:text-3xl font-bold text-black">University Events :-</h1>
 
       <CCarousel controls indicators>
         {universityEventsData.map((event) => (

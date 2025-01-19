@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiChevronsRight } from "react-icons/fi";
-import { LuContact2 } from "react-icons/lu";
-import { SiRotaryinternational } from "react-icons/si";
-import { IoIosPeople } from "react-icons/io";
-import { MdEventNote } from "react-icons/md";
+import { FiHome, FiChevronsRight } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
-import { MdOutlineRateReview } from "react-icons/md";
-import { GrGallery } from "react-icons/gr";
-import { FaQuestion } from "react-icons/fa";
-import { IoPeople } from "react-icons/io5";
-import { GiCampfire } from "react-icons/gi";
-import { FaRegCalendarAlt } from "react-icons/fa";
+
+// Manual Icon Mapping
+const iconMap = {
+  FiHome: FiHome,
+  SiRotaryinternational: React.lazy(() => import("react-icons/si").then(module => ({ default: module.SiRotaryinternational }))),
+  GrGallery: React.lazy(() => import("react-icons/gr").then(module => ({ default: module.GrGallery }))),
+  FaQuestion: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaQuestion }))),
+  MdEventNote: React.lazy(() => import("react-icons/md").then(module => ({ default: module.MdEventNote }))),
+  IoIosPeople: React.lazy(() => import("react-icons/io").then(module => ({ default: module.IoIosPeople }))),
+  IoPeople: React.lazy(() => import("react-icons/io5").then(module => ({ default: module.IoPeople }))),
+  GiCampfire: React.lazy(() => import("react-icons/gi").then(module => ({ default: module.GiCampfire }))),
+  FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
+  FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
+};
 
 const Sidebar = () => {
   const location = useLocation();
@@ -29,17 +33,13 @@ const Sidebar = () => {
       }
     };
 
-    // Set the initial state based on the current width
     handleResize();
 
-    // Add event listener to listen for window resize
     window.addEventListener('resize', handleResize);
 
-    // Cleanup the event listener on component unmount
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Update active route when location changes
   useEffect(() => {
     setActiveRoute(location.pathname);
     if (location.hash) {
@@ -49,7 +49,6 @@ const Sidebar = () => {
     }
   }, [location]);
 
-  // Detect screen size changes dynamically
   useEffect(() => {
     const handleResize = () => {
       setIsSmallScreen(window.innerWidth < 640); // 'sm' screen breakpoint
@@ -69,21 +68,24 @@ const Sidebar = () => {
   };
 
   const navigationLinks = [
-    { Icon: FiHome, title: "Home", path: "/" },
-    { Icon: SiRotaryinternational, title: "About NSS", path: "/aboutus" },
-    { Icon: GrGallery, title: "Gallery", path: "/gallery" },
-    { Icon: FaQuestion, title: "FAQ", path: "/faq" },
+    { Icon: "FiHome", title: "Home", path: "/" },
+    { Icon: "SiRotaryinternational", title: "About NSS", path: "/aboutus" },
+    { Icon: "GrGallery", title: "Gallery", path: "/gallery" },
+    { Icon: "FaQuestion", title: "FAQ", path: "/faq" },
     {
-      Icon: MdEventNote,
+      Icon: "MdEventNote",
       title: "Events",
       path: "/events",
       subLinks: [
-        { title: "Timeline", path: "/timeline" },  
+        { title: "Timeline", path: "/timeline" },
+        { title: "Camp", path: "/nss-camp" },
+        { title: "Grain-A-Thon", path: "/grain-a-thon" },
+        { title: "Blood Donation Drive", path: "/blood-donation-drive" },
       ],
     },
-    { Icon: IoIosPeople, title: "Team", path: "/team"},
+    { Icon: "IoIosPeople", title: "Team", path: "/team" },
     {
-      Icon: IoPeople,
+      Icon: "IoPeople",
       title: "Volunteer",
       path: "/volunteer",
       subLinks: [
@@ -92,8 +94,7 @@ const Sidebar = () => {
         { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
-    { Icon: GiCampfire, title: "Camp", path: "/camp" },
-    { Icon: FaRegCalendarAlt, title: "Calendar", path: "/calendar" },
+    { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
   ];
 
   const handleNavigation = (path) => {
@@ -116,7 +117,6 @@ const Sidebar = () => {
         backgroundPosition: isSmallScreen ? "initial" : open ? "center" : "left",
         transition: "width 0.5s ease-in-out",
       }}
-      
     >
       <button
         onClick={() => {
@@ -126,74 +126,81 @@ const Sidebar = () => {
         className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
       >
         <FiChevronsRight
-          className={`flex px-2 w-full text-black  text-lg sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
+          className={`flex px-2 w-full text-black text-lg sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
         />
       </button>
 
       <div className={`w-full flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}>
-        {navigationLinks.map(({ Icon, title, path, subLinks }) => (
-          <div key={path} className="w-full relative">
-            <div className="w-full flex items-center justify-between">
-              <Link
-                to={path}
-                onClick={() => {
-                  if (!subLinks) {
-                    handleNavigation(path);
-                    setOpen(false);
-                    setDropdowns({});
-                  }
-                }}
-                className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${
-                  activeRoute === path
-                    ? "bg-indigo-100 text-indigo-600"
-                    : "text-white hover:text-black hover:bg-gray-100/40"
-                }`}
-              >
-                <Icon className={`text-lg sm:text-xl ${open ? "" : "mx-auto"} transition-transform`} />
-                {open && (
-                  <span className="ml-3 text-sm sm:text-base font-medium whitespace-nowrap">
-                    {title}
-                  </span>
-                )}
-                {subLinks && (
-                  <button
-                    onClick={() => {toggleDropdown(title);setOpen(true)}} // Toggle dropdown for the specific menu
-                    className={`${open? "block":"hidden"} ml-1 p-1 focus:outline-none transition-all duration-300 ease-in-out`}
-                  >
-                    <span>
-                      <IoIosArrowDown
-                        className={`transition-transform ${ activeRoute === path? "text-indigo-600": "text-white"} ${dropdowns[title] && "rotate-180"}`}
-                      />
-                    </span>
-                  </button>
-                )}
-              </Link>
-            </div>
+        {navigationLinks.map(({ Icon, title, path, subLinks }) => {
+          const LazyIconComponent = iconMap[Icon]; // Retrieve the lazy-loaded icon from the map
 
-            {/* Dropdown Menu */}
-            {subLinks && dropdowns[title] && (
-              <div className="m-1 bg-white/20 shadow-lg rounded-lg z-10">
-                {subLinks.map((subLink) => (
-                  <Link
-                    key={subLink.path}
-                    to={subLink.path}
-                    onClick={() => {
-                      handleNavigation(subLink.path);
-                      setDropdowns((prev) => ({
-                        ...prev,
-                        [title]: false, // Close dropdown after navigation
-                      }));
+          return (
+            <div key={path} className="w-full relative">
+              <div className="w-full flex items-center justify-between">
+                <Link
+                  to={path}
+                  onClick={() => {
+                    if (!subLinks) {
+                      handleNavigation(path);
                       setOpen(false);
-                    }}
-                    className="block p-2 text-sm sm:text-base font-medium text-white no-underline rounded-lg hover:bg-white/20"
-                  >
-                    {subLink.title}
-                  </Link>
-                ))}
+                      setDropdowns({});
+                    }
+                  }}
+                  className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${
+                    activeRoute === path
+                      ? "bg-indigo-100 text-indigo-600"
+                      : "text-white hover:text-black hover:bg-gray-100/40"
+                  }`}
+                >
+                  <Suspense fallback={<div className="hidden"></div>}>
+                    <LazyIconComponent className={`text-lg sm:text-xl ${open ? "" : "mx-auto"} transition-transform`} />
+                  </Suspense>
+
+                  {open && (
+                    <span className="ml-3 text-sm sm:text-base font-medium whitespace-nowrap">
+                      {title}
+                    </span>
+                  )}
+                  {subLinks && (
+                    <button
+                      onClick={() => { toggleDropdown(title); setOpen(true); }} // Toggle dropdown for the specific menu
+                      className={`${open ? "block" : "hidden"} ml-1 p-1 focus:outline-none transition-all duration-300 ease-in-out`}
+                    >
+                      <span>
+                        <IoIosArrowDown
+                          className={`transition-transform ${activeRoute === path ? "text-indigo-600" : "text-white"} ${dropdowns[title] && "rotate-180"}`}
+                        />
+                      </span>
+                    </button>
+                  )}
+                </Link>
               </div>
-            )}
-          </div>
-        ))}
+
+              {/* Dropdown Menu */}
+              {subLinks && dropdowns[title] && (
+                <div className="m-1 bg-white/20 shadow-lg rounded-lg z-10">
+                  {subLinks.map((subLink) => (
+                    <Link
+                      key={subLink.path}
+                      to={subLink.path}
+                      onClick={() => {
+                        handleNavigation(subLink.path);
+                        setDropdowns((prev) => ({
+                          ...prev,
+                          [title]: false, // Close dropdown after navigation
+                        }));
+                        setOpen(false);
+                      }}
+                      className="block p-2 text-sm sm:text-base font-medium text-white no-underline rounded-lg hover:bg-white/20"
+                    >
+                      {subLink.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </nav>
   );

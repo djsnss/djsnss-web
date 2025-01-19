@@ -8,7 +8,7 @@ import BudgetBuzz from "../assets/Events/BudgetBuzz.png";
 
 export const universityEventsData = [
   {
-    id: 1,
+    id: 17,
     title: "Mann Ki Baat",
     description: "A nationwide interaction",
     slug: "mann-ki-baat",
@@ -23,7 +23,7 @@ export const universityEventsData = [
     date: "25th Sep 2024",
   },
   {
-    id: 2,
+    id: 18,
     title: "Laxmarao Inaamdaar Memorial Lecture",
     description: "In honor of a great visionary",
     slug: "laxmanrao-inamdaar-memorial-lecture",
@@ -38,7 +38,7 @@ export const universityEventsData = [
     date: "10th Oct 2024",
   },
   {
-    id: 3,
+    id: 19,
     title: "Swachhata hi Seva",
     description: "Cleanliness is service",
     slug: "swacchata-hi-seva",
@@ -53,7 +53,7 @@ export const universityEventsData = [
     date: "2nd Oct 2024",
   },
   {
-    id: 4,
+    id: 20,
     title: "Gandhi Jayanti Bhajan Sandhya",
     description: "A tribute to Mahatma Gandhi",
     slug: "gandhi-jayanti-bhajan-sandhya",
@@ -68,7 +68,7 @@ export const universityEventsData = [
     date: "2nd Oct 2024",
   },
   {
-    id: 5,
+    id: 21,
     title: "Meri Mitti Mera Desh",
     description: "Honoring our land and heritage",
     slug: "meri-mitti-mera-desh",
@@ -83,7 +83,7 @@ export const universityEventsData = [
     date: "15th Aug 2024",
   },
   {
-    id: 6,
+    id: 22,
     title: "Anti Dowry Rally",
     description: "Rally against the dowry system",
     slug: "anti-dowry-rally",
@@ -98,7 +98,7 @@ export const universityEventsData = [
     date: "8th Mar 2024",
   },
   {
-    id: 7,
+    id: 23,
     title: "Budget Buzz",
     description: "Understanding the Union Budget",
     slug: "budget-buzz",

@@ -1,4 +1,3 @@
-import React from "react";
 import Card from "./Card";
 import GrainAThon from "../../assets/Events/GrainAThon.png";
 import NSSCamp from "../../assets/Events/NSSCamp.jpg";
@@ -41,8 +40,8 @@ const Initiatives = () => {
   ];
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-center mb-4 text-white">
+    <div className="mb-6">
+      <h1 className="bg-white text-4xl font-bold text-center mx-4 text-dark-navy">
         Initiatives
       </h1>
       <div className="flex flex-wrap justify-center gap-8">
