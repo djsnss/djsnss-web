@@ -11,7 +11,7 @@ const GenerateCertificate = () => {
                 className="max-w-6xl "
             >
                 <div className="text-center mb-12">
-                    <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-6">
+                    <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold mb-6 text-black">
                         Generate Certificate for Past Events
                     </h1>
                     <p className="text-lg sm:text-xl lg:text-2xl text-black">

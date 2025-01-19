@@ -233,7 +233,7 @@ const LocalEvents = () => {
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 mb-5">
-      <h1 className='text-2xl md:text-3xl font-bold'>
+      <h1 className='text-2xl md:text-3xl font-bold text-black'>
         Local Events :-
       </h1>
       
