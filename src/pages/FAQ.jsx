@@ -75,28 +75,10 @@ const FAQ = () => {
 
   return (
     <div className="faq-container">
-      {/* First Div: Header Section */}
-      <div className="faq-header">
-        <div className="profile">
-          {/* DJSNSS Logo */}
-          <img src={DJSNSSLogo} alt="DJSNSS Logo" className="profile-img" />
-          <span className="profile-name">DJSNSS</span>
-        </div>
-        <div className="icons">
-          {/* 3 Dots Icon */}
-          <FaEllipsisV className="icon" />
-        </div>
-      </div>
-
       {/* Second Div: FAQ Section */}
       <div className="faq-content">
         {/* "FAQ" Label */}
-        <div
-          className={`faq-date ${scrollY > 10 ? "scrolled" : ""}`}
-          style={{
-            opacity: 1 - scrollY / 200, // Fade out as user scrolls
-          }}
-        >
+        <div className="flex mx-auto mb-2 py-4 h-max w-full justify-center items-center text-3xl md:text-7xl text-black">
           FAQ
         </div>
         {faqs.map((faq, index) => (
