@@ -1,10 +1,12 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollTT from "./components/ScrollTT";
+import { propsData } from "./data/dynamicPageData"; // Import data
+import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
 
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
@@ -32,11 +34,11 @@ const App = () => {
       <ScrollToTop />
 
       <div className="flex flex-row justify-start min-h-screen w-screen bg-white">
-        {/* Sidebar should be outside of Suspense for immediate rendering */}
+        {/* Sidebar */}
         <Sidebar />
 
         <div className="w-full h-screen overflow-y-scroll scroll-smooth">
-          {/* Suspense is used to handle lazy-loaded route components */}
+          {/* Suspense to handle lazy-loaded components */}
           <Suspense
             fallback={
               <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
@@ -45,7 +47,7 @@ const App = () => {
             }
           >
             <Routes>
-              {/* Define all routes with dynamic imports */}
+              {/* Existing routes */}
               <Route path="/" element={<Home />} />
               <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
@@ -62,10 +64,19 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
+
+              {/* Dynamic routes for events */}
+              {propsData.map((event) => (
+                <Route
+                  key={event.id}
+                  path={`/${event.slug}`}
+                  element={<DynamicPage event={event} />}
+                />
+              ))}
             </Routes>
           </Suspense>
-          
-          {/* Footer should be outside of Suspense as well */}
+
+          {/* Footer */}
           <Footer />
         </div>
       </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome, FiChevronsRight } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
-import { FaTimes } from "react-icons/fa";
 
 // Manual Icon Mapping
 const iconMap = {
@@ -79,6 +78,9 @@ const Sidebar = () => {
       path: "/events",
       subLinks: [
         { title: "Timeline", path: "/timeline" },
+        { title: "Camp", path: "/nss-camp" },
+        { title: "Grain-A-Thon", path: "/grain-a-thon" },
+        { title: "Blood Donation Drive", path: "/blood-donation-drive" },
       ],
     },
     { Icon: "IoIosPeople", title: "Team", path: "/team" },
@@ -92,9 +94,7 @@ const Sidebar = () => {
         { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
       ],
     },
-    { Icon: "GiCampfire", title: "Camp", path: "/camp" },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaTimes", title: "Timeline", path: "/timeline" },
   ];
 
   const handleNavigation = (path) => {

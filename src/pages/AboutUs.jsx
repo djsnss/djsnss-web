@@ -97,15 +97,16 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+      <div className='h-1 bg-dark-navy m-6'></div>
 
       {/* Principal's Desk Section */}
       <motion.section
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className='w-full p-10 bg-dark-navy'
+        className='w-full px-10 bg-white'
       >
-        <h2 className='text-4xl text-white tracking-[6px] justify-self-center my-4'>
+        <h2 className='text-4xl text-dark-navy tracking-[6px] justify-self-center my-4'>
           Message from Head Office
         </h2>
         <div className='flex flex-wrap justify-center gap-8 w-full mx-auto'>
@@ -114,8 +115,8 @@ const AboutUs = () => {
           ))}
         </div>
       </motion.section>
+      <div className='h-1 bg-dark-navy m-6'></div>
 
-      {/* Departments Section */}
       {/* Departments Section */}
       <motion.section
         initial={{ opacity: 0, y: 50 }}
@@ -132,17 +133,12 @@ const AboutUs = () => {
             const itemsPerRow = 3 // Maximum 3 cards per row
             const totalRows = Math.ceil(totalItems / itemsPerRow)
             const currentRow = Math.ceil((index + 1) / itemsPerRow)
-            const positionInRow = index % itemsPerRow // Position within the row (0, 1, 2)
 
             // Determine if the card is in the first row or last row
             const isFirstRow = currentRow === 1
             const isLastRow = currentRow === totalRows
 
             // Apply rounded corners conditionally for the top and bottom rows
-            const roundedClasses = `
-      ${isFirstRow ? 'rounded-t-full' : ''}
-      ${isLastRow ? 'rounded-b-full' : ''}
-    `
             return (
               <div
               key={index}
