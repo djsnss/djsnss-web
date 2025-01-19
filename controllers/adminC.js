@@ -185,7 +185,9 @@ export const createEvent = async (req, res) => {
   try {
     const {
       name,
+      slug,
       description,
+      longDescription,
       startHours,
       endHours,
       TotalNoOfHours,
@@ -212,7 +214,9 @@ export const createEvent = async (req, res) => {
     }
     const newEvent = new EventModel({
       name,
+      slug,
       description,
+      longDescription,
       startHours,
       endHours,
       TotalNoOfHours,

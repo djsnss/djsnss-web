@@ -5,8 +5,16 @@ const EventSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  slug: {
+    type: String,
+    default: "",
+  },
   description: {
     type: String,
+  },
+  longDescription: {
+    type: String,
+    default: "",
   },
   photo: {
     url: {
