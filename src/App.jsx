@@ -25,8 +25,8 @@ const Events = React.lazy(() => import("./pages/Events"));
 const Registration = React.lazy(() => import("./pages/Registration"));
 const Team = React.lazy(() => import("./pages/Team"));
 const Login = React.lazy(() => import("./pages/Login"));
-const Dashboard = React.lazy(() => import("./components/admin/Dashboard"));
-const AdminEvents = React.lazy(() => import("./components/admin/CreateEvent"));
+const Dashboard = React.lazy(() => import("./pages/admin/Dashboard"));
+const CreateEvent = React.lazy(() => import("./pages/admin/CreateEvent"));
 
 const App = () => {
   return (
@@ -66,6 +66,8 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/create-event" element={<CreateEvent />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (
