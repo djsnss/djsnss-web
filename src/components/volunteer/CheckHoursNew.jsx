@@ -60,15 +60,9 @@ const CheckHoursNew = () => {
   }
 
   return (
-    <div className="min-h-screen bg-cover bg-center bg-no-repeat p-4 flex items-center justify-center"
-      style={{
-        backgroundImage: "url('/src/assets/Events/TreePlantation.png')",
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-      }}
+    <div className="min-h-screen p-4 flex items-center justify-center bg-gradient-to-bl from-blue-400 to-gray-300"
     >
-      <Card className="w-full max-w-4xl backdrop-blur-sm bg-white/30 shadow-lg">
+      <Card className="w-full max-w-4xl border-2 border-white/50 backdrop-blur-lg bg-white/40 shadow-lg">
         <CardHeader>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Avatar className="w-24 h-24">
