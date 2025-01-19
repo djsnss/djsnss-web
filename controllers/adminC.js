@@ -690,3 +690,33 @@ export const getAllEvents = async (req, res) => {
       .json({ message: "Server error while fetching events" });
   }
 };
+
+export const updateEventDetails = async (req, res) => {
+  try {
+    const { eventId } = req.params; // Extract event ID from route parameter
+    const updatedData = req.body; // Data to update is expected in the request body
+
+    // Validate if the event exists
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Update the event details
+    const updatedEvent = await EventModel.findByIdAndUpdate(eventId, updatedData, {
+      new: true, // Return the updated document
+      runValidators: true, // Ensure validation is applied on updates
+    });
+
+    return res.status(200).json({
+      message: "Event details updated successfully",
+      event: updatedEvent,
+    });
+  } catch (error) {
+    console.error("Error updating event details:", error);
+    return res.status(500).json({
+      message: "Failed to update event details",
+      error: error.message,
+    });
+  }
+};

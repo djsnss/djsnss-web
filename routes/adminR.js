@@ -19,12 +19,12 @@ import {
   logout,
   getEventById,
   getAllEvents,
+  updateEventDetails,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
 
 import { uploadNormal } from "../middlewares/multer.js";
-import { get } from "http";
 
 const router = express.Router();
 
@@ -67,6 +67,8 @@ router.delete(
 router.post("/updateHours", authAdmin, updateVolunteerHours); // Update volunteer hours for an event
 
 router.get("/:eventId/stats", authAdmin, getEventStats); // Get event registration stats (the registered volunteer list)
+
+router.patch("/updateEvent/:eventId", authAdmin, updateEventDetails); //API to update Event details
 
 router.get("/getAttendanceList/:eventId", authAdmin, getAttendanceList); //get attendance list
 
