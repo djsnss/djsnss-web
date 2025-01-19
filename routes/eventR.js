@@ -3,7 +3,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.get("/upcoming-events", getUpcomingEvents);
-router.get("/past-events", getPastEvents);
+router.get("/upcoming-events", getUpcomingEvents); //api to fetch upcoming events
+router.get("/past-events", getPastEvents); //api to fetch past events
 
 export default router;

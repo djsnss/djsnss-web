@@ -205,4 +205,29 @@ const updateNormalPhoto = async (req, res) => {
   }
 };
 
-export { signup, login, registerEvent, uploadNormalPhoto, updateNormalPhoto };
+const checkHours = async (req, res) => {
+  try {
+    const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
+    if (!volunteer) {
+      return res.status(404).send("Volunteer not found");
+    }
+    return res
+      .status(200)
+      .json({
+        name: volunteer.studentDetails.name,
+        hours: volunteer.volunteerHours,
+      });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Error checking hours");
+  }
+};
+
+export {
+  signup,
+  login,
+  registerEvent,
+  uploadNormalPhoto,
+  updateNormalPhoto,
+  checkHours,
+};

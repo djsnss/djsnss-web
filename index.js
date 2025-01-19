@@ -34,4 +34,3 @@ app.use("/check-hours", checkHoursRouter);
 app.listen(PORT, () => {
   console.log(`Server connected at PORT ${PORT}`);
 });
-

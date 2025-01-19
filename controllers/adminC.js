@@ -192,6 +192,7 @@ export const createEvent = async (req, res) => {
       date,
       location,
       maxVolunteers,
+      scope,
     } = req.body;
     const existingEvent = await EventModel.findOne({ name });
     if (existingEvent) {
@@ -200,7 +201,8 @@ export const createEvent = async (req, res) => {
     const currentDate = new Date();
     const eventDate = new Date(date);
     const isSameDay =
-      currentDate.toISOString().split("T")[0] === eventDate.toISOString().split("T")[0];
+      currentDate.toISOString().split("T")[0] ===
+      eventDate.toISOString().split("T")[0];
     // Determine the status
     let status;
     if (eventDate > currentDate || isSameDay) {
@@ -218,6 +220,7 @@ export const createEvent = async (req, res) => {
       location,
       maxVolunteers,
       status,
+      scope,
     });
     await newEvent.save();
     return res.status(201).json({
@@ -269,47 +272,106 @@ export const removeVolunteerFromEvent = async (req, res) => {
 // Update volunteer hours for an event
 export const updateVolunteerHours = async (req, res) => {
   try {
-    const { volunteerId, eventId, hoursCompleted } = req.body;
-
-    if (hoursCompleted < 0) {
-      return res.status(400).json({ message: "Hours cannot be negative" });
-    }
-
-    const [volunteer, event] = await Promise.all([
-      VolunteerModel.findById(volunteerId),
-      EventModel.findById(eventId),
-    ]);
-
-    if (!volunteer || !event) {
-      return res.status(404).json({
-        message: !volunteer ? "Volunteer not found" : "Event not found",
-      });
-    }
-
-    // Verify volunteer is registered for this event
-    const isRegistered = event.registeredVolunteers.some(
-      (registration) => registration.volunteerId.toString() === volunteerId
-    );
-    if (!isRegistered) {
-      return res
-        .status(400)
-        .json({ message: "Volunteer is not registered for this event" });
-    }
-
-    // Verify hours don't exceed event's total hours
-    if (hoursCompleted > event.TotalNoOfHours) {
+    const { eventId, attendanceList } = req.body;
+    // Validate request
+    if (!eventId || !Array.isArray(attendanceList)) {
       return res.status(400).json({
-        message: `Hours cannot exceed events total hours of ${event.TotalNoOfHours}`,
+        message: "Invalid request. Provide eventId and attendanceList.",
       });
     }
+    // Fetch event details
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    const updates = [];
+    // Iterate through the attendance list
+    for (const { volunteerId, attended } of attendanceList) {
+      if (!volunteerId || typeof attended !== "boolean") {
+        updates.push({
+          volunteerId,
+          status: "failed",
+          reason: "Invalid data format",
+        });
+        continue;
+      }
+      // Check if the volunteer is registered for the event
+      const isRegistered = event.registeredVolunteers.some(
+        (reg) => reg.volunteerId.toString() === volunteerId
+      );
+      if (!isRegistered) {
+        updates.push({
+          volunteerId,
+          status: "failed",
+          reason: "Volunteer not registered for the event",
+        });
+        continue;
+      }
+      // Update attendance in the event model
+      const attendanceIndex = event.attendance.findIndex(
+        (att) => att.volunteerId.toString() === volunteerId
+      );
+      if (attendanceIndex >= 0) {
+        event.attendance[attendanceIndex].attended = attended;
+      } else {
+        event.attendance.push({ volunteerId, attended });
+      }
+      // If attended, update volunteer's individual event hours
+      if (attended) {
+        const volunteer = await VolunteerModel.findById(volunteerId);
+        if (volunteer) {
+          const currentEventHours = event.TotalNoOfHours;
 
-    // Update volunteer's total hours
-    volunteer.volunteerHours = (volunteer.volunteerHours || 0) + hoursCompleted;
-    await volunteer.save();
+          // Update individual event hours and attended status
+          const volunteerEvent = volunteer.connectedEvents.find(
+            (eventItem) => eventItem.eventId.toString() === eventId
+          );
 
+          if (volunteerEvent) {
+            volunteerEvent.hoursCompleted =
+              (volunteerEvent.hoursCompleted || 0) + currentEventHours;
+            volunteerEvent.attended = true; // Mark this event as attended
+          } else {
+            volunteer.connectedEvents.push({
+              eventId,
+              hoursCompleted: currentEventHours,
+              attended: true, // Mark as attended
+            });
+          }
+
+          // Update total volunteer hours
+          volunteer.volunteerHours =
+            (volunteer.volunteerHours || 0) + currentEventHours;
+          await volunteer.save();
+
+          updates.push({
+            volunteerId,
+            status: "success",
+            updatedHours: volunteer.volunteerHours,
+            eventHours: volunteerEvent
+              ? volunteerEvent.hoursCompleted
+              : currentEventHours,
+          });
+        } else {
+          updates.push({
+            volunteerId,
+            status: "failed",
+            reason: "Volunteer not found",
+          });
+        }
+      } else {
+        updates.push({
+          volunteerId,
+          status: "skipped",
+          reason: "Marked as not attended",
+        });
+      }
+    }
+    // Save updated event
+    await event.save();
     res.status(200).json({
-      message: "Volunteer hours updated successfully",
-      totalHours: volunteer.volunteerHours,
+      message: "Attendance and volunteer hours updated successfully",
+      updates,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -427,5 +489,50 @@ export const getPastEvents = async (req, res) => {
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error fetching past events");
+  }
+};
+
+export const getAttendanceList = async (req, res) => {
+  try {
+    const { eventId } = req.params;
+
+    // Fetch event details
+    const event = await EventModel.findById(eventId).populate(
+      "registeredVolunteers.volunteerId",
+      "name email"
+    );
+
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+
+    // Separate registered and attended volunteers
+    const registeredVolunteers = event.registeredVolunteers.map(
+      (volunteer) => ({
+        volunteerId: volunteer.volunteerId._id,
+        name: volunteer.volunteerId.name,
+        email: volunteer.volunteerId.email,
+      })
+    );
+
+    const attendedVolunteers = event.attendance
+      .filter((att) => att.attended)
+      .map((att) => ({
+        volunteerId: att.volunteerId,
+        name: registeredVolunteers.find(
+          (vol) => vol.volunteerId.toString() === att.volunteerId.toString()
+        )?.name,
+        email: registeredVolunteers.find(
+          (vol) => vol.volunteerId.toString() === att.volunteerId.toString()
+        )?.email,
+      }));
+
+    res.status(200).json({
+      message: "Attendance list fetched successfully",
+      registeredVolunteers,
+      attendedVolunteers,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };
