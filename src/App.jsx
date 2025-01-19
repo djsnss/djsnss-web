@@ -13,7 +13,7 @@ const Home = React.lazy(() => import("./pages/Landing"));
 const Volunteer = React.lazy(() => import("./pages/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./components/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./components/volunteer/VolunteerRegistration"));
-const CheckHours = React.lazy(() => import("./components/volunteer/CheckHours"));
+const CheckHoursNew = React.lazy(() => import("./components/volunteer/CheckHoursNew"));
 const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
@@ -22,11 +22,13 @@ const AboutUs = React.lazy(() => import("./pages/AboutUs"));
 const Calendar = React.lazy(() => import("./components/calendar/Calendar"));
 const EventDetails = React.lazy(() => import("./pages/EventDetails"));
 const Events = React.lazy(() => import("./pages/Events"));
-const Registration = React.lazy(() => import("./pages/Registration"));
 const Team = React.lazy(() => import("./pages/Team"));
 const Login = React.lazy(() => import("./pages/Login"));
-const Dashboard = React.lazy(() => import("./pages/admin/Dashboard"));
+const AdminDashboard = React.lazy(() => import("./pages/admin/Dashboard"));
 const CreateEvent = React.lazy(() => import("./pages/admin/CreateEvent"));
+const Unauthorized = React.lazy(() => import("./pages/Unauthorized"));
+const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
+const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
 
 const App = () => {
   return (
@@ -51,7 +53,6 @@ const App = () => {
             <Routes>
               {/* Existing routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/registration" element={<Registration />} />
               <Route path="/login" element={<Login />} />
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
@@ -66,8 +67,11 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/create-event" element={<CreateEvent />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/update-event" element={<UpdateEvent />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (
