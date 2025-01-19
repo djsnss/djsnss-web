@@ -10,7 +10,7 @@ const sectionColors = [
   "#005a8e", 
 ];
 
-const CreateEvent = ({ event, onSubmit, onCancel }) => {
+const CreateEvent = ({ event, onCancel }) => {
   const [formData, setFormData] = useState({
     name: event?.name || '',
     description: event?.description || '',
@@ -25,6 +25,9 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
   });
 
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const validateForm = () => {
     const newErrors = {};
@@ -40,8 +43,32 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      onSubmit(formData);
+    if (!validateForm()) return;
+
+    setLoading(true);
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    try {
+      const response = await fetch('https://djsnss-web.onrender.com/admin/createEvent', {
+        method: event ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to save event');
+      }
+
+      const data = await response.json();
+      setSuccessMessage(data.message || 'Event saved successfully!');
+    } catch (error) {
+      setErrorMessage(error.message || 'An unexpected error occurred');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,16 +90,16 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col bg-white">
-      {/* Page Heading */}
+    <div className="w-full flex flex-col bg-white">
       <div className="bg-[#003366] text-center text-white py-8">
         <h1 className="text-4xl font-bold">Event Management</h1>
         <p className="mt-2 text-xl">Create or update your event details below</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-6 p-6 bg-[#f1f8ff] w-full">
-    
-        {/* Image Upload */}
+        {successMessage && <p className="text-green-500">{successMessage}</p>}
+        {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+        
         <div className="space-y-2">
           <label className="block text-sm font-medium text-[#003366]">Event Image</label>
           <div className="relative">
@@ -111,7 +138,6 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
           </div>
         </div>
 
-        {/* Basic Information */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-sm font-medium text-[#003366] mb-1">Event Name *</label>
@@ -123,7 +149,6 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
             />
             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
           </div>
-
           <div>
             <label className="block text-sm font-medium text-[#003366] mb-1">Status *</label>
             <select
@@ -227,7 +252,6 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
           </div>
         </div>
 
-        {/* Form Actions */}
         <div className="flex justify-end gap-4 pt-4">
           <button
             type="button"
@@ -238,9 +262,10 @@ const CreateEvent = ({ event, onSubmit, onCancel }) => {
           </button>
           <button
             type="submit"
+            disabled={loading}
             className="px-4 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
           >
-            {event ? 'Update Event' : 'Create Event'}
+            {loading ? 'Saving...' : event ? 'Update Event' : 'Create Event'}
           </button>
         </div>
       </form>
