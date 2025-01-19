@@ -39,4 +39,24 @@ const sendLogin = async (req, res) => {
   }
 };
 
-export { sendSignup, sendLogin };
+const sendOTP = async (email, otp) => {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    service: "gmail",
+    auth: {
+      user: process.env.user, // Your email
+      pass: process.env.pass, // Your email password
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.user,
+    to: email,
+    subject: "OTP for Password Change",
+    text: `Your OTP for password change is: ${otp}`,
+  };
+
+  await transporter.sendMail(mailOptions);
+};
+
+export { sendSignup, sendLogin, sendOTP };

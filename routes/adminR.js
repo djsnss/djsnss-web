@@ -13,6 +13,10 @@ import {
   updateEventPhoto,
   uploadEventPhoto,
   getAttendanceList,
+  changeEmail,
+  changePassword,
+  sendOtpForPasswordChange,
+  logout,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
@@ -60,6 +64,14 @@ router.post("/updateHours", authAdmin, updateVolunteerHours); // Update voluntee
 router.get("/:eventId/stats", authAdmin, getEventStats); // Get event registration stats (the registered volunteer list)
 
 router.get("/getAttendanceList/:eventId", authAdmin, getAttendanceList); //get attendance list
+
+router.put("/change-email", changeEmail); //route to change email of admin
+
+router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for password change
+
+router.put("/change-password", changePassword); //route to change password of admin
+
+router.post("/logout", authAdmin, logout);
 
 export default router;
 

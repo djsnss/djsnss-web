@@ -4,35 +4,31 @@ import VolunteerModel from "../models/volunteer.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
-import { sendLogin } from "./nodemailerC.js";
+import { sendLogin, sendOTP } from "./nodemailerC.js";
+import AdminModel from "../models/admin.js";
+import crypto from "crypto";
+
 env.config();
 const Secret = process.env.SecretKey;
 
 export const login = async (req, res) => {
   try {
-    const { sapId, email, password } = req.body;
-    if (!sapId || !email || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       return res
         .status(400)
-        .json({ message: "sapId, email, and password are required" });
+        .json({ message: "email and password are required" });
     }
-    const volunteer = await VolunteerModel.findOne({
-      "studentDetails.sapId": sapId,
-      "studentDetails.email": email,
-    });
-    if (!volunteer) {
-      return res.status(400).send("Invalid sapId or email");
+    const admin = await AdminModel.findOne({ email: email });
+    if (!admin) {
+      return res.status(400).send("Invalid email");
     }
-    if (!volunteer.roles.includes("admin")) {
-      return res.status(403).json({ message: "The volunteer is not an admin" });
-    }
-    const match = await bcrypt.compare(password, volunteer.password);
-    if (!match) {
+    if (password !== admin.password) {
       return res.status(400).send("Invalid password");
     }
-    const token = jwt.sign({ volunteerId: volunteer._id }, Secret);
+    const token = jwt.sign({ adminId: admin._id }, Secret);
     sendLogin(req, res);
-    return res.status(200).json({ token, volunteer });
+    return res.status(200).json({ token, admin });
   } catch (err) {
     console.error("Login Error:", err);
     return res.status(500).json({ message: "Server error" });
@@ -55,6 +51,7 @@ export const getVolunteers = async (req, res) => {
       currentPage: page,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -101,6 +98,7 @@ export const getVolunteerById = async (req, res) => {
 
     res.json(volunteer);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -145,6 +143,7 @@ export const updateVolunteer = async (req, res) => {
 
     res.json(updatedVolunteer);
   } catch (error) {
+    console.error(error);
     res.status(400).json({ message: error.message });
   }
 };
@@ -177,6 +176,7 @@ export const deleteVolunteer = async (req, res) => {
 
     res.json({ message: "Volunteer deleted successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -265,6 +265,7 @@ export const removeVolunteerFromEvent = async (req, res) => {
       .status(200)
       .json({ message: "Volunteer removed from event successfully" });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -374,6 +375,7 @@ export const updateVolunteerHours = async (req, res) => {
       updates,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -407,6 +409,7 @@ export const getEventStats = async (req, res) => {
 
     res.status(200).json(stats);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
   }
 };
@@ -533,6 +536,122 @@ export const getAttendanceList = async (req, res) => {
       attendedVolunteers,
     });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: error.message });
+  }
+};
+
+export const changeEmail = async (req, res) => {
+  try {
+    const { currentPassword, newEmail } = req.body;
+    if (!currentPassword || !newEmail) {
+      return res
+        .status(400)
+        .json({ message: "Current password and new email are required" });
+    }
+    const admin = await AdminModel.findOne();
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+    // Verify the current password
+    if (currentPassword !== admin.password) {
+      return res.status(400).send("Invalid password");
+    }
+    // Update email
+    admin.email = newEmail;
+    await admin.save();
+    return res
+      .status(200)
+      .json({ message: "Email updated successfully", email: admin.email });
+  } catch (err) {
+    console.error("Change Email Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+const otpStore = {}; // Temporary store for OTPs and expiry
+
+export const sendOtpForPasswordChange = async (req, res) => {
+  try {
+    const admin = await AdminModel.findOne();
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+    // Generate and send OTP
+    const otp = crypto.randomInt(100000, 999999).toString();
+    const expiresAt = Date.now() + 10 * 60 * 1000; // Expires in 10 minutes
+
+    otpStore[admin.email] = { otp, expiresAt }; // Store OTP with expiry
+
+    await sendOTP(admin.email, otp); // Use your email service
+
+    return res.status(200).json({ message: "OTP sent to email" });
+  } catch (err) {
+    console.error("Send OTP Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const changePassword = async (req, res) => {
+  try {
+    const { otp, newPassword } = req.body;
+
+    if (!otp || !newPassword) {
+      return res
+        .status(400)
+        .json({ message: "OTP and new password are required" });
+    }
+
+    const admin = await AdminModel.findOne();
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    const storedOtpData = otpStore[admin.email];
+    if (!storedOtpData) {
+      return res
+        .status(400)
+        .json({ message: "No OTP found. Please request a new one." });
+    }
+
+    const { otp: storedOtp, expiresAt } = storedOtpData;
+
+    // Check if OTP is expired
+    if (Date.now() > expiresAt) {
+      delete otpStore[admin.email]; // Remove expired OTP
+      return res
+        .status(400)
+        .json({ message: "OTP has expired. Please request a new one." });
+    }
+
+    // Validate the OTP
+    if (storedOtp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update admin password
+    admin.password = hashedPassword;
+    await admin.save();
+
+    delete otpStore[admin.email]; // Remove OTP after successful password change
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error("Change Password Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const logout = (req, res) => {
+  try {
+    // Clear token from cookies if it's stored there
+    res.clearCookie("token");
+    res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Logout Error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };

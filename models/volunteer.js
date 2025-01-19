@@ -108,7 +108,7 @@ const volunteerSchema = new mongoose.Schema(
     },
     roles: {
       type: [String],
-      enum: ["admin", "core", "cocomm", "volunteer", "coordinator"],
+      enum: ["core", "cocomm", "volunteer", "coordinator"],
       default: ["volunteer"],
     },
     hobbies: {
