@@ -13,7 +13,7 @@ const Home = React.lazy(() => import("./pages/Landing"));
 const Volunteer = React.lazy(() => import("./pages/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./components/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./components/volunteer/VolunteerRegistration"));
-const CheckHours = React.lazy(() => import("./components/volunteer/CheckHours"));
+const CheckHoursNew = React.lazy(() => import("./components/volunteer/CheckHoursNew"));
 const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));

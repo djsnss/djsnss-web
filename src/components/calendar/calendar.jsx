@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./Calendar.css";
 
 const App = () => {
   const [events, setEvents] = useState([]);
@@ -101,7 +102,7 @@ const App = () => {
         </div>
         <div className="calendar grid grid-cols-7 gap-2">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-            <div key={index} className="text-center font-bold">
+            <div key={index} className="text-center font-bold day-header">
               {day}
             </div>
           ))}
@@ -109,14 +110,14 @@ const App = () => {
             item.day ? (
               <div
                 key={index}
-                className={`day p-2 rounded cursor-pointer ${
+                className={`day flex flex-col justify-between items-center p-2 rounded cursor-pointer ${
                   selectedDate === new Date(currentYear, currentMonth, item.day).toDateString()
                     ? "selected"
                     : ""
                 } hover:bg-blue-300`}
                 onClick={() => handleDateClick(item.day)}
               >
-                <span>{item.day}</span>
+                <span className="text-lg">{item.day}</span> {/* Increased font size for better visibility */}
                 {renderEvents(item.day)}
               </div>
             ) : (
