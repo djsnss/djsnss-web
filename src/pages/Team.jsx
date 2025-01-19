@@ -1,20 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import TeamSection from "../components/Team/TeamSection";
+import teamData from "../data/teamData";
+import Loader from "../components/Loaders/CustomLoader2"
 import "../styles/team.css";
 
 const Team = () => {
-  const [teamData, setTeamData] = useState(null);
-
-  useEffect(() => {
-    fetch("/data/teamData.json")
-      .then((response) => response.json())
-      .then((data) => setTeamData(data))
-      .catch((error) => console.error("Error fetching team data:", error));
-  }, []);
-
-  if (!teamData) return <p>Loading...</p>;
-
-  // Keep a global counter for sections
+  if (!teamData) return <div><Loader /></div>;
   let sectionIndex = 0;
 
   return (
@@ -22,6 +13,7 @@ const Team = () => {
       <div className="team-page-bg h-full w-full"></div>
       <div className="team-page relative">
         <h1>Meet Our Team</h1>
+
         {/* Faculty Section */}
         <div className="relative">
           <h2 className="team-heading">Faculty</h2>
