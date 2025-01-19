@@ -17,7 +17,7 @@ import Gallery from "./pages/Gallery";
 import Volunteer from "./pages/Volunteer";
 import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
 import Calendar from "./components/calendar/Calendar";
-import CheckHours from "./components/volunteer/CheckHours";
+import CheckHoursNew from "./components/volunteer/CheckHoursNew";
 import VolunteerRegistration from "./components/volunteer/VolunteerRegistration";
 import ScrollTT from "./components/ScrollTT";
 
@@ -57,7 +57,7 @@ const App = () => {
               <Route path="/volunteer" element={<Volunteer />} />
               <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
               <Route path="/volunteer/VolunteerRegistration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/CheckHours" element={<CheckHours />} />
+              <Route path="/volunteer/CheckHours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />

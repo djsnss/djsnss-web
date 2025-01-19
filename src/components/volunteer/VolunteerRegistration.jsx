@@ -37,7 +37,7 @@ const VolunteerRegistration = () => {
 
       {/* Form Container */}
       <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg backdrop-blur-lg">
-        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6 sm:flex-col sm:w-full">
           {/* Left side */}
           <div className="space-y-4">
             {/* Name Field */}
