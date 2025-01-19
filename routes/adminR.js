@@ -17,11 +17,14 @@ import {
   changePassword,
   sendOtpForPasswordChange,
   logout,
+  getEventById,
+  getAllEvents,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
 
 import { uploadNormal } from "../middlewares/multer.js";
+import { get } from "http";
 
 const router = express.Router();
 
@@ -29,14 +32,16 @@ const router = express.Router();
 router.post("/login", login); //login for admin
 
 // Volunteer routes
-router.get("/", getVolunteers); // Get all volunteers
-router.get("/:id", getVolunteerById); // Get a specific volunteer by ID
-router.patch("/:id", authAdmin, updateVolunteer); // Update a volunteer by ID
-router.delete("/:id", authAdmin, deleteVolunteer); // Delete a volunteer by ID
+router.get("/getAllVolunteers", getVolunteers); // Get all volunteers
+router.get("/getVolunteer/:id", getVolunteerById); // Get a specific volunteer by ID
+router.patch("/updateVolunteer/:id", authAdmin, updateVolunteer); // Update a volunteer by ID
+router.delete("/deleteVolunteer/:id", authAdmin, deleteVolunteer); // Delete a volunteer by ID
 
 // Event routes
 router.post("/createEvent", authAdmin, createEvent); // Create a new event
 router.get("/:eventId/volunteers", authAdmin, getVolunteersByEvent); // Get volunteers by event
+router.get("/event/:eventId", authAdmin, getEventById); // Get a specific event by ID
+router.get("/getAllEvents", authAdmin, getAllEvents); // API to fetch all events
 
 router.post(
   "/:id/uploadPhoto",
@@ -71,7 +76,7 @@ router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for passw
 
 router.put("/change-password", changePassword); //route to change password of admin
 
-router.post("/logout", authAdmin, logout);
+router.post("/logout", authAdmin, logout); //logout API for admin
 
 export default router;
 

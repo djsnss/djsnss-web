@@ -23,7 +23,8 @@ export const login = async (req, res) => {
     if (!admin) {
       return res.status(400).send("Invalid email");
     }
-    if (password !== admin.password) {
+    const match = await bcrypt.compare(password, admin.password);
+    if (!match) {
       return res.status(400).send("Invalid password");
     }
     const token = jwt.sign({ adminId: admin._id }, Secret);
@@ -45,14 +46,14 @@ export const getVolunteers = async (req, res) => {
 
     const total = await VolunteerModel.countDocuments();
 
-    res.json({
+    return res.json({
       volunteers,
       totalPages: Math.ceil(total / limit),
       currentPage: page,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -75,14 +76,14 @@ export const getVolunteersByEvent = async (req, res) => {
       .slice((page - 1) * limit, page * limit)
       .map((entry) => entry.volunteerId); // Extract the volunteer details
 
-    res.json({
+    return res.json({
       volunteers,
       totalPages: Math.ceil(totalVolunteers / limit),
       currentPage: page,
     });
   } catch (error) {
     console.error("Error fetching volunteers by event:", error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -96,10 +97,10 @@ export const getVolunteerById = async (req, res) => {
       return res.status(404).json({ message: "Volunteer not found" });
     }
 
-    res.json(volunteer);
+    return res.status(200).json(volunteer);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -141,10 +142,10 @@ export const updateVolunteer = async (req, res) => {
       return res.status(404).json({ message: "Volunteer not found" });
     }
 
-    res.json(updatedVolunteer);
+    return res.json(updatedVolunteer);
   } catch (error) {
     console.error(error);
-    res.status(400).json({ message: error.message });
+    return res.status(400).json({ message: error.message });
   }
 };
 
@@ -174,10 +175,10 @@ export const deleteVolunteer = async (req, res) => {
     // Delete volunteer
     await VolunteerModel.findByIdAndDelete(id);
 
-    res.json({ message: "Volunteer deleted successfully" });
+    return res.json({ message: "Volunteer deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -233,7 +234,7 @@ export const createEvent = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -265,12 +266,12 @@ export const removeVolunteerFromEvent = async (req, res) => {
 
     await Promise.all([event.save(), volunteer.save()]);
 
-    res
+    return res
       .status(200)
       .json({ message: "Volunteer removed from event successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -374,13 +375,13 @@ export const updateVolunteerHours = async (req, res) => {
     }
     // Save updated event
     await event.save();
-    res.status(200).json({
+    return res.status(200).json({
       message: "Attendance and volunteer hours updated successfully",
       updates,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -411,10 +412,10 @@ export const getEventStats = async (req, res) => {
       })),
     };
 
-    res.status(200).json(stats);
+    return res.status(200).json(stats);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -534,14 +535,14 @@ export const getAttendanceList = async (req, res) => {
         )?.email,
       }));
 
-    res.status(200).json({
+    return res.status(200).json({
       message: "Attendance list fetched successfully",
       registeredVolunteers,
       attendedVolunteers,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -653,9 +654,39 @@ export const logout = (req, res) => {
   try {
     // Clear token from cookies if it's stored there
     res.clearCookie("token");
-    res.status(200).json({ message: "Logout successful" });
+    return res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     console.error("Logout Error:", error);
-    res.status(500).json({ message: "Server error" });
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getEventById = async (req, res) => {
+  try {
+    const eventId = req.params.eventId;
+    const event = await EventModel.findById(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    return res.status(200).json(event);
+  } catch (err) {
+    console.error("Fetching Event error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const getAllEvents = async (req, res) => {
+  try {
+    const events = await EventModel.find();
+    // Retrieve all events
+    if (!events.length) {
+      return res.status(404).json({ message: "No events found" });
+    }
+    return res.status(200).json(events); // Send events as a response
+  } catch (error) {
+    console.error("Error fetching events:", error);
+    return res
+      .status(500)
+      .json({ message: "Server error while fetching events" });
   }
 };

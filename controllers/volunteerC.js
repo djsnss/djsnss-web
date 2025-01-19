@@ -109,7 +109,7 @@ const login = async (req, res) => {
   } catch (err) {
     console.error("Login Error:", err);
     return res.status(500).json({ message: "Server error" });
-  } 
+  }
 };
 
 const registerEvent = async (req, res) => {
@@ -146,7 +146,7 @@ const registerEvent = async (req, res) => {
     // Save changes
     await volunteer.save();
     await event.save();
-    res
+    return res
       .status(200)
       .send({ message: `Successfully registered for ${event.name}` });
   } catch (err) {
@@ -211,12 +211,10 @@ const checkHours = async (req, res) => {
     if (!volunteer) {
       return res.status(404).send("Volunteer not found");
     }
-    return res
-      .status(200)
-      .json({
-        name: volunteer.studentDetails.name,
-        hours: volunteer.volunteerHours,
-      });
+    return res.status(200).json({
+      name: volunteer.studentDetails.name,
+      hours: volunteer.volunteerHours,
+    });
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error checking hours");
