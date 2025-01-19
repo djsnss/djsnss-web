@@ -8,6 +8,10 @@ const EventSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  longDescription: {
+    type: String,
+    default: "",
+  },
   photo: {
     url: {
       type: String,
