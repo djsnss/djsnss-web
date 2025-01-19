@@ -59,7 +59,7 @@ const App = () => {
               <Route path="/volunteer" element={<Volunteer />} />
               <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
               <Route path="/volunteer/VolunteerRegistration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/CheckHours" element={<CheckHours />} />
+              <Route path="/volunteer/CheckHours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
