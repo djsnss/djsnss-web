@@ -128,11 +128,11 @@ const volunteerSchema = new mongoose.Schema(
         },
         attended: {
           type: Boolean,
-          default: false, // Tracks attendance for each event separately
+          default: false,
         },
         hoursCompleted: {
           type: Number,
-          default: 0, // Tracks hours completed for this specific event
+          default: 0,
         },
       },
     ],

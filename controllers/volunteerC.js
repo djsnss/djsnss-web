@@ -9,7 +9,6 @@ import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
 import mongoose from "mongoose";
 
-
 env.config();
 const Secret = process.env.SecretKey;
 
@@ -218,35 +217,38 @@ const updateNormalPhoto = async (req, res) => {
 
 const checkHours = async (req, res) => {
   try {
-    const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
+    const volunteer = await VolunteerModel.findById(
+      req.volunteer.volunteerId
+    ).populate({
+      path: "connectedEvents.eventId",
+      select: "name TotalNoOfHours",
+    });
     if (!volunteer) {
       return res.status(404).send("Volunteer not found");
     }
+    const connectedEvents = volunteer.connectedEvents
+      .map((event) => {
+        if (event.eventId) {
+          return {
+            eventId: event.eventId._id,
+            eventName: event.eventId.name,
+            totalNoOfHours: event.eventId.TotalNoOfHours,
+            attended: event.attended,
+            hoursCompleted: event.hoursCompleted,
+          };
+        }
+        return null;
+      })
+      .filter(Boolean);
     return res.status(200).json({
       name: volunteer.studentDetails.name,
       hours: volunteer.volunteerHours,
+      image: volunteer.normalPhoto.url,
+      connectedEvents,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).send("Error checking hours");
-  }
-};
-
-const getEventById = async (req, res) => {
-  console.log("hii")
-  try {
-    const id=req.params.eventId
-    // const event=await EventModel.findById(id);
-    console.log("Fetching Event by ID",id);
-    const event = await EventModel.findById('677e2bde6e1db8b9de7e7520');
-    console.log(event);
-    if (!event) {
-      return res.status(404).json({ message: "Event not found" });
-    }
-    return res.status(200).json(event);
-  } catch (err) {
-    console.error("Fetching Event error:", err);
-    return res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -257,5 +259,4 @@ export {
   uploadNormalPhoto,
   updateNormalPhoto,
   checkHours,
-  getEventById,
 };
