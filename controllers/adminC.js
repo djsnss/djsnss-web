@@ -197,22 +197,19 @@ export const createEvent = async (req, res) => {
       maxVolunteers,
       scope,
     } = req.body;
+    // Check if the event already exists
     const existingEvent = await EventModel.findOne({ name });
     if (existingEvent) {
       return res.status(400).json({ message: "Event already exists" });
     }
+    // Calculate the event status
     const currentDate = new Date();
     const eventDate = new Date(date);
     const isSameDay =
       currentDate.toISOString().split("T")[0] ===
       eventDate.toISOString().split("T")[0];
-    // Determine the status
-    let status;
-    if (eventDate > currentDate || isSameDay) {
-      status = "Upcoming";
-    } else {
-      status = "Past";
-    }
+    let status = eventDate > currentDate || isSameDay ? "Upcoming" : "Past";
+    // Create the new event
     const newEvent = new EventModel({
       name,
       slug,
@@ -227,8 +224,18 @@ export const createEvent = async (req, res) => {
       status,
       scope,
     });
+    if (req.file) {
+      // Upload the photo if provided
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "EventPhoto",
+      });
+      newEvent.photo = {
+        url: result.secure_url,
+        public_id: result.public_id,
+      };
+    }
     await newEvent.save();
-    return res.status(201).json({
+    return res.status(200).json({
       message: "Successfully created new Event",
       Event: newEvent,
     });
@@ -416,58 +423,6 @@ export const getEventStats = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: error.message });
-  }
-};
-
-export const uploadEventPhoto = async (req, res) => {
-  try {
-    const eventId = req.params.id;
-    if (!req.file) {
-      return res.status(400).send("File not found");
-    }
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "EventPhoto",
-    });
-    const event = await EventModel.findById(eventId);
-    if (!event) {
-      return res.status(404).send("Event not found.");
-    }
-    event.photo.url = result.secure_url;
-    event.photo.public_id = result.public_id;
-    await event.save();
-    return res.status(200).json({
-      message: "Event normal photo uploaded",
-      photo: event.photo,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Error uploading image");
-  }
-};
-
-export const updateEventPhoto = async (req, res) => {
-  try {
-    const eventId = req.params.id;
-    const event = await EventModel.findById(eventId);
-    if (!event) {
-      return res.status(404).send("event not found");
-    }
-    if (event.photo && event.photo.public_id) {
-      await cloudinary.uploader.destroy(event.photo.public_id);
-    }
-    const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "EventPhoto",
-    });
-    event.photo.url = result.secure_url;
-    event.photo.public_id = result.public_id;
-    await event.save();
-    return res.status(200).json({
-      message: "event normal photo updated",
-      photo: event.photo,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).send("Error updating image");
   }
 };
 
@@ -701,21 +656,39 @@ export const updateEventDetails = async (req, res) => {
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
-
+    // Handle photo update if a new file is provided
+    if (req.file) {
+      // Delete the old photo if it exists
+      if (event.photo && event.photo.public_id) {
+        await cloudinary.uploader.destroy(event.photo.public_id);
+      }
+      // Upload the new photo
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "EventPhoto",
+      });
+      // Update the event's photo details
+      updatedData.photo = {
+        url: result.secure_url,
+        public_id: result.public_id,
+      };
+    }
     // Update the event details
-    const updatedEvent = await EventModel.findByIdAndUpdate(eventId, updatedData, {
-      new: true, // Return the updated document
-      runValidators: true, // Ensure validation is applied on updates
-    });
-
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      eventId,
+      updatedData,
+      {
+        new: true, // Return the updated document
+        runValidators: true, // Ensure validation is applied on updates
+      }
+    );
     return res.status(200).json({
-      message: "Event details updated successfully",
+      message: "Event updated successfully",
       event: updatedEvent,
     });
   } catch (error) {
-    console.error("Error updating event details:", error);
+    console.error("Error updating event:", error);
     return res.status(500).json({
-      message: "Failed to update event details",
+      message: "Failed to update event",
       error: error.message,
     });
   }

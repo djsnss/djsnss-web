@@ -10,8 +10,6 @@ import {
   removeVolunteerFromEvent,
   updateVolunteerHours,
   getEventStats,
-  updateEventPhoto,
-  uploadEventPhoto,
   getAttendanceList,
   changeEmail,
   changePassword,
@@ -38,24 +36,16 @@ router.patch("/updateVolunteer/:id", authAdmin, updateVolunteer); // Update a vo
 router.delete("/deleteVolunteer/:id", authAdmin, deleteVolunteer); // Delete a volunteer by ID
 
 // Event routes
-router.post("/createEvent", authAdmin, createEvent); // Create a new event
+router.post(
+  "/createEvent",
+  authAdmin,
+  uploadNormal.single("image"),
+  createEvent
+); // Create a new event
+
 router.get("/:eventId/volunteers", authAdmin, getVolunteersByEvent); // Get volunteers by event
 router.get("/event/:eventId", authAdmin, getEventById); // Get a specific event by ID
 router.get("/getAllEvents", authAdmin, getAllEvents); // API to fetch all events
-
-router.post(
-  "/:id/uploadPhoto",
-  authAdmin,
-  uploadNormal.single("image"),
-  uploadEventPhoto
-); //Upload Event photo
-
-router.post(
-  "/:id/updatePhoto",
-  authAdmin,
-  uploadNormal.single("image"),
-  updateEventPhoto
-); //Update Event photo
 
 // New event-related routes
 router.delete(
@@ -68,7 +58,12 @@ router.post("/updateHours", authAdmin, updateVolunteerHours); // Update voluntee
 
 router.get("/:eventId/stats", authAdmin, getEventStats); // Get event registration stats (the registered volunteer list)
 
-router.patch("/updateEvent/:eventId", authAdmin, updateEventDetails); //API to update Event details
+router.put(
+  "/updateEvent/:eventId",
+  authAdmin,
+  uploadNormal.single("image"),
+  updateEventDetails
+); //API to update Event details
 
 router.get("/getAttendanceList/:eventId", authAdmin, getAttendanceList); //get attendance list
 
