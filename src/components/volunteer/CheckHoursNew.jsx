@@ -40,13 +40,13 @@ const VolunteerHours = () => {
   const fetchUserData = async () => {
     try {
       const volunteerId = "60004230019" // static id, login person will work on this
-      const volunteerResponse = await fetch(`http://localhost:8000/check-hours/volunteer/${volunteerId}`)
+      const volunteerResponse = await fetch(`https://djsnss-web.onrender.com/check-hours/volunteer/${volunteerId}`)
       if (!volunteerResponse.ok) throw new Error("Failed to fetch volunteer data")
       const volunteerData = await volunteerResponse.json()
 
       const eventDetails = await Promise.all(
         volunteerData.connectedEvents.map(async (eventId) => {
-          const eventResponse = await fetch(`http://localhost:8000/check-hours/event/${eventId}`)
+          const eventResponse = await fetch(`https://djsnss-web.onrender.com/check-hours/event/${eventId}`)
           if (!eventResponse.ok) throw new Error("Failed to fetch event data")
           const eventData = await eventResponse.json()
           return {
@@ -76,7 +76,7 @@ const VolunteerHours = () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch("http://localhost:8000/admin/getAllEvents", {
+      const response = await fetch("https://djsnss-web.onrender.com/admin/getAllEvents", {
         headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
       })
       if (!response.ok) throw new Error("Failed to fetch events")
@@ -94,7 +94,7 @@ const VolunteerHours = () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch(`http://localhost:8000/admin/${eventId}/volunteers`, {
+      const response = await fetch(`https://djsnss-web.onrender.com/admin/${eventId}/volunteers`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("adminToken")}` },
       })
       if (!response.ok) throw new Error("Failed to fetch volunteers")
@@ -132,7 +132,7 @@ const VolunteerHours = () => {
     setLoading(true)
     setError(null)
     try {
-      const response = await fetch("http://localhost:8000/admin/updateHours", {
+      const response = await fetch("https://djsnss-web.onrender.com/admin/updateHours", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

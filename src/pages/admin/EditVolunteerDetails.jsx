@@ -12,7 +12,7 @@ const EditVolunteerDetails = () => {
     const fetchEvents = async () => {
       try {
         const token = localStorage.getItem("token"); // Replace with your token logic
-        const response = await axios.get("/admin/getAllEvents", {
+        const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
           headers: { Authorization: `Bearer ${token}` },
         });
         setEvents(response.data.events || []);
@@ -30,7 +30,7 @@ const EditVolunteerDetails = () => {
     const fetchVolunteers = async () => {
       try {
         const token = localStorage.getItem("token");
-        const response = await axios.get(`/admin/${selectedEvent}/volunteers`, {
+        const response = await axios.get(`https://djsnss-web.onrender.com/admin/${selectedEvent}/volunteers`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setVolunteers(response.data.volunteers || []);
@@ -55,7 +55,7 @@ const EditVolunteerDetails = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "/admin/updateHours",
+        "https://djsnss-web.onrender.com/admin/updateHours",
         {
           eventId: selectedEvent,
           attendanceList: [
@@ -75,7 +75,7 @@ const EditVolunteerDetails = () => {
       try {
         const token = localStorage.getItem("token");
         await axios.patch(
-          `/admin/updateVolunteer/${editVolunteerId}`,
+          `https://djsnss-web.onrender.com/admin/updateVolunteer/${editVolunteerId}`,
           { hours: parseInt(updatedHours) },
           { headers: { Authorization: `Bearer ${token}` } }
         );
