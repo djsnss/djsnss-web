@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const VolunteerRegistration = () => {
+const volunteerRegistration = () => {
   const [formData, setFormData] = useState({
     name: "",
     branch: "",
@@ -34,6 +34,14 @@ const VolunteerRegistration = () => {
     <div className="min-h-screen bg-sky-100 p-6 flex flex-col items-center">
       {/* Heading */}
       <h2 className="text-5xl font-bold text-sky-900 mb-6">Volunteer Registration</h2>
+      <div>
+        <p className="text-sky-900 text-lg">
+          Already Registered?{" "}
+          <a href="/volunteer/volunteer-login" className="text-sky-600 hover:underline">
+            Login
+          </a>
+        </p>
+      </div>
 
       {/* Form Container */}
       <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg backdrop-blur-lg">
@@ -157,7 +165,7 @@ const VolunteerRegistration = () => {
             {/* Mother's Name Field */}
             <div>
               <label htmlFor="motherName" className="block text-sky-900 font-semibold">
-                Mother's Name
+                Mother&apos;s Name
               </label>
               <input
                 type="text"
@@ -172,7 +180,7 @@ const VolunteerRegistration = () => {
             {/* Father's Name Field */}
             <div>
               <label htmlFor="fatherName" className="block text-sky-900 font-semibold">
-                Father's Name
+                Father&apos;s Name
               </label>
               <input
                 type="text"
@@ -229,4 +237,4 @@ const VolunteerRegistration = () => {
   );
 };
 
-export default VolunteerRegistration;
+export default volunteerRegistration;

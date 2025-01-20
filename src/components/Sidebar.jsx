@@ -90,8 +90,8 @@ const Sidebar = () => {
       path: "/volunteer",
       subLinks: [
         { title: "Check Hours", path: "/volunteer/checkhours" },
-        { title: "Volunteer Registration", path: "/volunteer/VolunteerRegistration" },
-        { title: "Volunteer Policy", path: "/volunteer/VolunteerPolicy" },
+        { title: "Volunteer Registration", path: "/volunteer/volunteer-registration" },
+        { title: "Volunteer Policy", path: "/volunteer/volunteer-policy" },
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },

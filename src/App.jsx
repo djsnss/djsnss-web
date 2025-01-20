@@ -30,6 +30,7 @@ const Unauthorized = React.lazy(() => import("./pages/Unauthorized"));
 const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
 const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
+const VolunteerLogin = React.lazy(() => import("./components/volunteer/VolLogin"));
 
 const App = () => {
   return (
@@ -59,9 +60,10 @@ const App = () => {
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/volunteer" element={<Volunteer />} />
-              <Route path="/volunteer/VolunteerPolicy" element={<VolunteerPolicy />} />
-              <Route path="/volunteer/VolunteerRegistration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/CheckHours" element={<CheckHoursNew />} />
+              <Route path="/volunteer/volunteer-policy" element={<VolunteerPolicy />} />
+              <Route path="/volunteer/volunteer-registration" element={<VolunteerRegistration />} />
+              <Route path="/volunteer/volunteer-login" element={<VolunteerLogin />} />
+              <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
