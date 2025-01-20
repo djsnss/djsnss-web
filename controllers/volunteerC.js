@@ -3,9 +3,12 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
 import { sendLogin, sendSignup } from "./nodemailerC.js";
+// import EventModel from "../models/event.js";
 import EventModel from "../models/event.js";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
+import mongoose from "mongoose";
+
 
 env.config();
 const Secret = process.env.SecretKey;
@@ -229,6 +232,24 @@ const checkHours = async (req, res) => {
   }
 };
 
+const getEventById = async (req, res) => {
+  console.log("hii")
+  try {
+    const id=req.params.eventId
+    // const event=await EventModel.findById(id);
+    console.log("Fetching Event by ID",id);
+    const event = await EventModel.findById('677e2bde6e1db8b9de7e7520');
+    console.log(event);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    return res.status(200).json(event);
+  } catch (err) {
+    console.error("Fetching Event error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 export {
   signup,
   login,
@@ -236,4 +257,5 @@ export {
   uploadNormalPhoto,
   updateNormalPhoto,
   checkHours,
+  getEventById,
 };

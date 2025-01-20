@@ -1,6 +1,7 @@
 import express from "express";
 import { authVolunteer } from "../middlewares/authVerify.js";
 
+
 import {
   signup,
   login,
@@ -8,6 +9,7 @@ import {
   uploadNormalPhoto,
   updateNormalPhoto,
   checkHours,
+  getEventById,
 } from "../controllers/volunteerC.js";
 
 import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
@@ -33,5 +35,7 @@ router.post(
 ); //update normal photo(profile photo) of volunteer
 
 router.get("/checkHours", authVolunteer, checkHours); //Check number of volunteered hours
+
+router.get("/getEvent/:eventId", authVolunteer, getEventById); //Get event by ID
 
 export default router;
