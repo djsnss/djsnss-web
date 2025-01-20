@@ -72,7 +72,7 @@ function FooterComponent() {
                     <Link
                       key={link.id}
                       to={`/${link.link}`}
-                      className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-bright-blue transition duration-300 no-underline"
+                      className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-sky-300 transition duration-300 no-underline"
                     >
                       {link.name}
                     </Link>
@@ -96,7 +96,7 @@ function FooterComponent() {
                       target="_blank"
                       rel="noopener noreferrer"
                       key={social.id}
-                      className="text-white hover:text-bright-blue transition duration-300 text-xl sm:text-2xl md:text-3xl"
+                      className="text-white hover:text-sky-300 transition duration-300 text-xl sm:text-2xl md:text-3xl"
                     >
                       {IconComponent}
                     </a>
