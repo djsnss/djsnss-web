@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 
 const sectionColors = [
@@ -40,6 +40,13 @@ const CreateEvent = ({ event, onCancel }) => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

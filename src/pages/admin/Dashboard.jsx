@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Dashboard = () => {
@@ -15,6 +15,13 @@ const Dashboard = () => {
   const handleVolunteerEdit = () => {
     navigate('/edit-details');
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
 
   return (
     <div className="w-full min-h-screen flex flex-col bg-white">

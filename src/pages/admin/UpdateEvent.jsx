@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
+import axios from 'axios';
 
 /**
  * Popup component for editing an event.
  * Receives an event and callbacks for closing and updating.
  */
 function EditEventPopup({ event, onClose, onEventUpdated }) {
-  const [formData, setFormData] = useState({
-    name: event.name || '',
-    description: event.description || '',
-    photo: event.photo || { url: '', public_id: '' },
-    startHours: event.startHours || '',
-    endHours: event.endHours || '',
-    TotalNoOfHours: event.TotalNoOfHours || '',
-    date: event.date ? new Date(event.date).toISOString().split('T')[0] : '',
-    location: event.location || '',
-    maxVolunteers: event.maxVolunteers || 50,
-    status: event.status || 'Upcoming',
-  });
+  const [formData, setFormData] = useState(event);
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -77,22 +67,16 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
 
     try {
       // Make the API call to update the event
-      const response = await fetch('https://djsnss-web.onrender.com/update-event', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ _id: event._id, ...formData }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to update the event');
-      }
-
-      const data = await response.json();
-      setSuccessMessage(data.message || 'Event updated successfully!');
-
-      // Let the parent know we've updated the event
-      onEventUpdated({ _id: event._id, ...formData });
+      console.log(formData);
+      const token = localStorage.getItem("adminAuthToken");
+      await axios.put(
+        `https://djsnss-web.onrender.com/admin/updateEvent/${formData._id}`,
+        { ...formData },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setSuccessMessage('Event updated successfully');
+      onEventUpdated(formData);
+      onClose();
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -100,10 +84,27 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
     }
   };
 
+  useEffect(() => {
+    // Close the popup when the "Esc" key is pressed
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("keydown", handleKeyDown);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center overflow-auto">
       {/* Popup Card */}
-      <div className="bg-white rounded-lg shadow-lg w-11/12 max-w-2xl p-6 relative">
+      <div className="bg-white rounded-lg shadow-lg w-11/12 max-w-2xl p-6 relative overflow-y-auto max-h-[90vh]">
         {/* Close Button */}
         <button
           onClick={onClose}
@@ -129,19 +130,25 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                     alt="Event preview"
                     className="w-full h-48 object-cover rounded-lg"
                   />
-                  <button
-                    type="button"
-                    onClick={() => setFormData((prev) => ({ ...prev, photo: { url: '', public_id: '' } }))}
-                    className="absolute top-2 right-2 p-1 bg-red-500 text-white rounded-full"
-                  >
-                    <X className="w-4 h-4" />
-                  </button>
+                  <div className="absolute bottom-2 left-2">
+                    <label className="block">
+                      <span className="text-[#fff] bg-black/40 p-4 cursor-pointer">
+                        Replace Image
+                      </span>
+                      <input
+                        type="file"
+                        className="hidden"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                      />
+                    </label>
+                  </div>
                 </div>
               ) : (
                 <div className="flex items-center justify-center w-full h-48 border-2 border-dashed rounded-lg">
                   <div className="text-center">
                     <label className="block mt-2">
-                      <span className="text-[#387fa8] hover:text-[#003b5c] cursor-pointer">
+                      <span className="text-[#fff] p-4 bg-black/40 cursor-pointer">
                         Upload an image
                       </span>
                       <input
@@ -157,7 +164,6 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
             </div>
           </div>
 
-          {/* Event Name & Status */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#003366]">
@@ -166,7 +172,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
               <input
                 type="text"
                 name="name"
-                value={formData.name}
+                value={formData.name || ''}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
                   errors.name ? 'border-red-500' : 'border-[#387fa8]'
@@ -174,14 +180,13 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
               />
               {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
             </div>
-
             <div>
               <label className="block text-sm font-medium text-[#003366]">
                 Status *
               </label>
               <select
                 name="status"
-                value={formData.status}
+                value={formData.status || 'Upcoming'}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-[#387fa8] rounded-md"
               >
@@ -268,7 +273,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 type="number"
                 name="endHours"
                 min="0"
-                max="23"
+                max="24"
                 value={formData.endHours}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-[#387fa8] rounded-md"
@@ -348,14 +353,19 @@ export default function UpdateEventPage() {
 
   // Fetch the list of events from /events on mount
   useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+
     async function fetchEvents() {
       try {
-        const response = await fetch('https://djsnss-web.onrender.com/events/past-events');
-        if (!response.ok) {
-          throw new Error('Failed to fetch events');
-        }
-        const data = await response.json();
-        setEvents(data.events); // Assuming the API returns an array of event objects
+        const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
+        const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setEvents(response.data || []);
+        console.log(response);
       } catch (error) {
         setErrorMessage(error.message);
       } finally {
