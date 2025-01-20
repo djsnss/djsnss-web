@@ -5,75 +5,61 @@ import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 import axios from 'axios'
 
-const UserData = {
-  displayName: "John Doe",
-  avatar: "https://github.com/shadcn.png",
-  eventsAttended: [
-    { name: "Blood Donation Drive", hours: 8 },
-    { name: "Grainathon", hours: 4 },
-    { name: "Tree Plantation", hours: 6 },
-    { name: "NSS Camp", hours: 48 },
-    { name: "Stem Cell Donation Drive", hours: 10 },
-  ]
-}
-
 const CheckHoursNew = () => {
-  const [userData, setUserData] = useState(UserData)
+  const [userData, setUserData] = useState(null);
 
-  console.log(localStorage.getItem('volunteer'))
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const volunteerData = JSON.parse(localStorage.getItem("volunteer"))
-        // Fetch event details for each connected event (use _id)
-        console.log(volunteerData.connectedEvents)
-        const eventDetails = await Promise.all(
-          volunteerData.connectedEvents.map(async (connectedEvent) => {
-            const eventId = connectedEvent._id
-            const eventResponse = await axios.get(
-              `http://localhost:8000/volunteer/getEvent/${eventId}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-                },
-              }
-            )
-            const eventData = await eventResponse.json()
-            const hours = connectedEvent.attended
-              ? connectedEvent.hoursCompleted
-              : 0
-            return {
-              name: eventData.name,
-              hours,
-            }
-          })
-        )
-    
+        // Fetch user data from the /checkHours API
+        const response = await axios.get(
+          "https://djsnss-web.onrender.com/volunteer/checkHours",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+            },
+          }
+        );
+        const volunteerData = response.data;
+        const eventsAttended = volunteerData.connectedEvents.map((event) => ({
+          eventId: event.eventId,   
+          name: event.eventName,    
+          hours: event.hoursCompleted || 0,
+        }));
         setUserData({
-          ...volunteerData,
-          eventsAttended: eventDetails,
-        })
+          displayName: volunteerData.name,
+          avatar: volunteerData.image,
+          eventsAttended,
+        });
       } catch (err) {
-        console.error("Error fetching user data:", err)
+        console.error("Error fetching user data:", err);
       }
-    }
+    };
 
-    fetchUserData()
-  }, [])
+    fetchUserData();
+  }, []);
 
   if (!userData) {
-    return <div className="flex items-center justify-center h-screen">Loading...</div>
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen p-4 flex items-center justify-center bg-gradient-to-bl from-blue-400 to-gray-300"
-    >
+    <div className="min-h-screen p-4 flex items-center justify-center bg-gradient-to-bl from-blue-400 to-gray-300">
       <Card className="w-full max-w-4xl border-2 border-white/50 backdrop-blur-lg bg-white/40 shadow-lg">
         <CardHeader>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Avatar className="w-24 h-24">
               <AvatarImage src={userData.avatar} alt={userData.displayName} />
-              <AvatarFallback>{userData.displayName.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+              <AvatarFallback>
+                {userData.displayName
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")}
+              </AvatarFallback>
             </Avatar>
             <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
               {userData.displayName}
@@ -82,13 +68,15 @@ const CheckHoursNew = () => {
         </CardHeader>
         <CardContent>
           <ProfileSummary events={userData.eventsAttended} />
-          <h2 className="text-xl font-semibold mb-7 text-white text-center">Events Attended</h2>
+          <h2 className="text-xl font-semibold mb-7 text-white text-center">
+            Events Attended
+          </h2>
           <EventList events={userData.eventsAttended} />
         </CardContent>
       </Card>
     </div>
-  )
-}
+  );
+};
 
 const ProfileSummary = ({ events }) => {
   const totalEvents = events.length
