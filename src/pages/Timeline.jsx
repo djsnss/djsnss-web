@@ -48,7 +48,7 @@ const TimelineComponent = () => {
     }, 4000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [isTransitioning, backgroundImages.length]);
 
   const timelineData = largeEventsData;
 
@@ -79,7 +79,7 @@ const TimelineComponent = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 1 }}
-          className={`absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-all duration-500 ${!imageLoaded ? 'bg-dark-navy' : ''}`}
+          className={`absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed transition-all duration-500 ${!imageLoaded ? 'bg-gradient-to-bl from-blue-300 to-gray-300' : ''}`}
           style={{
             backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
           }}
@@ -95,7 +95,7 @@ const TimelineComponent = () => {
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 backdrop-blur-sm bg-black/90" />
+      <div className="absolute inset-0 backdrop-blur-sm bg-black/75" />
 
       <div className="relative overflow-y-scroll py-10">
         <VerticalTimeline lineColor="rgba(255, 255, 255, 0.2)">

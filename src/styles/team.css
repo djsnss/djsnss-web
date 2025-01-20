@@ -85,11 +85,12 @@ h1 {
 
 .team-card:hover {
   transform: scale(1.04) rotate(-1deg);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .team-card:hover > img {
   filter: blur(7px);
+  background-color: rgba(0, 0, 0, 0.1);
   animation: anim 3s infinite;
 }
 
@@ -153,7 +154,7 @@ h1 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   color: #fff;
   padding: 15px;
   text-align: center;
@@ -162,7 +163,7 @@ h1 {
 }
 
 .team-card:hover .team-card-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
 }
 
 /* Text Styles */
@@ -191,6 +192,7 @@ h1 {
   color: #000;
   background: linear-gradient(90deg, #000, #000);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -205,4 +207,102 @@ h1 {
   height: 4px;
   background: linear-gradient(90deg, #000, #000);
   border-radius: 2px;
+}
+
+
+/* General Page Styling */
+.team-page-bg {
+  font-family: "Poppins", sans-serif;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  background-color: #d9d9d9;
+  background-image: url("/team.svg");
+  background-size: cover; /* Better adaptability for smaller screens */
+  background-repeat: no-repeat;
+  background-position: center;
+  color: #212121;
+}
+
+.team-page {
+  text-align: center;
+  padding: 20px 40px; /* Reduce padding for smaller screens */
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  .team-page {
+    padding: 40px 220px;
+  }
+}
+
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px; /* Smaller gaps for compact layouts */
+  justify-items: center;
+}
+
+@media (min-width: 768px) {
+  .team-grid {
+    gap: 30px;
+  }
+}
+
+.team-card {
+  width: 100%; /* Ensure cards are fluid in smaller screens */
+  max-width: 250px; /* Restrict max width for consistency */
+  height: auto; /* Allow cards to grow with content */
+}
+
+.team-card-image {
+  width: 100%;
+  height: 200px; /* Reduce height for smaller screens */
+  object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .team-card-image {
+    height: 300px; /* Larger height for bigger screens */
+  }
+}
+
+.textBox {
+  font-size: 0.9rem; /* Adjust text size for smaller screens */
+}
+
+@media (min-width: 768px) {
+  .textBox {
+    font-size: 1rem;
+  }
+}
+h1 {
+  font-size: 2rem; /* Smaller font size for compact layouts */
+}
+
+@media (min-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+.team-heading {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .team-heading {
+    font-size: 2.5rem;
+  }
+}
+.team-section {
+  padding: 20px 10px; /* Compact padding for smaller screens */
+  margin: 30px 0;
+}
+
+@media (min-width: 768px) {
+  .team-section {
+    padding: 40px 20px;
+  }
 }

@@ -36,7 +36,7 @@ const getIcon = (name) => {
 // Main Footer Component
 function FooterComponent() {
   return (
-    <Footer className="bg-light-navy text-gray-300 rounded-none">
+    <Footer className="bg-light-navy no-underline text-gray-300 rounded-none">
       <div className="w-full">
         {/* Footer Top Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-8 px-6 sm:px-12 py-10">
@@ -72,7 +72,7 @@ function FooterComponent() {
                     <Link
                       key={link.id}
                       to={`/${link.link}`}
-                      className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-sky-300 transition duration-300"
+                      className="text-sm sm:text-base md:text-lg pb-3 text-white hover:text-sky-300 transition duration-300 no-underline"
                     >
                       {link.name}
                     </Link>
@@ -113,7 +113,7 @@ function FooterComponent() {
             href="/"
             by="DJS NSS™"
             year={2024}
-            className="text-xs sm:text-sm md:text-base"
+            className="text-xs sm:text-sm md:text-base no-underline"
           />
         </div>
       </div>

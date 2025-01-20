@@ -12,14 +12,9 @@ const App = () => {
   const generateCalendarDays = (month, year) => {
     const firstDay = new Date(year, month, 1).getDay();
     const daysInMonth = new Date(year, month + 1, 0).getDate();
-
     const calendarDays = [];
-    for (let i = 0; i < firstDay; i++) {
-      calendarDays.push({ day: null });
-    }
-    for (let day = 1; day <= daysInMonth; day++) {
-      calendarDays.push({ day });
-    }
+    for (let i = 0; i < firstDay; i++) calendarDays.push({ day: null });
+    for (let day = 1; day <= daysInMonth; day++) calendarDays.push({ day });
     return calendarDays;
   };
 
@@ -58,12 +53,9 @@ const App = () => {
       ));
   };
 
-  const days = generateCalendarDays(currentMonth, currentYear);
-
   const handleMonthChange = (increment) => {
     let newMonth = currentMonth + increment;
     let newYear = currentYear;
-
     if (newMonth < 0) {
       newMonth = 11;
       newYear -= 1;
@@ -71,7 +63,6 @@ const App = () => {
       newMonth = 0;
       newYear += 1;
     }
-
     setCurrentMonth(newMonth);
     setCurrentYear(newYear);
     setSelectedDate(null);
@@ -91,10 +82,12 @@ const App = () => {
     "06:00 PM",
   ];
 
+  const days = generateCalendarDays(currentMonth, currentYear);
+
   return (
-    <div className="app flex-row gap-5 p-5 bg-sky-100 text-sky-900 min-h-screen">
+    <div className="app flex flex-col md:flex-row gap-5 p-5 bg-sky-100 text-sky-900 min-h-screen">
       {/* Calendar Section */}
-      <div className="calendar-container flex-grow p-5 bg-sky-700 border border-blue-500 rounded-lg shadow-lg">
+      <div className="calendar-container w-full md:w-3/4 flex-grow p-5 bg-sky-700 border border-blue-500 rounded-lg shadow-lg">
         <div className="calendar-header flex justify-between items-center mb-5">
           <button onClick={() => handleMonthChange(-1)} className="text-lg text-white hover:text-blue-700">
             ❮
@@ -109,7 +102,7 @@ const App = () => {
         </div>
         <div className="calendar grid grid-cols-7 gap-2">
           {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day, index) => (
-            <div key={index} className="text-center font-bold">
+            <div key={index} className="text-center font-bold day-header">
               {day}
             </div>
           ))}
@@ -117,14 +110,14 @@ const App = () => {
             item.day ? (
               <div
                 key={index}
-                className={`day p-2 rounded cursor-pointer ${
+                className={`day flex flex-col justify-between items-center p-2 rounded cursor-pointer ${
                   selectedDate === new Date(currentYear, currentMonth, item.day).toDateString()
                     ? "selected"
                     : ""
                 } hover:bg-blue-300`}
                 onClick={() => handleDateClick(item.day)}
               >
-                <span>{item.day}</span>
+                <span className="text-lg">{item.day}</span> {/* Increased font size for better visibility */}
                 {renderEvents(item.day)}
               </div>
             ) : (
@@ -134,11 +127,11 @@ const App = () => {
         </div>
       </div>
       {/* Sidebar Section */}
-      <div className="sidebar w-1/3 p-5 bg-sky-600 border border-blue-500 rounded-lg shadow-lg">
+      <div className="sidebar w-full md:w-1/4 p-5 bg-sky-600 border border-blue-500 rounded-lg shadow-lg">
         <h2 className="text-lg font-bold">{selectedDate || "Select a Date"}</h2>
         {selectedDate && (
           <>
-            <h3 className="mt-4 font-bold">Select a Time:</h3>
+            <h3 className="mt-4 text-white font-bold">Select a Time:</h3>
             <select
               value={selectedTime}
               onChange={(e) => setSelectedTime(e.target.value)}
@@ -171,4 +164,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default App; 
