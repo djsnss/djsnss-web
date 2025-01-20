@@ -1,52 +1,98 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const EditVolunteerDetails = () => {
   const [volunteers, setVolunteers] = useState([]);
   const [updatedHours, setUpdatedHours] = useState("");
   const [editVolunteerId, setEditVolunteerId] = useState(null);
   const [selectedEvent, setSelectedEvent] = useState("");
+  const [events, setEvents] = useState([]);
 
-  const events = ["Event 1", "Event 2", "Event 3"]; // Placeholder event list
-
-  // Placeholder: Fetch all volunteers (replace with API call later)
   useEffect(() => {
-    console.log("Fetching volunteers logic here...");
-    // Example volunteers data (replace with fetched data later)
-    setVolunteers([
-      { id: "101", name: "Volunteer A", hours: 5, attended: false },
-      { id: "102", name: "Volunteer B", hours: 8, attended: false },
-      { id: "103", name: "Volunteer C", hours: 3, attended: false },
-    ]);
+    const fetchEvents = async () => {
+      try {
+        const token = localStorage.getItem("token"); // Replace with your token logic
+        const response = await axios.get("/admin/getAllEvents", {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setEvents(response.data.events || []);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+    fetchEvents();
   }, []);
 
-  // Handle updating volunteer hours
-  const handleEditHours = () => {
-    if (updatedHours !== "" && editVolunteerId !== null) {
-      setVolunteers((prev) =>
-        prev.map((volunteer) =>
-          volunteer.id === editVolunteerId
-            ? { ...volunteer, hours: parseInt(updatedHours) }
-            : volunteer
-        )
-      );
-      setUpdatedHours("");
-      setEditVolunteerId(null);
-    }
-  };
+  // Fetch volunteers for the selected event
+  useEffect(() => {
+    if (!selectedEvent) return;
 
-  // Handle attendance update (Present/Absent)
-  const handleAttendanceChange = (volunteerId, status) => {
+    const fetchVolunteers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const response = await axios.get(`/admin/${selectedEvent}/volunteers`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setVolunteers(response.data.volunteers || []);
+      } catch (error) {
+        console.error("Error fetching volunteers:", error);
+      }
+    };
+
+    fetchVolunteers();
+  }, [selectedEvent]);
+
+  // Update volunteer attendance
+  const handleAttendanceChange = async (volunteerId, status) => {
     setVolunteers((prev) =>
       prev.map((volunteer) =>
         volunteer.id === volunteerId
-          ? {
-              ...volunteer,
-              attended: status,
-              hours: status ? volunteer.hours + 3 : volunteer.hours, // Example: Add 3 hours for Present
-            }
+          ? { ...volunteer, attended: status }
           : volunteer
       )
     );
+
+    try {
+      const token = localStorage.getItem("token");
+      await axios.post(
+        "/admin/updateHours",
+        {
+          eventId: selectedEvent,
+          attendanceList: [
+            { volunteerId, attended: status },
+          ],
+        },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+    } catch (error) {
+      console.error("Error updating attendance:", error);
+    }
+  };
+
+  // Update volunteer hours
+  const handleEditHours = async () => {
+    if (updatedHours !== "" && editVolunteerId !== null) {
+      try {
+        const token = localStorage.getItem("token");
+        await axios.patch(
+          `/admin/updateVolunteer/${editVolunteerId}`,
+          { hours: parseInt(updatedHours) },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        setVolunteers((prev) =>
+          prev.map((volunteer) =>
+            volunteer.id === editVolunteerId
+              ? { ...volunteer, hours: parseInt(updatedHours) }
+              : volunteer
+          )
+        );
+        setUpdatedHours("");
+        setEditVolunteerId(null);
+      } catch (error) {
+        console.error("Error updating hours:", error);
+      }
+    }
   };
 
   return (
@@ -68,8 +114,8 @@ const EditVolunteerDetails = () => {
         >
           <option value="">-- Select an Event --</option>
           {events.map((event) => (
-            <option key={event} value={event}>
-              {event}
+            <option key={event._id} value={event._id}>
+              {event.name}
             </option>
           ))}
         </select>
@@ -95,25 +141,13 @@ const EditVolunteerDetails = () => {
                 </div>
                 <div className="flex gap-4 items-center">
                   <button
-                    className="px-4 py-2 bg-green-500 text-white rounded-md sm:hidden"
-                    onClick={() => handleAttendanceChange(volunteer.id, true)}
-                  >
-                    ✔
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded-md sm:hidden"
-                    onClick={() => handleAttendanceChange(volunteer.id, false)}
-                  >
-                    ✘
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-green-500 text-white rounded-md hidden sm:block"
+                    className="px-4 py-2 bg-green-500 text-white rounded-md"
                     onClick={() => handleAttendanceChange(volunteer.id, true)}
                   >
                     Present
                   </button>
                   <button
-                    className="px-4 py-2 bg-red-500 text-white rounded-md hidden sm:block"
+                    className="px-4 py-2 bg-red-500 text-white rounded-md"
                     onClick={() => handleAttendanceChange(volunteer.id, false)}
                   >
                     Absent
