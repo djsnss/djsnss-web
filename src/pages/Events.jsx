@@ -47,13 +47,13 @@ const Events = () => {
         EVENTS
       </h1>
 
-      <div className="h-[60vh] sm:h-[80vh] w-full px-4 mt-12 mb-5">
+      <div className={`${upcomingEventsData.length === 0? "h-[30vh]":"h-[60vh] sm:h-[80vh]"} w-full px-4 mt-12 mb-5`}>
         <h1 className="text-2xl md:text-3xl font-bold text-black">
           Upcoming Events :-
         </h1>
 
         {upcomingEventsData.length === 0 ? (
-          <p className="text-2xl md:text-3xl w-full text-center font-bold text-white">
+          <p className="text-2xl md:text-3xl w-full text-center font-bold text-black">
             No Upcoming Events
           </p>
         ) : (
@@ -64,12 +64,12 @@ const Events = () => {
               <CCarouselItem key={event._id}>
                 <CImage
                   className="d-block w-100 rounded-lg h-[50vh] sm:h-[60vh] bg-center object-cover"
-                  src={event.imageURL}
+                  src={event.photo.url}
                   alt={event.name}
                 />
                 <CCarouselCaption className="text-shadow p-4 bg-white/70 rounded-lg shadow-md">
                   <h5
-                    // onClick={() => navigate(`/eventdetails/${event.slug}`)}
+                    onClick={() => navigate(`/eventdetails/${event.slug}`)}
                     className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"
                   >
                     {event.name}

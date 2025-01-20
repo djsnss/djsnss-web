@@ -68,13 +68,13 @@ const AboutUs = () => {
         className='relative flex flex-col items-center justify-center w-full h-screen bg-black/60 p-4 bg-cover bg-center'
         style={{ backgroundImage: `url(${Aboutusimg})` }}
       >
-        <div className='absolute inset-0 bg-black opacity-40 z-20'></div>{' '}
+        <div className=' inset-0 bg-black opacity-40 z-20'></div>{' '}
         {/* Overlay for darkening the background */}
         <h1 className='text-3xl md:text-7xl text-white z-50 mb-10 sm:mb-20'>
           <strong>ABOUT US</strong>
         </h1>
         <div className='flex flex-col md:flex-row justify-center items-center gap-6 px-4 z-30'>
-          <div className='relative bg-gray-600/40 p-6 rounded-lg shadow-[0_0_4px_rgba(255,255,255,0.7),0_0_4px_rgba(200,239,255,0.7)] backdrop-blur-sm hover:backdrop-blur-lg transition-all duration-300 hover:shadow-[0_0_4px_rgb(171,249,236),0_0_5px_rgba(183,244,255,0.8)] max-w-4xl w-full'>
+          <div className=' bg-gray-600/40 p-6 rounded-lg shadow-[0_0_4px_rgba(255,255,255,0.7),0_0_4px_rgba(200,239,255,0.7)] backdrop-blur-sm hover:backdrop-blur-lg transition-all duration-300 hover:shadow-[0_0_4px_rgb(171,249,236),0_0_5px_rgba(183,244,255,0.8)] max-w-4xl w-full'>
             <h2 className='text-2xl md:text-4xl text-white mb-4 text-center'>
               Our Mission and Vision
             </h2>
@@ -141,21 +141,21 @@ const AboutUs = () => {
             // Apply rounded corners conditionally for the top and bottom rows
             return (
               <div
-              key={index}
-              className={`group flex flex-col items-center justify-center bg-white w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.33%-30px)] min-w-[250px] p-5
+                key={index}
+                className={`group flex flex-col items-center justify-center bg-white w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.33%-30px)] min-w-[300px] md:min-h-[370px] p-5
                 shadow-md border border-gray-200 transition-transform duration-300 hover:shadow-lg transform hover:-translate-y-1
                 ${isFirstRow ? 'lg:rounded-t-full' : ''} 
                 ${isLastRow ? 'lg:rounded-b-full' : ''}`}
-            >
-              <div className='top-0 text-pretty'>
-                <h3 className='text-lg sm:text-xl md:text-2xl font-bold uppercase text-gray-800 mb-3'>
-                  {dept.title}
-                </h3>
-                <p className='text-sm sm:text-base text-gray-600'>
-                  {dept.description}
-                </p>
+              >
+                <div className='top-0 text-pretty'>
+                  <h3 className='text-lg sm:text-xl md:text-2xl justify-start font-bold uppercase text-gray-800 mb-3'>
+                    {dept.title}
+                  </h3>
+                  <p className='text-md sm:text-base text-gray-600'>
+                    {dept.description}
+                  </p>
+                </div>
               </div>
-            </div>
             )
           })}
         </div>

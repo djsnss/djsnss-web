@@ -13,7 +13,7 @@ const Dashboard = () => {
   };
 
   const handleVolunteerEdit = () => {
-    // Implement the logic to edit volunteer details if necessary
+    navigate('/edit-details');
   };
 
   return (

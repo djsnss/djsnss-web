@@ -215,14 +215,13 @@
 
 // export default LocalEvents;
 
-import React from "react";
+import React, {useState,useEffect} from "react";
 import {
   CCarousel,
   CCarouselItem,
   CImage,
   CCarouselCaption,
 } from "@coreui/react";
-import { universityEventsData } from "../../data/universityEvents";
 import { useNavigate } from "react-router-dom";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import { MapPin, CalendarDays } from "lucide-react";
@@ -230,25 +229,57 @@ import "./UniversityEvents.css";
 
 const UniversityEvents = () => {
   const navigate = useNavigate();
+  const [universityEventsData, setUniversityEventsData] = useState([]);
+    
+      useEffect(()=>{
+        const fetchData = async()=>{
+          const response = await fetch("https://djsnss-web.onrender.com/events/past-events")
+          .then((data)=>data.json())
+          .catch((error)=>{
+            console.log(error.message);
+          })
+    
+          const formattedEvents = response.events
+          .filter((event) => event.scope === "University")
+          .map((event) => {
+            const eventDate = new Date(event.date);
+            const formattedDate = eventDate
+              .toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+              })
+              .split("/")
+              .join("-");
+            return { ...event, date: formattedDate };
+          });
+          
+          setUniversityEventsData(formattedEvents)
+        };
+        
+        fetchData();
+      }, [] )
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 my-5 sm:my-10">
       <h1 className="text-2xl md:text-3xl font-bold text-black">University Events :-</h1>
 
-      <CCarousel controls indicators>
+      <CCarousel controls={universityEventsData.length > 1}
+          indicators={universityEventsData.length > 1}
+          interval={universityEventsData.length > 1 ? 5000 : false}>
         {universityEventsData.map((event) => (
-          <CCarouselItem key={event.id}>
+          <CCarouselItem key={event._id}>
             <CImage
               className="d-block w-100 rounded-lg h-[50vh] sm:h-[60vh] bg-center object-cover"
-              src={event.imageURL}
-              alt={event.title}
+              src={event.photo.url}
+              alt={event.name}
             />
             <CCarouselCaption className="text-shadow p-4 bg-white/70 rounded-lg shadow-md">
               <h5
                 onClick={() => navigate(`/eventdetails/${event.slug}`)}
                 className="text-black text-base sm:text-xl font-bold cursor-pointer mb-2"
               >
-                {event.title}
+                {event.name}
               </h5>
               <p className="text-black text-xs sm:text-sm">
                 {event.description}
