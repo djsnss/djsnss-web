@@ -72,9 +72,14 @@ const signup = async (req, res) => {
       password: hashedPassword,
       hobbies,
     });
+    const token = jwt.sign(
+      { volunteerId: newVolunteer._id, role: "volunteer" },
+      Secret
+    );
     await newVolunteer.save();
     sendSignup(req, res);
     return res.status(201).json({
+      token,
       message: "Volunteer successfully registered",
       volunteer: newVolunteer,
     });
@@ -103,7 +108,10 @@ const login = async (req, res) => {
     if (!match) {
       return res.status(400).send("Invalid password");
     }
-    const token = jwt.sign({ volunteerId: volunteer._id }, Secret);
+    const token = jwt.sign(
+      { volunteerId: volunteer._id, role: "volunteer" },
+      Secret
+    );
     sendLogin(req, res);
     return res.status(200).json({ token, volunteer });
   } catch (err) {
