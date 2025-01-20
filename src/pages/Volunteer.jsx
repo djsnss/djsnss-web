@@ -175,11 +175,11 @@ const Volunteer = () => {
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-center mb-12"
+              className="text-center my-12"
             >
               <Link
                 to="/volunteer-policy"
-                className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out text-lg"
+                className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out text-lg mt-12"
               >
                 View Volunteer Policy
               </Link>
