@@ -40,6 +40,8 @@ const Login = () => {
 
       alert('Login successful');
       localStorage.setItem('authToken', data.token); 
+      localStorage.setItem('volunteer', JSON.stringify(data.volunteer));
+
       window.location.href = '/volunteer/checkhours';  
     } catch (error) {
       setError(error.message); 
