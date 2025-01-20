@@ -11,7 +11,7 @@ const sectionColors = [
   "#005a8e", 
 ];
 
-const volunteer-policy = () => {
+const volunteerPolicy = () => {
   const sections = [
     {
       title: "Introduction",
@@ -121,4 +121,4 @@ const volunteer-policy = () => {
   );
 };
 
-export default volunteer-policy;
+export default volunteerPolicy;

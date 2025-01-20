@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const LoginPage = ({ onLogin }) => {
-  const [formData, setFormData] = useState({ username: '', password: '' });
+const LoginPage = () => {
+  const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -33,11 +33,8 @@ const LoginPage = ({ onLogin }) => {
       const data = await response.json();
 
       // Save login data (e.g., token) to localStorage
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('username', formData.username);
-
-      // Call the onLogin callback to update the app state
-      onLogin(data.token);
+      localStorage.setItem('adminAuthToken', data.token);
+      localStorage.setItem('email', formData.email);
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -61,11 +58,11 @@ const LoginPage = ({ onLogin }) => {
           {errorMessage && <p className="text-red-500 text-sm mb-4">{errorMessage}</p>}
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-[#003366] mb-1">Username</label>
+            <label className="block text-sm font-medium text-[#003366] mb-1">Email</label>
             <input
               type="text"
-              name="username"
-              value={formData.username}
+              name="email"
+              value={formData.email}
               onChange={handleInputChange}
               className="w-full p-2 border border-[#387fa8] rounded-md text-[#003366]"
               required

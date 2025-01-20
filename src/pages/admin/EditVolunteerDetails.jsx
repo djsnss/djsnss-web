@@ -9,9 +9,14 @@ const EditVolunteerDetails = () => {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+
     const fetchEvents = async () => {
       try {
-        const token = localStorage.getItem("token"); // Replace with your token logic
+        const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
         const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -29,7 +34,7 @@ const EditVolunteerDetails = () => {
 
     const fetchVolunteers = async () => {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("adminAuthToken");
         const response = await axios.get(`https://djsnss-web.onrender.com/admin/${selectedEvent}/volunteers`, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -53,7 +58,7 @@ const EditVolunteerDetails = () => {
     );
 
     try {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("adminAuthToken");
       await axios.post(
         "https://djsnss-web.onrender.com/admin/updateHours",
         {
@@ -73,7 +78,7 @@ const EditVolunteerDetails = () => {
   const handleEditHours = async () => {
     if (updatedHours !== "" && editVolunteerId !== null) {
       try {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("adminAuthToken");
         await axios.patch(
           `https://djsnss-web.onrender.com/admin/updateVolunteer/${editVolunteerId}`,
           { hours: parseInt(updatedHours) },
