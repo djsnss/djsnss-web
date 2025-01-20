@@ -4,19 +4,6 @@ import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import TimelineComponent from "./pages/Timeline";
-import EventDetails from "./pages/EventDetails";
-import AboutUs from "./pages/AboutUs";
-import Registration from "./pages/Registration";
-import Login from "./pages/Login";
-import MessageDetails from "./pages/Messages";
-import FAQ from "./pages/FAQ";
-import Gallery from "./pages/Gallery";
-import Volunteer from "./pages/Volunteer";
-import VolunteerPolicy from "./components/volunteer/VolunteerPolicy";
-import Calendar from "./components/calendar/Calendar";
-import CheckHours from "./components/volunteer/CheckHours";
-import VolunteerRegistration from "./components/volunteer/VolunteerRegistration";
 import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
@@ -42,7 +29,7 @@ const CreateEvent = React.lazy(() => import("./pages/admin/CreateEvent"));
 const Unauthorized = React.lazy(() => import("./pages/Unauthorized"));
 const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
-const EditDetails = React.lazy(() => import("./pages/admin/edit-details"));
+const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
 
 const App = () => {
   return (
@@ -81,7 +68,26 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/create-event" element={<CreateEvent />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/update-event" element={<UpdateEvent />} />
+              <Route path="/edit-details" element={<EditVolunteerDetails />} />
+              <Route path="/admin/dashboard" element={<AdminDashboard />} />
+              <Route path="/create-event" element={<CreateEvent />} />
+              <Route path="/unauthorized" element={<Unauthorized />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/update-event" element={<UpdateEvent />} />
 
+              {/* Dynamic routes for events */}
+              {propsData.map((event) => (
+                <Route
+                  key={event.id}
+                  path={`/${event.slug}`}
+                  element={<DynamicPage event={event} />}
+                />
+              ))}
             </Routes>
           </Suspense>
 
