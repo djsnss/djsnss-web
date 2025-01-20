@@ -20,7 +20,7 @@ const EditVolunteerDetails = () => {
         const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
           headers: { Authorization: `Bearer ${token}` },
         });
-        setEvents(response.data.events || []);
+        setEvents(response.data || []);
       } catch (error) {
         console.error("Error fetching events:", error);
       }

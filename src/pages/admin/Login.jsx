@@ -35,6 +35,9 @@ const LoginPage = () => {
       // Save login data (e.g., token) to localStorage
       localStorage.setItem('adminAuthToken', data.token);
       localStorage.setItem('email', formData.email);
+
+      // Redirect to dashboard
+      window.location.href = '/admin/dashboard';
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
