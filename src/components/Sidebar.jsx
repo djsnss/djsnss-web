@@ -75,8 +75,8 @@ const Sidebar = () => {
     {
       Icon: "MdEventNote",
       title: "Events",
-      path: "/events",
       subLinks: [
+        { title: "Events", path: "/events" },
         { title: "Timeline", path: "/timeline" },
         { title: "Camp", path: "/nss-camp" },
         { title: "Grain-A-Thon", path: "/grain-a-thon" },
@@ -142,7 +142,7 @@ const Sidebar = () => {
                   onClick={() => {
                     if (!subLinks) {
                       handleNavigation(path);
-                      setOpen(false);
+                      setOpen(!open);
                       setDropdowns({});
                     }
                   }}
@@ -189,7 +189,7 @@ const Sidebar = () => {
                           ...prev,
                           [title]: false, // Close dropdown after navigation
                         }));
-                        setOpen(false);
+                        setOpen(!open);
                       }}
                       className="block p-2 text-sm sm:text-base font-medium text-white no-underline rounded-lg hover:bg-white/20"
                     >

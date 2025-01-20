@@ -65,10 +65,10 @@ const AboutUs = () => {
     <div className='w-full min-h-full'>
       {/* About Us Section */}
       <section
-        className='relative flex flex-col items-center justify-center w-full h-screen bg-black/60 p-4 bg-cover bg-center'
+        className='relative flex flex-col items-center justify-center w-full h-screen bg-black/70 p-4 bg-cover bg-center'
         style={{ backgroundImage: `url(${Aboutusimg})` }}
       >
-        <div className=' inset-0 bg-black opacity-40 z-20'></div>{' '}
+        <div className="absolute inset-0 bg-black opacity-40"></div> {/* Overlay for darkening the background */}
         {/* Overlay for darkening the background */}
         <h1 className='text-3xl md:text-7xl text-white z-50 mb-10 sm:mb-20'>
           <strong>ABOUT US</strong>
