@@ -15,7 +15,7 @@ const Initiatives = () => {
     },
     {
       eventName: "Blood Donation Drive",
-      shortDesc: "Organized a successful blood donation campaign donating 650+ blood bags for the needy.",
+      shortDesc: "Successful collection of 650+ blood bags for the needy.",
       imageUrl: BDD,
       link: "/eventdetails/blood-donation-drive",
     },
@@ -26,7 +26,7 @@ const Initiatives = () => {
       link: "/eventdetails/nss-camp",
     },
     {
-      eventName: "Stem Cell Donation Drive",
+      eventName: "Stem Cell Donation",
       shortDesc: "A drive to raise awareness about stem cell donation.",
       imageUrl: StemCell,
       link: "/eventdetails/stem-cell-donation-drive",
@@ -50,7 +50,7 @@ const Initiatives = () => {
             <div
               key={index}
               className={`transform transition-transform ${
-                index % 2 === 0 ? "mt-16" : "mt-0"
+                index % 2 === 0 ? "xl:mt-16" : "xl:mt-0"
               }`}
             >
               <Card

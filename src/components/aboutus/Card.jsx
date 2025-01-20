@@ -7,19 +7,21 @@ import {
 } from "@material-tailwind/react";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+
 function CardDefault({ desk }) {
     const navigate = useNavigate();
 
     const handleNavigation = () => {
         navigate(desk.link);
     };
+
     return (
         <Card className="mt-6 w-96 border-2 border-dark-navy">
             <CardHeader color="blue-gray" className="relative ">
                 <img
-                    src="https://images.unsplash.com/photo-1540553016722-983e48a2cd10?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=80"
-                    alt="card-image"
-                    className="w-full h-48 object-cover rounded-b-none"
+                    src={desk.image} // Use the image from the desk object
+                    alt={`${desk.name} image`} // Improve accessibility
+                    className="w-full mx-0 object-cover rounded-b-none"
                 />
             </CardHeader>
             <CardBody>
@@ -30,7 +32,7 @@ function CardDefault({ desk }) {
                     {desk.role}
                 </Typography>
                 <Button
-                onClick={handleNavigation}
+                    onClick={handleNavigation}
                     className="bg-light-navy-blue text-white hover:bg-dark-navy duration-300"
                 >
                     Read More
@@ -39,8 +41,15 @@ function CardDefault({ desk }) {
         </Card>
     );
 }
+
 export default CardDefault;
 
+// Update PropTypes to reflect the object structure
 CardDefault.propTypes = {
-    desk: PropTypes.string,
+    desk: PropTypes.shape({
+        link: PropTypes.string.isRequired, // Ensure the 'link' is a string
+        name: PropTypes.string.isRequired, // Ensure the 'name' is a string
+        role: PropTypes.string.isRequired, // Ensure the 'role' is a string
+        image: PropTypes.string.isRequired, // Ensure the 'image' is a string
+    }).isRequired,
 };

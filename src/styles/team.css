@@ -85,11 +85,12 @@ h1 {
 
 .team-card:hover {
   transform: scale(1.04) rotate(-1deg);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
 .team-card:hover > img {
   filter: blur(7px);
+  background-color: rgba(0, 0, 0, 0.1);
   animation: anim 3s infinite;
 }
 
@@ -153,7 +154,7 @@ h1 {
   position: absolute;
   bottom: 0;
   width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   color: #fff;
   padding: 15px;
   text-align: center;
@@ -162,7 +163,7 @@ h1 {
 }
 
 .team-card:hover .team-card-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4));
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.8));
 }
 
 /* Text Styles */
@@ -191,6 +192,7 @@ h1 {
   color: #000;
   background: linear-gradient(90deg, #000, #000);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -219,7 +221,7 @@ h1 {
   background-size: cover; /* Better adaptability for smaller screens */
   background-repeat: no-repeat;
   background-position: center;
-  color: #333;
+  color: #212121;
 }
 
 .team-page {
