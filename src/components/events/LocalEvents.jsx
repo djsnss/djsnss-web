@@ -240,7 +240,7 @@ const LocalEvents = () => {
         })
   
         const formattedEvents = response.events
-        .filter((event) => event.scope === "Local")
+        .filter((event) => event.scope === "Local" || event.scope==="Area-Level")
         .map((event) => {
           const eventDate = new Date(event.date);
           const formattedDate = eventDate
