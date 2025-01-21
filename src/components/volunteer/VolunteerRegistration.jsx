@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
-const VolunteerRegistration = () => {
+const volunteerRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
     branch: "",
@@ -27,51 +26,14 @@ const VolunteerRegistration = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setMessage("");
-
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
-    });
-
-    try {
-      const response = await fetch("https://djsnss-web.onrender.com/volunteer/signup", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage("Registration successful!");
-        setFormData({
-          name: "",
-          branch: "",
-          sapId: "",
-          phoneNumber: "",
-          email: "",
-          password: "",
-          hobbies: "",
-          motherName: "",
-          fatherName: "",
-          motherEmail: "",
-          fatherEmail: "",
-          description: "",
-          passportPhoto: null,
-        });
-      } else {
-        setMessage(`Error: ${result.message || "Failed to register."}`);
-      }
-    } catch (error) {
-      setMessage("An error occurred during registration. Please try again.");
-      console.error(error);
-    }
+    console.log(formData);
   };
 
   return (
     <div className="min-h-screen bg-sky-100 p-6 flex flex-col items-center">
+      {/* Heading */}
       <h2 className="text-5xl font-bold text-sky-900 mb-6 text-center">
         Volunteer Registration
       </h2>
@@ -87,12 +49,20 @@ const VolunteerRegistration = () => {
         </p>
       </div>
 
-      <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg">
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Left Column */}
+      {/* Form Container */}
+      <div className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-lg backdrop-blur-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {/* Left side */}
           <div className="space-y-4">
+            {/* Name Field */}
             <div>
-              <label htmlFor="name" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="name"
+                className="block text-sky-900 font-semibold"
+              >
                 Name
               </label>
               <input
@@ -105,8 +75,13 @@ const VolunteerRegistration = () => {
                 required
               />
             </div>
+
+            {/* Branch Field */}
             <div>
-              <label htmlFor="branch" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="branch"
+                className="block text-sky-900 font-semibold"
+              >
                 Branch
               </label>
               <input
@@ -119,8 +94,13 @@ const VolunteerRegistration = () => {
                 required
               />
             </div>
+
+            {/* SAP ID Field */}
             <div>
-              <label htmlFor="sapId" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="sapId"
+                className="block text-sky-900 font-semibold"
+              >
                 SAP ID
               </label>
               <input
@@ -134,8 +114,13 @@ const VolunteerRegistration = () => {
                 required
               />
             </div>
+
+            {/* Phone Number Field */}
             <div>
-              <label htmlFor="phoneNumber" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="phoneNumber"
+                className="block text-sky-900 font-semibold"
+              >
                 Phone Number
               </label>
               <input
@@ -148,8 +133,13 @@ const VolunteerRegistration = () => {
                 required
               />
             </div>
+
+            {/* Hobbies Field */}
             <div>
-              <label htmlFor="hobbies" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="hobbies"
+                className="block text-sky-900 font-semibold"
+              >
                 Hobbies
               </label>
               <input
@@ -163,10 +153,14 @@ const VolunteerRegistration = () => {
             </div>
           </div>
 
-          {/* Right Column */}
+          {/* Right side */}
           <div className="space-y-4">
+            {/* Email Field */}
             <div>
-              <label htmlFor="email" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="email"
+                className="block text-sky-900 font-semibold"
+              >
                 Email
               </label>
               <input
@@ -179,8 +173,13 @@ const VolunteerRegistration = () => {
                 required
               />
             </div>
+
+            {/* Password Field */}
             <div>
-              <label htmlFor="password" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="password"
+                className="block text-sky-900 font-semibold"
+              >
                 Password
               </label>
               <div className="relative">
@@ -196,14 +195,19 @@ const VolunteerRegistration = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-3 flex items-center text-sky-700"
+                  className="absolute inset-y-0 right-3 flex items-center text-sky-700 font-medium"
                 >
                   {showPassword ? "Hide" : "Show"}
                 </button>
               </div>
             </div>
+
+            {/* Mother's Name Field */}
             <div>
-              <label htmlFor="motherName" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="motherName"
+                className="block text-sky-900 font-semibold"
+              >
                 Mother&apos;s Name
               </label>
               <input
@@ -215,8 +219,13 @@ const VolunteerRegistration = () => {
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
             </div>
+
+            {/* Father's Name Field */}
             <div>
-              <label htmlFor="fatherName" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="fatherName"
+                className="block text-sky-900 font-semibold"
+              >
                 Father&apos;s Name
               </label>
               <input
@@ -228,8 +237,13 @@ const VolunteerRegistration = () => {
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
             </div>
+
+            {/* Description Field */}
             <div>
-              <label htmlFor="description" className="block text-sky-900 font-semibold">
+              <label
+                htmlFor="description"
+                className="block text-sky-900 font-semibold"
+              >
                 Description
               </label>
               <textarea
@@ -242,9 +256,12 @@ const VolunteerRegistration = () => {
             </div>
           </div>
 
-          {/* Passport Photo Upload */}
-          <div className="col-span-1 md:col-span-2">
-            <label htmlFor="passportPhoto" className="block text-sky-900 font-semibold text-center">
+          {/* Passport Photo */}
+          <div className="col-span-1 md:col-span-2 w-full flex flex-col items-center">
+            <label
+              htmlFor="passportPhoto"
+              className="block text-sky-900 font-semibold text-center"
+            >
               Passport Size Photo
             </label>
             <input
@@ -253,13 +270,13 @@ const VolunteerRegistration = () => {
               name="passportPhoto"
               accept="image/*"
               onChange={handleChange}
-              className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              className="p-2 mt-2 bg-sky-200 w-full text-sky-900 rounded"
               required
             />
           </div>
-
+          
           {/* Submit Button */}
-          <div className="col-span-1 md:col-span-2 mt-6">
+          <div className="mt-6 col-span-1 md:col-span-2">
             <button
               type="submit"
               className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700"
@@ -269,15 +286,9 @@ const VolunteerRegistration = () => {
           </div>
         </form>
 
-        {/* Message Display */}
-        {message && (
-          <p className={`mt-4 text-center ${message.startsWith("Error") ? "text-red-600" : "text-green-600"}`}>
-            {message}
-          </p>
-        )}
       </div>
     </div>
   );
 };
 
-export default VolunteerRegistration;
+export default volunteerRegistration;
