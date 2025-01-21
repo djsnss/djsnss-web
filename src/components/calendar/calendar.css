@@ -93,22 +93,15 @@ body {
   color: #fff;
 }
 
-.day:hover {
-  background-color: #044c5e;
-  box-shadow: 0 0 8px #044c5e;
-  transform: scale(1.1);
-  z-index: 1;
-}
-
 .event-day {
-  background-color: #ffeb3b; /* Yellow highlight for days with events */
+  background-color: #fff; /* Yellow highlight for days with events */
   color: #333;
   font-weight: bold;
 }
 
 .event-day:hover {
-  background-color: #fbc02d; /* Darker yellow when hovered */
-  box-shadow: 0 0 8px #fbc02d;
+  background-color: #fff; /* Darker yellow when hovered */
+  box-shadow: 0 0 8px #fff;
   transform: scale(1.1);
   z-index: 1;
 }
@@ -131,8 +124,8 @@ body {
 }
 
 .sidebar {
-  width: 100%;
-  background-color: #1a2e45;
+  width: 100% !important;
+  background-color: #1a2e45 !important;
   border: 1px solid #044c5e;
   padding: 20px;
   border-radius: 8px;
@@ -142,22 +135,6 @@ body {
 .sidebar h2 {
   margin-bottom: 10px;
   color: #e5efff;
-}
-
-.sidebar input,
-.sidebar select {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #044c5e;
-  background: #0e1726;
-  color: #e5efff;
-  border-radius: 5px;
-  transition: all 0.3s ease;
-}
-
-.sidebar input::placeholder {
-  color: #888;
 }
 
 .sidebar button {

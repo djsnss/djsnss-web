@@ -75,8 +75,9 @@ const Sidebar = () => {
     {
       Icon: "MdEventNote",
       title: "Events",
+      path: "/events",
       subLinks: [
-        { title: "Events", path: "/events" },
+        // { title: "Events", path: "/events" },
         { title: "Timeline", path: "/timeline" },
         { title: "Camp", path: "/nss-camp" },
         { title: "Grain-A-Thon", path: "/grain-a-thon" },

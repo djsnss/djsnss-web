@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import GenerateCertificate from "../components/events/GenerateCertificate";
 import LargeEvents from "../components/events/LargeEvents";
 import LocalEvents from "../components/events/LocalEvents";
@@ -12,6 +13,7 @@ import {
 } from "@coreui/react";
 
 const Events = () => {
+  const navigate = useNavigate();
   const [upcomingEventsData, setUpcomingEventsData] = useState([]);
 
   useEffect(()=>{

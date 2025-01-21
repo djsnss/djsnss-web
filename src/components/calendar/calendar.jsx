@@ -166,10 +166,15 @@
 
 // export default App;
 
+
+
+
 import React, { useState, useEffect } from "react";
 import "./Calendar.css";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [selectedDate, setSelectedDate] = useState(null);
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
@@ -186,10 +191,12 @@ const App = () => {
         if (data.events) {
           // Map events to a format we can use in the app
           const mappedEvents = data.events.map((event) => ({
+            _id: event._id,
             name: event.name,
             longDescription: event.longDescription,
             date: new Date(event.date).toDateString(),
             photo: event.photo.url,
+            slug: event.slug,
           }));
           setEvents(mappedEvents);
         }
@@ -230,9 +237,38 @@ const App = () => {
     return calendarDays;
   };
 
-  const handleRegister = (eventName) => {
-    alert(`You have registered for ${eventName}`);
+  const handleRegister = async (eventId) => {
+    const authToken = localStorage.getItem("authToken");
+  
+    if (!authToken) {
+      alert("You need to be logged in to register.");
+      return;
+    }
+  
+    try {
+      const response = await fetch(`https://djsnss-web.onrender.com/volunteer/events/${eventId}/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${authToken}`,
+        },
+        body: JSON.stringify({ eventId: eventId }),
+      });
+  
+      if (response.ok) {
+        const result = await response.json();
+        alert(`You have registered for ${result.eventName}`); // assuming the response contains eventName
+      } else {
+        // You can add a check here for specific error responses (e.g., 400, 401, etc.)
+        alert('Registration failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error registering:', error);
+      alert('An error occurred. Please try again later.');
+    }
   };
+  
+  
 
   const days = generateCalendarDays(currentMonth, currentYear);
 
@@ -243,7 +279,7 @@ const App = () => {
   return (
     <div className="app flex flex-col md:flex-row gap-5 p-5 bg-sky-100 text-sky-900 min-h-screen">
       {/* Calendar Section */}
-      <div className="calendar-container w-full md:w-3/4 flex-grow p-5 bg-sky-700 border border-blue-500 rounded-lg shadow-lg">
+      <div className="calendar-container w-full md:w-3/4 flex-grow p-5 bg-sky-700 border border-blue-500 rounded-lg shadow-lg order-1">
         <div className="calendar-header flex justify-between items-center mb-5">
           <button
             onClick={() => handleMonthChange(-1)}
@@ -301,7 +337,7 @@ const App = () => {
       </div>
 
       {/* Sidebar Section */}
-      <div className="sidebar w-full md:w-1/4 p-5 bg-sky-600 border border-blue-500 rounded-lg shadow-lg">
+      <div className="sidebar w-full md:w-1/4 p-5 bg-sky-600 border border-blue-500 rounded-lg shadow-lg order-2">
         <h2 className="text-lg font-bold text-white mb-4">
           {selectedDate ? `Events on ${selectedDate}` : "Select a Date"}
         </h2>
@@ -310,7 +346,7 @@ const App = () => {
           filteredEvents.map((event, index) => (
             <div
               key={index}
-              className="event-card mt-4 p-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105"
+              className="event-card mt-4 p-4 bg-white rounded-lg shadow-md transition-transform transform hover:scale-[1.01]"
             >
               {/* Event Image */}
               <div className="event-image h-40 mb-3">
@@ -329,17 +365,17 @@ const App = () => {
 
               {/* Event Details */}
               <div className="event-details">
-                <h3 className="text-lg font-bold text-sky-700 truncate">
+                <h3 onClick={() => navigate(`/eventdetails/${event.slug}`)} className="text-lg font-bold text-sky-700 truncate hover:cursor-pointer">
                   {event.name}
                 </h3>
-                <p className="text-sm text-gray-600 mt-2 line-clamp-3">
+                <p className="text-sm text-gray-600 mt-2 line-clamp-6">
                   {event.longDescription}
                 </p>
               </div>
 
               {/* Register Button */}
               <button
-                onClick={() => handleRegister(event.name)}
+                onClick={() => handleRegister(event._id)}
                 className="mt-3 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
               >
                 Register
@@ -357,3 +393,5 @@ const App = () => {
 };
 
 export default App;
+
+
