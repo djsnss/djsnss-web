@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
 import axios from 'axios'
+import NSSLogo from "../../assets/NSSLogo.png";
 
 const CheckHoursNew = () => {
   const [userData, setUserData] = useState(null);
@@ -28,7 +29,7 @@ const CheckHoursNew = () => {
         }));
         setUserData({
           displayName: volunteerData.name,
-          avatar: volunteerData.image,
+          avatar: volunteerData.image || NSSLogo,
           eventsAttended,
         });
       } catch (err) {
