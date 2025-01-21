@@ -40,8 +40,8 @@ const Initiatives = () => {
   ];
 
   return (
-    <div className="mb-6">
-      <h1 className="bg-white text-4xl font-bold text-center mx-4 text-dark-navy">
+    <div className="my-7">
+      <h1 className="bg-white text-5xl underline font-bold text-center mx-4 text-dark-navy">
         Initiatives
       </h1>
       <div className="flex flex-wrap justify-center gap-8">
