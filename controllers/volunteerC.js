@@ -20,6 +20,7 @@ const signup = async (req, res) => {
       fatherName,
       motherEmail,
       fatherEmail,
+      name,
       branch,
       sapId,
       phoneNumber,
@@ -62,6 +63,7 @@ const signup = async (req, res) => {
         fatherName,
       },
       studentDetails: {
+        name,
         branch,
         sapId,
         phoneNumber,
@@ -144,14 +146,19 @@ const registerEvent = async (req, res) => {
     if (!Array.isArray(event.registeredVolunteers)) {
       event.registeredVolunteers = [];
     }
-    // Avoid duplicate registration
-    if (volunteer.connectedEvents.includes(eventId)) {
+    //Avoid duplicate registration
+    const eventIdString = String(eventId);
+    if (
+      volunteer.connectedEvents.some(
+        (event) => String(event.eventId) === eventIdString
+      )
+    ) {
       return res
         .status(400)
         .send({ message: `Already registered for ${event.name}` });
     }
     // Register the volunteer
-    volunteer.connectedEvents.push(eventId);
+    volunteer.connectedEvents.push({ eventId: eventId });
     event.registeredVolunteers.push({ volunteerId: volunteer._id });
     // Save changes
     await volunteer.save();
