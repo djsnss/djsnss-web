@@ -77,6 +77,13 @@ body {
   justify-content: center;
 }
 
+.day:hover {
+  background-color: #044c5e;
+  box-shadow: 0 0 8px #044c5e;
+  transform: scale(1.1);
+  z-index: 1;
+}
+
 .day span {
   font-size: calc(1rem + (0.5vw));
 }
@@ -89,6 +96,19 @@ body {
 .day:hover {
   background-color: #044c5e;
   box-shadow: 0 0 8px #044c5e;
+  transform: scale(1.1);
+  z-index: 1;
+}
+
+.event-day {
+  background-color: #ffeb3b; /* Yellow highlight for days with events */
+  color: #333;
+  font-weight: bold;
+}
+
+.event-day:hover {
+  background-color: #fbc02d; /* Darker yellow when hovered */
+  box-shadow: 0 0 8px #fbc02d;
   transform: scale(1.1);
   z-index: 1;
 }
