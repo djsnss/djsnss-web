@@ -2,12 +2,12 @@ import VolunteerModel from "../models/volunteer.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
-import { sendLogin, sendSignup } from "./nodemailerC.js";
+import { sendLogin, sendSignup, sendOTP } from "./nodemailerC.js";
 // import EventModel from "../models/event.js";
 import EventModel from "../models/event.js";
 import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
-import mongoose from "mongoose";
+import crypto from "crypto";
 
 env.config();
 const Secret = process.env.SecretKey;
@@ -259,6 +259,108 @@ const checkHours = async (req, res) => {
   }
 };
 
+const otpStore = {}; // Temporary store for OTPs and expiry
+
+const sendOtpForPasswordChange = async (req, res) => {
+  try {
+    const email = req.body.email;
+    const volunteer = await VolunteerModel.findOne({
+      "studentDetails.email": email,
+    });
+    if (!volunteer) {
+      return res.status(404).json({ message: "Volunteer not found" });
+    }
+    // Generate and send OTP
+    const otp = crypto.randomInt(100000, 999999).toString();
+    const expiresAt = Date.now() + 10 * 60 * 1000; // Expires in 10 minutes
+
+    otpStore[volunteer.studentDetails.email] = { otp, expiresAt }; // Store OTP with expiry
+
+    await sendOTP(volunteer.studentDetails.email, otp); // Use your email service
+
+    return res.status(200).json({ message: "OTP sent to email" });
+  } catch (err) {
+    console.error("Send OTP Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+const changePassword = async (req, res) => {
+  try {
+    const { otp, newPassword } = req.body;
+
+    if (!otp || !newPassword) {
+      return res
+        .status(400)
+        .json({ message: "OTP and new password are required" });
+    }
+    // Find the volunteer email from the OTP store using the provided OTP
+    let volunteerEmail = null;
+    for (let email in otpStore) {
+      if (otpStore[email].otp === otp) {
+        volunteerEmail = email;
+        break;
+      }
+    }
+    if (!volunteerEmail) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Find volunteer by email (no need for the volunteer ID)
+    const volunteer = await VolunteerModel.findOne({ "studentDetails.email": volunteerEmail });
+    if (!volunteer) {
+      return res.status(404).json({ message: "Volunteer not found" });
+    }
+
+    const storedOtpData = otpStore[volunteer.studentDetails.email];
+    if (!storedOtpData) {
+      return res
+        .status(400)
+        .json({ message: "No OTP found. Please request a new one." });
+    }
+
+    const { otp: storedOtp, expiresAt } = storedOtpData;
+
+    // Check if OTP is expired
+    if (Date.now() > expiresAt) {
+      delete otpStore[volunteer.email]; // Remove expired OTP
+      return res
+        .status(400)
+        .json({ message: "OTP has expired. Please request a new one." });
+    }
+
+    // Validate the OTP
+    if (storedOtp !== otp) {
+      return res.status(400).json({ message: "Invalid OTP" });
+    }
+
+    // Hash the new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update volunteer password
+    volunteer.password = hashedPassword;
+    await volunteer.save();
+
+    delete otpStore[volunteer.email]; // Remove OTP after successful password change
+
+    return res.status(200).json({ message: "Password updated successfully" });
+  } catch (err) {
+    console.error("Change Password Error:", err);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+const logout = (req, res) => {
+  try {
+    // Clear token from cookies if it's stored there
+    res.clearCookie("token");
+    return res.status(200).json({ message: "Logout successful" });
+  } catch (error) {
+    console.error("Logout Error:", error);
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
 export {
   signup,
   login,
@@ -266,4 +368,7 @@ export {
   uploadNormalPhoto,
   updateNormalPhoto,
   checkHours,
+  sendOtpForPasswordChange,
+  changePassword,
+  logout,
 };

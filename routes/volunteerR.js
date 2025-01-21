@@ -8,6 +8,9 @@ import {
   uploadNormalPhoto,
   updateNormalPhoto,
   checkHours,
+  changePassword,
+  sendOtpForPasswordChange,
+  logout,
 } from "../controllers/volunteerC.js";
 
 import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
@@ -33,5 +36,11 @@ router.post(
 ); //update normal photo(profile photo) of volunteer
 
 router.get("/checkHours", authVolunteer, checkHours); //Check number of volunteered hours
+
+router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for password change
+
+router.put("/change-password", changePassword); //route to change password of volunteer
+
+router.post("/logout", authVolunteer, logout); //logout API for volunteer
 
 export default router;
