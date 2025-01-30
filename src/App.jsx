@@ -1,5 +1,10 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -11,9 +16,15 @@ import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
 const Volunteer = React.lazy(() => import("./pages/Volunteer"));
-const VolunteerPolicy = React.lazy(() => import("./components/volunteer/VolunteerPolicy"));
-const VolunteerRegistration = React.lazy(() => import("./components/volunteer/VolunteerRegistration"));
-const CheckHoursNew = React.lazy(() => import("./components/volunteer/CheckHoursNew"));
+const VolunteerPolicy = React.lazy(() =>
+  import("./components/volunteer/VolunteerPolicy")
+);
+const VolunteerRegistration = React.lazy(() =>
+  import("./components/volunteer/VolunteerRegistration")
+);
+const CheckHoursNew = React.lazy(() =>
+  import("./components/volunteer/CheckHoursNew")
+);
 const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
@@ -23,14 +34,18 @@ const Calendar = React.lazy(() => import("./components/calendar/Calendar"));
 const EventDetails = React.lazy(() => import("./pages/EventDetails"));
 const Events = React.lazy(() => import("./pages/Events"));
 const Team = React.lazy(() => import("./pages/Team"));
-const Login = React.lazy(() => import("./pages/Login"));
+const LoginPage = React.lazy(() => import("./pages/Login")); // Update this to LoginPage
 const AdminDashboard = React.lazy(() => import("./pages/admin/Dashboard"));
 const CreateEvent = React.lazy(() => import("./pages/admin/CreateEvent"));
 const Unauthorized = React.lazy(() => import("./pages/Unauthorized"));
 const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
-const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
-const VolunteerLogin = React.lazy(() => import("./components/volunteer/VolLogin"));
+const EditVolunteerDetails = React.lazy(() =>
+  import("./pages/admin/EditVolunteerDetails")
+);
+const VolunteerLogin = React.lazy(() =>
+  import("./components/volunteer/VolLogin")
+);
 
 const App = () => {
   return (
@@ -55,14 +70,24 @@ const App = () => {
             <Routes>
               {/* Existing routes */}
               <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<LoginPage />} />{" "}
+              {/* Updated to LoginPage */}
               <Route path="/events" element={<Events />} />
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/volunteer" element={<Volunteer />} />
-              <Route path="/volunteer/volunteer-policy" element={<VolunteerPolicy />} />
-              <Route path="/volunteer/volunteer-registration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/volunteer-login" element={<VolunteerLogin />} />
+              <Route
+                path="/volunteer/volunteer-policy"
+                element={<VolunteerPolicy />}
+              />
+              <Route
+                path="/volunteer/volunteer-registration"
+                element={<VolunteerRegistration />}
+              />
+              <Route
+                path="/volunteer/volunteer-login"
+                element={<VolunteerLogin />}
+              />
               <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
@@ -70,18 +95,13 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
+              {/* Admin routes */}
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/create-event" element={<CreateEvent />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/update-event" element={<UpdateEvent />} />
               <Route path="/edit-details" element={<EditVolunteerDetails />} />
-              <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/create-event" element={<CreateEvent />} />
-              <Route path="/unauthorized" element={<Unauthorized />} />
-              <Route path="/admin/login" element={<AdminLogin />} />
-              <Route path="/update-event" element={<UpdateEvent />} />
-
               {/* Dynamic routes for events */}
               {propsData.map((event) => (
                 <Route
