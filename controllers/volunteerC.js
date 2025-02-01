@@ -45,12 +45,15 @@ const signup = async (req, res) => {
     if (!isSquare) {
       return res
         .status(400)
-        .send("Image is not square (1:1 aspect ratio required)");
+        .json({ message: "Image is not square (1:1 aspect ratio required)" });
     }
 
     if (!isValidSize) {
-      return res.status(400).send("Image dimensions should be 300x300 pixels");
+      return res
+        .status(400)
+        .json({ message: "Image dimensions should be 300x300 pixels" });
     }
+
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "PassportPhoto",
     });
@@ -307,7 +310,9 @@ const changePassword = async (req, res) => {
     }
 
     // Find volunteer by email (no need for the volunteer ID)
-    const volunteer = await VolunteerModel.findOne({ "studentDetails.email": volunteerEmail });
+    const volunteer = await VolunteerModel.findOne({
+      "studentDetails.email": volunteerEmail,
+    });
     if (!volunteer) {
       return res.status(404).json({ message: "Volunteer not found" });
     }
