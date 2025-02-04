@@ -2,101 +2,108 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const EditVolunteerDetails = () => {
-  const [volunteers, setVolunteers] = useState([]);
-  const [updatedHours, setUpdatedHours] = useState("");
-  const [editVolunteerId, setEditVolunteerId] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState("");
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState([]); // List of events
+  const [selectedEvent, setSelectedEvent] = useState(""); // Selected event
+  const [volunteers, setVolunteers] = useState([]); // List of registered volunteers
+  const [attendanceStatus, setAttendanceStatus] = useState({}); // Updated attendance status for volunteers
+  const [attendanceList, setAttendanceList] = useState([]); // Attendance list (for updateHours API)
+  const token = localStorage.getItem("adminAuthToken");
 
+  // Fetch all events when the component loads
   useEffect(() => {
-    if (!localStorage.getItem("adminAuthToken")) {
-      // Redirect to login if not authenticated
-      window.location.href = "/unauthorized";
-    }
-
     const fetchEvents = async () => {
+      if (!token) {
+        console.error("Token is missing or expired!");
+        return;
+      }
       try {
-        const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
-        const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setEvents(response.data || []);
+        const response = await axios.get(
+          "https://djsnss-web.onrender.com/admin/getAllEvents",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setEvents(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);
       }
     };
+
     fetchEvents();
-  }, []);
+  }, [token]);
 
-  // Fetch volunteers for the selected event
+  // Fetch volunteers when an event is selected
   useEffect(() => {
-    if (!selectedEvent) return;
-
     const fetchVolunteers = async () => {
-      try {
-        const token = localStorage.getItem("adminAuthToken");
-        const response = await axios.get(`https://djsnss-web.onrender.com/admin/${selectedEvent}/volunteers`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        setVolunteers(response.data.volunteers || []);
-      } catch (error) {
-        console.error("Error fetching volunteers:", error);
+      if (selectedEvent) {
+        try {
+          const response = await axios.get(
+            `https://djsnss-web.onrender.com/admin/${selectedEvent}/volunteers`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+          console.log(response.data.volunteers);
+          setVolunteers(response.data.volunteers);
+        } catch (error) {
+          console.error("Error fetching volunteers:", error);
+        }
       }
     };
 
     fetchVolunteers();
-  }, [selectedEvent]);
+  }, [selectedEvent, token]);
 
-  // Update volunteer attendance
-  const handleAttendanceChange = async (volunteerId, status) => {
-    setVolunteers((prev) =>
-      prev.map((volunteer) =>
-        volunteer.id === volunteerId
-          ? { ...volunteer, attended: status }
-          : volunteer
-      )
-    );
+  // Handle attendance change (Present/Absent)
+  const handleAttendanceChange = (volunteerId, status) => {
+    setAttendanceStatus((prevStatus) => ({
+      ...prevStatus,
+      [volunteerId]: status,
+    }));
+  };
 
+  // Update attendance hours
+  const updateHours = async () => {
     try {
-      const token = localStorage.getItem("adminAuthToken");
+      // Prepare the attendance list based on marked attendance
+      const updatedAttendanceList = volunteers.map((volunteer) => ({
+        volunteerId: volunteer._id,
+        attended: attendanceStatus[volunteer._id] ?? false, // Default to false if not set
+      }));
+
+      // Fetch the existing attendance list
+      const response = await axios.get(
+        `https://djsnss-web.onrender.com/admin/getAttendanceList/${selectedEvent}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setAttendanceList(response.data);
+
+      // Update hours
       await axios.post(
         "https://djsnss-web.onrender.com/admin/updateHours",
         {
           eventId: selectedEvent,
-          attendanceList: [
-            { volunteerId, attended: status },
-          ],
+          attendanceList: updatedAttendanceList,
         },
-        { headers: { Authorization: `Bearer ${token}` } }
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
+
+      alert("Attendance hours updated successfully.");
     } catch (error) {
       console.error("Error updating attendance:", error);
-    }
-  };
-
-  // Update volunteer hours
-  const handleEditHours = async () => {
-    if (updatedHours !== "" && editVolunteerId !== null) {
-      try {
-        const token = localStorage.getItem("adminAuthToken");
-        await axios.patch(
-          `https://djsnss-web.onrender.com/admin/updateVolunteer/${editVolunteerId}`,
-          { hours: parseInt(updatedHours) },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-
-        setVolunteers((prev) =>
-          prev.map((volunteer) =>
-            volunteer.id === editVolunteerId
-              ? { ...volunteer, hours: parseInt(updatedHours) }
-              : volunteer
-          )
-        );
-        setUpdatedHours("");
-        setEditVolunteerId(null);
-      } catch (error) {
-        console.error("Error updating hours:", error);
-      }
+      alert("Failed to update hours. Please try again.");
     }
   };
 
@@ -106,9 +113,12 @@ const EditVolunteerDetails = () => {
         Edit Volunteer Details
       </h1>
 
-      {/* Event Selection */}
+      {/* Event selection dropdown */}
       <div className="mb-8">
-        <label htmlFor="event" className="block text-lg font-semibold text-[#003366] mb-2">
+        <label
+          htmlFor="event"
+          className="block text-lg font-semibold text-[#003366] mb-2"
+        >
           Select Event:
         </label>
         <select
@@ -118,94 +128,74 @@ const EditVolunteerDetails = () => {
           onChange={(e) => setSelectedEvent(e.target.value)}
         >
           <option value="">-- Select an Event --</option>
-          {events.map((event) => (
-            <option key={event._id} value={event._id}>
-              {event.name}
-            </option>
-          ))}
+          {events.length > 0 ? (
+            events.map((event) => (
+              <option key={event._id} value={event._id}>
+                {event.name}
+              </option>
+            ))
+          ) : (
+            <option disabled>No events available</option>
+          )}
         </select>
       </div>
 
-      {/* Volunteers List (Attendance Management) */}
+      {/* Display volunteers and attendance options */}
       {selectedEvent && volunteers.length > 0 && (
         <div className="mb-8">
           <h2 className="text-2xl font-semibold text-[#003366] mb-4">
             Volunteer Attendance for {selectedEvent}
           </h2>
           <div className="space-y-4">
-            {volunteers.map((volunteer) => (
-              <div
-                key={volunteer.id}
-                className="flex items-center justify-between p-4 border border-[#387fa8] rounded-md"
-              >
-                <div>
-                  <span className="text-lg text-[#003366]">{volunteer.name}</span>
-                  <p className="text-sm text-[#555]">
-                    Marked: {volunteer.attended ? "Present" : "Absent"}
-                  </p>
+            {volunteers.map((volunteer) => {
+              const isPresent = attendanceStatus[volunteer._id] ?? false;
+
+              return (
+                <div
+                  key={volunteer._id}
+                  className="flex items-center justify-between p-4 border border-[#387fa8] rounded-md"
+                >
+                  <span className="text-lg text-[#003366]">
+                    {volunteer.studentDetails.name}
+                  </span>
+                  <div className="flex gap-4 items-center">
+                    <button
+                      className={`px-4 py-2 ${
+                        isPresent ? "bg-green-500" : "bg-gray-300"
+                      } text-white rounded-md`}
+                      onClick={() =>
+                        handleAttendanceChange(volunteer._id, true)
+                      }
+                    >
+                      Present
+                    </button>
+                    <button
+                      className={`px-4 py-2 ${
+                        !isPresent ? "bg-red-500" : "bg-gray-300"
+                      } text-white rounded-md`}
+                      onClick={() =>
+                        handleAttendanceChange(volunteer._id, false)
+                      }
+                    >
+                      Absent
+                    </button>
+                  </div>
                 </div>
-                <div className="flex gap-4 items-center">
-                  <button
-                    className="px-4 py-2 bg-green-500 text-white rounded-md"
-                    onClick={() => handleAttendanceChange(volunteer.id, true)}
-                  >
-                    Present
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-red-500 text-white rounded-md"
-                    onClick={() => handleAttendanceChange(volunteer.id, false)}
-                  >
-                    Absent
-                  </button>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
 
-      {/* Edit Volunteer Hours Section */}
-      <div className="mb-8">
-        <h2 className="text-xl font-semibold text-[#003366] mb-4">
-          Update Volunteer Hours
-        </h2>
-        {volunteers.map((volunteer) => (
-          <div key={volunteer.id} className="mb-4 p-4 border border-[#387fa8] rounded-md">
-            <div className="flex justify-between">
-              <span className="text-lg text-[#003366]">{volunteer.name}</span>
-              <span className="text-xl font-semibold text-[#003366]">
-                Current Hours: {volunteer.hours}
-              </span>
-            </div>
-            <div className="flex gap-4 items-center mt-2">
-              {editVolunteerId === volunteer.id ? (
-                <>
-                  <input
-                    type="number"
-                    className="p-3 border border-[#387fa8] rounded-md text-[#333] placeholder-[#555]"
-                    placeholder="Enter new hours"
-                    value={updatedHours}
-                    onChange={(e) => setUpdatedHours(e.target.value)}
-                  />
-                  <button
-                    className="px-4 py-2 bg-blue-500 text-white rounded-md"
-                    onClick={handleEditHours}
-                  >
-                    Apply Changes
-                  </button>
-                </>
-              ) : (
-                <button
-                  className="px-4 py-2 bg-blue-500 text-white rounded-md"
-                  onClick={() => setEditVolunteerId(volunteer.id)}
-                >
-                  Edit Hours
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
+      {/* Update attendance hours button */}
+      {selectedEvent && volunteers.length > 0 && (
+        <button
+          onClick={updateHours}
+          className="px-6 py-3 bg-blue-500 text-white rounded-md"
+        >
+          Update Hours
+        </button>
+      )}
     </div>
   );
 };

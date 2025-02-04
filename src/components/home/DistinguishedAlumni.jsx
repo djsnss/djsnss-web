@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import CardNew from './CardNew'
 
 const DistinguishedAlumni = () => {
   const alumni = [
@@ -25,12 +26,12 @@ const DistinguishedAlumni = () => {
   ]
 
   return (
-    <div className="bg-white">
-      {/* Decorative Line */}
-      <div className="h-1 bg-dark-navy m-6"></div>
+    <div className="bg-white my-7">
+      {/* Decorative Line
+      <div className="h-1 bg-dark-navy m-6"></div> */}
 
       <div className="text-center mb-8">
-        <h2 className="text-dark-navy text-4xl font-bold tracking-wide">
+        <h2 className="text-dark-navy text-5xl underline font-bold tracking-wide">
           Distinguished Alumni
         </h2>
         <p className="text-light-gray mt-2 text-lg">
@@ -43,26 +44,15 @@ const DistinguishedAlumni = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-6"
+        className="flex flex-row flex-wrap justify-center items-center gap-10 p-6"
       >
         {alumni.map((alumnus, index) => (
-          <div
-            key={index}
-            className="flex flex-col items-center text-center bg-misty-blue p-4 rounded-lg"
-          >
-            <img
-              src={alumnus.image}
-              alt={alumnus.name}
-              className="w-28 h-28 rounded-full object-cover mb-4 border-4 border-bright-bg-bright-blue"
-            />
-            <h3 className="text-white font-semibold text-xl">{alumnus.name}</h3>
-            <p className="text-light-gray text-sm mt-2">{alumnus.position}</p>
-          </div>
+          <CardNew img={alumnus.img} name={alumnus.name} position={alumnus.position} key={index} />
         ))}
       </motion.div>
 
-      {/* Decorative Line */}
-      <div className="h-1 bg-dark-navy m-6"></div>
+      {/* Decorative Line
+      <div className="h-1 bg-dark-navy m-6"></div> */}
     </div>
   )
 }

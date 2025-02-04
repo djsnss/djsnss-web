@@ -1,5 +1,10 @@
 import React, { Suspense } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
 import Sidebar from "./components/Sidebar";
 import Footer from "./components/Footer";
@@ -58,9 +63,18 @@ const App = () => {
               <Route path="/eventdetails/:slug" element={<EventDetails />} />
               <Route path="/team" element={<Team />} />
               <Route path="/volunteer" element={<Volunteer />} />
-              <Route path="/volunteer/volunteer-policy" element={<VolunteerPolicy />} />
-              <Route path="/volunteer/volunteer-registration" element={<VolunteerRegistration />} />
-              <Route path="/volunteer/volunteer-login" element={<VolunteerLogin />} />
+              <Route
+                path="/volunteer/volunteer-policy"
+                element={<VolunteerPolicy />}
+              />
+              <Route
+                path="/volunteer/volunteer-registration"
+                element={<VolunteerRegistration />}
+              />
+              <Route
+                path="/volunteer/volunteer-login"
+                element={<VolunteerLogin />}
+              />
               <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
               <Route path="/aboutus" element={<AboutUs />} />
