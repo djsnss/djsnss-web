@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const VolunteerRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const handleNavigate = useNavigate();
   const [message, setMessage] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -52,6 +53,7 @@ const VolunteerRegistration = () => {
 
       if (response.ok) {
         setMessage("Registration successful!");
+        handleNavigate("/volunteer/volunteer-login");
         setFormData({
           name: "",
           branch: "",

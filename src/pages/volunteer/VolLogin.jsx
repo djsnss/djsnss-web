@@ -78,7 +78,7 @@ const Login = () => {
               onChange={handleChange}
               className="w-full p-3 bg-sky-50 text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
               placeholder="Enter your SapId"
-              pattern="^\d{10}$"
+              pattern="^\d{11}$"
               required
             />
           </div>

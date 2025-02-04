@@ -1,8 +1,8 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/Avatar"
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/Avatar"
 import axios from 'axios'
 import NSSLogo from "../../assets/NSSLogo.png";
 

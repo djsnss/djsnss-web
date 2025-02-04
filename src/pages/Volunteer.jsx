@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Image1 from "../assets/Events/TreePlantation.png";
-import VolunteerFillerSection from "../components/volunteer/FillerSection";
+import VolunteerFillerSection from "../pages/volunteer/FillerSection";
 
 const Volunteer = () => {
   return (
