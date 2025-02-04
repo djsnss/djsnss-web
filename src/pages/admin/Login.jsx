@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import Loader from '../../components/Loaders/CustomLoader2';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -36,8 +39,8 @@ const LoginPage = () => {
       localStorage.setItem('adminAuthToken', data.token);
       localStorage.setItem('email', formData.email);
 
-      // Redirect to dashboard
-      window.location.href = '/admin/dashboard';
+      // Redirect to dashboard using navigate
+      navigate('/admin/dashboard');
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
@@ -89,7 +92,7 @@ const LoginPage = () => {
             disabled={loading}
             className="w-full py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
           >
-            {loading ? 'Logging in...' : 'Login'}
+            {loading ? <Loader /> : 'Login'}
           </button>
         </form>
       </div>

@@ -30,45 +30,57 @@ const VolunteerRegistration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-
+  
     const formDataToSend = new FormData();
+  
+    // Append non-file inputs
     Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
+      if (key !== "passportPhoto") {
+        formDataToSend.append(key, formData[key]);
+      }
     });
-
+  
+    // Append File input separately
+    if (formData.passportPhoto) {
+      formDataToSend.append("passportPhoto", formData.passportPhoto);
+    }
+  
     try {
       const response = await fetch("https://djsnss-web.onrender.com/volunteer/signup", {
         method: "POST",
         body: formDataToSend,
       });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage("Registration successful!");
-        setFormData({
-          name: "",
-          branch: "",
-          sapId: "",
-          phoneNumber: "",
-          email: "",
-          password: "",
-          hobbies: "",
-          motherName: "",
-          fatherName: "",
-          motherEmail: "",
-          fatherEmail: "",
-          description: "",
-          passportPhoto: null,
-        });
-      } else {
-        setMessage(`Error: ${result.message || "Failed to register."}`);
+  
+      if (!response.ok) {
+        throw new Error(`HTTP Error: ${response.status}`);
       }
+        try {
+        await response.json();
+      } catch (err) {
+        throw new Error("Invalid JSON response");
+      }
+  
+      setMessage("Registration successful!");
+      setFormData({
+        name: "",
+        branch: "",
+        sapId: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+        hobbies: "",
+        motherName: "",
+        fatherName: "",
+        motherEmail: "",
+        fatherEmail: "",
+        description: "",
+        passportPhoto: null,
+      });
     } catch (error) {
-      setMessage("An error occurred during registration. Please try again.");
+      setMessage(`An error occurred: ${error.message}`);
       console.error(error);
     }
-  };
+  };  
 
   return (
     <div className="min-h-screen bg-sky-100 p-6 flex flex-col items-center">
@@ -130,7 +142,7 @@ const VolunteerRegistration = () => {
                 value={formData.sapId}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
-                pattern="^\d{10}$"
+                pattern="^\d{11}$"
                 required
               />
             </div>
@@ -157,6 +169,20 @@ const VolunteerRegistration = () => {
                 id="hobbies"
                 name="hobbies"
                 value={formData.hobbies}
+                onChange={handleChange}
+                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="fatherEmail" className="block text-sky-900 font-semibold">
+                Father&apos;s Email
+              </label>
+              <input
+                type="text"
+                id="fatherEmail"
+                name="fatherEmail"
+                value={formData.fatherEmail}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
@@ -211,6 +237,19 @@ const VolunteerRegistration = () => {
                 id="motherName"
                 name="motherName"
                 value={formData.motherName}
+                onChange={handleChange}
+                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              />
+            </div>
+            <div>
+              <label htmlFor="motherEmail" className="block text-sky-900 font-semibold">
+                Mother&apos;s Email
+              </label>
+              <input
+                type="text"
+                id="motherEmail"
+                name="motherEmail"
+                value={formData.motherEmail}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
