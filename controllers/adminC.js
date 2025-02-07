@@ -513,8 +513,8 @@ export const changeEmail = async (req, res) => {
     if (!admin) {
       return res.status(404).json({ message: "Admin not found" });
     }
-    // Verify the current password
-    if (currentPassword !== admin.password) {
+    const match = await bcrypt.compare(currentPassword, admin.password);
+    if (!match) {
       return res.status(400).send("Invalid password");
     }
     // Update email
