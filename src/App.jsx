@@ -12,6 +12,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
+import { Toaster } from "react-hot-toast";
 
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
@@ -42,6 +43,7 @@ const App = () => {
       {/* Scroll to top and Scroll tracking components */}
       <ScrollTT />
       <ScrollToTop />
+      <Toaster position="top-right" reverseOrder={false}/>
 
       <div className="flex flex-row justify-start min-h-screen w-screen bg-white">
         {/* Sidebar */}

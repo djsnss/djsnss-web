@@ -1,37 +1,42 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card"
-import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/Avatar"
-import axios from 'axios'
+import { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/Card";
+import { Avatar, AvatarFallback, AvatarImage } from "../../components/ui/Avatar";
+import axios from "axios";
 import NSSLogo from "../../assets/NSSLogo.png";
+import { MdOutlineModeEdit } from "react-icons/md";
+import toast from "react-hot-toast";
 
 const CheckHoursNew = () => {
   const [userData, setUserData] = useState(null);
+  const fileInputRef = useRef(null);
+  const [image, setImage] = useState(NSSLogo);
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        // Fetch user data from the /checkHours API
         const response = await axios.get(
           "https://djsnss-web.onrender.com/volunteer/checkHours",
           {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-            },
+            }
           }
         );
+
         const volunteerData = response.data;
         const eventsAttended = volunteerData.connectedEvents.map((event) => ({
-          eventId: event.eventId,   
-          name: event.eventName,    
+          eventId: event.eventId,
+          name: event.eventName,
           hours: event.hoursCompleted || 0,
         }));
+
         setUserData({
           displayName: volunteerData.name,
           avatar: volunteerData.image || NSSLogo,
           eventsAttended,
         });
+
+        setImage(volunteerData.image || NSSLogo); // Set initial image
       } catch (err) {
         console.error("Error fetching user data:", err);
       }
@@ -39,6 +44,37 @@ const CheckHoursNew = () => {
 
     fetchUserData();
   }, []);
+
+  const handleFileChange = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("image", file);
+
+    try {
+      const response = await fetch(
+        "https://djsnss-web.onrender.com/volunteer/update-normalPhoto",
+        {
+          method: "POST",
+          body: formData,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`, // Send token in headers
+          },
+        }
+      );
+
+      if (response.ok) {
+        const data = await response.json();
+        setImage(data.normalPhoto.url); // Update the profile picture
+        toast.success("Image Updated Successfully")
+      } else {
+        toast.error("Image update failed:", response.statusText);
+      }
+    } catch (error) {
+      toast.error("Error uploading image:", error);
+    }
+  };
 
   if (!userData) {
     return (
@@ -53,15 +89,32 @@ const CheckHoursNew = () => {
       <Card className="w-full max-w-4xl border-2 border-white/50 backdrop-blur-lg bg-white/40 shadow-lg">
         <CardHeader>
           <div className="flex flex-col md:flex-row items-center gap-4">
-            <Avatar className="w-24 h-24">
-              <AvatarImage src={userData.avatar} alt={userData.displayName} />
-              <AvatarFallback>
-                {userData.displayName
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
+            {/* Avatar with Edit Button */}
+            <div className="relative group w-24 h-24">
+              <Avatar className="w-24 h-24">
+                <AvatarImage src={image} alt={userData.displayName} />
+                <AvatarFallback>
+                  {userData.displayName
+                    .split(" ")
+                    .map((n) => n[0])
+                    .join("")}
+                </AvatarFallback>
+              </Avatar>
+              {/* Hover Edit Icon */}
+              <div
+                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full"
+                onClick={() => fileInputRef.current.click()}
+              >
+                <MdOutlineModeEdit className="text-white w-6 h-6" />
+              </div>
+              <input
+                type="file"
+                ref={fileInputRef}
+                className="hidden"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+            </div>
             <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
               {userData.displayName}
             </CardTitle>
@@ -80,8 +133,8 @@ const CheckHoursNew = () => {
 };
 
 const ProfileSummary = ({ events }) => {
-  const totalEvents = events.length
-  const totalHours = events.reduce((sum, event) => sum + event.hours, 0)
+  const totalEvents = events.length;
+  const totalHours = events.reduce((sum, event) => sum + event.hours, 0);
 
   return (
     <div className="bg-black/40 p-4 rounded-lg mb-6 flex justify-around">
@@ -94,15 +147,15 @@ const ProfileSummary = ({ events }) => {
         <p className="font-sans text-sm">Total Hours</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const EventCard = ({ event }) => (
   <div className="bg-black/40 shadow-lg p-4 rounded-lg flex flex-col items-center justify-center text-center">
     <h3 className="font-serif font-semibold text-white">{event.name}</h3>
     <p className="font-sans text-sky-100 text-sm">Hours: {event.hours}</p>
   </div>
-)
+);
 
 const EventList = ({ events }) => (
   <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -110,10 +163,6 @@ const EventList = ({ events }) => (
       <EventCard key={index} event={event} />
     ))}
   </div>
-)
+);
 
-export default CheckHoursNew
-
-
-
-
+export default CheckHoursNew;
