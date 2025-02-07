@@ -48,6 +48,7 @@ const LoginPage = () => {
       // Save login data (e.g., token) to localStorage
       localStorage.setItem("adminAuthToken", data.token);
       localStorage.setItem("email", formData.email);
+      localStorage.setItem("password", formData.password);
 
       // Redirect to dashboard using navigate
       navigate('/admin/dashboard');
