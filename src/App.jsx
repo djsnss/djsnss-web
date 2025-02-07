@@ -38,6 +38,8 @@ const AdminEmail = React.lazy(() => import("./pages/admin/ChangeEmail"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
 const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
 const VolunteerLogin = React.lazy(() => import("./pages/volunteer/VolLogin"));
+const VolunteerPass = React.lazy(() => import("./pages/volunteer/ChangePassword"));
+
 
 const App = () => {
   return (
@@ -97,6 +99,7 @@ const App = () => {
               <Route path="/admin/change-email" element={<AdminEmail />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
               <Route path="/update-event" element={<UpdateEvent />} />
+              <Route path="/volunteer/change-password" element={<VolunteerPass />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (

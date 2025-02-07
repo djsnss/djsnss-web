@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -82,6 +83,8 @@ const Login = () => {
               required
             />
           </div>
+          
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -129,6 +132,9 @@ const Login = () => {
               </button>
             </div>
           </div>
+
+          {/* Forgot Password Field */}
+          <Link to={"/volunteer/change-password"} className="mt-2 text-sky-600">Forgot Password?</Link>
 
           {/* Error Message */}
           {error && <p className="text-red-500 text-center">{error}</p>}
