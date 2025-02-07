@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Loader from '../../components/Loaders/CustomLoader2';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../components/Loaders/CustomLoader2";
 
 const ChangeEmailPage = () => {
   const [formData, setFormData] = useState({
-    currentEmail: "",
     newEmail: "",
-    password: ""
+    password: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -23,13 +22,13 @@ const ChangeEmailPage = () => {
     setErrorMessage("");
 
     // Validation checks
-    if (!formData.currentEmail || !formData.newEmail || !formData.password) {
+    if (!formData.newEmail || !formData.password) {
       setErrorMessage("All fields are required");
       setLoading(false);
       return;
     }
 
-    if (!formData.newEmail.includes('@')) {
+    if (!formData.newEmail.includes("@")) {
       setErrorMessage("Please enter a valid email address");
       setLoading(false);
       return;
@@ -37,31 +36,42 @@ const ChangeEmailPage = () => {
 
     try {
       const token = localStorage.getItem("adminAuthToken");
+
+      const requestData = {
+        currentPassword: formData.password,
+        newEmail: formData.newEmail,
+      };
+
+      console.log("Sending request to API:", requestData); // Debugging: Log request data
+
       const response = await fetch(
         "https://djsnss-web.onrender.com/admin/change-email",
         {
-          method: "POST",
+          method: "PUT",
           headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
+            "Content-Type": "application/json", // ⬅️ This tells the backend it's JSON data
+            Authorization: `Bearer ${token}`, // If required
           },
-          body: JSON.stringify({
-            currentEmail: formData.currentEmail,
-            newEmail: formData.newEmail,
-            password: formData.password
-          }),
+          body: JSON.stringify(requestData), // Ensure it's properly converted to JSON
         }
       );
 
+      console.log("Response Status:", response.status); // Debugging: Log response status
+
       if (!response.ok) {
         const errorData = await response.json();
+        console.error("Error Response Data:", errorData); // Debugging: Log error response
         throw new Error(errorData.message || "Failed to change email");
       }
 
+      const responseData = await response.json();
+      console.log("Success Response Data:", responseData); // Debugging: Log success response
+
       // Update email in localStorage and navigate back to dashboard
       localStorage.setItem("email", formData.newEmail);
-      navigate('/admin/dashboard');
+      navigate("/admin/dashboard");
     } catch (error) {
+      console.error("Fetch Error:", error.message); // Debugging: Log fetch error
       setErrorMessage(error.message);
     } finally {
       setLoading(false);
@@ -83,24 +93,10 @@ const ChangeEmailPage = () => {
           <h2 className="text-2xl font-bold text-[#003366] mb-6 text-center">
             Change Email
           </h2>
-          
+
           {errorMessage && (
             <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
           )}
-
-          <div className="mb-4">
-            <label className="block text-sm font-medium text-[#003366] mb-1">
-              Current Email
-            </label>
-            <input
-              type="email"
-              name="currentEmail"
-              value={formData.currentEmail}
-              onChange={handleInputChange}
-              className="w-full p-2 border border-[#387fa8] rounded-md text-[#003366]"
-              required
-            />
-          </div>
 
           <div className="mb-4">
             <label className="block text-sm font-medium text-[#003366] mb-1">
@@ -135,7 +131,7 @@ const ChangeEmailPage = () => {
             disabled={loading}
             className="w-full py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
           >
-            {loading ? <Loader /> : 'Update Email'}
+            {loading ? <Loader /> : "Update Email"}
           </button>
         </form>
       </div>
