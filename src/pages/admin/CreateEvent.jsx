@@ -23,6 +23,13 @@ const CreateEvent = () => {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
+
   // Validate the form fields
   const validateForm = () => {
     const newErrors = {};
@@ -47,14 +54,20 @@ const CreateEvent = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  /**
+   * Convert a selected file to a Base64 URL for preview.
+   */
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData((prev) => ({
-        ...prev,
-        photo: file, // Store the file directly
-        photoPreview: URL.createObjectURL(file),
-      }));
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData((prev) => ({
+          ...prev,
+          photo: { url: reader.result, public_id: "temp_id" },
+        }));
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -69,30 +82,10 @@ const CreateEvent = () => {
 
     try {
       const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
-      // Create FormData object
-      const formDataObj = new FormData();
-
-      // Append all fields from the form except the photo
-      Object.entries(formData).forEach(([key, value]) => {
-        if (key !== "photo") {
-          formDataObj.append(key, value);
-        }
-      });
-
-      // Append the photo separately if it exists
-      if (formData.photo) {
-        formDataObj.append("file", formData.photo); // Backend expects `req.file`
-      }
-
       const response = await axios.post(
         "https://djsnss-web.onrender.com/admin/createEvent", // API endpoint
-        formDataObj, // Request body
-        {
-          headers: {
-            Authorization: `Bearer ${token}`, // Authorization header with Bearer token
-            "Content-Type": "multipart/form-data", // Optional: Ensure correct Content-Type
-          },
-        }
+        { ...formData },
+        { headers: { Authorization: `Bearer ${token}` } }
       );
 
       console.log("Response:", response);
@@ -148,27 +141,46 @@ const CreateEvent = () => {
 
         {/* Event Image */}
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-[#003366]">Event Image</label>
+          <label className="block text-sm font-medium text-[#003366]">
+            Event Image
+          </label>
           <div className="relative">
-            {formData.photoPreview ? (
-              <img
-                src={formData.photoPreview}
-                alt="Event preview"
-                className="w-full h-48 object-cover rounded-lg"
-              />
+            {formData.photo.url ? (
+              <div className="relative">
+                <img
+                  src={formData.photo.url}
+                  alt="Event preview"
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+                <div className="absolute bottom-2 left-2">
+                  <label className="block">
+                    <span className="text-[#fff] bg-black/40 p-4 cursor-pointer">
+                      Replace Image
+                    </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                </div>
+              </div>
             ) : (
               <div className="flex items-center justify-center w-full h-48 border-2 border-dashed rounded-lg">
-                <label className="block mt-2">
-                  <span className="text-[#387fa8] hover:text-[#003b5c] cursor-pointer">
-                    Upload an image
-                  </span>
-                  <input
-                    type="file"
-                    className="hidden"
-                    accept="image/*"
-                    onChange={handleImageUpload}
-                  />
-                </label>
+                <div className="text-center">
+                  <label className="block mt-2">
+                    <span className="text-[#fff] p-4 bg-black/40 cursor-pointer">
+                      Upload an image
+                    </span>
+                    <input
+                      type="file"
+                      className="hidden"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                    />
+                  </label>
+                </div>
               </div>
             )}
           </div>
@@ -240,7 +252,9 @@ const CreateEvent = () => {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-[#003366]">Total Hours *</label>
+          <label className="block text-sm font-medium text-[#003366]">
+            Total Hours *
+          </label>
           <input
             type="number"
             name="TotalNoOfHours"
@@ -250,7 +264,9 @@ const CreateEvent = () => {
               errors.TotalNoOfHours ? "border-red-500" : "border-[#387fa8]"
             }`}
           />
-          {errors.TotalNoOfHours && <p className="text-red-500 text-sm">{errors.TotalNoOfHours}</p>}
+          {errors.TotalNoOfHours && (
+            <p className="text-red-500 text-sm">{errors.TotalNoOfHours}</p>
+          )}
         </div>
 
         {/* Date and Hours */}

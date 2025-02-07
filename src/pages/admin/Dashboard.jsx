@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +15,17 @@ const Dashboard = () => {
 
   const handleVolunteerEdit = () => {
     navigate('/edit-details');
+  };
+
+  const handleLogout = async () => {
+    const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
+    await axios.post("https://djsnss-web.onrender.com/admin/logout", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    localStorage.removeItem("adminAuthToken");
+    navigate('/admin/login');
   };
 
   useEffect(() => {
@@ -52,6 +64,13 @@ const Dashboard = () => {
           className="px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
         >
           Edit Volunteer Details
+        </button>
+
+        <button
+          onClick={handleLogout}
+          className="px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
+        >
+          Logout
         </button>
       </div>
     </div>

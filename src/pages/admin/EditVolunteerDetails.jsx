@@ -9,6 +9,13 @@ const EditVolunteerDetails = () => {
   const [attendanceList, setAttendanceList] = useState([]); // Attendance list (for updateHours API)
   const token = localStorage.getItem("adminAuthToken");
 
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
+
   // Fetch all events when the component loads
   useEffect(() => {
     const fetchEvents = async () => {
