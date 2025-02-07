@@ -38,7 +38,7 @@ const CheckHoursNew = () => {
 
         setImage(volunteerData.image || NSSLogo); // Set initial image
       } catch (err) {
-        console.error("Error fetching user data:", err);
+        toast.error("Error fetching user data");
       }
     };
 
@@ -69,10 +69,10 @@ const CheckHoursNew = () => {
         setImage(data.normalPhoto.url); // Update the profile picture
         toast.success("Image Updated Successfully")
       } else {
-        toast.error("Image update failed:", response.statusText);
+        toast.error("Image update failed");
       }
     } catch (error) {
-      toast.error("Error uploading image:", error);
+      toast.error("Error uploading image");
     }
   };
 

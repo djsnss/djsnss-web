@@ -11,37 +11,41 @@ import {
   CImage,
   CCarouselCaption,
 } from "@coreui/react";
+import CustomLoader2 from "../components/Loaders/CustomLoader2";
 
 const Events = () => {
   const navigate = useNavigate();
   const [upcomingEventsData, setUpcomingEventsData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    const fetchData = async()=>{
-      const response = await fetch("https://djsnss-web.onrender.com/events/upcoming-events")
-      .then((data)=>data.json())
-      .catch((error)=>{
-        console.log(error.message);
-      })
-
-      const formattedEvents = response.events.map((event) => {
-        const eventDate = new Date(event.date);
-        const formattedDate = eventDate
-          .toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-          })
-          .split("/")
-          .join("-");
-        return { ...event, date: formattedDate };
-      });
-      
-      setUpcomingEventsData(formattedEvents)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://djsnss-web.onrender.com/events/upcoming-events");
+        const data = await response.json();
+        
+        const formattedEvents = data.events.map((event) => {
+          const eventDate = new Date(event.date);
+          const formattedDate = eventDate
+            .toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })
+            .split("/")
+            .join("-");
+          return { ...event, date: formattedDate };
+        });
+        
+        setUpcomingEventsData(formattedEvents);
+      } catch (error) {
+        console.error(error.message);
+      } finally {
+        setLoading(false);
+      }
     };
-    
     fetchData();
-  }, [] )
+  }, []);
 
   return (
     <div className="h-max w-full font-poppins scroll-smooth bg-white">
@@ -49,19 +53,25 @@ const Events = () => {
         EVENTS
       </h1>
 
-      <div className={`${upcomingEventsData.length === 0? "h-[30vh]":"h-[60vh] sm:h-[80vh]"} w-full px-4 mt-12 mb-5`}>
+      <div className={`${upcomingEventsData.length === 0 ? "h-[30vh]" : "h-[60vh] sm:h-[80vh]"} w-full px-4 mt-12 mb-5`}>
         <h1 className="text-2xl md:text-3xl font-bold text-black">
           Upcoming Events :-
         </h1>
 
-        {upcomingEventsData.length === 0 ? (
+        {loading ? (
+          <div className="h-max w-full flex justify-center items-center">
+            <CustomLoader2 />
+          </div>
+        ) : upcomingEventsData.length === 0 ? (
           <p className="text-2xl md:text-3xl w-full text-center font-bold text-black">
             No Upcoming Events
           </p>
         ) : (
-          <CCarousel  controls={upcomingEventsData.length > 1}
-          indicators={upcomingEventsData.length > 1}
-          interval={upcomingEventsData.length > 1 ? 5000 : false}>
+          <CCarousel
+            controls={upcomingEventsData.length > 1}
+            indicators={upcomingEventsData.length > 1}
+            interval={upcomingEventsData.length > 1 ? 5000 : false}
+          >
             {upcomingEventsData.map((event) => (
               <CCarouselItem key={event._id}>
                 <CImage
