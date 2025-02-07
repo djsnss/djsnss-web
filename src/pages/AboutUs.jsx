@@ -142,7 +142,7 @@ const AboutUs = () => {
             return (
               <div
                 key={index}
-                className={`group flex flex-col items-center justify-center bg-white w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.33%-30px)] min-w-[300px] md:min-h-[370px] p-5
+                className={`group flex flex-col items-center justify-start bg-white w-full sm:w-[calc(50%-16px)] lg:w-[calc(33.33%-30px)] min-w-[300px] md:min-h-[370px] p-8
                 shadow-md border border-gray-200 transition-transform duration-300 hover:shadow-lg transform hover:-translate-y-1
                 ${isFirstRow ? 'lg:rounded-t-full' : ''} 
                 ${isLastRow ? 'lg:rounded-b-full' : ''}`}
