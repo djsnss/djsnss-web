@@ -41,6 +41,7 @@ const CreateEvent = () => {
     if (!formData.longDescription.trim()) newErrors.longDescription = "Long description is required.";
     if (!formData.date) newErrors.date = "Date is required.";
     if (!formData.location.trim()) newErrors.location = "Location is required.";
+    if (!formData.photo.url.trim()) newErrors.photo = "Event image is required.";
     if (!formData.TotalNoOfHours)
       newErrors.TotalNoOfHours = "Total hours is required.";
     if (formData.maxVolunteers < 1)
@@ -144,7 +145,7 @@ const CreateEvent = () => {
         {/* Event Image */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-[#003366]">
-            Event Image
+            Event Image *
           </label>
           <div className="relative">
             {formData.photo.url ? (
@@ -177,10 +178,13 @@ const CreateEvent = () => {
                     </span>
                     <input
                       type="file"
-                      className="hidden"
                       accept="image/*"
                       onChange={handleImageUpload}
-                    />
+                      className="hidden"
+                  />
+                  {errors.photo && (
+                    <p className="text-red-500 mt-6 text-sm">{errors.photo}</p>
+                  )}
                   </label>
                 </div>
               </div>
