@@ -1,43 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  
+
   const handleAddEvent = () => {
-    navigate('/create-event');
+    navigate("/create-event");
   };
 
   const handleEditEvent = () => {
-    navigate('/update-event');
+    navigate("/update-event");
   };
 
   const handleVolunteerEdit = () => {
-    navigate('/edit-details');
+    navigate("/edit-details");
   };
 
   const handleLogout = async () => {
     const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
-    const email = localStorage.getItem("email"); // Replace with your email logic
-    const password = localStorage.getItem("password"); // Replace with your password logic
-
-    const formData = {
-      email: email,
-      password: password,
-    };
-
-    await axios.post("https://djsnss-web.onrender.com/admin/logout", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(formData),
-    });
-  
+    await axios.post(
+      "https://djsnss-web.onrender.com/admin/logout",
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     localStorage.removeItem("adminAuthToken");
-    localStorage.removeItem("email");
-    localStorage.removeItem("password");
-    navigate('/admin/login');
+    navigate("/admin/login");
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 body {
   background-color: #fff;
-  color: #333; 
+  color: #333;
   margin: 0;
   padding: 0;
 }
@@ -8,8 +8,8 @@ body {
 .faq-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; 
-  background-color: #fff; 
+  gap: 20px;
+  background-color: #fff;
   border-radius: 8px;
 }
 
@@ -18,7 +18,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background-color: #f1f1f1;
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex-wrap: wrap; /* Allow wrapping in small screens */
@@ -67,7 +67,7 @@ body {
 }
 
 .faq-date {
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: bold;
   color: #333;
   background-color: #fff;
@@ -89,19 +89,19 @@ body {
   align-items: flex-start;
   margin-top: 30px;
   padding: 5px;
-  background-color: #f1f1f1;
+  background-color: #fff;
   border-radius: 20px;
 }
 
 .faq-question {
-  background-color: #f7f7f7; 
+  background-color: #fff;
   color: black;
   padding: 12px 20px;
   border-radius: 15px;
-  width: 100%; 
-  max-width: 600px; 
+  width: 100%;
+  max-width: 600px;
   margin-bottom: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .faq-answer {
@@ -109,13 +109,14 @@ body {
   color: white;
   padding: 12px 20px;
   border-radius: 15px;
-  width: 100%; 
+  width: 100%;
   max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: auto; 
+  margin-left: auto;
 }
 
-.faq-question, .faq-answer {
+.faq-question,
+.faq-answer {
   font-size: 16px;
   font-weight: normal;
 }
@@ -128,16 +129,16 @@ body {
   margin-top: 20px;
   padding: 15px;
   border-radius: 8px;
-  background-color: #f1f1f1; 
+  background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .chat-icon {
-  background-color: #333; 
+  background-color: #333;
   color: white;
   border-radius: 50%;
-  padding: 12px; 
-  font-size: 32px; 
+  padding: 12px;
+  font-size: 32px;
   cursor: pointer;
 }
 
@@ -155,7 +156,7 @@ body {
 
 .mic-icon {
   font-size: 24px;
-  color: #333; 
+  color: #333;
   cursor: pointer;
 }
 
@@ -185,7 +186,8 @@ body {
     padding: 6px 10px;
   }
 
-  .faq-question, .faq-answer {
+  .faq-question,
+  .faq-answer {
     font-size: 14px;
   }
 
@@ -214,7 +216,8 @@ body {
     padding: 10px;
   }
 
-  .faq-question, .faq-answer {
+  .faq-question,
+  .faq-answer {
     font-size: 13px;
   }
 

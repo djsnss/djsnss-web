@@ -92,7 +92,6 @@ const App = () => {
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/update-event" element={<UpdateEvent />} />
               <Route path="/edit-details" element={<EditVolunteerDetails />} />
-              <Route path="/create-event" element={<CreateEvent />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               <Route path="/admin/change-password" element={<AdminPass />} />

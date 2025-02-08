@@ -65,7 +65,7 @@ const EventDetails = () => {
                 </div>
                 <div>
                   <a
-                    href="https://nsss-certificate.vercel.app/"
+                    href="https://djsnss-certificate.streamlit.app"
                     target="_blank"
                     rel="noreferrer"
                     className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"

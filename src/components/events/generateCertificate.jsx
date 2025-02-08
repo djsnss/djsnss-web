@@ -25,7 +25,7 @@ const GenerateCertificate = () => {
                     className="text-center mb-6"
                 >
                     <Link
-                        to="https://nsss-certificate.vercel.app/"
+                        to="https://djsnss-certificate.streamlit.app"
                         className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out text-lg"
                         target="_blank" rel="noreferrer">
                         Generate Certificate
