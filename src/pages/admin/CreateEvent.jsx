@@ -36,6 +36,8 @@ const CreateEvent = () => {
 
     // Required fields
     if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.startHours.trim()) newErrors.startHours = "start hours is required.";
+    if (!formData.endHours.trim()) newErrors.endHours = "end hours is required.";
     if (!formData.slug.trim()) newErrors.slug = "Slug is required.";
     if (!formData.description.trim()) newErrors.description = "Description is required.";
     if (!formData.longDescription.trim()) newErrors.longDescription = "Long description is required.";
@@ -306,7 +308,7 @@ const CreateEvent = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Start Hour
+              Start Hour *
             </label>
             <input
               type="number"
@@ -320,7 +322,7 @@ const CreateEvent = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              End Hour
+              End Hour *
             </label>
             <input
               type="number"
