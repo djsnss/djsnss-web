@@ -25,7 +25,7 @@ const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
 const TimelineComponent = React.lazy(() => import("./pages/Timeline"));
 const AboutUs = React.lazy(() => import("./pages/AboutUs"));
-const Calendar = React.lazy(() => import("./components/calendar/Calendar"));
+const Calendar = React.lazy(() => import("./components/calendar/calendar"));
 const EventDetails = React.lazy(() => import("./pages/EventDetails"));
 const Events = React.lazy(() => import("./pages/Events"));
 const Team = React.lazy(() => import("./pages/Team"));
