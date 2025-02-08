@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import GenerateCertificate from "../components/events/GenerateCertificate";
+import GenerateCertificate from "../components/events/generateCertificate";
 import LargeEvents from "../components/events/LargeEvents";
 import LocalEvents from "../components/events/LocalEvents";
 import UniversityEvents from "../components/events/UniversityEvents";
