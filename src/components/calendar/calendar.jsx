@@ -170,7 +170,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import "./Calendar.css";
+import "./calendar.css";
 import { useNavigate } from "react-router-dom";
 
 const App = () => {
