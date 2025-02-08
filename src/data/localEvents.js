@@ -3,7 +3,7 @@ import VersovaBeachCleanup from "../assets/Events/VersovaBeachCleanup.jpg";
 import CyberSavvy from "../assets/Events/CyberSavvy.png";
 import SensoryBoard from "../assets/Events/SensoryBoardEvent.png";
 import OrphanageVisit2023 from "../assets/Events/OrphanageVisit2023.jpg";
-import JuhuBeachCleanup from "../assets/Events/JuhuBeachCleanup.jpg";
+import JuhuBeachCleanup from "../assets/Events/JuhuBeachCLeanup.jpg";
 import Aabhar2022 from "../assets/Events/Aabhar2022.jpg";
 export const localEventsData = [
   {
