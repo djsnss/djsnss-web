@@ -28,17 +28,16 @@ import HitanshuShah from "../assets/Team/Hitanshu Shah.jpg";
 import DhruviShah from "../assets/Team/Dhruvi Shah.jpg";
 import UmangDuwani from "../assets/Team/Umang Duwani.jpg";
 import NeetJain from "../assets/Team/Neet Jain.jpg";
-
-
+import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
+import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal.jpg";
+import AlishaBanz from "../assets/Faculty/Alisha Banz.jpg";
 
 const generateFacultyData = () => ({
-  Principal: [
-    { name: "Dr. Hari Vasudevan", imageUrl: "path_to_principal_image.jpg" },
-  ],
+  Principal: [{ name: "Dr. Hari Vasudevan", imageUrl: HariVasudevan }],
   ProgramOfficers: [
-    { name: "Prof. Vyankatesh Bagal", imageUrl: "path_to_bagal_image.jpg" },
+    { name: "Prof. Vyankatesh Bagal", imageUrl: VyankateshBagal },
     { name: "Prof. Rahul Taware", imageUrl: "path_to_taware_image.jpg" },
-    { name: "Prof. Alisha Banz", imageUrl: "path_to_banz_image.jpg" },
+    { name: "Prof. Alisha Banz", imageUrl: AlishaBanz },
   ],
 });
 
@@ -61,16 +60,12 @@ const Team_23_24 = {
         { name: "Shashank Naik", imageUrl: ShashankNaik },
         { name: "Parna Mishra", imageUrl: ParnaMishra },
       ],
-      Secretary: [
-        { name: "Rushabh Mehta", imageUrl: RushabhMehta },
-      ],
+      Secretary: [{ name: "Rushabh Mehta", imageUrl: RushabhMehta }],
       JointSecretary: [
-        { name: "Yash Dalvi", imageUrl:   YashDalvi },
+        { name: "Yash Dalvi", imageUrl: YashDalvi },
         { name: "Bhavy Shah", imageUrl: BhavyShah },
       ],
-      Treasurer: [
-        { name: "Cleon Lopes", imageUrl: CleonLopes },
-      ],
+      Treasurer: [{ name: "Cleon Lopes", imageUrl: CleonLopes }],
       JointTreasurer: [
         { name: "Archi Patel", imageUrl: ArchiPatel },
         { name: "Manit Rathod", imageUrl: ManitRathod },
