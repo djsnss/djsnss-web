@@ -27,7 +27,9 @@ export const login = async (req, res) => {
     if (!match) {
       return res.status(400).send("Invalid password");
     }
-    const token = jwt.sign({ adminId: admin._id, role: "admin" }, Secret);
+    const token = jwt.sign({ adminId: admin._id, role: "admin" }, Secret, {
+      expiresIn: "1d",
+    });
     sendLogin(req, res);
     return res.status(200).json({ token, admin });
   } catch (err) {

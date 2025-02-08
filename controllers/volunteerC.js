@@ -81,7 +81,8 @@ const signup = async (req, res) => {
     });
     const token = jwt.sign(
       { volunteerId: newVolunteer._id, role: "volunteer" },
-      Secret
+      Secret,
+      { expiresIn: "7d" }
     );
     await newVolunteer.save();
     sendSignup(req, res);
