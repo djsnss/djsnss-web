@@ -16,6 +16,13 @@ const ChangeEmailPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);

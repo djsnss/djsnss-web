@@ -88,7 +88,6 @@ const App = () => {
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
-              <Route path="/create-event" element={<CreateEvent />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
               <Route path="/update-event" element={<UpdateEvent />} />
               <Route path="/edit-details" element={<EditVolunteerDetails />} />
@@ -97,7 +96,8 @@ const App = () => {
               <Route path="/admin/change-password" element={<AdminPass />} />
               <Route path="/admin/change-email" element={<AdminEmail />} />
               <Route path="/admin/dashboard" element={<AdminDashboard />} />
-              <Route path="/update-event" element={<UpdateEvent />} />
+              <Route path="/admin/create-event" element={<CreateEvent />} />
+              <Route path="/admin/update-event" element={<UpdateEvent />} />
               <Route path="/volunteer/change-password" element={<VolunteerPass />} />
 
               {/* Dynamic routes for events */}

@@ -14,6 +14,13 @@ const CheckHoursNew = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!localStorage.getItem("authToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get(

@@ -21,6 +21,13 @@ const ChangePasswordPage = () => {
     setFormData({ ...formData, [name]: value });
   };
 
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
+
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
