@@ -17,7 +17,13 @@ const TeamCard = ({ name, position, image }) => (
     <div className="textBox">
       <p className="text head">{position}</p>
       <span>at</span>
-      <p className="text price">DJSCE</p>
+      {
+        position=="Principal"?(
+          <p className="text price">DJSCE</p>
+        ):(
+          <p className="text price">DJSNSS</p>
+        )
+      }
     </div>
   </div>
 );
