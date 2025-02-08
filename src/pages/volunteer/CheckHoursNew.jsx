@@ -5,11 +5,13 @@ import axios from "axios";
 import NSSLogo from "../../assets/NSSLogo.png";
 import { MdOutlineModeEdit } from "react-icons/md";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckHoursNew = () => {
   const [userData, setUserData] = useState(null);
   const fileInputRef = useRef(null);
   const [image, setImage] = useState(NSSLogo);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -44,6 +46,11 @@ const CheckHoursNew = () => {
 
     fetchUserData();
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("authToken");
+    navigate("/login");
+  };
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
@@ -88,36 +95,46 @@ const CheckHoursNew = () => {
     <div className="min-h-screen p-4 flex items-center justify-center bg-gradient-to-bl from-blue-400 to-gray-300">
       <Card className="w-full max-w-4xl border-2 border-white/50 backdrop-blur-lg bg-white/40 shadow-lg">
         <CardHeader>
-          <div className="flex flex-col md:flex-row items-center gap-4">
+          <div className="flex flex-col md:flex-row items-center justify-between w-full">
             {/* Avatar with Edit Button */}
-            <div className="relative group w-24 h-24">
-              <Avatar className="w-24 h-24">
-                <AvatarImage src={image} alt={userData.displayName} />
-                <AvatarFallback>
-                  {userData.displayName
-                    .split(" ")
-                    .map((n) => n[0])
-                    .join("")}
-                </AvatarFallback>
-              </Avatar>
-              {/* Hover Edit Icon */}
-              <div
-                className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full"
-                onClick={() => fileInputRef.current.click()}
-              >
-                <MdOutlineModeEdit className="text-white w-6 h-6" />
+            <div className="flex items-center gap-4">
+              <div className="relative group w-24 h-24">
+                <Avatar className="w-24 h-24">
+                  <AvatarImage src={image} alt={userData.displayName} />
+                  <AvatarFallback>
+                    {userData.displayName
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                {/* Hover Edit Icon */}
+                <div
+                  className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer rounded-full"
+                  onClick={() => fileInputRef.current.click()}
+                >
+                  <MdOutlineModeEdit className="text-white w-6 h-6" />
+                </div>
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  className="hidden"
+                  accept="image/*"
+                  onChange={handleFileChange}
+                />
               </div>
-              <input
-                type="file"
-                ref={fileInputRef}
-                className="hidden"
-                accept="image/*"
-                onChange={handleFileChange}
-              />
+              <CardTitle className="text-2xl md:text-3xl text-white">
+                {userData.displayName}
+              </CardTitle>
             </div>
-            <CardTitle className="text-2xl md:text-3xl text-center md:text-left text-white">
-              {userData.displayName}
-            </CardTitle>
+
+            {/* Logout Button - Now at the extreme right */}
+            <button
+              onClick={handleLogout}
+              className="px-4 py-2 ml-auto rounded-md bg-red-600 hover:bg-red-700 text-white transition-all"
+            >
+              Logout
+            </button>
           </div>
         </CardHeader>
         <CardContent>
