@@ -56,7 +56,7 @@ const CheckHoursNew = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
-    navigate("/login");
+    navigate("/");
   };
 
   const handleFileChange = async (event) => {

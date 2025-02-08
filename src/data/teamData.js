@@ -43,12 +43,12 @@ const TeamData = {
       {
         name: "Prof. Vyankatesh Bagal",
         position: "Program Officer",
-        image: "",
+        image: VyankateshBagal,
       },
       {
         name: "Prof. Rahul Taware",
         position: "Program Officer",
-        image: VyankateshBagal,
+        image: "",
       },
       {
         name: "Prof. Alisha Banz",
