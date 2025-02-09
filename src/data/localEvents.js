@@ -1,6 +1,6 @@
 import BandraBeachCleanup from "../assets/Events/BandraBC.png";
 import VersovaBeachCleanup from "../assets/Events/VersovaBeachCleanup.jpg";
-import CyberSavvy from "../assets/Events/CyberSavvy.png";
+import CyberSavvy from "../assets/Events/CyberSavvy.jpeg";
 import SensoryBoard from "../assets/Events/SensoryBoardEvent.png";
 import OrphanageVisit2023 from "../assets/Events/OrphanageVisit2023.jpg";
 import JuhuBeachCleanup from "../assets/Events/JuhuBeachCLeanup.jpg";
