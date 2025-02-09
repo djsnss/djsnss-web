@@ -16,10 +16,10 @@ import JheelPatel from "../assets/Team/Jheel Patel.jpg";
 import ShrirangDeshmukh from "../assets/Team/Shrirang Deshmukh.jpg";
 import DevShah from "../assets/Team/Dev Shah.jpg";
 import MahekSureja from "../assets/Team/Mahek Sureja.jpg";
-// import AsmiSavla from "../assets/Team/Asmi Savla.jpg";
+import AsmiSavla from "../assets/Team/Asmi Savla.jpg";
 import HarshKeniya from "../assets/Team/Harsh Keniya.jpg";
 import AsviShah from "../assets/Team/Asvi Shah.jpg";
-// import DeepDoshi from "../assets/Team/Deep Doshi.jpg";
+import DeepDoshi from "../assets/Team/Deep Doshi.jpg";
 import ShriyaKela from "../assets/Team/Shriya Kela.jpg";
 import DiyanMehta from "../assets/Team/Diyan Mehta.jpg";
 import HitanshuShah from "../assets/Team/Hitanshu Shah.jpg";
@@ -86,12 +86,12 @@ const Team_23_24 = {
         { name: "Mahek Sureja", imageUrl: MahekSureja },
       ],
       Creatives: [
-        { name: "Asmi Savla", imageUrl: "" },
+        { name: "Asmi Savla", imageUrl: AsmiSavla },
         { name: "Harsh Keniya", imageUrl: HarshKeniya },
       ],
       SocialMedia: [
         { name: "Asvi Shah", imageUrl: AsviShah },
-        { name: "Deep Doshi", imageUrl: "" },
+        { name: "Deep Doshi", imageUrl: DeepDoshi },
       ],
       Editorial: [
         { name: "Shriya Kela", imageUrl: ShriyaKela },
