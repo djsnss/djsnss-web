@@ -31,7 +31,7 @@ const DistinguishedAlumni = () => {
       <div className="h-1 bg-dark-navy m-6"></div> */}
 
       <div className="text-center mb-8">
-        <h2 className="text-dark-navy text-5xl underline font-bold tracking-wide">
+        <h2 className="text-dark-navy text-xl md:text-2xl lg:text-4xl underline font-bold tracking-wide">
           Distinguished Alumni
         </h2>
         <p className="text-light-gray mt-2 text-lg">
