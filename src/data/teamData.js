@@ -10,16 +10,14 @@ import AgamKamdar from "../assets/Team/Agam Kamdar.jpg";
 import YashDalvi from "../assets/Team/Yash Dalvi.jpg";
 import ArchiPatel from "../assets/Team/Archi Patel.jpg";
 import JaiwinMehta from "../assets/Team/Jaiwin Mehta.jpg";
-import JainamShah from "../assets/Team/Jainam Shah.jpg";
-import HarsheelSharma from "../assets/Team/Harsheel Sharma.jpg";
 import JheelPatel from "../assets/Team/Jheel Patel.jpg";
 import ShrirangDeshmukh from "../assets/Team/Shrirang Deshmukh.jpg";
 import DevShah from "../assets/Team/Dev Shah.jpg";
 import MahekSureja from "../assets/Team/Mahek Sureja.jpg";
-// import AsmiSavla from "../assets/Team/Asmi Savla.jpg";
+import AsmiSavla from "../assets/Team/Asmi Savla.jpg";
 import HarshKeniya from "../assets/Team/Harsh Keniya.jpg";
-// import AsviShah from "../assets/Team/Asvi Shah.jpg";
-// import DeepDoshi from "../assets/Team/Deep Doshi.jpg";
+import AsviShah from "../assets/Team/Asvi Shah.jpg";
+import DeepDoshi from "../assets/Team/Deep Doshi.jpg";
 import ShriyaKela from "../assets/Team/Shriya Kela.jpg";
 import DiyanMehta from "../assets/Team/Diyan Mehta.jpg";
 import HitanshuShah from "../assets/Team/Hitanshu Shah.jpg";
@@ -115,16 +113,6 @@ const TeamData = {
         name: "Technical",
         members: [
           { name: "Ansh Shah", position: "Head of Technical", image: AnshShah },
-          {
-            name: "Jainam Shah",
-            position: "Head of Technical",
-            image: JainamShah,
-          },
-          {
-            name: "Harsheel Sharma",
-            position: "Head of Technical",
-            image: HarsheelSharma,
-          },
         ],
       },
       {
@@ -152,9 +140,7 @@ const TeamData = {
         name: "Creatives",
         members: [
           {
-            name: "Asmi Savla",
-            position: "Head of Creatives",
-            image: "",
+            name: "Asmi Savla", position: "Head of Creatives", image: AsmiSavla,
           },
           {
             name: "Harsh Keniya",
@@ -169,12 +155,12 @@ const TeamData = {
           {
             name: "Asvi Shah",
             position: "Head of Social Media",
-            image: "",
+            image: AsviShah,
           },
           {
             name: "Deep Doshi",
             position: "Head of Social Media",
-            image: "",
+            image: DeepDoshi,
           },
         ],
       },
