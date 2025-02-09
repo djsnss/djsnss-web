@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loaders/CustomLoader2";
 
@@ -15,6 +15,13 @@ const ChangeEmailPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  useEffect(() => {
+    if (!localStorage.getItem("adminAuthToken")) {
+      // Redirect to login if not authenticated
+      window.location.href = "/unauthorized";
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

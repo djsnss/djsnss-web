@@ -6,15 +6,23 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const handleAddEvent = () => {
-    navigate("/create-event");
+    navigate("/admin/create-event");
   };
 
   const handleEditEvent = () => {
-    navigate("/update-event");
+    navigate("/admin/update-event");
   };
 
   const handleVolunteerEdit = () => {
-    navigate("/edit-details");
+    navigate("/admin/edit-details");
+  };
+
+  const handleChangeEmail = () => {
+    navigate("/admin/change-email");
+  };
+
+  const handleChangePassword = () => {
+    navigate("/admin/change-password");
   };
 
   const handleLogout = async () => {
@@ -68,6 +76,20 @@ const Dashboard = () => {
           className="px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
         >
           Edit Volunteer Details
+        </button>
+
+        <button
+          onClick={handleChangeEmail}
+          className="px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
+        >
+          Change Email
+        </button>
+
+        <button
+          onClick={handleChangePassword}
+          className="px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
+        >
+          Change Password
         </button>
 
         <button

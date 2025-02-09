@@ -36,9 +36,14 @@ const CreateEvent = () => {
 
     // Required fields
     if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.startHours.trim()) newErrors.startHours = "start hours is required.";
+    if (!formData.endHours.trim()) newErrors.endHours = "end hours is required.";
     if (!formData.slug.trim()) newErrors.slug = "Slug is required.";
+    if (!formData.description.trim()) newErrors.description = "Description is required.";
+    if (!formData.longDescription.trim()) newErrors.longDescription = "Long description is required.";
     if (!formData.date) newErrors.date = "Date is required.";
     if (!formData.location.trim()) newErrors.location = "Location is required.";
+    if (!formData.photo.url.trim()) newErrors.photo = "Event image is required.";
     if (!formData.TotalNoOfHours)
       newErrors.TotalNoOfHours = "Total hours is required.";
     if (formData.maxVolunteers < 1)
@@ -142,7 +147,7 @@ const CreateEvent = () => {
         {/* Event Image */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-[#003366]">
-            Event Image
+            Event Image *
           </label>
           <div className="relative">
             {formData.photo.url ? (
@@ -175,10 +180,13 @@ const CreateEvent = () => {
                     </span>
                     <input
                       type="file"
-                      className="hidden"
                       accept="image/*"
                       onChange={handleImageUpload}
-                    />
+                      className="hidden"
+                  />
+                  {errors.photo && (
+                    <p className="text-red-500 mt-6 text-sm">{errors.photo}</p>
+                  )}
                   </label>
                 </div>
               </div>
@@ -235,20 +243,30 @@ const CreateEvent = () => {
             value={formData.description}
             onChange={handleInputChange}
             rows={4}
-            className="w-full p-2 border border-[#387fa8] rounded-md"
+            className={`w-full p-2 border rounded-md ${
+              errors.description ? "border-red-500" : "border-[#387fa8]"
+            }`}
           />
+          {errors.description && (
+            <p className="text-red-500 text-sm">{errors.description}</p>
+          )}
         </div>
         <div>
           <label className="block text-sm font-medium text-[#003366]">
-            Long Description
+            Long Description *
           </label>
           <textarea
             name="longDescription"
             value={formData.longDescription}
             onChange={handleInputChange}
             rows={6}
-            className="w-full p-2 border border-[#387fa8] rounded-md"
+            className={`w-full p-2 border rounded-md ${
+              errors.longDescription ? "border-red-500" : "border-[#387fa8]"
+            }`}
           />
+          {errors.longDescription && (
+            <p className="text-red-500 text-sm">{errors.longDescription}</p>
+          )}
         </div>
 
         <div>
@@ -290,7 +308,7 @@ const CreateEvent = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Start Hour
+              Start Hour *
             </label>
             <input
               type="number"
@@ -304,7 +322,7 @@ const CreateEvent = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              End Hour
+              End Hour *
             </label>
             <input
               type="number"

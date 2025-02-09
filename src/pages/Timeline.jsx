@@ -278,7 +278,8 @@ const TimelineComponent = () => {
               icon={<item.icon className="w-6 h-6" />}
               iconStyle={{
                 background: item.color,
-                boxShadow: `0 0 0 4px ${item.color}40, inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)`,
+                boxShadow: `0 0 10px 4px ${item.color}80, 0 0 20px 8px ${item.color}60, inset 0 2px 0 rgb(0 0 0 / 8%), 0 3px 0 4px rgb(0 0 0 / 5%)`,
+                border: "2px solid rgb(255 255 255 / 20%)",
               }}
               contentStyle={{
                 background: "rgba(255, 255, 255, 0.05)",

@@ -200,13 +200,29 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
           {/* Description */}
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Description
+              Description *
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleInputChange}
+              rows={2}
+              required
+              className="w-full p-2 border border-[#387fa8] rounded-md"
+            />
+          </div>
+
+          {/* Long Description */}
+          <div>
+            <label className="block text-sm font-medium text-[#003366]">
+              Long Description *
+            </label>
+            <textarea
+              name="longDescription"
+              value={formData.longDescription}
+              onChange={handleInputChange}
               rows={4}
+              required
               className="w-full p-2 border border-[#387fa8] rounded-md"
             />
           </div>

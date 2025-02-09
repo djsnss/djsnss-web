@@ -16,14 +16,12 @@ function CardDefault({ desk }) {
     };
 
     return (
-        <Card className="mt-6 w-96 border-2 border-dark-navy">
-            <CardHeader color="blue-gray" className="relative ">
-                <img
-                    src={desk.image} // Use the image from the desk object
-                    alt={`${desk.name} image`} // Improve accessibility
-                    className="w-full mx-0 object-cover rounded-b-none"
-                />
-            </CardHeader>
+        <Card className="mt-6 w-80 border-2 border-dark-navy">
+            <img
+                src={desk.image} // Use the image from the desk object
+                alt={`${desk.name} image`} // Improve accessibility
+                className="w-full object-cover rounded-t-xl rounded-b-none"
+            />
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="">
                     {desk.name}
