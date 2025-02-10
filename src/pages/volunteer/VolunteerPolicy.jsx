@@ -58,15 +58,15 @@ const volunteerPolicy = () => {
   ];
 
   return (
-    <div className="w-full h-screen flex flex-col md:flex-row">
+    <div className="w-full min-h-screen flex flex-col md:flex-row">
       {/* Left Half - Volunteer Policy Title */}
       <section
-        className="relative w-full md:w-1/2 min-h-screen bg-black/60 p-4 bg-cover bg-center"
+        className="relative w-full md:w-1/2 min-h-[60vh] md:min-h-screen bg-black/60 p-4 flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${PolicyImg})` }} 
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 text-center text-white">
-          <h1 className="text-4xl md:text-7xl font-bold text-white tracking-wide">Volunteer Policy</h1>
+        <div className="relative z-10 text-center text-white px-4">
+          <h1 className="text-4xl md:text-7xl font-bold tracking-wide">Volunteer Policy</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             NSS aims to instill a sense of responsibility, leadership, and community development among volunteers.
             Learn about our mission and impact below.
@@ -74,9 +74,9 @@ const volunteerPolicy = () => {
         </div>
       </section>
 
-      {/* Right Half - Scrollable Grid (Responsive) */}
-      <section className="w-full md:w-1/2 min-h-screen overflow-y-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+      {/* Right Half - Scrollable Grid (Fixes Nested Scroll Issue) */}
+      <section className="w-full md:w-1/2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
           {sections.map((section, index) => (
             <motion.div
               key={index}
@@ -88,25 +88,15 @@ const volunteerPolicy = () => {
                 backgroundColor: sectionColors[index % sectionColors.length],
               }}
             >
-              <h2 className="text-white text-xl font-semibold">{section.title}</h2>
-              <div
-                className="w-full h-full"
-                style={{
-                  padding: "20px",
-                  overflow: "hidden",
-                  height: "100%",
-                  borderRadius: "0", 
-                }}
-              >
+              <h2 className="text-white text-xl font-semibold text-center">{section.title}</h2>
+              <div className="w-full h-full mt-3">
                 {section.content.includes("-") ? (
                   <ul className="list-disc pl-5 text-white">
                     {section.content
                       .split("\n")
                       .filter((item) => item.trim() !== "")
                       .map((item, i) => (
-                        <li key={i} className="mb-2">
-                          {item.replace("-", "").trim()}
-                        </li>
+                        <li key={i} className="mb-2">{item.replace("-", "").trim()}</li>
                       ))}
                   </ul>
                 ) : (
