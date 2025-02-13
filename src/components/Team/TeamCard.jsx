@@ -13,8 +13,12 @@ const TeamCard = ({ name, position, image }) => {
           alt={name}
           className="team-card-image"
         />
+        <div
+          className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20">
+          <h3 className="text-xs sm:text-lg font-bold">{name}</h3>
+        </div>
         <div className="textBox">
-          <p className="text head">{name}</p>
+          <p className="text head">{position}</p>
           <span>at</span>
           {position === "Principal" ? (
             <p className="text price">DJSCE</p>
