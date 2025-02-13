@@ -19,11 +19,6 @@ const MenuLinks = [
     name: "Team",
     link: "team",
   },
-  {
-    id: 5,
-    name: "Admin",
-    link: "admin/login",
-  },
 ];
 
 export { MenuLinks };
@@ -48,11 +43,6 @@ const SocialLinks = [
     id: 4,
     name: "Twitter",
     link: " https://x.com/NSS_DJSCE",
-  },
-  {
-    id: 5,
-    name: "Github",
-    link: "https://github.com/djsnss/",
   },
 ];
 

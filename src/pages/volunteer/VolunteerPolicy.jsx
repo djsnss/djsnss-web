@@ -66,7 +66,7 @@ const volunteerPolicy = () => {
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-4xl md:text-7xl font-bold tracking-wide">Volunteer Policy</h1>
+          <h1 className="text-4xl md:text-7xl font-bold tracking-wide text-white">Volunteer Policy</h1>
           <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
             NSS aims to instill a sense of responsibility, leadership, and community development among volunteers.
             Learn about our mission and impact below.
