@@ -1,15 +1,13 @@
 import React from "react";
 import TeamCard from "./TeamCard";
-import "../../styles/team.css";
 
-const TeamSection = ({ index, title, members }) => {
-  // Dynamically assign a CSS class based on odd/even index
-  const sectionClass = index % 2 === 0 ? "section-even" : "section-odd";
-
+const TeamSection = ({ title, members }) => {
   return (
-    <div className={`team-section relative ${sectionClass}`}>
-      <h2>{title}</h2>
-      <div className="team-grid">
+    <div className="px-auto py-8 my-14 mx-auto h-max w-full max-w-4xl rounded-lg shadow-lg text-black bg-white/10 relative">
+      <h2 className="text-2xl md:text-3xl font-bold uppercase text-center text-gray-800 mb-8 relative inline-block">
+        {title}
+      </h2>
+      <div className="h-max w-full max-w-full flex flex-row flex-wrap justify-around items-center gap-4">
         {members.map((member, idx) => (
           <TeamCard key={idx} {...member} />
         ))}
