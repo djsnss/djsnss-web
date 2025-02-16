@@ -18,7 +18,7 @@ const VolunteerFillerSection = () => {
             <div className="flex flex-col md:flex-row gap-6">
               <div className="w-full md:w-1/3 aspect-square bg-[#387fa8] overflow-hidden">
                 <img
-                  src="/api/placeholder/400/400"
+                  src="../../src/assets/volunteer/motherteresa.jpg"
                   alt="Mother Teresa"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
@@ -34,7 +34,7 @@ const VolunteerFillerSection = () => {
             <div className="flex flex-col md:flex-row gap-6">
               <div className="w-full md:w-1/3 aspect-square bg-[#387fa8] overflow-hidden">
                 <img
-                  src="/api/placeholder/400/400"
+                  src="../../src/assets/volunteer/abdulkalam.jpg"
                   alt="APJ Abdul Kalam"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
@@ -94,7 +94,7 @@ const VolunteerFillerSection = () => {
           <h3 className="text-2xl font-semibold text-[#003366] mb-6">Rural Development</h3>
           <div className="aspect-square bg-[#387fa8] overflow-hidden">
             <img
-              src="/api/placeholder/400/400"
+              src="../../src/assets/volunteer/rural.jpg"
               alt="Rural Development"
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
@@ -116,7 +116,7 @@ const VolunteerFillerSection = () => {
           <h3 className="text-2xl font-semibold mb-6 text-white">Environmental Impact</h3>
           <div className="aspect-square bg-[#005a8e] overflow-hidden">
             <img
-              src="/api/placeholder/400/400"
+              src="../../src/assets/volunteer/env.jpg"
               alt="Environmental Projects"
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
@@ -134,7 +134,7 @@ const VolunteerFillerSection = () => {
         >
           <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Government Initiatives</h3>
           <div className="aspect-square bg-[#387fa8] overflow-hidden">
-            <img src="/api/placeholder/400/400" alt="Government Schemes" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+            <img src= "../../src/assets/volunteer/govt.jpg" alt="Government Schemes" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
           </div>
           <ul className="space-y-4 text-[#003b5c] mt-6">
             <li className="border-b border-[#387fa8] pb-3">
