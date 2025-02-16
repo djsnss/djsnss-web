@@ -118,7 +118,7 @@ const login = async (req, res) => {
     }
     const token = jwt.sign(
       { volunteerId: volunteer._id, role: "volunteer" },
-      Secret
+      Secret,{expiresIn:"7d"}
     );
     sendLogin(req, res);
     return res.status(200).json({ token, volunteer });

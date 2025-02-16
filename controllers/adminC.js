@@ -44,7 +44,8 @@ export const getVolunteers = async (req, res) => {
     const volunteers = await VolunteerModel.find()
       .limit(limit * 1)
       .skip((page - 1) * limit)
-      .populate("connectedEvents");
+      .populate("connectedEvents")
+      .lean();
 
     const total = await VolunteerModel.countDocuments();
 
@@ -430,9 +431,11 @@ export const getEventStats = async (req, res) => {
 
 export const getUpcomingEvents = async (req, res) => {
   try {
-    const upcomingEvents = await EventModel.find({ status: "Upcoming" }).sort({
-      date: 1,
-    });
+    const upcomingEvents = await EventModel.find({ status: "Upcoming" })
+      .sort({
+        date: 1,
+      })
+      .lean();
     return res.status(200).json({
       message: "Upcoming events fetched successfully",
       events: upcomingEvents,
@@ -444,9 +447,11 @@ export const getUpcomingEvents = async (req, res) => {
 };
 export const getPastEvents = async (req, res) => {
   try {
-    const pastEvents = await EventModel.find({ status: "Past" }).sort({
-      date: 1,
-    });
+    const pastEvents = await EventModel.find({ status: "Past" })
+      .sort({
+        date: 1,
+      })
+      .lean();
     return res.status(200).json({
       message: "Past events fetched successfully",
       events: pastEvents,
@@ -634,7 +639,7 @@ export const getEventById = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await EventModel.find();
+    const events = await EventModel.find().lean();
     // Retrieve all events
     if (!events.length) {
       return res.status(404).json({ message: "No events found" });
@@ -692,6 +697,23 @@ export const updateEventDetails = async (req, res) => {
     return res.status(500).json({
       message: "Failed to update event",
       error: error.message,
+    });
+  }
+};
+
+export const deleteEvent = async (req, res) => {
+  try {
+    const eventId = req.params.eventId;
+    const event = await EventModel.findByIdAndDelete(eventId);
+    if (!event) {
+      return res.status(404).json({ message: "Event not found" });
+    }
+    return res.status(200).json({ message: "Event successfully deleted" });
+  } catch (err) {
+    console.error("Error deleting events:", err);
+    return res.status(500).json({
+      message: "Failed to delete events",
+      error: err.message,
     });
   }
 };
