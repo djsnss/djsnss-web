@@ -6,189 +6,260 @@ import VolunteerFillerSection from "../pages/volunteer/FillerSection";
 
 const Volunteer = () => {
   return (
-    <div className="bg-gradient-to-bl  from-blue-300 to-gray-300">
-      <div className="p-6 mx-auto max-w-7xl text-white flex flex-col justify-center">
-        <div className="mt-10 ">
-          <div className="text-center min-h-svh flex flex-col">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-800 mb-6">
-              Volunteer with Us
-            </h1>
-            <div className="flex flex-col justify-around items-center">
-              <p className="text-lg sm:text-xl lg:text-2xl mb-8 text-gray-800">
-                Join our dedicated team of volunteers and be a driving force for
-                meaningful transformation. By offering your time, skills, and
-                unwavering passion, you can make a profound impact on our
-                community, inspire positive change, and help build a legacy of
-                compassion and progress that will echo through generations.
-                Together, we can forge a brighter future and create lasting
-                differences that uplift and empower those around us.
-              </p>
-              <img
-                src={Image1}
-                alt="Tree Plantation"
-                className="max-h-96 rounded-lg shadow-lg mb-8"
-              />
-            </div>
+    <div className="min-h-screen bg-[#cce7ff]">
+      {/* Hero Section */}
+      <div className="relative h-[100vh] w-full overflow-hidden">
+        <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
+          <div className="hidden md:block bg-[#003366] h-full" />
+          <div className="relative h-full">
+            <img src={Image1} alt="Tree Plantation" className="h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-[#003b5c]/70 md:bg-[#003b5c]/40" />
           </div>
-
-          {/* Volunteer Benefits */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white p-8 rounded-lg shadow-lg mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-green-800 mb-6 text-center">
-              Volunteer Benefits
-            </h2>
-            <p className="text-md sm:text-lg lg:text-xl text-gray-600 mb-4 text-center">
-              Discover the numerous benefits of volunteering with us, from
-              personal growth to professional development and community
-              engagement. Make a difference while gaining valuable skills and
-              experiences. Join us today and be a part of something bigger than
-              yourself.
-            </p>
-            <ul className="list-disc text-gray-600 ml-0 md:ml-20">
-              <li>Develop leadership and teamwork skills</li>
-              <li>Gain hands-on experience in various fields</li>
-              <li>Enhance your resume and career prospects</li>
-              <li>Build a network of like-minded individuals</li>
-              <li>Receive certificates and awards for your contributions</li>
-            </ul>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        </div>
+        <div className="relative z-10 h-full">
+          <div className="w-full px-4 md:px-12 h-full flex items-center">
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="w-full md:max-w-2xl"
             >
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-4">
-                Why Volunteer?
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Volunteering provides an opportunity to enhance your skills,
-                build networks, and give back to the community. Make a tangible
-                difference and grow personally and professionally.
+              <h1 className="text-4xl md:text-7xl font-bold text-white mb-4 md:mb-8 leading-tight">
+                Volunteer with Us
+              </h1>
+              <p className="text-lg md:text-2xl text-[#cce7ff] leading-relaxed">
+                Join our dedicated team of volunteers and be a driving force for meaningful transformation. Together, we can forge a brighter future.
               </p>
-              <ul className="list-disc ml-5 text-gray-600">
-                <li>Enhance personal and professional skills</li>
-                <li>Build meaningful connections</li>
-                <li>Gain valuable experience</li>
-                <li>Receive recognition for your efforts</li>
-              </ul>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-4">
-                How to Get Involved
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Explore ways to contribute, from signing up for programs to
-                participating in community events and special projects tailored
-                to your interests and skills.
-              </p>
-              <ul className="list-disc ml-5 text-gray-600">
-                <li>Sign up for volunteer programs</li>
-                <li>Participate in community outreach</li>
-                <li>Join special projects and initiatives</li>
-                <li>Attend orientation and training sessions</li>
-              </ul>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-            >
-              <h2 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-4">
-                Upcoming Events
-              </h2>
-              <p className="text-gray-600 mb-4">
-                Join our upcoming events and make an impact. Participate in
-                clean-ups, charity runs, food drives, and more!
-              </p>
-              <ul className="list-disc ml-5 text-gray-600">
-                <li>Community Clean-Up Day - Oct 15, 2024</li>
-                <li>Annual Charity Run - Nov 10, 2024</li>
-                <li>Food Drive - Dec 5, 2024</li>
-                <li>Winter Festival Volunteering - Dec 20, 2024</li>
-              </ul>
-            </motion.div>
-          </div>
-
-          {/* Informational Section 1: Why Volunteer? */}
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="bg-white p-8 rounded-lg shadow-lg mb-12"
-          >
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-gray-800 mb-6 text-center">
-              NSS Events & Activities
-            </h2>
-            <p className="text-gray-600 text-lg mb-4">
-              NSS frequently organizes events such as rural development
-              projects, cleanliness drives, health awareness programs, and
-              environmental conservation campaigns. These events are perfect
-              opportunities for volunteers to give back to society while
-              learning new skills.
-            </p>
-            <p className="text-gray-600 text-lg">
-              From regular meetups to special camps, NSS events bring together
-              people from diverse backgrounds with a common goal of community
-              service. Volunteers often form lasting bonds, build teamwork, and
-              foster lifelong friendships.
-            </p>
-          </motion.div>
-
-          <div>
-            {/* Build Lifelong Friendships */}
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="bg-white p-8 rounded-lg shadow-md mb-12"
-            >
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold text-gray-800 mb-4">
-                Build Lifelong Friendships
-              </h3>
-              <p className="text-gray-600">
-                The NSS experience fosters deep friendships and connections with
-                like-minded individuals. By working together on projects,
-                volunteers not only grow as individuals but also form a network
-                of lifelong companions.
-              </p>
-              <p className="text-gray-600">
-                Frequent meetups, discussions, and group activities create an
-                environment where volunteers share their passion for social
-                service while developing strong relationships that last a
-                lifetime.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="text-center my-12"
-            >
+              <br />
+              <br />
               <Link
-                to="/volunteer-policy"
-                className="inline-block px-6 py-3 bg-blue-500 text-white font-semibold rounded-full shadow-lg hover:bg-blue-600 transition duration-300 ease-in-out text-lg mt-12"
+                to="/volunteer/volunteer-registration"
+                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300 mr-4"
               >
-                View Volunteer Policy
+                Register to be a Volunteer
+              </Link>
+              <Link
+                to="/volunteer/volunteer-login"
+                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300"
+              >
+                Login
               </Link>
             </motion.div>
-          </div>
 
-          {/* Informational Section 2: Connecting with Nature & Rural India */}
-          <VolunteerFillerSection />
+          </div>
         </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="w-full">
+        {/* Impact and Benefits Section */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-0">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="col-span-1 md:col-span-8 bg-[#cce7ff] p-6 md:p-12"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold text-[#003366] mb-6 md:mb-8">Make an Impact</h2>
+            <p className="text-lg md:text-xl text-[#003b5c] mb-6 md:mb-8 leading-relaxed">
+              By offering your time, skills, and unwavering passion, you can make a profound impact on our community and inspire positive change.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+                <img src={Image1} alt="Volunteer Activity" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+              </div>
+              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+                <img src={Image1} alt="Community Impact" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+              </div>
+            </div>
+          </motion.div>
+          <div className="col-span-1 md:col-span-4 bg-[#005a8e] p-6 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-white">Volunteer Benefits</h3>
+            <ul className="space-y-4 text-base md:text-lg text-[#cce7ff]">
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Develop leadership and teamwork skills</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Gain hands-on experience in various fields</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Enhance your resume and career prospects</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Build a network of like-minded individuals</span>
+              </li>
+              <li className="flex items-start">
+                <span className="mr-2">•</span>
+                <span>Receive certificates and awards for your contributions</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Full-Width Image Section */}
+        <div className="relative h-64 md:h-96 w-full">
+          <img src={Image1} alt="Volunteer Impact" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#003366]/60" />
+          <div className="absolute inset-0 flex items-center justify-center p-4">
+            <p className="text-2xl md:text-4xl font-bold text-white text-center max-w-4xl">
+              Make a difference while gaining valuable skills and experiences
+            </p>
+          </div>
+        </div>
+
+        {/* Three Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="bg-[#a2b9d8] p-6 md:p-12 hover:bg-[#cce7ff] transition-colors duration-300"
+          >
+            <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Why Volunteer?</h3>
+            <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <img src={Image1} alt="Why Volunteer" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+            </div>
+            <p className="text-[#003b5c] my-6">
+              Volunteering provides an opportunity to enhance your skills, build networks, and give back to the community. Make a tangible difference and grow personally and professionally.
+            </p>
+            <ul className="list-disc ml-5 text-[#003b5c] space-y-3">
+              <li>Enhance personal and professional skills</li>
+              <li>Build meaningful connections</li>
+              <li>Gain valuable experience</li>
+              <li>Receive recognition for your efforts</li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-[#003366] p-6 md:p-12 hover:bg-[#005a8e] transition-colors duration-300"
+          >
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-white">How to Get Involved</h3>
+            <div className="aspect-square bg-[#003b5c] overflow-hidden">
+              <img src={Image1} alt="Get Involved" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+            </div>
+            <p className="text-[#cce7ff] my-6">
+              Explore ways to contribute, from signing up for programs to participating in community events and special projects tailored to your interests and skills.
+            </p>
+            <ul className="list-disc ml-5 text-[#cce7ff] space-y-3">
+              <li>Sign up for volunteer programs</li>
+              <li>Participate in community outreach</li>
+              <li>Join special projects and initiatives</li>
+              <li>Attend orientation and training sessions</li>
+
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="bg-[#a2b9d8] p-6 md:p-12 hover:bg-[#cce7ff] transition-colors duration-300"
+          >
+            <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Upcoming Events</h3>
+            <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <img src={Image1} alt="Upcoming Events" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+            </div>
+            <ul className="space-y-4 text-[#003b5c] mt-6">
+              <li className="border-b border-[#387fa8] pb-3">
+                <span className="text-[#005a8e] font-semibold">Oct 15, 2024</span>
+                <div className="font-medium">Community Clean-Up Day</div>
+              </li>
+              <li className="border-b border-[#387fa8] pb-3">
+                <span className="text-[#005a8e] font-semibold">Nov 10, 2024</span>
+                <div className="font-medium">Annual Charity Run</div>
+              </li>
+              <li>
+                <span className="text-[#005a8e] font-semibold">Dec 5, 2024</span>
+                <div className="font-medium">Food Drive</div>
+              </li>
+            </ul>
+          </motion.div>
+        </div>
+
+        {/* NSS Events Section */}
+        <div className="grid grid-cols-1 md:grid-cols-12 w-full">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="col-span-1 md:col-span-7 bg-[#387fa8] p-6 md:p-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">NSS Events & Activities</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+              <div className="aspect-square bg-[#003b5c] overflow-hidden col-span-2 md:col-span-2 row-span-2">
+                <img
+                  src={Image1}
+                  alt="NSS Activity Main"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="aspect-square bg-[#003b5c] overflow-hidden">
+                <img
+                  src={Image1}
+                  alt="NSS Activity 2"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="aspect-square bg-[#003b5c] overflow-hidden">
+                <img
+                  src={Image1}
+                  alt="NSS Activity 3"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            </div>
+            <p className="text-[#cce7ff] text-base md:text-lg mb-8">
+              NSS frequently organizes events such as rural development projects, cleanliness drives, health awareness programs, and environmental conservation campaigns. These events are perfect opportunities for volunteers to give back to society while learning new skills.
+            </p>
+            <p className="text-[#cce7ff] text-base md:text-lg mb-8">
+              From regular meetups to special camps, NSS events bring together people from diverse backgrounds with a common goal of community service. Volunteers often form lasting bonds, build teamwork, and foster lifelong friendships.
+            </p>
+            <Link
+              to="/volunteer/volunteer-policy"
+              className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#003366] text-white text-base md:text-lg font-semibold hover:bg-[#003b5c] transition duration-300"
+            >
+              View Volunteer Policy
+            </Link>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="col-span-1 md:col-span-5 bg-[#cce7ff] p-6 md:p-12"
+          >
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-[#003366]">Build Lifelong Friendships</h3>
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+                <img
+                  src={Image1}
+                  alt="Friendships 1"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+                <img
+                  src={Image1}
+                  alt="Friendships 2"
+                  className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                />
+              </div>
+            </div>
+            <p className="text-[#003b5c] text-base md:text-lg">
+              The NSS experience fosters deep friendships and connections with like-minded individuals. By working together on projects, volunteers not only grow as individuals but also form a network of lifelong companions.
+            </p>
+            <br></br>
+            <br></br>
+            <p className="text-[#003b5c] text-base md:text-lg">
+              Frequent meetups, discussions, and group activities create an environment where volunteers share their passion for social service while developing strong relationships that last a lifetime.
+            </p>
+          </motion.div>
+        </div>
+
+
+        {/* Additional Section */}
+        <VolunteerFillerSection />
       </div>
     </div>
   );
