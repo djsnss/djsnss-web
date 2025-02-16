@@ -18,6 +18,7 @@ import {
   getEventById,
   getAllEvents,
   updateEventDetails,
+  deleteEvent,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
@@ -74,6 +75,8 @@ router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for passw
 router.put("/change-password", changePassword); //route to change password of admin
 
 router.post("/logout", authAdmin, logout); //logout API for admin
+
+router.delete("/deleteEvent", authAdmin, deleteEvent);
 
 export default router;
 
