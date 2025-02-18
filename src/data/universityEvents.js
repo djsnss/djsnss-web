@@ -4,7 +4,7 @@ import SwachhataHiSeva from "../assets/Events/VersovaBeachCleanup.jpg";
 import GandhiJayanti from "../assets/Events/GandhiJayanti.jpg";
 import MeriMatiMeraDesh from "../assets/Events/MeriMittiMeraDesh.jpg";
 import AntiDowry from "../assets/Events/AntiDowry.png";
-import BudgetBuzz from "../assets/Events/BudgetBuzz.png";
+import BudgetBuzz from "../assets/Events/BudgetBuzz.jpg";
 
 export const universityEventsData = [
   {
