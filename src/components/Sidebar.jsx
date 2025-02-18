@@ -2,7 +2,6 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome, FiChevronsRight } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
-
 // Manual Icon Mapping
 const iconMap = {
   FiHome: FiHome,
@@ -15,6 +14,7 @@ const iconMap = {
   GiCampfire: React.lazy(() => import("react-icons/gi").then(module => ({ default: module.GiCampfire }))),
   FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
   FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
+  FaGoogleDrive: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaGoogleDrive }))),
 };
 
 const Sidebar = () => {
@@ -97,6 +97,7 @@ const Sidebar = () => {
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
+    { Icon: "FaGoogleDrive", title: "Drive", path: "/drive" },
   ];
 
   const handleNavigation = (path) => {
