@@ -9,14 +9,20 @@ import AdminModel from "../models/admin.js";
 import crypto from "crypto";
 import redis from "redis";
 
-const redisClient = redis.createClient({
-  socket: {
-    host: process.env.REDIS_HOST,
-    port: 6379,
-  },
+const redisClient = createClient({
+  url: process.env.REDIS_URL,
+  socket: { tls: true },
 });
+redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
 
-redisClient.connect();
+(async () => {
+  try {
+    await redisClient.connect();
+    console.log("✅ Connected to Redis!");
+  } catch (err) {
+    console.error("Redis Connection Failed:", err);
+  }
+})();
 
 env.config();
 const Secret = process.env.SecretKey;
