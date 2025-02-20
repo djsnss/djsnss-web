@@ -15,7 +15,7 @@ const iconMap = {
   GiCampfire: React.lazy(() => import("react-icons/gi").then(module => ({ default: module.GiCampfire }))),
   FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
   FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
-  FaGoogleDrive: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaGoogleDrive }))),
+  FaRegFileAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegFileAlt }))),
   LuPanelRightClose: React.lazy(() => import("react-icons/lu").then(module => ({ default: module.LuPanelRightClose }))),
 };
 
@@ -99,7 +99,7 @@ const Sidebar = () => {
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaGoogleDrive", title: "Reports", path: "/drive" },
+    { Icon: "FaRegFileAlt", title: "Reports", path: "/drive" },
   ];
 
   const handleNavigation = (path) => {
