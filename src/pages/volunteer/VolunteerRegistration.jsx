@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 const VolunteerRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleNavigate = useNavigate();
@@ -8,6 +9,8 @@ const VolunteerRegistration = () => {
     name: "",
     branch: "",
     sapId: "",
+    caste: "",
+    gender: "",
     phoneNumber: "",
     email: "",
     password: "",
@@ -58,6 +61,8 @@ const VolunteerRegistration = () => {
           name: "",
           branch: "",
           sapId: "",
+          caste: "",
+          gender: "",
           phoneNumber: "",
           email: "",
           password: "",
@@ -126,7 +131,7 @@ const VolunteerRegistration = () => {
               >
                 Branch
               </label>
-              <input
+              <select
                 type="text"
                 id="branch"
                 name="branch"
@@ -134,7 +139,17 @@ const VolunteerRegistration = () => {
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
                 required
-              />
+              >
+                <option value="" disabled>Select Branch</option>
+                <option value="Computer">Computer</option>
+                <option value="IT">IT</option>
+                <option value="Data Science">Data Science</option>
+                <option value="EXTC">EXTC</option>
+                <option value="IOT">IOT</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="AI&ML">AI&ML</option>
+                <option value="AI&DS">AI&DS</option>
+              </select>
             </div>
             <div>
               <label
@@ -144,12 +159,12 @@ const VolunteerRegistration = () => {
                 SAP ID
               </label>
               <input
-                type="text"
+                type="number"
                 id="sapId"
                 name="sapId"
                 value={formData.sapId}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 pattern="^\d{11}$"
                 required
               />
@@ -168,6 +183,7 @@ const VolunteerRegistration = () => {
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 required
               />
             </div>
@@ -188,17 +204,34 @@ const VolunteerRegistration = () => {
               />
             </div>
             <div>
+              <label htmlFor="gender" className="block text-sky-900 font-semibold">
+                Gender
+              </label>
+              <select
+                id="gender"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              >
+                <option value="" disabled>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div>
               <label
-                htmlFor="fatherEmail"
+                htmlFor="caste"
                 className="block text-sky-900 font-semibold"
               >
-                Father&apos;s Email
+                Caste
               </label>
               <input
-                type="email"
-                id="fatherEmail"
-                name="fatherEmail"
-                value={formData.fatherEmail}
+                type="text"
+                id="caste"
+                name="caste"
+                value={formData.caste}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
@@ -294,6 +327,22 @@ const VolunteerRegistration = () => {
                 id="fatherName"
                 name="fatherName"
                 value={formData.fatherName}
+                onChange={handleChange}
+                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="fatherEmail"
+                className="block text-sky-900 font-semibold"
+              >
+                Father&apos;s Email
+              </label>
+              <input
+                type="email"
+                id="fatherEmail"
+                name="fatherEmail"
+                value={formData.fatherEmail}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               />
