@@ -16,7 +16,7 @@ import { Toaster } from "react-hot-toast";
 
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
-const Volunteer = React.lazy(() => import("./pages/Volunteer"));
+const Volunteer = React.lazy(() => import("./pages/volunteer/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./pages/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./pages/volunteer/VolunteerRegistration"));
 const CheckHoursNew = React.lazy(() => import("./pages/volunteer/CheckHoursNew"));

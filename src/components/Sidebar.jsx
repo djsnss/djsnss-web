@@ -112,7 +112,7 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`absolute sm:relative p-2 sm:h-screen shadow-lg border-r border-b border-white/20 sm:border-hidden backdrop-blur-lg transition-all duration-500 ease-in-out ${open ? "h-[100vh] w-[100vw] sm:w-48" : "h-max w-12 sm:w-20"} z-50 font-poppins rounded-br-lg sm:rounded-none overflow-y-auto overflow-x-hidden`}
+      className={`absolute sm:relative p-2 sm:h-screen shadow-lg border-r border-b border-white/20 sm:border-hidden backdrop-blur-lg transition-all duration-500 ease-in-out ${open ? "h-[100vh] w-[100vw] sm:w-48" : "h-max w-12 md:w-14"} z-50 font-poppins rounded-br-lg sm:rounded-none overflow-y-auto overflow-x-hidden`}
       style={{
         backgroundColor: isSmallScreen ? "rgba(0,0,0,0.5)" : "",
         backgroundImage: !isSmallScreen
