@@ -1,7 +1,8 @@
 import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiHome, FiChevronsRight } from "react-icons/fi"; // Keep core icons like this for immediate use
+import { FiHome } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
+import { LuPanelRightClose } from "react-icons/lu";
 // Manual Icon Mapping
 const iconMap = {
   FiHome: FiHome,
@@ -15,7 +16,9 @@ const iconMap = {
   FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
   FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
   FaGoogleDrive: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaGoogleDrive }))),
+  LuPanelRightClose: React.lazy(() => import("react-icons/lu").then(module => ({ default: module.LuPanelRightClose }))),
 };
+
 
 const Sidebar = () => {
   const location = useLocation();
@@ -75,9 +78,8 @@ const Sidebar = () => {
     {
       Icon: "MdEventNote",
       title: "Events",
-      path: "/events",
       subLinks: [
-        // { title: "Events", path: "/events" },
+        { title: "Events", path: "/events" },
         { title: "Timeline", path: "/timeline" },
         { title: "Camp", path: "/nss-camp" },
         { title: "Grain-A-Thon", path: "/grain-a-thon" },
@@ -88,9 +90,9 @@ const Sidebar = () => {
     {
       Icon: "IoPeople",
       title: "Volunteer",
-      path: "/volunteer",
       subLinks: [
         ...(localStorage.getItem("authToken") ? [{ title: "Check Hours", path: "/volunteer/checkhours" }] : []),
+        { title: "Volunteer", path: "/volunteer/" },
         { title: "Volunteer Registration", path: "/volunteer/volunteer-registration" },
         { title: "Volunteer Login", path: "/volunteer/volunteer-login" },
         { title: "Volunteer Policy", path: "/volunteer/volunteer-policy" },
@@ -126,11 +128,14 @@ const Sidebar = () => {
           setOpen(!open);
           setDropdowns({}); // Close all dropdowns when sidebar toggles
         }}
-        className="w-full h-10 rounded-lg bg-slate-100 transition-colors duration-200"
+        className={`flex w-full h-8 items-center justify-center mb-2 rounded-lg ${open ? "bg-indigo-100": "bg-slate-100" } transition-colors duration-200`}
       >
-        <FiChevronsRight
-          className={`flex px-2 w-full text-black text-lg sm:p-0 mx-auto transition-transform ${open && "rotate-180"}`}
+        <LuPanelRightClose
+          className={`flex aspect-square text-black text-lg sm:p-0 transition-transform ${open && "hidden"}`}
         />
+        <p className={`text-black text-lg sm:text-lg font-semibold text-center ${open ? "my-2 flex" : "hidden"}`}>
+          Close
+        </p>
       </button>
 
       <div className={`w-full flex flex-col space-y-2 ${open ? "block" : "hidden sm:block"}`}>
@@ -145,7 +150,6 @@ const Sidebar = () => {
                   onClick={() => {
                     if (!subLinks) {
                       handleNavigation(path);
-                      setOpen(!open);
                       setDropdowns({});
                     }
                   }}
@@ -192,7 +196,6 @@ const Sidebar = () => {
                           ...prev,
                           [title]: false, // Close dropdown after navigation
                         }));
-                        setOpen(!open);
                       }}
                       className="block p-2 text-sm sm:text-base font-medium text-white no-underline rounded-lg hover:bg-white/20"
                     >

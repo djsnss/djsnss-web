@@ -54,8 +54,6 @@ function FooterComponent() {
           <div className="w-full h-40 md:h-56 overflow-hidden rounded-lg shadow-lg border border-gray-700">
             <iframe
               className="w-full h-full"
-              frameBorder="0"
-              scrolling="no"
               src="https://maps.google.com/maps?width=655&amp;height=240&amp;hl=en&amp;q=DJ Sanghvi College&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
             ></iframe>
           </div>
@@ -105,9 +103,7 @@ function FooterComponent() {
                       {report.reports.map((item) => (
                         <a
                           key={item.id}
-                          href={item.driveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href={item.link}
                           className="text-sm md:text-base text-white hover:text-sky-300 transition-all duration-300 ease-in-out"
                         >
                           {item.name}

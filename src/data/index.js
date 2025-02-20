@@ -54,14 +54,12 @@ const ReportLinks = [
       {
         id: 1,
         name: "Annual Report",
-        link: "annualreport-2021-22",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2021-22",
+        link: "/drive",
       },
       {
         id: 2,
         name: "Event Report",
-        link: "eventreport-2021-22",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2021-22",
+        link: "/drive",
       },
     ],
   },
@@ -71,31 +69,12 @@ const ReportLinks = [
       {
         id: 3,
         name: "Annual Report",
-        link: "annualreport-2022-23",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2022-23",
+        link: "/drive",
       },
       {
         id: 4,
         name: "Event Report",
-        link: "eventreport-2022-23",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2022-23",
-      },
-    ],
-  },
-  {
-    year: "2023-24",
-    reports: [
-      {
-        id: 5,
-        name: "Annual Report",
-        link: "annualreport-2023-24",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2023-24",
-      },
-      {
-        id: 6,
-        name: "Event Report",
-        link: "eventreport-2023-24",
-        driveLink: "https://drive.google.com/drive/folders/your-folder-id-2023-24",
+        link: "/drive",
       },
     ],
   },

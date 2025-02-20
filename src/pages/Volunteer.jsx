@@ -33,13 +33,13 @@ const Volunteer = () => {
               <br />
               <Link
                 to="/volunteer/volunteer-registration"
-                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300 mr-4"
+                className="no-underline inline-block px-6 md:px-8 py-3 md:py-4 rounded-xl bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300 mr-4"
               >
                 Register to be a Volunteer
               </Link>
               <Link
                 to="/volunteer/volunteer-login"
-                className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300"
+                className="no-underline inline-block px-6 md:px-8 py-3 md:py-4 rounded-xl bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300"
               >
                 Login
               </Link>
