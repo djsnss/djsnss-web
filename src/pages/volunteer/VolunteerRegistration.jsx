@@ -215,9 +215,9 @@ const VolunteerRegistration = () => {
                 className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
               >
                 <option value="" disabled>Select Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="other">Other</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div>
