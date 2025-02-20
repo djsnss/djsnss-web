@@ -7,7 +7,7 @@ import env from "dotenv";
 import { sendLogin, sendOTP } from "./nodemailerC.js";
 import AdminModel from "../models/admin.js";
 import crypto from "crypto";
-import redis from "redis";
+import { createClient } from "redis";
 
 const redisClient = createClient({
   url: process.env.REDIS_URL,
