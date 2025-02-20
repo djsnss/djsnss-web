@@ -7,6 +7,16 @@ import env from "dotenv";
 import { sendLogin, sendOTP } from "./nodemailerC.js";
 import AdminModel from "../models/admin.js";
 import crypto from "crypto";
+import redis from "redis";
+
+const redisClient = redis.createClient({
+  socket: {
+    host: process.env.REDIS_HOST,
+    port: 6379,
+  },
+});
+
+redisClient.connect();
 
 env.config();
 const Secret = process.env.SecretKey;
@@ -185,6 +195,11 @@ export const deleteVolunteer = async (req, res) => {
   }
 };
 
+const clearCache = async () => {
+  await redisClient.del("upcomingEvents");
+  await redisClient.del("pastEvents");
+};
+
 export const createEvent = async (req, res) => {
   try {
     const {
@@ -238,6 +253,7 @@ export const createEvent = async (req, res) => {
       };
     }
     await newEvent.save();
+    await clearCache();
     return res.status(200).json({
       message: "Successfully created new Event",
       Event: newEvent,
@@ -431,11 +447,23 @@ export const getEventStats = async (req, res) => {
 
 export const getUpcomingEvents = async (req, res) => {
   try {
+    const cachedEvents = await redisClient.get("upcomingEvents");
+    if (cachedEvents) {
+      return res.status(200).json({
+        message: "Upcoming events fetched successfully (from cache)",
+        events: JSON.parse(cachedEvents),
+      });
+    }
     const upcomingEvents = await EventModel.find({ status: "Upcoming" })
       .sort({
         date: 1,
       })
       .lean();
+    await redisClient.setEx(
+      "upcomingEvents",
+      3600,
+      JSON.stringify(upcomingEvents)
+    );
     return res.status(200).json({
       message: "Upcoming events fetched successfully",
       events: upcomingEvents,
@@ -447,11 +475,19 @@ export const getUpcomingEvents = async (req, res) => {
 };
 export const getPastEvents = async (req, res) => {
   try {
+    const cachedEvents = await redisClient.get("pastEvents");
+    if (cachedEvents) {
+      return res.status(200).json({
+        message: "Past events fetched successfully (from cache)",
+        events: JSON.parse(cachedEvents),
+      });
+    }
     const pastEvents = await EventModel.find({ status: "Past" })
       .sort({
         date: 1,
       })
       .lean();
+    await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
     return res.status(200).json({
       message: "Past events fetched successfully",
       events: pastEvents,
