@@ -11,7 +11,7 @@ const TeamCard = ({ name, position, image }) => {
             "https://images.unsplash.com/photo-1678811116814-26372fcfef1b?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           }
           alt={name}
-          className="team-card-image"
+          className="team-card-image h-[45vh] w-full"
         />
         <div
           className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20">
@@ -51,8 +51,6 @@ const StyledWrapper = styled.div`
   }
 
   .team-card-image {
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     border-radius: 20px;
     scale: 0.95;
