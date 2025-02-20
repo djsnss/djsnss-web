@@ -99,7 +99,7 @@ const Sidebar = () => {
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaGoogleDrive", title: "Drive", path: "/drive" },
+    { Icon: "FaGoogleDrive", title: "Reports", path: "/drive" },
   ];
 
   const handleNavigation = (path) => {

@@ -4,41 +4,32 @@ import { motion } from "framer-motion";
 const FolderTree = () => {
   const folders = [
     { id: "12qa-XERk8JzCJ2X0ocF3O84fEfv4Sa6f", name: "NSS Data" },
-    { id: "1sEtSeeYL-a0P1UCs_Kwl5thgbzIkAHCu", name: "NSS 2021-22" },
     { id: "1bzzElnbii_J72C8O71t96UIe9qnIVPSl", name: "NSS 2022-23" },
-  ];
-
+    { id: "1sEtSeeYL-a0P1UCs_Kwl5thgbzIkAHCu", name: "NSS 2021-22" },
+  ]; 
+  
   return (
-    <div className="min-h-screen bg-[#cce7ff] p-6 md:p-12">
-      <motion.h1
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center text-4xl md:text-7xl font-bold text-[#003366] mb-10"
-      >
+    <div className="w-full p-4 font-poppins">
+      <h1 className="flex mx-auto mb-2 py-4 h-max w-full justify-center items-center text-3xl md:text-7xl text-black">
         Drive Links
-      </motion.h1>
+      </h1>
 
-      <div className="space-y-8 max-w-5xl mx-auto">
+      <div className="space-y-8 px-4 md:px-8 lg:px-16">
         {folders.map((folder, index) => (
-          <motion.div
+          <div
             key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="w-full bg-white shadow-lg rounded-lg overflow-hidden p-6 border border-[#003b5c]"
+            className="w-full h-max border border-gray-300 rounded-2xl shadow-xl p-6 bg-gradient-to-br from-gray-50 to-gray-100 hover:shadow-2xl transition-all duration-300"
           >
-            <h2 className="text-2xl font-semibold text-[#003b5c] mb-4">
+            <h2 className="text-2xl font-semibold font-montserrat text-gray-800 mb-4">
               {folder.name}
             </h2>
-            <div className="w-full rounded-lg overflow-hidden border border-gray-300">
-              <iframe
-                src={`https://drive.google.com/embeddedfolderview?id=${folder.id}#grid`}
-                width="100%"
-                height="450px"
-                className="w-full h-[450px] rounded-md"
-              ></iframe>
-            </div>
-          </motion.div>
+            <iframe
+              src={`https://drive.google.com/embeddedfolderview?id=${folder.id}#grid`}
+              width="100%"
+              height="450px"
+              className="rounded-lg border border-gray-200 shadow-md"
+            ></iframe>
+          </div>
         ))}
       </div>
     </div>

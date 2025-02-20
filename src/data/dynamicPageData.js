@@ -23,9 +23,9 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
     location: 'Dahanu',
     date: '26th Jan - 31st Jan 2024',
     images: [
-      '/path/to/image1.jpg',
-      '/path/to/image2.jpg',
-      '/path/to/image3.jpg'
+      '../src/assets/Events/camp1.jpg',
+      '../src/assets/Events/camp2.jpg',
+      '../src/assets/Events/camp3.jpg'
     ]
   },
   {
@@ -45,9 +45,9 @@ The success of Grain-A-Thon highlighted the power of community-driven initiative
     featuredImage: 'https://img.freepik.com/premium-photo/high-resolution-close-up-golden-wheat-ears-loose-grains-turquoise-background-perfect_996993-50614.jpg',
     date: 'February 2024',
     images: [
-      '/path/to/image1.jpg',
-      '/path/to/image2.jpg',
-      '/path/to/image3.jpg'
+      '../src/assets/Events/grainathon1.jpg',
+      '../src/assets/Events/grainathon2.JPG',
+      '../src/assets/Events/GrainAThon.png'
     ]
   },
   {
@@ -68,9 +68,9 @@ The success of the blood donation drive reflected the strength of the college co
     location: 'Mumbai',
     date: 'March 2024',
     images: [
-      '/path/to/image1.jpg',
-      '/path/to/image2.jpg',
-      '/path/to/image3.jpg'
+      '../src/assets/Events/bdd1.jpg',
+      '../src/assets/Events/bdd2.jpg',
+      '../src/assets/Events/bdd3.jpg'
     ]
   }
 ]
