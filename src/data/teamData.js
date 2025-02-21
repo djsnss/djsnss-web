@@ -27,32 +27,17 @@ import NeetJain from "../assets/Team/Neet Jain.jpg";
 import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal.jpg";
 import AlishaBanz from "../assets/Faculty/Alisha Banz.jpg";
+import RahulTaware from "../assets/Faculty/Rahul Taware.jpg";
 
 const TeamData = {
   faculty: {
     principal: [
-      {
-        name: "Dr. Hari Vasudevan",
-        position: "Principal",
-        image: HariVasudevan,
-      },
+      { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, },
     ],
     "Program Officers": [
-      {
-        name: "Prof. Vyankatesh Bagal",
-        position: "Program Officer",
-        image: VyankateshBagal,
-      },
-      {
-        name: "Prof. Rahul Taware",
-        position: "Program Officer",
-        image: "",
-      },
-      {
-        name: "Prof. Alisha Banz",
-        position: "Program Officer",
-        image: AlishaBanz,
-      },
+      { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, },
+      { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, },
+      { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, },
     ],
   },
   upperCore: {
@@ -60,16 +45,8 @@ const TeamData = {
       { name: "Dev Popat", position: "Chairperson", image: DevPopat },
     ],
     "vice Chairpersons": [
-      {
-        name: "Shashank Naik",
-        position: "Vice Chairperson",
-        image: ShashankNaik,
-      },
-      {
-        name: "Parna Mishra",
-        position: "Vice Chairperson",
-        image: ParnaMishra,
-      },
+      { name: "Shashank Naik", position: "Vice Chairperson", image: ShashankNaik, },
+      { name: "Parna Mishra", position: "Vice Chairperson", image: ParnaMishra, },
     ],
     secretary: [
       { name: "Rushabh Mehta", position: "Secretary", image: RushabhMehta },
@@ -91,22 +68,10 @@ const TeamData = {
       {
         name: "Publicity",
         members: [
-          {
-            name: "Umang Duwani",
-            position: "Head of Publicity",
-            image: UmangDuwani,
-          },
-          {
-            name: "Agam Kamdar",
-            position: "Head of Publicity",
-            image: AgamKamdar,
-          },
+          { name: "Umang Duwani", position: "Head of Publicity", image: UmangDuwani, },
+          { name: "Agam Kamdar", position: "Head of Publicity", image: AgamKamdar, },
           { name: "Neet Jain", position: "Head of Publicity", image: NeetJain },
-          {
-            name: "Jaiwin Mehta",
-            position: "Head of Publicity",
-            image: JaiwinMehta,
-          },
+          { name: "Jaiwin Mehta", position: "Head of Publicity", image: JaiwinMehta, },
         ],
       },
       {
@@ -118,75 +83,33 @@ const TeamData = {
       {
         name: "Events",
         members: [
-          {
-            name: "Shrirang Deshmukh",
-            position: "Head of Events",
-            image: ShrirangDeshmukh,
-          },
+          { name: "Shrirang Deshmukh", position: "Head of Events", image: ShrirangDeshmukh, },
           { name: "Dev Shah", position: "Head of Events", image: DevShah },
-          {
-            name: "Mahek Sureja",
-            position: "Head of Events",
-            image: MahekSureja,
-          },
-          {
-            name: "Jheel Patel",
-            position: "Head of Events",
-            image: JheelPatel,
-          },
+          { name: "Mahek Sureja", position: "Head of Events", image: MahekSureja, },
+          { name: "Jheel Patel", position: "Head of Events", image: JheelPatel, },
         ],
       },
       {
         name: "Creatives",
         members: [
-          {
-            name: "Asmi Savla", position: "Head of Creatives", image: AsmiSavla,
-          },
-          {
-            name: "Harsh Keniya",
-            position: "Head of Creatives",
-            image: HarshKeniya,
-          },
+          { name: "Asmi Savla", position: "Head of Creatives", image: AsmiSavla, },
+          { name: "Harsh Keniya", position: "Head of Creatives", image: HarshKeniya, },
         ],
       },
       {
         name: "Social Media",
         members: [
-          {
-            name: "Asvi Shah",
-            position: "Head of Social Media",
-            image: AsviShah,
-          },
-          {
-            name: "Deep Doshi",
-            position: "Head of Social Media",
-            image: DeepDoshi,
-          },
+          { name: "Asvi Shah", position: "Head of Social Media", image: AsviShah, },
+          { name: "Deep Doshi", position: "Head of Social Media", image: DeepDoshi, },
         ],
       },
       {
         name: "Editorial",
         members: [
-          {
-            name: "Shriya Kela",
-            position: "Head of Editorial",
-            image: ShriyaKela,
-          },
-          {
-            name: "Diyan Mehta",
-            position: "Head of Editorial",
-            image: DiyanMehta,
-          },
-          {
-            name: "Hitanshu Shah",
-            position: "Head of Editorial",
-            image: HitanshuShah,
-          },
-          {
-            name: "Dhruvi Shah",
-            position: "Head of Editorial",
-            image: DhruviShah,
-          },
+          { name: "Shriya Kela", position: "Head of Editorial", image: ShriyaKela, },
+          { name: "Diyan Mehta", position: "Head of Editorial", image: DiyanMehta, },
+          { name: "Hitanshu Shah", position: "Head of Editorial", image: HitanshuShah, },
+          { name: "Dhruvi Shah", position: "Head of Editorial", image: DhruviShah, },
         ],
       },
     ],

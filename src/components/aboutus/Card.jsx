@@ -1,12 +1,11 @@
 import {
     Card,
-    CardHeader,
-    CardBody,
     Typography,
     Button,
 } from "@material-tailwind/react";
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import '../../styles/about.css';
 
 function CardDefault({ desk }) {
     const navigate = useNavigate();
@@ -16,38 +15,37 @@ function CardDefault({ desk }) {
     };
 
     return (
-        <Card className="mt-6 w-80 border-2 border-dark-navy">
+        <Card className="mt-6 w-60 border-2 border-dark-navy">
             <img
-                src={desk.image} // Use the image from the desk object
-                alt={`${desk.name} image`} // Improve accessibility
+                src={desk.image}
+                alt={`${desk.name} image`}
                 className="w-full object-cover rounded-t-xl rounded-b-none"
             />
-            <CardBody>
-                <Typography variant="h5" color="blue-gray" className="">
+            <div className="p-2">
+                <Typography variant="h5" color="blue-gray" className="font-semibold">
                     {desk.name}
                 </Typography>
-                <Typography>
+                <Typography className="text-sm text-gray-600">
                     {desk.role}
                 </Typography>
                 <Button
                     onClick={handleNavigation}
-                    className="bg-light-navy-blue text-white hover:bg-dark-navy duration-300"
+                    className="mt-1 p-2 w-max rounded-lg about-button"
                 >
                     Read More
                 </Button>
-            </CardBody>
+            </div>
         </Card>
     );
 }
 
 export default CardDefault;
 
-// Update PropTypes to reflect the object structure
 CardDefault.propTypes = {
     desk: PropTypes.shape({
-        link: PropTypes.string.isRequired, // Ensure the 'link' is a string
-        name: PropTypes.string.isRequired, // Ensure the 'name' is a string
-        role: PropTypes.string.isRequired, // Ensure the 'role' is a string
-        image: PropTypes.string.isRequired, // Ensure the 'image' is a string
+        link: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        role: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
     }).isRequired,
 };
