@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GenerateCertificate from "../components/events/generateCertificate";
 import LargeEvents from "../components/events/LargeEvents";
-import LocalEvents from "../components/events/LocalEvents";
+import CollegeEvents from "../components/events/CollegeEvents";
 import UniversityEvents from "../components/events/UniversityEvents";
+import AreaEvents from "../components/events/AreaEvents";
 import { MapPin, CalendarDays } from "lucide-react";
 import {
   CCarousel,
@@ -108,7 +109,9 @@ const Events = () => {
 
       <GenerateCertificate />
 
-      <LocalEvents />
+      <CollegeEvents />
+
+      <AreaEvents />
 
       <UniversityEvents />
     </div>

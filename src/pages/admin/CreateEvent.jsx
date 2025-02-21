@@ -398,6 +398,7 @@ const CreateEvent = () => {
               className="w-full p-2 border border-[#387fa8] rounded-md"
             >
               <option value="Local">Local</option>
+              <option value="Area">Area</option>
               <option value="University">University</option>
             </select>
           </div>

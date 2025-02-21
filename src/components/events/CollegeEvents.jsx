@@ -226,9 +226,9 @@ import { useNavigate } from "react-router-dom";
 import "@coreui/coreui/dist/css/coreui.min.css";
 import { MapPin, CalendarDays } from "lucide-react";
 import CustomLoader2 from "../Loaders/CustomLoader2";
-import "./LocalEvents.css";
+import "./CollegeEvents.css";
 
-const LocalEvents = () => {
+const CollegeEvents = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [localEventsData, setLocalEventsData] = useState([]);
@@ -240,7 +240,7 @@ const LocalEvents = () => {
           const data = await response.json();
           
           const formattedEvents = data.events
-            .filter((event) => event.scope === "Local" || event.scope==="Area-Level")
+            .filter((event) => event.scope === "Local")
             .map((event) => {
               const eventDate = new Date(event.date);
               const formattedDate = eventDate
@@ -267,7 +267,7 @@ const LocalEvents = () => {
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 my-5 sm:my-10">
-      <h1 className="text-2xl md:text-3xl font-bold text-black">Local Events :-</h1>
+      <h1 className="text-2xl md:text-3xl font-bold text-black">College Events :</h1>
 
       {loading ? (
         <div className="flex justify-center items-center h-[50vh]">
@@ -315,4 +315,4 @@ const LocalEvents = () => {
   );
 };
 
-export default LocalEvents;
+export default CollegeEvents;
