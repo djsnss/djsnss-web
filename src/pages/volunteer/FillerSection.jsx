@@ -24,7 +24,7 @@ const VolunteerFillerSection = () => {
                 />
               </div>
               <div className="w-full md:w-2/3">
-                <h3 className="text-xl font-semibold text-[#003366] mb-3">Mother Teresa's Legacy</h3>
+                <h3 className="text-xl font-semibold text-[#003366] mb-3">Mother Teresa&apos;s Legacy</h3>
                 <p className="text-[#003b5c]">
                   Mother Teresa devoted her life to serving the poor and destitute around the world. Her selfless work through the Missionaries of Charity continues to inspire volunteers across the globe.
                 </p>
@@ -40,9 +40,9 @@ const VolunteerFillerSection = () => {
                 />
               </div>
               <div className="w-full md:w-2/3">
-                <h3 className="text-xl font-semibold text-[#003366] mb-3">Dr. APJ Abdul Kalam's Vision</h3>
+                <h3 className="text-xl font-semibold text-[#003366] mb-3">Dr. APJ Abdul Kalam&apos;s Vision</h3>
                 <p className="text-[#003b5c]">
-                  Dr. APJ Abdul Kalam, the 'People's President,' emphasized giving back to society through education and social service.
+                  Dr. APJ Abdul Kalam, the &apos;People&apos;s President,&apos; emphasized giving back to society through education and social service.
                 </p>
               </div>
             </div>
@@ -122,7 +122,10 @@ const VolunteerFillerSection = () => {
             />
           </div>
           <p className="text-[#cce7ff] mt-6">
-            Participate in tree plantations, clean energy initiatives, and environmental awareness campaigns.
+            Participate in tree plantations, clean energy initiatives, and environmental awareness campaigns. NSS volunteers contribute to a greener future by organizing eco-friendly events, promoting sustainable practices, and educating communities on the importance of environmental conservation. By engaging in environmental projects, you can make a tangible impact on the planet and inspire others to adopt eco-friendly habits.
+            <br />
+            <br />
+            <span className="font-semibold">Join NSS to protect the environment and create a sustainable future for all!</span>
           </p>
         </motion.div>
 

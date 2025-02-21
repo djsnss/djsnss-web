@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Image1 from "../assets/Events/TreePlantation.png";
-import VolunteerFillerSection from "../pages/volunteer/FillerSection";
+import Image1 from "../../assets/Events/TreePlantation.png";
+import VolunteerFillerSection from "./FillerSection";
+import '../../styles/volunteer.css';
 
 const Volunteer = () => {
   return (
@@ -29,20 +30,20 @@ const Volunteer = () => {
               <p className="text-lg md:text-2xl text-[#cce7ff] leading-relaxed">
                 Join our dedicated team of volunteers and be a driving force for meaningful transformation. Together, we can forge a brighter future.
               </p>
-              <br />
-              <br />
-              <Link
-                to="/volunteer/volunteer-registration"
-                className="no-underline inline-block px-6 md:px-8 py-3 md:py-4 rounded-xl bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300 mr-4"
-              >
-                Register to be a Volunteer
-              </Link>
-              <Link
-                to="/volunteer/volunteer-login"
-                className="no-underline inline-block px-6 md:px-8 py-3 md:py-4 rounded-xl bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold hover:bg-[#000000] hover:text-white transition duration-300"
-              >
-                Login
-              </Link>
+              <div className="flex flex-col sm:flex-row mt-4">
+                <Link
+                  to="/volunteer/volunteer-registration"
+                  className="no-underline inline-block px-3 md:px-4 py-1 md:py-2 mr-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
+                >
+                  Register to be a Volunteer
+                </Link>
+                <Link
+                  to="/volunteer/volunteer-login"
+                  className="no-underline inline-block px-3 md:px-6 py-1 md:py-2 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
+                >
+                  Login
+                </Link>
+              </div>
             </motion.div>
 
           </div>
@@ -219,7 +220,7 @@ const Volunteer = () => {
             </p>
             <Link
               to="/volunteer/volunteer-policy"
-              className="inline-block px-6 md:px-8 py-3 md:py-4 bg-[#003366] text-white text-base md:text-lg font-semibold hover:bg-[#003b5c] transition duration-300"
+              className="no-underline inline-block px-3 md:px-6 py-1 md:py-2 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
             >
               View Volunteer Policy
             </Link>

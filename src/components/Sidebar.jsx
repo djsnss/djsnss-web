@@ -15,7 +15,7 @@ const iconMap = {
   GiCampfire: React.lazy(() => import("react-icons/gi").then(module => ({ default: module.GiCampfire }))),
   FaRegCalendarAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegCalendarAlt }))),
   FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
-  FaGoogleDrive: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaGoogleDrive }))),
+  FaRegFileAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegFileAlt }))),
   LuPanelRightClose: React.lazy(() => import("react-icons/lu").then(module => ({ default: module.LuPanelRightClose }))),
 };
 
@@ -99,7 +99,7 @@ const Sidebar = () => {
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaGoogleDrive", title: "Reports", path: "/drive" },
+    { Icon: "FaRegFileAlt", title: "Reports", path: "/drive" },
   ];
 
   const handleNavigation = (path) => {
@@ -112,7 +112,7 @@ const Sidebar = () => {
 
   return (
     <nav
-      className={`absolute sm:relative p-2 sm:h-screen shadow-lg border-r border-b border-white/20 sm:border-hidden backdrop-blur-lg transition-all duration-500 ease-in-out ${open ? "h-[100vh] w-[100vw] sm:w-48" : "h-max w-12 sm:w-20"} z-50 font-poppins rounded-br-lg sm:rounded-none overflow-y-auto overflow-x-hidden`}
+      className={`absolute sm:relative p-2 sm:h-screen shadow-lg border-r border-b border-white/20 sm:border-hidden backdrop-blur-lg transition-all duration-500 ease-in-out ${open ? "h-[100vh] w-[100vw] sm:w-48" : "h-max w-12 md:w-14"} z-50 font-poppins rounded-br-lg sm:rounded-none overflow-y-auto overflow-x-hidden`}
       style={{
         backgroundColor: isSmallScreen ? "rgba(0,0,0,0.5)" : "",
         backgroundImage: !isSmallScreen
