@@ -67,7 +67,7 @@ const EventSchema = new mongoose.Schema({
   },
   scope: {
     type: String,
-    enum: ["Local", "University"],
+    enum: ["Local", "Area", "University"],
     required: true,
   },
   attendance: [
