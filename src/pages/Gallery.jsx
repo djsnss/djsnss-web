@@ -1,5 +1,5 @@
 import React from "react";
-import { localEventsData } from "../data/localEvents";
+// import { localEventsData } from "../data/localEvents";
 import { largeEventsData } from "../data/largeEvents";
 import { universityEventsData } from "../data/universityEvents";
 
@@ -7,7 +7,7 @@ import { universityEventsData } from "../data/universityEvents";
 const allEventsData = [
   ...largeEventsData,
   ...universityEventsData,
-  ...localEventsData,
+//   ...localEventsData,
 ];
 
 const Gallery = () => {
