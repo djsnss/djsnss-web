@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { X } from "lucide-react";
+import axios from "axios";
 
 /**
  * Popup component for editing an event.
@@ -11,19 +11,21 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   /**
    * Validate required fields before submitting.
    */
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name) newErrors.name = 'Name is required';
-    if (!formData.date) newErrors.date = 'Date is required';
-    if (!formData.location) newErrors.location = 'Location is required';
-    if (!formData.TotalNoOfHours) newErrors.TotalNoOfHours = 'Total hours is required';
-    if (formData.maxVolunteers < 1) newErrors.maxVolunteers = 'Must allow at least 1 volunteer';
+    if (!formData.name) newErrors.name = "Name is required";
+    if (!formData.date) newErrors.date = "Date is required";
+    if (!formData.location) newErrors.location = "Location is required";
+    if (!formData.TotalNoOfHours)
+      newErrors.TotalNoOfHours = "Total hours is required";
+    if (formData.maxVolunteers < 1)
+      newErrors.maxVolunteers = "Must allow at least 1 volunteer";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -47,7 +49,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
       reader.onloadend = () => {
         setFormData((prev) => ({
           ...prev,
-          photo: { url: reader.result, public_id: 'temp_id' },
+          photo: { url: reader.result, public_id: "temp_id" },
         }));
       };
       reader.readAsDataURL(file);
@@ -62,19 +64,27 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
     if (!validateForm()) return;
 
     setLoading(true);
-    setSuccessMessage('');
-    setErrorMessage('');
+    setSuccessMessage("");
+    setErrorMessage("");
 
     try {
       // Make the API call to update the event
       console.log(formData);
       const token = localStorage.getItem("adminAuthToken");
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key === "photo") {
+          formDataToSend.append("photo", formData.photo); // Append the file
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
       await axios.put(
         `https://djsnss-web.onrender.com/admin/updateEvent/${formData._id}`,
-        { ...formData },
+        { ...formDataToSend },
         { headers: { Authorization: `Bearer ${token}` } }
       );
-      setSuccessMessage('Event updated successfully');
+      setSuccessMessage("Event updated successfully");
       onEventUpdated(formData);
       onClose();
     } catch (error) {
@@ -121,7 +131,9 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
 
           {/* Event Image */}
           <div className="space-y-2">
-            <label className="block text-sm font-medium text-[#003366]">Event Image</label>
+            <label className="block text-sm font-medium text-[#003366]">
+              Event Image
+            </label>
             <div className="relative">
               {formData.photo.url ? (
                 <div className="relative">
@@ -172,13 +184,15 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
               <input
                 type="text"
                 name="name"
-                value={formData.name || ''}
+                value={formData.name || ""}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.name ? 'border-red-500' : 'border-[#387fa8]'
+                  errors.name ? "border-red-500" : "border-[#387fa8]"
                 }`}
               />
-              {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
+              {errors.name && (
+                <p className="text-red-500 text-sm">{errors.name}</p>
+              )}
             </div>
             <div>
               <label className="block text-sm font-medium text-[#003366]">
@@ -186,7 +200,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
               </label>
               <select
                 name="status"
-                value={formData.status || 'Upcoming'}
+                value={formData.status || "Upcoming"}
                 onChange={handleInputChange}
                 className="w-full p-2 border border-[#387fa8] rounded-md"
               >
@@ -239,10 +253,12 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 value={formData.date}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.date ? 'border-red-500' : 'border-[#387fa8]'
+                  errors.date ? "border-red-500" : "border-[#387fa8]"
                 }`}
               />
-              {errors.date && <p className="text-red-500 text-sm">{errors.date}</p>}
+              {errors.date && (
+                <p className="text-red-500 text-sm">{errors.date}</p>
+              )}
             </div>
 
             <div>
@@ -255,7 +271,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 value={formData.TotalNoOfHours}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.TotalNoOfHours ? 'border-red-500' : 'border-[#387fa8]'
+                  errors.TotalNoOfHours ? "border-red-500" : "border-[#387fa8]"
                 }`}
               />
               {errors.TotalNoOfHours && (
@@ -309,10 +325,12 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 value={formData.location}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.location ? 'border-red-500' : 'border-[#387fa8]'
+                  errors.location ? "border-red-500" : "border-[#387fa8]"
                 }`}
               />
-              {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
+              {errors.location && (
+                <p className="text-red-500 text-sm">{errors.location}</p>
+              )}
             </div>
 
             <div>
@@ -326,7 +344,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 value={formData.maxVolunteers}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.maxVolunteers ? 'border-red-500' : 'border-[#387fa8]'
+                  errors.maxVolunteers ? "border-red-500" : "border-[#387fa8]"
                 }`}
               />
               {errors.maxVolunteers && (
@@ -349,7 +367,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
               className="px-4 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
               disabled={loading}
             >
-              {loading ? 'Updating...' : 'Update'}
+              {loading ? "Updating..." : "Update"}
             </button>
           </div>
         </form>
@@ -365,7 +383,7 @@ export default function UpdateEventPage() {
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loadingEvents, setLoadingEvents] = useState(true);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   // Fetch the list of events from /events on mount
   useEffect(() => {
@@ -377,9 +395,12 @@ export default function UpdateEventPage() {
     async function fetchEvents() {
       try {
         const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
-        const response = await axios.get("https://djsnss-web.onrender.com/admin/getAllEvents", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.get(
+          "https://djsnss-web.onrender.com/admin/getAllEvents",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
         setEvents(response.data || []);
         console.log(response);
       } catch (error) {
@@ -426,8 +447,12 @@ export default function UpdateEventPage() {
 
       {/* Event List Section */}
       <div className="p-6 bg-[#f1f8ff] flex-1 overflow-auto">
-        {loadingEvents && <p className="text-center text-[#003366]">Loading events...</p>}
-        {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+        {loadingEvents && (
+          <p className="text-center text-[#003366]">Loading events...</p>
+        )}
+        {errorMessage && (
+          <p className="text-red-500 text-center">{errorMessage}</p>
+        )}
 
         {/* Grid of events */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
@@ -438,8 +463,12 @@ export default function UpdateEventPage() {
               onClick={() => handleSelectEvent(event)}
             >
               <h2 className="text-lg font-bold text-[#003366]">{event.name}</h2>
-              <p className="text-sm text-gray-500">Date: {new Date(event.date).toLocaleDateString()}</p>
-              <p className="text-sm text-gray-500">Location: {event.location}</p>
+              <p className="text-sm text-gray-500">
+                Date: {new Date(event.date).toLocaleDateString()}
+              </p>
+              <p className="text-sm text-gray-500">
+                Location: {event.location}
+              </p>
               <p className="text-sm text-gray-500">Status: {event.status}</p>
             </div>
           ))}
