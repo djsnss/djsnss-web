@@ -57,17 +57,17 @@ const DynamicPage = ({ event }) => {
           <h3 className='text-center text-3xl font-bold text-black mb-6'>
             Memories from Previous Years
           </h3>
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12'>
-    {event.images.map((image, index) => (
-        <img
-            key={index}
-            src={image}
-            alt={`Memory ${index + 1}`}
-            className='rounded-lg shadow-lg'
-            style={{ width: '300px', height: '400px', objectFit: 'cover' }} // Add fixed width, height, and object-fit
-            />
-          ))}
-        </div>
+          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12'>
+            {event.images.map((image, index) => (
+              <div key={index} className="w-full flex justify-center">
+                <img
+                  src={image}
+                  alt={`Memory ${index + 1}`}
+                  className='rounded-lg shadow-lg w-full max-w-xs md:max-w-sm lg:max-w-md aspect-[3/4] object-cover'
+                />
+              </div>
+            ))}
+          </div>
         </section>
       </div>
     </div>
