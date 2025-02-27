@@ -193,6 +193,7 @@ const Sidebar = () => {
                       to={subLink.path}
                       onClick={() => {
                         handleNavigation(subLink.path);
+                        setOpen(true);
                         setDropdowns((prev) => ({
                           ...prev,
                           [title]: false, // Close dropdown after navigation
