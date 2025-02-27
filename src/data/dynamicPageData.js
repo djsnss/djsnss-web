@@ -25,7 +25,10 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
     images: [
       '../src/assets/Events/camp1.jpg',
       '../src/assets/Events/camp2.jpg',
-      '../src/assets/Events/camp3.jpg'
+      '../src/assets/Events/camp3.jpg',
+      '../src/assets/Events/camp4.jpg',
+      '../src/assets/Events/camp5.jpg',
+      '../src/assets/Events/camp6.jpg'
     ]
   },
   {
@@ -46,8 +49,11 @@ The success of Grain-A-Thon highlighted the power of community-driven initiative
     date: 'February 2024',
     images: [
       '../src/assets/Events/grainathon1.jpg',
+      '../src/assets/Events/grainathon5.JPG',
+      '../src/assets/Events/GrainAThon.png',
+      '../src/assets/Events/grainathon4.jpg',
       '../src/assets/Events/grainathon2.JPG',
-      '../src/assets/Events/GrainAThon.png'
+      '../src/assets/Events/grainathon6.jpg'
     ]
   },
   {
@@ -70,7 +76,10 @@ The success of the blood donation drive reflected the strength of the college co
     images: [
       '../src/assets/Events/bdd1.jpg',
       '../src/assets/Events/bdd2.jpg',
-      '../src/assets/Events/bdd3.jpg'
+      '../src/assets/Events/bdd3.jpg',
+      '../src/assets/Events/bdd4.jpg',
+      '../src/assets/Events/bdd5.jpg',
+      '../src/assets/Events/bdd6.jpg'
     ]
   }
 ]
