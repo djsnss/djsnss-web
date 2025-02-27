@@ -40,6 +40,7 @@ const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVoluntee
 const VolunteerLogin = React.lazy(() => import("./pages/volunteer/VolLogin"));
 const VolunteerPass = React.lazy(() => import("./pages/volunteer/ChangePassword"));
 const FolderTree = React.lazy(() => import("./components/FolderTree"));
+const TechnicalProject = React.lazy(() => import("./pages/TechnicalProject"));
 
 
 const App = () => {
@@ -84,6 +85,7 @@ const App = () => {
               />
               <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
               <Route path="/timeline" element={<TimelineComponent />} />
+              <Route path="/technical-project" element={<TechnicalProject />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/gallery" element={<Gallery />} />
@@ -100,7 +102,7 @@ const App = () => {
               <Route path="/admin/create-event" element={<CreateEvent />} />
               <Route path="/admin/update-event" element={<UpdateEvent />} />
               <Route path="/volunteer/change-password" element={<VolunteerPass />} />
-              <Route path="/drive" element={<FolderTree />} />
+              <Route path="/reports" element={<FolderTree />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (

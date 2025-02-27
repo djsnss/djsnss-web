@@ -81,6 +81,7 @@ const Sidebar = () => {
       subLinks: [
         { title: "Events", path: "/events" },
         { title: "Timeline", path: "/timeline" },
+        { title: "Technical Project", path: "/technical-project" },
         { title: "Camp", path: "/nss-camp" },
         { title: "Grain-A-Thon", path: "/grain-a-thon" },
         { title: "Blood Donation Drive", path: "/blood-donation-drive" },

@@ -23,7 +23,7 @@ const AreaEvents = () => {
         const data = await response.json();
         
         const formattedEvents = data.events
-          .filter((event) => event.scope === "Area")
+          .filter((event) => event.scope === "Area-Level")
           .map((event) => {
             const eventDate = new Date(event.date);
             const formattedDate = eventDate
