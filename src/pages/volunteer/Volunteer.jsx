@@ -33,13 +33,13 @@ const Volunteer = () => {
               <div className="flex flex-col sm:flex-row mt-4">
                 <Link
                   to="/volunteer/volunteer-registration"
-                  className="no-underline inline-block px-3 md:px-4 py-1 md:py-2 mr-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
+                  className="no-underline inline-block px-3 rounded-lg md:px-4 py-1 md:py-2 mr-4 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
                 >
                   Register to be a Volunteer
                 </Link>
                 <Link
                   to="/volunteer/volunteer-login"
-                  className="no-underline inline-block px-3 md:px-6 py-1 md:py-2 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
+                  className="no-underline inline-block px-3 rounded-lg md:px-6 py-1 md:py-2 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
                 >
                   Login
                 </Link>
