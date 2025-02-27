@@ -1,6 +1,6 @@
 import { FaSun,FaLightbulb,FaWater } from "react-icons/fa6";
 import SolarNarpad from "../assets/Technical/SolarNarpad.jpg"
-import SolarWaki from "../assets/Technical/SolarNarpad.jpg"
+import SolarWaki from "../assets/Technical/SolarWaki.jpg"
 import WaterPumpAmbewadi from "../assets/Technical/Water Pump.jpg"
 
 export const TechnicalProjects = [
