@@ -15,7 +15,6 @@ import {
 import { MenuLinks, SocialLinks, ReportLinks } from "../data/index";
 import { Link } from "react-router-dom";
 
-// Helper function to return icons based on social media names
 const getIcon = (name) => {
   switch (name.toLowerCase()) {
     case "facebook":
@@ -78,7 +77,7 @@ function FooterComponent() {
                   <Link
                     key={link.id}
                     to={`/${link.link}`}
-                    className="text-sm md:text-lg text-white hover:text-sky-300 transition-all duration-300 ease-in-out"
+                    className="text-sm md:text-lg text-white hover:text-sky-300 transition-all duration-300 ease-in-out no-underline hover:underline"
                   >
                     {link.name}
                   </Link>
@@ -104,7 +103,7 @@ function FooterComponent() {
                         <a
                           key={item.id}
                           href={item.link}
-                          className="text-sm md:text-base text-white hover:text-sky-300 transition-all duration-300 ease-in-out"
+                          className="text-sm md:text-base text-white hover:text-sky-300 transition-all duration-300 ease-in-out no-underline hover:underline"
                         >
                           {item.name}
                         </a>

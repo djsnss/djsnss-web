@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { motion } from "framer-motion";
-import { localEventsData } from "../data/localEvents";
+import { localEventsData } from "../data/areaEvents";
 import { largeEventsData } from "../data/largeEvents";
 // Import other event data arrays
 import { universityEventsData } from "../data/universityEvents";
@@ -68,7 +68,7 @@ const EventDetails = () => {
                     href="https://djsnss-certificate.streamlit.app"
                     target="_blank"
                     rel="noreferrer"
-                    className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors"
+                    className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors no-underline hover:underline"
                   >
                     Generate Certificate &gt;
                   </a>

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import "./../../styles/team.css";
+import "./../../styles/homeCard.css";
 
 function ProfileCard({ name, imageUrl, link, shortDesc }) {
   return (
