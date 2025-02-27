@@ -40,7 +40,7 @@ router.delete("/deleteVolunteer/:id", authAdmin, deleteVolunteer); // Delete a v
 router.post(
   "/createEvent",
   authAdmin,
-  uploadNormal.single("image"),
+  uploadNormal.single("photo"),
   createEvent
 ); // Create a new event
 
@@ -62,7 +62,7 @@ router.get("/:eventId/stats", authAdmin, getEventStats); // Get event registrati
 router.put(
   "/updateEvent/:eventId",
   authAdmin,
-  uploadNormal.single("image"),
+  uploadNormal.single("photo"),
   updateEventDetails
 ); //API to update Event details
 
