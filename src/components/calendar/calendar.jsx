@@ -261,7 +261,7 @@ const App = () => {
       } else {
         // You can add a check here for specific error responses (e.g., 400, 401, etc.)
         const errorData = await response.json();
-        alert(`Error: ${errorData.message || 'An error occurred. Please try again later.'}`);
+        alert(`${errorData.message || 'An error occurred. Please try again later.'}`);
       }
     } catch (error) {
       console.error('Error registering:', error);
