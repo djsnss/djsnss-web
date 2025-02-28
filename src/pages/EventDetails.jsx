@@ -4,11 +4,13 @@ import { localEventsData } from "../data/areaEvents";
 import { largeEventsData } from "../data/largeEvents";
 // Import other event data arrays
 import { universityEventsData } from "../data/universityEvents";
+import { TechnicalProjects } from "../data/technicalProjects";
 // Combine all event data arrays
 const allEventsData = [
   ...largeEventsData,
   ...universityEventsData,
-  ...localEventsData /* Add more arrays as needed */,
+  ...localEventsData,
+  ...TechnicalProjects,
 ];
 
 const EventDetails = () => {
