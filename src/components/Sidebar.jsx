@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FiHome } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
 import { LuPanelRightClose } from "react-icons/lu";
+
 // Manual Icon Mapping
 const iconMap = {
   FiHome: FiHome,
@@ -17,6 +18,7 @@ const iconMap = {
   FaTimes: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaClock }))),
   FaRegFileAlt: React.lazy(() => import("react-icons/fa").then(module => ({ default: module.FaRegFileAlt }))),
   LuPanelRightClose: React.lazy(() => import("react-icons/lu").then(module => ({ default: module.LuPanelRightClose }))),
+  LiaCertificateSolid: React.lazy(() => import("react-icons/lia").then(module => ({ default: module.LiaCertificateSolid }))),
 };
 
 
@@ -100,7 +102,8 @@ const Sidebar = () => {
       ],
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaRegFileAlt", title: "Reports", path: "/drive" },
+    { Icon: "FaRegFileAlt", title: "Reports", path: "/reports" },
+    { Icon: "LiaCertificateSolid" , title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" },
   ];
 
   const handleNavigation = (path) => {
