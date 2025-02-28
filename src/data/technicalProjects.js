@@ -34,7 +34,7 @@ export const TechnicalProjects = [
       scale: "Medium",
       duration: "1 day",
       location: "Waki Village",
-      date: "2024",
+      date: "26th Jan 2025",
       icon: FaLightbulb,
       color: "#FB923C"
     },

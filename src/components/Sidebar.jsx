@@ -103,7 +103,7 @@ const Sidebar = () => {
     },
     { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
     { Icon: "FaRegFileAlt", title: "Reports", path: "/reports" },
-    { Icon: "LiaCertificateSolid" , title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" },
+    { Icon: "LiaCertificateSolid", title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" },
   ];
 
   const handleNavigation = (path) => {
@@ -120,7 +120,7 @@ const Sidebar = () => {
       style={{
         backgroundColor: isSmallScreen ? "rgba(0,0,0,0.5)" : "",
         backgroundImage: !isSmallScreen
-          ? "linear-gradient(150deg, rgba(3,4,94,1) 0%, rgba(0,119,182,1) 25%, rgba(0,180,216,1) 50%, rgba(0,119,182,1) 75%, rgba(3,4,94,1) 100%)"
+          ? "linear-gradient(150deg, rgba(3,4,94,1) 0%, rgba(0,119,182,1) 75%, rgba(3,4,94,1) 100%)"
           : "none",
         backgroundSize: isSmallScreen ? "auto" : open ? "150% 150%" : "200% 200%",
         backgroundPosition: isSmallScreen ? "initial" : open ? "center" : "left",
@@ -132,7 +132,7 @@ const Sidebar = () => {
           setOpen(!open);
           setDropdowns({}); // Close all dropdowns when sidebar toggles
         }}
-        className={`flex w-full h-8 items-center justify-center mb-2 rounded-lg ${open ? "bg-indigo-100": "bg-slate-100" } transition-colors duration-200`}
+        className={`flex w-full h-8 items-center justify-center mb-2 rounded-lg ${open ? "bg-indigo-100" : "bg-slate-100"} transition-colors duration-200`}
       >
         <LuPanelRightClose
           className={`flex aspect-square text-black text-lg sm:p-0 transition-transform ${open && "hidden"}`}
@@ -150,18 +150,18 @@ const Sidebar = () => {
             <div key={path} className="w-full relative">
               <div className="w-full flex items-center justify-between">
                 <Link
-                  to={path}
+                  to={!subLinks ? path : "#"} // Prevent navigation for main menu items with sub-links
                   onClick={() => {
-                    if (!subLinks) {
+                    setOpen(true); // Open sidebar when clicking
+                    if (subLinks) {
+                      toggleDropdown(title); // Open the dropdown
+                    } else {
                       handleNavigation(path);
                       setDropdowns({});
                     }
                   }}
-                  className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${
-                    activeRoute === path
-                      ? "bg-indigo-100 text-indigo-600"
-                      : "text-white hover:text-black hover:bg-gray-100/40"
-                  }`}
+                  className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${activeRoute === path ? "bg-indigo-100 text-indigo-600" : "text-white hover:text-black hover:bg-gray-100/40"
+                    }`}
                 >
                   <Suspense fallback={<div className="hidden"></div>}>
                     <LazyIconComponent className={`text-lg sm:text-xl ${open ? "" : "mx-auto"} transition-transform`} />
@@ -174,16 +174,20 @@ const Sidebar = () => {
                   )}
                   {subLinks && (
                     <button
-                      onClick={() => { toggleDropdown(title); setOpen(true); }} // Toggle dropdown for the specific menu
+                      onClick={(e) => {
+                        e.nativeEvent.stopImmediatePropagation();
+                        toggleDropdown(title); // Toggle dropdown
+                        setOpen(true); // Keep sidebar open
+                      }}
                       className={`${open ? "block" : "hidden"} ml-1 p-1 focus:outline-none transition-all duration-300 ease-in-out`}
                     >
-                      <span>
-                        <IoIosArrowDown
-                          className={`transition-transform ${activeRoute === path ? "text-indigo-600" : "text-white"} ${dropdowns[title] && "rotate-180"}`}
-                        />
-                      </span>
+                      <IoIosArrowDown
+                        className={`transition-transform ${activeRoute === path ? "text-indigo-600" : "text-white"
+                          } ${dropdowns[title] ? "rotate-180" : ""}`}
+                      />
                     </button>
                   )}
+
                 </Link>
               </div>
 

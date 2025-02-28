@@ -38,7 +38,7 @@ const DynamicPage = ({ event }) => {
           <div className='max-w-7xl mx-auto px-6 md:px-12'>
             <h2 className='text-3xl font-bold mb-8'>What is {event.title}?</h2>
             <div className='md:flex items-center'>
-              <p className='text-xs sm:text-lg text-justify leading-relaxed text-gray-300 md:w-2/3 md:mr-6'>
+              <p className='text-sm sm:text-lg text-justify leading-relaxed text-gray-300 md:w-2/3 md:mr-6'>
               <div dangerouslySetInnerHTML={{ __html: event.description }} />
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>

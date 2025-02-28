@@ -19,7 +19,7 @@ function CardDefault({ desk }) {
             <img
                 src={desk.image}
                 alt={`${desk.name} image`}
-                className="w-full object-cover rounded-t-xl rounded-b-none"
+                className="w-full max-h-52 object-cover rounded-t-xl rounded-b-none"
             />
             <div className="p-2">
                 <Typography variant="h5" color="blue-gray" className="font-semibold">

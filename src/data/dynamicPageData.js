@@ -1,8 +1,8 @@
 // src/propsData.js
 
-import NSSCamp from '../assets/Camp.png'
+import NSSCamp from '../assets/Camp.jpg';
 import GrainAThon from '../assets/Grains.png';
-import BDD from '../assets/Blood.png'
+import BDD from '../assets/Events/bdd5.jpg';
 
 export const propsData = [
   {
@@ -19,6 +19,7 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
     `,
     backgroundColor: 'dark-navy',
     bgImage: NSSCamp,
+    featuredImage: '../src/assets/camp-highlight.jpg',
     slug: 'nss-camp',
     location: 'Dahanu',
     date: '26th Jan - 31st Jan 2024',
@@ -70,6 +71,7 @@ In addition to the blood donation itself, informational sessions were conducted 
 The success of the blood donation drive reflected the strength of the college community's commitment to making a positive impact. Not only did it help save lives in the immediate term, but it also set an inspiring example of how simple acts of kindness can have a profound effect on the health and well-being of countless individuals. The drive ended on a high note, with organizers and participants alike feeling a deep sense of accomplishment and pride in contributing to such a meaningful cause.`,
     backgroundColor: 'red-500',
     bgImage: BDD,
+    featuredImage: "../src/assets/Events/bdd2.jpg",
     slug: 'blood-donation-drive',
     location: 'Mumbai',
     date: 'March 2024',
