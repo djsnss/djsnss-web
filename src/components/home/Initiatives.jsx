@@ -1,7 +1,7 @@
 import Card from "./Card";
 import GrainAThon from "../../assets/Events/GrainAThon.png";
 import NSSCamp from "../../assets/Events/NSSCamp.jpg";
-import BDD from "../../assets/Events/BDD.jpg";
+import BDD from "../../assets/Events/bdd/BDD.jpg";
 import StemCell from "../../assets/Events/TirangaRally/IMG_4530.jpg";
 import ACD from "../../assets/Events/AnnualCharity.png";
 

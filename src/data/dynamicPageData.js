@@ -1,8 +1,28 @@
-// src/propsData.js
+// propsData.js
 
 import NSSCamp from '../assets/Camp.jpg';
 import GrainAThon from '../assets/Grains.png';
-import BDD from '../assets/Events/bdd5.jpg';
+import BDD from '../assets/Events/bdd/bdd5.jpg';
+import Camp1 from '../assets/Events/camp/camp1.jpg';
+import Camp2 from '../assets/Events/camp/camp2.jpg';
+import Camp3 from '../assets/Events/camp/camp3.jpg';
+import Camp4 from '../assets/Events/camp/camp4.jpg';
+import Camp5 from '../assets/Events/camp/camp5.jpg';
+import Camp6 from '../assets/Events/camp/camp6.jpg';
+import Grain3 from '../assets/Events/grainathon/GrainAThon.png';
+import Grain1 from '../assets/Events/grainathon/grainathon1.png';
+import Grain5 from '../assets/Events/grainathon/grainathon2.png';
+import GrainathonPreview from '../assets/Events/grainathon/grainathon3.png';
+import Grain4 from '../assets/Events/grainathon/grainathon4.png';
+import Grain2 from '../assets/Events/grainathon/grainathon5.png';
+import Grain6 from '../assets/Events/grainathon/grainathon6.png';
+import BDD1 from '../assets/Events/bdd/bdd1.jpg';
+import BDD2 from '../assets/Events/bdd/bdd2.jpg';
+import BDD3 from '../assets/Events/bdd/bdd3.jpg';
+import BDD4 from '../assets/Events/bdd/bdd4.jpg';
+import BDD5 from '../assets/Events/bdd/bdd5.jpg';
+import BDD6 from '../assets/Events/bdd/bdd6.jpg';
+import CampFeatured from '../assets/camp-highlight.jpg';
 
 export const propsData = [
   {
@@ -19,18 +39,11 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
     `,
     backgroundColor: 'dark-navy',
     bgImage: NSSCamp,
-    featuredImage: '../src/assets/camp-highlight.jpg',
+    featuredImage: CampFeatured,
     slug: 'nss-camp',
     location: 'Dahanu',
     date: '26th Jan - 31st Jan 2024',
-    images: [
-      '../src/assets/Events/camp1.jpg',
-      '../src/assets/Events/camp2.jpg',
-      '../src/assets/Events/camp3.jpg',
-      '../src/assets/Events/camp4.jpg',
-      '../src/assets/Events/camp5.jpg',
-      '../src/assets/Events/camp6.jpg'
-    ]
+    images: [Camp1, Camp2, Camp3, Camp4, Camp5, Camp6]
   },
   {
     id: 2,
@@ -46,16 +59,9 @@ The success of Grain-A-Thon highlighted the power of community-driven initiative
     bgImage: GrainAThon,
     slug: 'grain-a-thon',
     location: 'Mumbai',
-    featuredImage: 'https://img.freepik.com/premium-photo/high-resolution-close-up-golden-wheat-ears-loose-grains-turquoise-background-perfect_996993-50614.jpg',
+    featuredImage: GrainathonPreview,
     date: 'February 2024',
-    images: [
-      '../src/assets/Events/grainathon1.jpg',
-      '../src/assets/Events/grainathon5.JPG',
-      '../src/assets/Events/GrainAThon.png',
-      '../src/assets/Events/grainathon4.jpg',
-      '../src/assets/Events/grainathon2.JPG',
-      '../src/assets/Events/grainathon6.jpg'
-    ]
+    images: [Grain1, Grain2, Grain3, Grain4, Grain5, Grain6]
   },
   {
     id: 3,
@@ -71,17 +77,10 @@ In addition to the blood donation itself, informational sessions were conducted 
 The success of the blood donation drive reflected the strength of the college community's commitment to making a positive impact. Not only did it help save lives in the immediate term, but it also set an inspiring example of how simple acts of kindness can have a profound effect on the health and well-being of countless individuals. The drive ended on a high note, with organizers and participants alike feeling a deep sense of accomplishment and pride in contributing to such a meaningful cause.`,
     backgroundColor: 'red-500',
     bgImage: BDD,
-    featuredImage: "../src/assets/Events/bdd2.jpg",
+    featuredImage: "../assets/Events/bdd2.jpg",
     slug: 'blood-donation-drive',
     location: 'Mumbai',
     date: 'March 2024',
-    images: [
-      '../src/assets/Events/bdd1.jpg',
-      '../src/assets/Events/bdd2.jpg',
-      '../src/assets/Events/bdd3.jpg',
-      '../src/assets/Events/bdd4.jpg',
-      '../src/assets/Events/bdd5.jpg',
-      '../src/assets/Events/bdd6.jpg'
-    ]
+    images: [BDD1, BDD2, BDD3, BDD4, BDD5, BDD6]
   }
 ]
