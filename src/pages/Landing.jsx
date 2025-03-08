@@ -57,7 +57,7 @@ const Landing = () => {
           >
             NSS Dwarkadas J. Sanghvi College of Engineering
           </motion.h1>
-          <motion.p
+          <motion.div
             className="text-md md:text-2xl text-center"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -65,7 +65,7 @@ const Landing = () => {
           >
             <div className="w-full border-white my-5 border-b-4"></div>
             FOR YOU, WITH YOU, ALWAYS!
-          </motion.p>
+          </motion.div>
         </div>
       </motion.div>
       <div className="flex flex-col items-center justify-center">

@@ -134,7 +134,9 @@ const Login = () => {
           </div>
 
           {/* Forgot Password Field */}
-          <Link to={"/volunteer/change-password"} className="mt-2 text-sky-600">Forgot Password?</Link>
+          <Link to={"/volunteer/change-password"} className="mt-2 text-sky-600">
+            Forgot Password?
+          </Link>
 
           {/* Error Message */}
           {error && <p className="text-red-500 text-center">{error}</p>}

@@ -257,10 +257,11 @@ const App = () => {
   
       if (response.ok) {
         const result = await response.json();
-        alert(`You have registered for ${result.eventName}`); // assuming the response contains eventName
+        alert(`You have registered for ${result.name}`); // assuming the response contains eventName
       } else {
         // You can add a check here for specific error responses (e.g., 400, 401, etc.)
-        alert('Registration failed. Please try again.');
+        const errorData = await response.json();
+        alert(`${errorData.message || 'An error occurred. Please try again later.'}`);
       }
     } catch (error) {
       console.error('Error registering:', error);

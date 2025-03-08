@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import "../styles/FAQ.css";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 
-// Import icons here
 import {
   FaEllipsisV,
   FaMicrophoneAlt,

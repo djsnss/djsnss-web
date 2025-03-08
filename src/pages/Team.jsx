@@ -1,8 +1,8 @@
 import React from "react";
 import TeamSection from "../components/Team/TeamSection";
 import teamData from "../data/teamData";
-import Loader from "../components/Loaders/CustomLoader2"
-import '../styles/team.css'
+import Loader from "../components/Loaders/CustomLoader2";
+import '../styles/team.css';
 
 const Team = () => {
   if (!teamData) return <div><Loader /></div>;

@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const CreateEvent = () => {
@@ -7,7 +7,7 @@ const CreateEvent = () => {
     slug: "",
     description: "",
     longDescription: "",
-    photo: { url: "", public_id: "" },
+    photo: null,
     startHours: "",
     endHours: "",
     TotalNoOfHours: "",
@@ -34,20 +34,21 @@ const CreateEvent = () => {
   const validateForm = () => {
     const newErrors = {};
 
-    // Required fields
-    if (!formData.name.trim()) newErrors.name = "Name is required.";
-    if (!formData.startHours.trim()) newErrors.startHours = "start hours is required.";
-    if (!formData.endHours.trim()) newErrors.endHours = "end hours is required.";
-    if (!formData.slug.trim()) newErrors.slug = "Slug is required.";
-    if (!formData.description.trim()) newErrors.description = "Description is required.";
-    if (!formData.longDescription.trim()) newErrors.longDescription = "Long description is required.";
+    if (!formData.name?.trim()) newErrors.name = "Name is required.";
+    if (!formData.slug?.trim()) newErrors.slug = "Slug is required.";
+    if (!formData.description?.trim())
+      newErrors.description = "Description is required.";
+    if (!formData.longDescription?.trim())
+      newErrors.longDescription = "Long description is required.";
     if (!formData.date) newErrors.date = "Date is required.";
-    if (!formData.location.trim()) newErrors.location = "Location is required.";
-    if (!formData.photo.url.trim()) newErrors.photo = "Event image is required.";
+    if (!formData.location?.trim())
+      newErrors.location = "Location is required.";
+    if (!formData.photo) newErrors.photo = "Event image is required.";
     if (!formData.TotalNoOfHours)
       newErrors.TotalNoOfHours = "Total hours is required.";
     if (formData.maxVolunteers < 1)
       newErrors.maxVolunteers = "Must allow at least 1 volunteer.";
+    console.log("formData in validateForm:", formData);
 
     setErrors(newErrors);
     console.log("Errors:", newErrors);
@@ -55,24 +56,21 @@ const CreateEvent = () => {
   };
 
   const handleInputChange = (e) => {
+    console.log("Before update:", formData);
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [name]: value };
+      console.log("After update:", updated);
+      return updated;
+    });
   };
-
-  /**
-   * Convert a selected file to a Base64 URL for preview.
-   */
   const handleImageUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setFormData((prev) => ({
-          ...prev,
-          photo: { url: reader.result, public_id: "temp_id" },
-        }));
-      };
-      reader.readAsDataURL(file);
+      setFormData((prev) => ({
+        ...prev,
+        photo: file, // Store the file, not a URL
+      }));
     }
   };
 
@@ -87,10 +85,23 @@ const CreateEvent = () => {
 
     try {
       const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
+      const formDataToSend = new FormData();
+      Object.keys(formData).forEach((key) => {
+        if (key === "photo") {
+          formDataToSend.append("photo", formData.photo); // Append the file
+        } else {
+          formDataToSend.append(key, formData[key]);
+        }
+      });
       const response = await axios.post(
         "https://djsnss-web.onrender.com/admin/createEvent", // API endpoint
-        { ...formData },
-        { headers: { Authorization: `Bearer ${token}` } }
+        formDataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
       );
 
       console.log("Response:", response);
@@ -102,7 +113,7 @@ const CreateEvent = () => {
         slug: "",
         description: "",
         longDescription: "",
-        photo: { url: "", public_id: "" },
+        photo: null,
         startHours: "",
         endHours: "",
         TotalNoOfHours: "",
@@ -113,8 +124,10 @@ const CreateEvent = () => {
         scope: "Local",
       });
     } catch (error) {
-      console.error("Error:", error.message);
-      setErrorMessage(error.message || "An unexpected error occurred.");
+      console.error("Error:", error.response?.data || error.message);
+      setErrorMessage(
+        error.response?.data?.message || "An unexpected error occurred."
+      );
     } finally {
       setLoading(false);
     }
@@ -150,10 +163,10 @@ const CreateEvent = () => {
             Event Image *
           </label>
           <div className="relative">
-            {formData.photo.url ? (
+            {formData.photo? (
               <div className="relative">
                 <img
-                  src={formData.photo.url}
+                  src={URL.createObjectURL(formData.photo)}
                   alt="Event preview"
                   className="w-full h-48 object-cover rounded-lg"
                 />
@@ -183,10 +196,12 @@ const CreateEvent = () => {
                       accept="image/*"
                       onChange={handleImageUpload}
                       className="hidden"
-                  />
-                  {errors.photo && (
-                    <p className="text-red-500 mt-6 text-sm">{errors.photo}</p>
-                  )}
+                    />
+                    {errors.photo && (
+                      <p className="text-red-500 mt-6 text-sm">
+                        {errors.photo}
+                      </p>
+                    )}
                   </label>
                 </div>
               </div>

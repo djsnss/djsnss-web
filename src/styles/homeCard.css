@@ -1,17 +1,4 @@
-/* General Page Styling */
-.team-page-bg {
-    font-family: "Poppins", sans-serif;
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    background-color: #d9d9d9;
-    background-image: url("/team.svg");
-    background-size: 70%;
-    background-repeat: no-repeat;
-    background-position: center;
-    color: #333;
-  }
-  
+/* General Page Styling */  
   .team-page {
     text-align: center;
     padding: 40px 220px;
@@ -207,21 +194,6 @@
     height: 4px;
     background: linear-gradient(90deg, #000, #000);
     border-radius: 2px;
-  }
-  
-  
-  /* General Page Styling */
-  .team-page-bg {
-    font-family: "Poppins", sans-serif;
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    background-color: #d9d9d9;
-    background-image: url("/team.svg");
-    background-size: cover; /* Better adaptability for smaller screens */
-    background-repeat: no-repeat;
-    background-position: center;
-    color: #212121;
   }
   
   .team-page {

@@ -54,12 +54,12 @@ const ReportLinks = [
       {
         id: 1,
         name: "Annual Report",
-        link: "/drive",
+        link: "/reports",
       },
       {
         id: 2,
         name: "Event Report",
-        link: "/drive",
+        link: "/reports",
       },
     ],
   },
@@ -69,12 +69,12 @@ const ReportLinks = [
       {
         id: 3,
         name: "Annual Report",
-        link: "/drive",
+        link: "/reports",
       },
       {
         id: 4,
         name: "Event Report",
-        link: "/drive",
+        link: "/reports",
       },
     ],
   },
