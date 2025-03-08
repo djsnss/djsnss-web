@@ -120,7 +120,9 @@ const Sidebar = () => {
       style={{
         backgroundColor: isSmallScreen ? "rgba(0,0,0,0.5)" : "",
         backgroundImage: !isSmallScreen
+          // ? "linear-gradient(150deg, rgba(37,150,190,1) 0%, rgba(37,150,190,1) 100%)"
           ? "linear-gradient(150deg, rgba(3,4,94,1) 0%, rgba(0,119,182,1) 75%, rgba(3,4,94,1) 100%)"
+          // ? "linear-gradient(150deg, rgba(4,24,119,1) 0%, rgba(4,24,119,1) 100%)"
           : "none",
         backgroundSize: isSmallScreen ? "auto" : open ? "150% 150%" : "200% 200%",
         backgroundPosition: isSmallScreen ? "initial" : open ? "center" : "left",
