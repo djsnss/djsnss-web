@@ -51,14 +51,14 @@ const App = () => {
       {/* Scroll to top and Scroll tracking components */}
       <ScrollTT />
       <ScrollToTop />
-      <Toaster position="top-right" reverseOrder={false}/>
+      <Toaster position="top-right" reverseOrder={false} />
 
-      <Navbar />
       <div className="
-      flex flex-row justify-start 
+      justify-start 
       min-h-screen w-screen bg-white">
         {/* Sidebar */}
         {/* <Sidebar /> */}
+        <Navbar />
 
         <div className="w-full h-screen overflow-y-scroll scroll-smooth">
           {/* Suspense to handle lazy-loaded components */}

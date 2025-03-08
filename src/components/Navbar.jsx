@@ -92,7 +92,7 @@ const Navbar = () => {
                             <div key={index} className="relative">
                                 <Link
                                     to={link.path || "#"}
-                                    className="px-3 hover:text-gray-300 flex items-center"
+                                    className="px-3 hover:text-gray-300 flex items-center underline-none"
                                     onClick={() => link.subLinks && toggleDropdown(link.title)}
                                 >
                                     {link.Icon && <link.Icon className="mr-2" />}
