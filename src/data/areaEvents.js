@@ -12,7 +12,7 @@ export const localEventsData = [
     description: "Restoring our shores",
     slug: "bandra-beach-cleanup",
     link: "/eventdetails/bandra-beach-cleanup",
-    background: "bg-blue-500",
+    background: "bg-blue-200",
     imageURL: BandraBeachCleanup,
     longDescription:
       "On 12th March 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a Bandra Beach Cleanup drive. The event aimed to restore the natural beauty of the beach and promote environmental awareness. Over 50 volunteers participated, collecting plastic waste and other debris. The cleanup drive not only helped in cleaning the beach but also educated participants on the importance of environmental conservation and waste management.",
@@ -27,7 +27,7 @@ export const localEventsData = [
     description: "Join hands for a cleaner coast",
     slug: "versova-beach-cleanup",
     link: "/eventdetails/versova-beach-cleanup",
-    background: "bg-teal-500",
+    background: "bg-sky-200",
     imageURL: VersovaBeachCleanup,
     longDescription:
       "On 18th March 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering conducted a cleanup drive at Versova Beach. The event, which focused on reducing plastic pollution, saw participation from over 60 students. Volunteers worked tirelessly to remove garbage and raise awareness about the detrimental effects of plastic waste on marine life. The event was a significant step towards fostering a cleaner environment and instilling the importance of sustainability among students.",
@@ -42,7 +42,7 @@ export const localEventsData = [
     description: "Empowering differently-abled children",
     slug: "connect-for-sensory-board-event",
     link: "/eventdetails/connect-for-sensory-board-event",
-    background: "bg-pink-500",
+    background: "bg-cyan-200",
     imageURL: SensoryBoard,
     longDescription:
       "On 5th April 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a sensory board event in collaboration with Connect, a local NGO. The event aimed to create sensory boards for differently-abled children to aid in their cognitive development. Volunteers crafted and assembled boards with various textures, colors, and objects, providing the children with a valuable tool for learning and sensory stimulation. The event was a fulfilling experience for all involved, fostering creativity and empathy among the volunteers.",
@@ -57,7 +57,7 @@ export const localEventsData = [
     description: "Navigating the digital world safely",
     slug: "cybersavvy",
     link: "/eventdetails/cybersavvy",
-    background: "bg-red-500",
+    background: "bg-indigo-200",
     imageURL: CyberSavvy,
     longDescription:
       "On 28th February 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering held a '' workshop aimed at educating students about online safety and digital literacy. The workshop covered topics such as cybersecurity, online privacy, and safe social media practices. Experts in the field provided valuable insights, and interactive sessions allowed participants to ask questions and discuss real-world scenarios. The event was well-received and equipped students with the knowledge needed to navigate the digital world safely and responsibly.",
@@ -72,7 +72,7 @@ export const localEventsData = [
     description: "Celebrating the spirit of gratitude",
     slug: "aabhar-2022",
     link: "/eventdetails/aabhar-2022",
-    background: "bg-purple-500",
+    background: "bg-sky-200",
     imageURL: Aabhar2022,
     longDescription:
       "Aabhar 2022, held on 20th December 2022, was a heartwarming event organized by the NSS unit of Dwarkadas J. Sanghvi College of Engineering to express gratitude towards the unsung heroes of the society. The event featured performances by students, heartfelt speeches, and the distribution of appreciation tokens to sanitation workers, security personnel, and other support staff. The event was a beautiful reminder of the importance of acknowledging and appreciating those who work behind the scenes to make our lives better.",
@@ -87,7 +87,7 @@ export const localEventsData = [
     description: "Keeping our beaches pristine",
     slug: "juhu-beach-cleanup",
     link: "/eventdetails/juhu-beach-cleanup",
-    background: "bg-yellow-500",
+    background: "bg-cyan-200",
     imageURL: JuhuBeachCleanup,
     longDescription:
       "The NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a cleanup drive at Juhu Beach on 25th February 2024. The event focused on removing litter and raising awareness about the impact of pollution on marine ecosystems. Volunteers participated enthusiastically, collecting several bags of waste. The event not only contributed to a cleaner beach but also helped instill a sense of responsibility towards environmental conservation among participants.",
@@ -102,7 +102,7 @@ export const localEventsData = [
     description: "Spreading smiles and joy",
     slug: "orphanage-visit",
     link: "/eventdetails/orphanage-visit",
-    background: "bg-green-500",
+    background: "bg-teal-200",
     imageURL: OrphanageVisit2023,
     longDescription:
       "On 14th January 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering visited an orphanage in Andheri. The visit aimed to bring joy to the children by organizing fun activities, games, and a small gift distribution. Volunteers spent quality time with the children, engaging in meaningful interactions that left a lasting impact on both the visitors and the children. The event highlighted the importance of compassion and community service in making a difference in the lives of the less fortunate.",
