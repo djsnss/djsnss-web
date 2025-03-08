@@ -3,6 +3,7 @@ import Initiatives from "./Initiatives";
 import DistinguishedAlumni from "./DistinguishedAlumni";
 import AboutSection from "./AboutSection";
 
+
 const About = () => {
   return (
     <div className="bg- text-black">

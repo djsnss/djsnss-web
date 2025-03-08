@@ -13,6 +13,7 @@ import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
 import { Toaster } from "react-hot-toast";
+import AllAlumni from "./components/home/AllAlumni";
 
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
@@ -101,6 +102,7 @@ const App = () => {
               <Route path="/admin/update-event" element={<UpdateEvent />} />
               <Route path="/volunteer/change-password" element={<VolunteerPass />} />
               <Route path="/drive" element={<FolderTree />} />
+              <Route path="/alumni" element={<AllAlumni />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (

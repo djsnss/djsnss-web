@@ -25,7 +25,8 @@ const CardNew = ({image, name, position}) => {
 const StyledWrapper = styled.div`
   .card {
     position: relative;
-    width: 300px;
+    height: 300px;
+    width: 250px;
     background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
