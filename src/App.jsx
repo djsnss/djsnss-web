@@ -6,7 +6,8 @@ import {
   useNavigate,
 } from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
-import Sidebar from "./components/Sidebar";
+// import Sidebar from "./components/Sidebar";
+import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollTT from "./components/ScrollTT";
@@ -51,9 +52,12 @@ const App = () => {
       <ScrollToTop />
       <Toaster position="top-right" reverseOrder={false}/>
 
-      <div className="flex flex-row justify-start min-h-screen w-screen bg-white">
+      <Navbar />
+      <div className="
+      flex flex-row justify-start 
+      min-h-screen w-screen bg-white">
         {/* Sidebar */}
-        <Sidebar />
+        {/* <Sidebar /> */}
 
         <div className="w-full h-screen overflow-y-scroll scroll-smooth">
           {/* Suspense to handle lazy-loaded components */}

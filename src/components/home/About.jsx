@@ -5,7 +5,7 @@ import AboutSection from "./AboutSection";
 
 const About = () => {
   return (
-    <div className="bg- text-black">
+    <div className=" text-black">
       <AboutSection />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
