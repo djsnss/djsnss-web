@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Logo from "../../assets/aboutus.jpg"
 
-const CardNew = ({img,name,position}) => {
+const CardNew = ({image, name, position}) => {
   return (
     <StyledWrapper>
       <div className="card h-[300px] sm:h-[200px] flex-col sm:flex-row">
-        <img src={Logo} alt={name} className=''/>
+        <img src={image} alt={name} className=''/>
         
         <div className='block sm:hidden'>
           <p className="card__title text-center ">{name}</p>
@@ -25,7 +25,8 @@ const CardNew = ({img,name,position}) => {
 const StyledWrapper = styled.div`
   .card {
     position: relative;
-    width: 300px;
+    height: 300px;
+    width: 250px;
     background-color: #f2f2f2;
     border-radius: 10px;
     display: flex;
