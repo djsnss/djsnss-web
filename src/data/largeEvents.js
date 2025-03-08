@@ -1,9 +1,9 @@
-import GrainAThon from "../assets/Events/GrainAThon.png";
+import GrainAThon from "../assets/Events/grainathon/GrainAThon.png";
 import BorivaliTP from "../assets/Events/TreePlantation.png";
 import NSSCamp from "../assets/Events/NSSCamp.jpg";
 import AnnualCharity from "../assets/Events/AnnualCharity.png";
 import VoterRegistration from "../assets/Events/VoterRegistration.png";
-import BDD from "../assets/Events/BDD.jpg";
+import BDD from "../assets/Events/bdd/BDD.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
 import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
 import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
