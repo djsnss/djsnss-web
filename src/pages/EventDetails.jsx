@@ -18,11 +18,11 @@ const EventDetails = () => {
   const eventDetail = allEventsData.find((event) => event.slug === slug);
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center ">
       <div>
         {eventDetail ? (
           <motion.div
-            className={`w-full p-6 flex flex-col lg:flex-row ${eventDetail.background} text-black`}
+            className={`w-full p-6 flex flex-col lg:flex-row ${eventDetail.background} text-white`}
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -30,7 +30,7 @@ const EventDetails = () => {
             <motion.img
               src={eventDetail.imageURL}
               alt={eventDetail.title}
-              className="w-[80vh] h-96 mr-0 lg:mr-6 self-center object-cover rounded-lg shadow-xl shadow-black/50"
+              className="w-[80vh] h-96 mr-0 lg:mr-6 self-center object-cover rounded-lg"
               initial={{ scale: 0.8 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.5, ease: "easeOut" }}

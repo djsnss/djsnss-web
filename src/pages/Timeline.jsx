@@ -208,6 +208,8 @@ const TimelineComponent = () => {
 
 export default TimelineComponent;
 
+
+// import React, { useState, useEffect } from 'react';
 // import {
 //   VerticalTimeline,
 //   VerticalTimelineElement,
