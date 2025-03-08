@@ -18,7 +18,7 @@ const AboutSection = () => {
           className='w-full md:w-1/2 h-60 md:h-96 object-cover flex-grow rounded-lg mb-4 md:mb-0'
         />
         <div className='w-full md:w-1/2 flex flex-col justify-center items-center lg:space-x-8'>
-          <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold text-center mb-4 font-cursive underline'>
+          <h2 className='text-xl md:text-2xl lg:text-4xl font-semibold text-center mb-4 font-cursive underline -inset-0'>
             About Us
           </h2>
           <p className='text-sm sm:text-base md:text-lg lg:text-xl mb-4'>

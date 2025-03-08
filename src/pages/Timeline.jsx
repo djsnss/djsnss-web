@@ -158,7 +158,7 @@ const TimelineComponent = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-full overflow-hidden">
+    <div className="relative min-h-screen w-full overflow-hidden pt-16">
       <motion.div
         key={currentImageIndex}
         initial={{ opacity: 0 }}

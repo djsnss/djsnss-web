@@ -11,7 +11,7 @@ const Team = () => {
   return (
     <div className="team-page-bg overflow-y-scroll w-full min-h-screen">
       <div className="h-full w-full text-center px-5 py-8 md:py-10 relative">
-        <h1 className="flex mx-auto mb-2 h-max w-full justify-center items-center text-3xl md:text-7xl text-black">MEET OUR TEAM</h1>
+        <h1 className="flex mx-auto mb-2 h-max w-full justify-center items-center text-3xl md:text-7xl text-black pt-16">MEET OUR TEAM</h1>
 
         {/* Faculty Section */}
         <div className="relative">

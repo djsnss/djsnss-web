@@ -15,7 +15,7 @@ const DynamicPage = ({ event }) => {
         {/* Header Section */}
         <header className='text-center py-20 h-screen flex flex-col justify-center'>
           <motion.h1
-            className={`self-center text-white text-4xl md:text-7xl lg:text-9xl font-extrabold tracking-wide mb-4 `}
+            className={`self-center text-white text-4xl md:text-7xl lg:text-9xl font-extrabold tracking-wide mb-4 pt-16`}
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5 }}
