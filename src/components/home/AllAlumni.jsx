@@ -11,62 +11,94 @@ const AllAlumni = () => {
   // Extended alumni list - you can add more alumni here
   const alumini = [
     {
-      name: "Hetankshi Vora",
-      position: "",
-      image: "../assets/alumini/Hetankshi Vora.jpg",
+      name: "Ritvi Shetty",
+      position: "Co-Chairperson",
+      image: "../assets/alumini/RitviShetty.jpg",
       details:
-        "I am a Electronics & Telecommunication Engineer from the batch of 2023 with strong time management and leadership skills. Serving as a Volunteer & Secretary at DJNSS was one of the best experiences of my journey, allowing me to contribute to impactful initiatives that fostered social awareness and well-being. From organizing blood donation drive, voter registration campaigns, bringing joy to children during orphanage visits, leading road safety and COVID awareness campaigns to ensure public safety. \nAll of this was made possible with the unwavering support of my NSS committee, Principal Sir, Rahul Taware Sir, and Vyankatesh Bagal Sir whose guidance and encouragement played a vital role in driving these initiatives forward. My time in NSS has deeply shaped my commitment to community service and social responsibility.",
+    ""},
+    {
+      name: "Krutik Panchal",
+      position: "Editorial Co-committee",
+      image: "../src/assets/alumini/KrutikPanchal.jpg",
+      details:
+""    },
+    {
+      name: "Nilay Shah",
+      position: "Chairperson",
+      image: "../src/assets/alumini/NilayShah.jpg",
+      details:
+        "Qualification:\nMBA - Jamnalal Bajaj Institute of Management Studies, Batch of 2025\nB.E. Electronics & Telecommunication - DJSCE 2021\n\nNSS Tenure:\mDuring our tenure, we conducted a medical camp, solar streetlights installation, recycled rubber tyre footwear distribution and other projects at our adopted village, and organised a Blood Donation Drive with a single day collection of 819 units\nRegistered for stem cell donation at DJSCE, and some years later, I was fortunate to match with a patient and donated stem cells to save a life\nPrevious Work Experience:\nSAP B1 funcional consultant at Uneecops Business Solutions\nBusiness Development Executive at Aelius Turbina (Solar and Wind Renewables)\n\nViews about NSS:\nBeing part of NSS allowed me to collaborate with individuals from diverse backgrounds and lead a team of 150 volunteers toward a shared mission. The connections we built remain strong to this day, extending to fellow members, faculty, villagers, and everyone we engaged with over those two years. This experience has been one of my life's most impactful and transformative chapters, reinforcing my commitment to a career centered on leadership and service."
     },
     {
-      name: "Shailee Gala",
-      position: "MBA student at SIBM Pune",
-      image: "../src/assets/alumini/Shailee Gala.jpg",
+      name: "Vishwa Mehta",
+      position: "Joint Secretary",
+      image: "../src/assets/alumini/VishwaMehta.jpg",
       details:
-        "Review: \nMy experience at NSS Unit of DJ Sanghvi is a blend of service, learning and personal growth. The feeling of giving back to the society is something that I will always carry with me for the rest of my life. The work at NSS pushed me out of my comfort zone, and it was the most rewarding part of my life at DJ Sanghvi. \n\nResume: \nCurrently an MBA student at SIBM Pune.Have 2 years of work experience at Samsung Electronics India Limited.Graduated as EXTC Engineer (B.E.) and was Jt. secretary at NSS Unit 2020-21",
+        "B.E. Electronics & Telecommunication - DJSCE 2021\n• Pursued her passion for baking by completing a certified course from a renowned culinary school.\n• Successfully runs a baking and confectionery business.\n• Joined the family business in stock broking and mutual fund distribution. .",
     },
     {
-      name: "Rajas Joshi",
-      position: "Senior Analyst at Sergiwa Capital",
-      image: "../src/assets/alumini/Rajas Joshi.jpg",
+      name: "Ritik Shah",
+      position: "Technical Head",
+      image: "../src/assets/alumini/RitikShah.jpg",
       details:
-        "Reviews - \nManaged various teams and defined actionable roadmaps for publicity & technical teams, further, coordinated meetings with team members for weekly updates on progress of implementing planned initiatives. \n Work Experience - \nWorked as a Senior Analyst at SERGIWA CAPITAL \nWorked as an analyst at TRESVISTA FINANCIAL SERVICES",
+        "",
     },
     {
-      name: "Riya Kothari",
-      position: "Professor & HOD Of Chemistry",
-      image: "../src/assets/alumini/Riya Kothari.jpg",
+      name: "Jignesh Thakur",
+      position: "Joint Treasurer",
+      image: "../src/assets/alumini/JigneshThakur.jpg",
       details:
-        "Review – My NSS Journey \nBeing a part of NSS was one of the most enriching experiences of my college life. Serving as the Creative Head allowed me to explore my creativity while making a meaningful social impact. The journey from organizing large-scale events to working at the grassroots level helped me develop valuable skills in management, leadership, public engagement, and problem-solving. \nOne of the most memorable milestones was leading a record-breaking blood donation drive, where we collected nearly 800 bottles, setting a benchmark for future initiatives. The 7-day rural development camp gave me a deep sense of responsibility and the opportunity to understand and address real-life challenges faced by underprivileged communities. \nBeyond the activities, NSS has played a crucial role in my holistic development—enhancing my communication skills, teamwork, empathy, and decision-making abilities. It has shaped me into a more socially responsible individual, and I carry these lessons with me in every aspect of life. \nI am truly grateful for this journey and for the lifelong memories and values it has given me. \nWork Experience - \n 1. Currently working as a Professor & HOD Of Chemistry for an leading education institute in Mumbai, coaching kids from 8 th to 12 th grade  \n2. Co Founder Of Sarthak - An organisation for Holistic Development of students  \n3. Academic Counselor at Private Institutes in Mumbai.",
+        "Qualification:\nMBA - Jamnalal Bajaj Institute of Management Studies\nBatch of 2024\nB.E. Electronics & Telecommunication - DJSCE '21\nCurrently working in JM Financial as a Senior Associate",
     },
     {
-      name: "Rohin Mathew",
-      position: "Product Manager at Kotak Mahindra Bank",
-      image: "../src/assets/alumini/Rohin.jpg",
+      name: "Nidhi Joshi",
+      position: "Co-Chairperson",
+      image: "../src/assets/alumini/NidhiJoshi.jpg",
       details:
-        "Chair person DJ NSS, 2019 \n\nQualification - \n1) MBA - Xavier Institute of Management, Bhubaneswar, Batch of 2023 \n2) Mechanical Engineering D.J Sanghvi, Batch of 2020 \n\nViews - \n NSS has always been very close to my heart. Being from D.J Sanghvi, we as a team always wanted to bring a substantial change in our service to society with our long term projects, technical projects etc and were successful in doing so. The way NSS grooms you as a person and the bonds that it helps you create is just an amazing experience.",
-    },
-    // Additional alumni entries can be added here
-    {
-      name: "Aditya Sharma",
-      position: "Software Engineer at Google",
-      image: "../src/assets/alumini/placeholder.jpg",
-      details:
-        "NSS volunteer from 2018-2020. Led multiple technical initiatives including developing apps for social causes. Currently working as a Software Engineer at Google, focusing on AI solutions for accessibility.",
+        "M.Sc. Medical Engineering - FAU (Erlangen, Germany) 2025\nB.E. Biomedical Engineering - DJSCE (Mumbai, India) 2021\nReceived an honorary best paper award for a research paper (VRST 2024)\nCurrently working part-time in a MedTech company while travelling Europe (14 countries so far). ",
     },
     {
-      name: "Priya Mehta",
-      position: "Environmental Scientist",
-      image: "../src/assets/alumini/placeholder.jpg",
+      name: "Tanaya Parab",
+      position: "Vice Chairperson",
+      image: "../src/assets/alumini/TanayaParab.jpg",
       details:
-        "Active NSS member during 2017-2019. Organized tree plantation drives and environmental awareness campaigns. Now working as an Environmental Scientist with a focus on sustainable development in urban areas.",
+        "B.E Electronics - DJSCE 2021\nAchieved AIR-2 after clearing SSB Interview to join Officers' Training Academy, Gaya\nTo pass-out as a Lieutenant and join Indian Army in Sept 2025",
     },
     {
-      name: "Rahul Desai",
-      position: "Social Entrepreneur",
-      image: "../src/assets/alumini/placeholder.jpg",
+      name: "Maitri Shah",
+      position: "Secretary",
+      image: "../src/assets/alumini/MaitriShah.jpg",
       details:
-        "NSS Secretary 2016-2018. Passionate about social causes and community development. Founded a social enterprise that provides employment opportunities to underprivileged youth through skill development programs.",
+        "Qualification:\nMaster’s in Engineering Management - Duke University (Durham, USA) 2023\nB.E. Electronics Engineering - DJSCE (Mumbai, India) 2021\n\nPreviously served as the Co-President for Duke Engineering Masters Student Council\nCertified in Lean Six Sigma (Green Belt) – Skilled in process optimization and operational efficiency\nCurrently working as an Operations Program Manager for Mill Industries, a Bay Area based Climate Tech startup",
     },
+    {
+      name: "Shubh Padechia",
+      position: "Technical Head",
+      image: "../src/assets/alumini/ShubhPadechia.jpg",
+      details:
+        "",
+    },
+    {
+      name: "Ahan Dalia",
+      position: "Treasurer",
+      image: "../src/assets/alumini/AhanDalia.jpg",
+      details:
+        "Completed my Master's degree in Robotics from Johns Hopkins University.\nPublished 2 papers and had a demo presentation at a leading conference in 2024.",
+    },
+    {
+      name: "Tanushree Saraf",
+      position: "Chairperson",
+      image: "../src/assets/alumini/TanushreeSaraf.jpg",
+      details:
+        "Completed Masters in Management of Technology from New York University.\nAutomated Student-Project Allocation System using LLM for one of the departments at NYU.",
+    },
+    {
+      name: "Labdhi Shah",
+      position: "Secretary",
+      image: "../src/assets/alumini/LabdhiShah.jpg",
+      details:
+        "Completed my Master’s in Management Science from The University of Texas at Dallas.\nCSM certified, led project management initiatives through the Project Management Club, implementing an AI solution at a financial services venture.",
+    }
   ]
 
   return (
