@@ -4,6 +4,17 @@ import { motion } from "framer-motion";
 import Image1 from "../../assets/Events/TreePlantation.png";
 import VolunteerFillerSection from "./FillerSection";
 import '../../styles/volunteer.css';
+import AboutUs from "../../assets/aboutus.jpg";
+import Yaarana from"../../assets/volunteer/yarana1.jpg"; 
+import Impact from"../../assets/volunteer/impact.jpg";
+import Upcoming from "../../assets/volunteer/upcoming.png";
+import CyberSavvy from "../../assets/Events/CyberSavvy.png";
+import Impact2 from "../../assets/volunteer/impact2.jpg";
+import Event1 from "../../assets/volunteer/events1.jpg";
+import Event2 from "../../assets/volunteer/events2.jpg";
+import Event3 from "../../assets/volunteer/events3.jpg";
+import LF1 from "../../assets/volunteer/lf1.jpg";
+import LF2 from "../../assets/volunteer/lf2.jpg";
 
 const Volunteer = () => {
   return (
@@ -65,10 +76,10 @@ const Volunteer = () => {
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="aspect-square bg-[#387fa8] overflow-hidden">
-                <img src={"../src/assets/volunteer/impact.jpg"} alt="Volunteer Activity" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                <img src={Impact} alt="Volunteer Activity" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
               <div className="aspect-square bg-[#387fa8] overflow-hidden">
-                <img src={"../src/assets/volunteer/impact2.jpg"} alt="Community Impact" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+                <img src={Impact2} alt="Community Impact" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
             </div>
           </motion.div>
@@ -101,7 +112,7 @@ const Volunteer = () => {
 
         {/* Full-Width Image Section */}
         <div className="relative h-64 md:h-96 w-full">
-          <img src={"../src/assets/volunteer/yarana1.jpg"} alt="Volunteer Impact" className="w-full h-full object-cover" />
+          <img src={Yaarana} alt="Volunteer Impact" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-[#003366]/60" />
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <p className="text-2xl md:text-4xl font-bold text-white text-center max-w-4xl">
@@ -119,7 +130,7 @@ const Volunteer = () => {
           >
             <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Why Volunteer?</h3>
             <div className="aspect-square bg-[#387fa8] overflow-hidden">
-              <img src={"../src/assets/aboutus.jpg"} alt="Why Volunteer" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+              <img src={AboutUs} alt="Why Volunteer" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
             </div>
             <p className="text-[#003b5c] my-6">
               Volunteering provides an opportunity to enhance your skills, build networks, and give back to the community. Make a tangible difference and grow personally and professionally.
@@ -140,7 +151,7 @@ const Volunteer = () => {
           >
             <h3 className="text-xl md:text-2xl font-semibold mb-6 text-white">How to Get Involved</h3>
             <div className="aspect-square bg-[#003b5c] overflow-hidden">
-              <img src={"../../src/assets/Events/CyberSavvy.png"} alt="Get Involved" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+              <img src={CyberSavvy} alt="Get Involved" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
             </div>
             <p className="text-[#cce7ff] my-6">
               Explore ways to contribute, from signing up for programs to participating in community events and special projects tailored to your interests and skills.
@@ -162,7 +173,7 @@ const Volunteer = () => {
           >
             <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Upcoming Events</h3>
             <div className="aspect-square bg-[#387fa8] overflow-hidden">
-              <img src={"../src/assets/volunteer/upcoming.png"} alt="Upcoming Events" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
+              <img src={Upcoming} alt="Upcoming Events" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
             </div>
             <ul className="space-y-4 text-[#003b5c] mt-6">
               <li className="border-b border-[#387fa8] pb-3">
@@ -192,21 +203,21 @@ const Volunteer = () => {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
               <div className="aspect-square bg-[#003b5c] overflow-hidden col-span-2 md:col-span-2 row-span-2">
                 <img
-                  src={"../src/assets/volunteer/events2.jpg"}
+                  src={Event1}
                   alt="NSS Activity Main"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <div className="aspect-square bg-[#003b5c] overflow-hidden">
                 <img
-                  src={"../src/assets/volunteer/events1.jpg"}
+                  src={Event2}
                   alt="NSS Activity 2"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <div className="aspect-square bg-[#003b5c] overflow-hidden">
                 <img
-                  src={"../src/assets/volunteer/events3.jpg"}
+                  src={Event3}
                   alt="NSS Activity 3"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
@@ -234,14 +245,14 @@ const Volunteer = () => {
             <div className="grid grid-cols-2 gap-4 mb-6">
               <div className="aspect-square bg-[#387fa8] overflow-hidden">
                 <img
-                  src={"../src/assets/volunteer/lf1.jpg"}
+                  src={LF1}
                   alt=""
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
               <div className="aspect-square bg-[#387fa8] overflow-hidden">
                 <img
-                  src={"../src/assets/volunteer/lf2.jpg"}
+                  src={LF2}
                   alt="Friendships 2"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
