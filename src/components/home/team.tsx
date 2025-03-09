@@ -3,28 +3,7 @@ import { motion } from "framer-motion"
 import TeamCard from "./team-card"
 
 export default function Team() {
-  const teamMembers = [
-    {
-      image: "/placeholder.svg?height=300&width=300&text=Team Member 1",
-      name: "Team Member 1",
-      position: "Position Title",
-    },
-    {
-      image: "/placeholder.svg?height=300&width=300&text=Team Member 2",
-      name: "Team Member 2",
-      position: "Position Title",
-    },
-    {
-      image: "/placeholder.svg?height=300&width=300&text=Team Member 3",
-      name: "Team Member 3",
-      position: "Position Title",
-    },
-    {
-      image: "/placeholder.svg?height=300&width=300&text=Team Member 4",
-      name: "Team Member 4",
-      position: "Position Title",
-    },
-  ]
+  
 
   return (
     <section id="team" className="py-20 bg-blue-50">
@@ -63,9 +42,11 @@ export default function Team() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
+         <a href="/team">
           <button className="border-blue-600 text-blue-600 hover:bg-blue-50 rounded-full">
             View All Team Members
           </button>
+         </a>
         </motion.div>
       </div>
     </section>
