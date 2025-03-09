@@ -58,7 +58,7 @@ export default function Hero () {
             transition={{ delay: 0.6, duration: 0.7 }}
           >
 <a href="/volunteer">
-            <button className='bg-gradient-to-br shadow-black/40 from-blue-600 via-cyan-500 to-sky-500 hover:opacity-80 text-lg flex justify-center items-center py-2 px-6 h-12 rounded-full shadow-lg transition-all duration-300'>
+            <button className='shadow-black/40 bg-blue-600 hover:opacity-80 text-lg flex justify-center items-center py-2 px-6 h-12 rounded-full shadow-lg transition-all duration-300'>
               Get Involved <ArrowRight className='ml-2 h-5 w-5' />
             </button>
 </a>
