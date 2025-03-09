@@ -42,16 +42,6 @@ export default function Activities() {
       direction: "left" as const,
     },
     {
-      image: StemCell,
-      title: "Stem Cell Donation",
-      description:
-        "A drive to raise awareness about stem cell donation.",
-      link: "/eventdetails/stem-cell-donation-drive",
-      icon: HandHeart,
-      iconColor: "text-purple-500",
-      direction: "right" as const,
-    },
-    {
       image: ACD,
       title: "Annual Charity Drive",
       description:
