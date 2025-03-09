@@ -5,7 +5,6 @@ import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
     const location = useLocation();
-    const [activeRoute, setActiveRoute] = useState(location.pathname);
     const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [isOpen, setIsOpen] = useState(false);
     const [dropdowns, setDropdowns] = useState({});
@@ -18,10 +17,6 @@ const Navbar = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize);
     }, []);
-
-    useEffect(() => {
-        setActiveRoute(location.pathname);
-    }, [location]);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -40,6 +35,11 @@ const Navbar = () => {
             ...prev,
             [key]: !prev[key],
         }));
+    };
+
+    const closeMobileMenu = () => {
+        setIsOpen(false);
+        setDropdowns({});
     };
 
     const navigationLinks = [
@@ -95,7 +95,12 @@ const Navbar = () => {
                                 <Link
                                     to={link.path || "#"}
                                     className="px-3 hover:text-gray-300 flex items-center no-underline text-white visited:text-white focus:outline-none focus:ring-0 active:outline-none"
-                                    onClick={() => link.subLinks && toggleDropdown(link.title)}
+                                    onClick={(e) => {
+                                        if (link.subLinks) {
+                                            e.preventDefault();
+                                            toggleDropdown(link.title);
+                                        }
+                                    }}
                                 >
                                     {link.Icon && <link.Icon className="mr-2" />}
                                     {link.title}
@@ -106,7 +111,12 @@ const Navbar = () => {
                                 {link.subLinks && dropdowns[link.title] && (
                                     <div className="absolute left-0 mt-2 bg-black/85 backdrop-blur-md text-white rounded-lg shadow-lg w-48 p-2">
                                         {link.subLinks.map((sub, subIndex) => (
-                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white">
+                                            <Link 
+                                                key={subIndex} 
+                                                to={sub.path} 
+                                                className="block px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white"
+                                                onClick={closeMobileMenu}
+                                            >
                                                 {sub.title}
                                             </Link>
                                         ))}
@@ -132,7 +142,14 @@ const Navbar = () => {
                                 <Link
                                     to={link.path || "#"}
                                     className="block px-4 py-3 text-lg no-underline text-white visited:text-white focus:outline-none focus:ring-0 active:outline-none"
-                                    onClick={() => link.subLinks ? toggleDropdown(link.title) : setIsOpen(false)}
+                                    onClick={(e) => {
+                                        if (link.subLinks) {
+                                            e.preventDefault();
+                                            toggleDropdown(link.title);
+                                        } else {
+                                            closeMobileMenu();
+                                        }
+                                    }}
                                 >
                                     {link.title}
                                     {link.subLinks && <IoIosArrowDown className="inline text-white ml-2" />}
@@ -141,7 +158,7 @@ const Navbar = () => {
                                 {link.subLinks && dropdowns[link.title] && (
                                     <div className="pl-4 bg-white/10 rounded-md">
                                         {link.subLinks.map((sub, subIndex) => (
-                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/20 no-underline text-white visited:text-white" onClick={() => setIsOpen(false)}>
+                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/20 no-underline text-white visited:text-white" onClick={closeMobileMenu}>
                                                 {sub.title}
                                             </Link>
                                         ))}
