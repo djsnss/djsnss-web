@@ -81,7 +81,7 @@ const Navbar = () => {
 
     return (
         <div className="flex justify-center items-start">
-            <nav className="fixed flex w-max mt-12 md:mt-20 md:max-w-4xl bg-black/90 md:bg-black/30 text-white shadow-black/50 border shadow-lg backdrop-blur-md items-start self-center rounded-none md:rounded-full z-50">
+            <nav className="fixed flex w-screen md:w-max mt-12 md:mt-20 md:max-w-4xl bg-black/90 md:bg-black/30 text-white shadow-black/50 border shadow-lg backdrop-blur-md items-start self-center rounded-none md:rounded-full z-50">
                 <div className="container mx-auto flex justify-between md:justify-center items-center p-4">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold block md:hidden">DJSCE NSS</Link>
