@@ -23,17 +23,7 @@ export default function Team() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-          {teamMembers.map((member, index) => (
-            <TeamCard
-              key={index}
-              image={member.image}
-              name={member.name}
-              position={member.position}
-              delay={index * 0.1}
-            />
-          ))}
-        </div>
+ 
 
         <motion.div
           className="mt-12 text-center"
