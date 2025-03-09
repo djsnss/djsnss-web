@@ -4,9 +4,10 @@ import NSSLogo from "../assets/NSSLogo.png";
 import Hero from "../components/home/hero";
 import Features from "../components/home/features";
 import Activities from "../components/home/Activities";
-import Impact from "../components/home/Impact";
-import Team from "../components/home/Team";
-import Events from "../components/home/Events";
+import Impact from "../components/home/impact";
+import Team from "../components/home/team";
+import Events from "../components/home/events";
+import Initiatives from "../components/home/initiatives";
 
 const data = [
   { src: DJSNSSLogo, alt: "NSS DJSCE Logo", link: "/" },
