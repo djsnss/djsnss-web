@@ -7,7 +7,7 @@ import Activities from "../components/home/Activities";
 import Impact from "../components/home/impact";
 import Team from "../components/home/team";
 import Events from "../components/home/events";
-import Initiatives from "../components/home/initiatives";
+import Initiatives from "../components/home/Initiatives";
 
 const data = [
   { src: DJSNSSLogo, alt: "NSS DJSCE Logo", link: "/" },
