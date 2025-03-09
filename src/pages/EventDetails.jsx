@@ -22,7 +22,7 @@ const EventDetails = () => {
       <div>
         {eventDetail ? (
           <motion.div
-            className={`w-full pt-16 p-6 flex flex-col lg:flex-row bg-cyan-200 text-black`}
+            className={`w-full pt-16 p-6 flex flex-col lg:flex-row bg-sky-100 text-black`}
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
