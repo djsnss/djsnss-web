@@ -68,9 +68,6 @@ export default function EventCard({
           <span>{location}</span>
         </div>
       </div>
-      <button className="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition">
-        Register
-      </button>
     </motion.div>
   );
 }
