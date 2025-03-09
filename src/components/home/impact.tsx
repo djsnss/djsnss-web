@@ -76,21 +76,6 @@ export default function Impact() {
                 Our initiatives align with the UN's Sustainable Development Goals, focusing particularly on quality
                 education, good health and well-being, and climate action.
               </p>
-              <button className="bg-blue-600 hover:bg-blue-700 rounded-full">View Our Projects</button>
-            </div>
-            <div className="grid grid-cols-3 gap-4">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="relative overflow-hidden rounded-lg group">
-                  <img
-                    src={`/placeholder.svg?height=100&width=100&text=SDG ${i + 1}`}
-                    alt={`SDG ${i + 1}`}
-                    width={100}
-                    height={100}
-                    className="rounded-lg transition-transform duration-300 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-blue-600/0 group-hover:bg-blue-600/10 transition-colors duration-300"></div>
-                </div>
-              ))}
             </div>
           </div>
         </motion.div>
