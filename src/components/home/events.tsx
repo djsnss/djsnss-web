@@ -1,32 +1,48 @@
-import React from "react"
-import { motion } from "framer-motion"
-import EventCard from "./event-card"
-import { ArrowRight, Heart, Leaf, BookOpen } from "lucide-react"
+"use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import EventCard from "./event-card";
+import { ArrowRight, Heart, Leaf, BookOpen, HandHeart } from "lucide-react";
 
 export default function Events() {
   const events = [
     {
       title: "Blood Donation Drive",
       date: "March 15, 2025",
-      location: "College Campus",
+      location: "AIML Section, DJ Sanghvi College",
       icon: Heart,
       iconColor: "text-red-500",
     },
     {
       title: "Tree Plantation Drive",
       date: "April 5, 2025",
-      location: "City Park",
+      location: "National Park",
       icon: Leaf,
       iconColor: "text-green-500",
     },
     {
-      title: "Education Workshop",
-      date: "April 20, 2025",
-      location: "Community Center",
-      icon: BookOpen,
-      iconColor: "text-blue-500",
+      title: "Stem Cell Donation Awareness",
+      date: "May 10, 2025",
+      location: "Ground Floor, DJ Sanghvi College",
+      icon: HandHeart,
+      iconColor: "text-purple-500",
     },
-  ]
+    {
+      title: "Grain-A-Thon",
+      date: "June 1, 2025",
+      location: "DJ Sanghvi College",
+      icon: BookOpen,
+      iconColor: "text-yellow-500",
+    },
+    {
+      title: "Annual Charity Drive",
+      date: "July 15, 2025",
+      location: "DJ Sanghvi College",
+      icon: Leaf,
+      iconColor: "text-green-500",
+    },
+  ];
 
   return (
     <section className="py-20 bg-white">
@@ -42,7 +58,8 @@ export default function Events() {
             Upcoming Events
           </h2>
           <p className="text-lg text-gray-600">
-            Join us for these upcoming activities and be part of creating positive change in our community.
+            Join us for these upcoming activities and be part of creating
+            positive change in our community.
           </p>
         </motion.div>
 
@@ -67,12 +84,15 @@ export default function Events() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <a href="#" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group">
-            View All Events <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+          <a
+            href="#"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+          >
+            View All Events{" "}
+            <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
           </a>
         </motion.div>
       </div>
     </section>
-  )
+  );
 }
-
