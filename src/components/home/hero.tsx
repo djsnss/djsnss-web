@@ -57,12 +57,16 @@ export default function Hero () {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6, duration: 0.7 }}
           >
+<a href="/volunteer">
             <button className='bg-gradient-to-br shadow-black/40 from-blue-600 via-cyan-500 to-sky-500 hover:opacity-80 text-lg flex justify-center items-center py-2 px-6 h-12 rounded-full shadow-lg transition-all duration-300'>
               Get Involved <ArrowRight className='ml-2 h-5 w-5' />
             </button>
+</a>
+<a href="events">
             <button className='border border-blue-600 text-blue-600 hover:bg-blue-100 text-lg px-8 py-2 h-12 flex justify-center items-center rounded-full transition-all duration-300 shodow-black/70 shadow-lg'>
               Learn More <ArrowRight className='ml-2 h-5 w-5' />
             </button>
+</a>
           </motion.div>
         </motion.div>
         <motion.img
