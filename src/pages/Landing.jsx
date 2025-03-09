@@ -2,7 +2,7 @@ import DJSLogo from "../assets/DJSLogo.png";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 import NSSLogo from "../assets/NSSLogo.png";
 import Hero from "../components/home/hero";
-import Features from "../components/home/Features";
+import Features from "../components/home/features";
 import Activities from "../components/home/Activities";
 import Impact from "../components/home/Impact";
 import Team from "../components/home/Team";
