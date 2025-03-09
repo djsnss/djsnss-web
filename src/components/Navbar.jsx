@@ -82,7 +82,7 @@ const Navbar = () => {
     return (
         <div className="flex justify-center items-start">
             <nav className="fixed flex w-screen md:w-max mt-12 md:mt-20 md:max-w-4xl bg-black/90 md:bg-black/30 text-white shadow-black/50 border shadow-lg backdrop-blur-md items-start self-center rounded-none md:rounded-full z-50">
-                <div className="container mx-auto flex justify-between md:justify-center items-center p-4">
+                <div className="container mx-auto flex justify-between md:justify-center items-center px-4 py-3">
                     {/* Logo */}
                     <Link to="/" className="text-xl font-bold block md:hidden no-underline text-white visited:text-white">
                         DJSCE NSS
@@ -114,7 +114,7 @@ const Navbar = () => {
                                             <Link 
                                                 key={subIndex} 
                                                 to={sub.path} 
-                                                className="block px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white"
+                                                className="block my-0.5 px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white"
                                                 onClick={closeMobileMenu}
                                             >
                                                 {sub.title}
@@ -146,8 +146,6 @@ const Navbar = () => {
                                         if (link.subLinks) {
                                             e.preventDefault();
                                             toggleDropdown(link.title);
-                                        } else {
-                                            closeMobileMenu();
                                         }
                                     }}
                                 >
@@ -158,7 +156,12 @@ const Navbar = () => {
                                 {link.subLinks && dropdowns[link.title] && (
                                     <div className="pl-4 bg-white/10 rounded-md">
                                         {link.subLinks.map((sub, subIndex) => (
-                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/20 no-underline text-white visited:text-white" onClick={closeMobileMenu}>
+                                            <Link 
+                                                key={subIndex} 
+                                                to={sub.path} 
+                                                className="block my-0.5 px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white"
+                                                onClick={closeMobileMenu}
+                                            >
                                                 {sub.title}
                                             </Link>
                                         ))}

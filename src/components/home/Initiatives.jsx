@@ -40,10 +40,10 @@ const Initiatives = () => {
   ];
 
   return (
-    <div className="my-7">
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
-Initiatives
-</h1>
+    <div className="py-14 bg-white container mx-auto px-4 md:px-6">
+        <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center mb-16">
+        Initiatives
+        </h1>
       <div className="flex flex-wrap justify-center gap-8">
         {data.map((event, index) => {
           return (

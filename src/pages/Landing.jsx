@@ -23,6 +23,7 @@ export default function Home() {
         <Features />
         <Activities />
         <Impact />
+        <Initiatives/>
         <Team />
         <Events />
       </main>
