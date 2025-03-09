@@ -84,7 +84,9 @@ const Navbar = () => {
             <nav className="fixed flex w-screen md:w-max mt-12 md:mt-20 md:max-w-4xl bg-black/90 md:bg-black/30 text-white shadow-black/50 border shadow-lg backdrop-blur-md items-start self-center rounded-none md:rounded-full z-50">
                 <div className="container mx-auto flex justify-between md:justify-center items-center p-4">
                     {/* Logo */}
-                    <Link to="/" className="text-xl font-bold block md:hidden">DJSCE NSS</Link>
+                    <Link to="/" className="text-xl font-bold block md:hidden no-underline text-white visited:text-white">
+                        DJSCE NSS
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <div className="hidden lg:flex space-x-6" ref={dropdownRef}>
@@ -92,7 +94,7 @@ const Navbar = () => {
                             <div key={index} className="relative">
                                 <Link
                                     to={link.path || "#"}
-                                    className="px-3 hover:text-gray-300 flex items-center underline-none"
+                                    className="px-3 hover:text-gray-300 flex items-center no-underline text-white visited:text-white focus:outline-none focus:ring-0 active:outline-none"
                                     onClick={() => link.subLinks && toggleDropdown(link.title)}
                                 >
                                     {link.Icon && <link.Icon className="mr-2" />}
@@ -104,7 +106,7 @@ const Navbar = () => {
                                 {link.subLinks && dropdowns[link.title] && (
                                     <div className="absolute left-0 mt-2 bg-black/85 backdrop-blur-md text-white rounded-lg shadow-lg w-48 p-2">
                                         {link.subLinks.map((sub, subIndex) => (
-                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl">
+                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/30 rounded-lg backdrop-blur-xl no-underline text-white visited:text-white">
                                                 {sub.title}
                                             </Link>
                                         ))}
@@ -129,7 +131,7 @@ const Navbar = () => {
                             <div key={index} className="w-full">
                                 <Link
                                     to={link.path || "#"}
-                                    className="block px-4 py-3 text-lg"
+                                    className="block px-4 py-3 text-lg no-underline text-white visited:text-white focus:outline-none focus:ring-0 active:outline-none"
                                     onClick={() => link.subLinks ? toggleDropdown(link.title) : setIsOpen(false)}
                                 >
                                     {link.title}
@@ -139,7 +141,7 @@ const Navbar = () => {
                                 {link.subLinks && dropdowns[link.title] && (
                                     <div className="pl-4 bg-white/10 rounded-md">
                                         {link.subLinks.map((sub, subIndex) => (
-                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/20" onClick={() => setIsOpen(false)}>
+                                            <Link key={subIndex} to={sub.path} className="block px-4 py-2 hover:bg-white/20 no-underline text-white visited:text-white" onClick={() => setIsOpen(false)}>
                                                 {sub.title}
                                             </Link>
                                         ))}
