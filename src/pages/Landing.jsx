@@ -3,7 +3,7 @@ import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 import NSSLogo from "../assets/NSSLogo.png";
 import Hero from "../components/home/hero";
 import Features from "../components/home/features";
-import Activities from "../components/home/Activities";
+import Activities from "../components/home/activities";
 import Impact from "../components/home/impact";
 import Team from "../components/home/team";
 import Events from "../components/home/events";
