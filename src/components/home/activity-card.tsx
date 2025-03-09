@@ -1,22 +1,24 @@
-"use client"
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import { ChevronRight, type LucideIcon } from "lucide-react"
+import React from "react";
+import { motion } from "framer-motion";
+import { ChevronRight, type LucideIcon } from "lucide-react";
 
 interface ActivityCardProps {
-  image: string
-  title: string
-  description: string
-  icon: LucideIcon
-  iconColor: string
-  direction: "left" | "right"
+  image: string;
+  title: string;
+  description: string;
+  link: string;
+  icon: LucideIcon;
+  iconColor: string;
+  direction: "left" | "right";
 }
 
 export default function ActivityCard({
   image,
   title,
   description,
+  link,
   icon: Icon,
   iconColor,
   direction,
@@ -33,7 +35,7 @@ export default function ActivityCard({
         <img
           src={image || "/placeholder.svg"}
           alt={title}
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-105 w-full h-full"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
       </div>
@@ -43,11 +45,14 @@ export default function ActivityCard({
           <h3 className="text-xl font-semibold">{title}</h3>
         </div>
         <p className="text-gray-600 mb-4">{description}</p>
-        <a href="#" className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group">
-          Learn more <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
+        <a
+          href={link}
+          className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+        >
+          Learn more{" "}
+          <ChevronRight className="h-4 w-4 ml-1 transition-transform group-hover:translate-x-1" />
         </a>
       </div>
     </motion.div>
-  )
+  );
 }
-
