@@ -88,12 +88,12 @@ const ChangePasswordPage = () => {
 
   return (
     <div className="w-full h-screen flex flex-col bg-white">
-      <div className="bg-[#003366] text-center text-white py-8">
+      <div className="bg-[#003366] text-center text-white py-8 pt-16">
         <h1 className="text-4xl font-bold">Change Password</h1>
         <p className="mt-2 text-xl">Update your account password</p>
       </div>
 
-      <div className="flex flex-col items-center justify-center h-full px-6 bg-[#f1f8ff]">
+      <div className="flex flex-col items-center justify-center h-full px-6 bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
         <form className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
           <h2 className="text-2xl font-bold text-[#003366] mb-6 text-center">
             {step === 1 ? "Verify Email" : "Change Password"}

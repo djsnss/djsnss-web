@@ -64,10 +64,10 @@ const volunteerPolicy = () => {
         className="relative w-full md:w-1/2 min-h-[60vh] md:min-h-screen bg-black/60 p-4 flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${PolicyImg})` }} 
       >
-        <div className="absolute inset-0 bg-black opacity-50"></div>
+        <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-4xl md:text-7xl font-bold tracking-wide text-white">Volunteer Policy</h1>
-          <p className="mt-4 text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="mt-4 text-lg md:text-2xl text-gray-100 max-w-3xl mx-auto">
             NSS aims to instill a sense of responsibility, leadership, and community development among volunteers.
             Learn about our mission and impact below.
           </p>

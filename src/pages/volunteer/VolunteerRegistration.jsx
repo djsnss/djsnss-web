@@ -84,7 +84,7 @@ const VolunteerRegistration = () => {
   };
 
   return (
-    <div className="min-h-screen bg-sky-100 p-6 flex flex-col items-center">
+    <div className="min-h-screen p-6 flex flex-col items-center bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
       <h2 className="text-5xl font-bold text-sky-900 mb-6 text-center">
         Volunteer Registration
       </h2>

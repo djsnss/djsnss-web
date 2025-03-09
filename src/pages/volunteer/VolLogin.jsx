@@ -56,7 +56,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-sky-300">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
       {/* Form Container */}
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-2xl">
         <h1 className="text-2xl font-bold text-sky-900 text-center mb-6">

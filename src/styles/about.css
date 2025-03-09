@@ -1,8 +1,5 @@
 .about-button {
-    border: unset;
-    color: #003450;
     z-index: 1;
-    background: #4dacff;
     position: relative;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
@@ -10,17 +7,18 @@
     overflow: hidden;
     align-items: center;
     justify-content: center;
-   }
-   
-   .about-button::before {
-    content: "";
+}
+
+.about-button::before {
+    content: "";    
+    border: unset;
     position: absolute;
     top: 0;
     left: 0;
     height: 100%;
     width: 0;
     border-radius: 0;
-    background-color: #000000;
+    background: #4dacff;
     z-index: -1;
     -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
     box-shadow: 4px 14px 19px -3px rgba(0,0,0,0.87);

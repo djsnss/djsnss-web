@@ -1,8 +1,8 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import Background from '../../assets/Events/TreePlantation.png'
-import About from '../components/home/About'
+import BackgroundImg from '../../assets/Events/TreePlantation.png';
+import '../../styles/about.css'
 import { useState, useEffect } from 'react'
 
 export default function Hero () {
@@ -14,7 +14,7 @@ export default function Hero () {
         <div className='absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white to-transparent'></div>
 
         {/* Abstract shapes */}
-        <div className='absolute top-1/4 left-1/4 w-64 h-64 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob'></div>
+        <div className='absolute top-1/4 left-1/4 w-64 h-64 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob'></div>
         <div className='absolute top-1/3 right-1/4 w-64 h-64 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000'></div>
         <div className='absolute bottom-1/4 right-1/3 w-64 h-64 bg-sky-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000'></div>
       </div>
@@ -58,19 +58,19 @@ export default function Hero () {
             transition={{ delay: 0.6, duration: 0.7 }}
           >
 <a href="/volunteer">
-            <button className='border border-blue-600 text-blue-600 hover:bg-blue-100 text-lg px-8 py-2 h-12 flex justify-center items-center rounded-full transition-all duration-300 shodow-black/70 shadow-lg'>
+            <button className='border border-blue-400 text-blue-600 bg-blue-100 text-lg px-8 py-2 h-12 flex justify-center items-center rounded-full transition-all duration-300 shodow-black/70 shadow-lg about-button'>
               Get Involved <ArrowRight className='ml-2 h-5 w-5' />
             </button>
 </a>
 <a href="events">
-            <button className='border border-blue-600 text-blue-600 hover:bg-blue-100 text-lg px-8 py-2 h-12 flex justify-center items-center rounded-full transition-all duration-300 shodow-black/70 shadow-lg'>
+            <button className='border border-blue-400 text-blue-600 bg-blue-100 text-lg px-8 py-2 h-12 flex justify-center items-center rounded-full transition-all duration-300 shodow-black/70 shadow-lg about-button'>
               Learn More <ArrowRight className='ml-2 h-5 w-5' />
             </button>
 </a>
           </motion.div>
         </motion.div>
         <motion.img
-          src={Background}
+          src={BackgroundImg}
           alt='Tree Plantation'
           className='w-full md:w-1/2 h-72 md:h-96 lg:h-[700px] object-cover mt-12 md:mt-0 rounded-2xl shadow-lg'
           initial={{ opacity: 0 }}

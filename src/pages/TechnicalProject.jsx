@@ -6,7 +6,7 @@ import { TechnicalProjects } from "../data/technicalProjects";
 const TechnicalProject = () => {
   const navigate = useNavigate();
   return (
-    <div className="h-max w-full font-poppins bg-[#003366]">
+    <div className="h-max w-full font-poppins bg-[#003366] pt-16">
       <h1 className="flex mx-auto mb-2 py-4 h-max w-full justify-center items-center text-3xl md:text-7xl text-white">
         TECHNICAL PROJECTS
       </h1>

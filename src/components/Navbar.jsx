@@ -1,22 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 
 const Navbar = () => {
-    const location = useLocation();
-    const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
     const [isOpen, setIsOpen] = useState(false);
     const [dropdowns, setDropdowns] = useState({});
     const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth < 768);
-        };
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
