@@ -8,39 +8,32 @@ import { ArrowRight, Heart, Leaf, BookOpen, HandHeart } from "lucide-react";
 export default function Events() {
   const events = [
     {
-      title: "Blood Donation Drive",
-      date: "March 15, 2025",
+      title: "Volunteer Registration Drive",
+      date: "TBA",
       location: "AIML Section, DJ Sanghvi College",
       icon: Heart,
       iconColor: "text-red-500",
     },
     {
       title: "Tree Plantation Drive",
-      date: "April 5, 2025",
+      date: "TBA",
       location: "National Park",
       icon: Leaf,
       iconColor: "text-green-500",
     },
     {
       title: "Stem Cell Donation Awareness",
-      date: "May 10, 2025",
+      date: "TBA",
       location: "Ground Floor, DJ Sanghvi College",
       icon: HandHeart,
       iconColor: "text-purple-500",
     },
     {
       title: "Grain-A-Thon",
-      date: "June 1, 2025",
+      date: "TBA",
       location: "DJ Sanghvi College",
       icon: BookOpen,
       iconColor: "text-yellow-500",
-    },
-    {
-      title: "Annual Charity Drive",
-      date: "July 15, 2025",
-      location: "DJ Sanghvi College",
-      icon: Leaf,
-      iconColor: "text-green-500",
     },
   ];
 
@@ -85,7 +78,7 @@ export default function Events() {
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <a
-            href="#"
+            href="/events"
             className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
           >
             View All Events{" "}
