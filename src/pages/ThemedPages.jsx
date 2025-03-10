@@ -22,15 +22,15 @@ const DynamicPage = ({ event }) => {
           >
             {event.title}
           </motion.h1>
-          <motion.p
+          <motion.div
             className='text-md md:text-2xl text-center self-center '
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5 }}
           >
-            <div className='w-full border-white my-5 border-b-4'></div>
+            <span className='w-full border-white my-5 border-b-4'></span>
             {event.date} | {event.location}
-          </motion.p>
+          </motion.div>
         </header>
 
         {/* "What is Camp?" Section */}
@@ -39,7 +39,7 @@ const DynamicPage = ({ event }) => {
             <h2 className='text-3xl font-bold mb-8'>What is {event.title}?</h2>
             <div className='md:flex items-center'>
               <p className='text-sm sm:text-lg text-justify leading-relaxed text-gray-300 md:w-2/3 md:mr-6'>
-              <div dangerouslySetInnerHTML={{ __html: event.description }} />
+                <span dangerouslySetInnerHTML={{ __html: event.description }} />
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>
                 <img
