@@ -96,9 +96,8 @@ const Navbar = () => {
     },
     {
       Icon: "FaRegFileAlt",
-      title: "Extras",
+      title: "See More",
       subLinks: [
-        { title: "Drive", path: "/drive" },
         { title: "Alumni", path: "/alumni" },
         { title: "Reports", path: "/reports" },
         { title: "Gallery", path: "/gallery" },
