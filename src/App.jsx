@@ -53,9 +53,7 @@ const App = () => {
       <ScrollToTop />
       <Toaster position="top-right" reverseOrder={false} />
 
-      <div className="
-      justify-start 
-      min-h-screen w-screen bg-white">
+      <div className="justify-start min-h-screen w-screen bg-white">
         {/* Sidebar */}
         {/* <Sidebar /> */}
         <Navbar />

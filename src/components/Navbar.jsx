@@ -111,7 +111,7 @@ const Navbar = () => {
   return (
     <nav
       ref={menuRef}
-      className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full md:w-max md:top-5 md:max-w-4xl bg-slate-950/90 md:bg-slate-950/50 text-white shadow-black/50 border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
+      className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full md:w-max md:top-5 md:max-w-4xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
     >
       {/* Desktop Navbar */}
       <div className="hidden md:flex items-center space-x-6 px-6 py-1">
@@ -165,78 +165,93 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Navbar */}
-      <div className={`md:hidden container ${navOpen ? "h-screen" : "h-14"} mx-auto flex flex-col items-center justify-start`}>
-        {/* Mobile Menu Button */}
-        <div className={`container mx-auto px-2 flex items-center justify-between`}>
+      <div
+        className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navOpen ? "h-screen bg-black backdrop-blur-md" : "h-12 bg-black/90 backdrop-blur-lg"
+          } flex flex-col items-center`}
+      >
+        {/* Mobile Menu Button & Logo */}
+        <div className="flex items-center justify-between px-3 py-2 w-full">
           {/* Logo */}
-          <div>
-            <a href="/" className={`text-white font-semibold text-lg py-3 no-underline ${navOpen ? "hidden" : "block"}`}>
-              DJS NSS
-            </a>
-          </div>
+          <a
+            href="/"
+            className={`text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300 ${navOpen ? "opacity-0" : "opacity-100"
+              }`}
+          >
+            DJS NSS
+          </a>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setNavOpen((prev) => !prev)}
-            className="md:hidden top-4 right-4 absolute text-white text-2xl focus:outline-none"
+            className={`text-white text-3xl transition-transform duration-300 ${navOpen ? "rotate-180" : "rotate-0"
+              }`}
           >
             {navOpen ? <LuPanelRightClose /> : <IoIosArrowDown />}
           </button>
-          {/* Mobile Menu */}
-          {navOpen && (
-            <div className="w-full flex flex-col items-center">
-              {navigationLinks.map(({ Icon, title, path, subLinks }) => {
-                const LazyIconComponent = iconMap[Icon];
-                return (
-                  <div key={title} className="border-b border-gray-700">
-                    {subLinks ? (
-                      // If dropdown, toggle dropdown instead of navigating
-                      <button
-                        onClick={() => toggleDropdown(title, true)}
-                        className="flex items-center text-white px-6 py-3 w-full text-left"
-                      >
-                        <Suspense fallback={<div className="hidden"></div>}>
-                          <LazyIconComponent className="text-xl mr-2" />
-                        </Suspense>
-                        {title}
-                        <IoIosArrowDown className="ml-auto" />
-                      </button>
-                    ) : (
-                      // If no dropdown, navigate and close menu
-                      <Link
-                        to={path}
-                        onClick={closeMenu}
-                        className="flex items-center text-white px-6 py-3"
-                      >
-                        <Suspense fallback={<div className="hidden"></div>}>
-                          <LazyIconComponent className="text-xl mr-2" />
-                        </Suspense>
-                        {title}
-                      </Link>
-                    )}
+        </div>
 
-                    {/* Mobile Dropdown */}
-                    {subLinks && dropdowns[title] && (
-                      <div className="bg-gray-900">
-                        {subLinks.map((subLink) => (
-                          <Link
-                            key={subLink.path}
-                            to={subLink.path}
-                            onClick={closeMenu}
-                            className="block px-8 py-2 text-gray-400 hover:text-white no-underline"
-                          >
-                            {subLink.title}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+        {/* Mobile Menu */}
+        <div
+          className={`w-full flex flex-col items-center overflow-hidden transition-all duration-500 ${navOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+            }`}
+        >
+          {navigationLinks.map(({ Icon, title, path, subLinks }) => {
+            const LazyIconComponent = iconMap[Icon];
+            return (
+              <div key={title} className="w-full">
+                {subLinks ? (
+                  // Dropdown Button
+                  <button
+                    onClick={() => toggleDropdown(title)}
+                    className="flex items-center text-white px-6 py-4 w-full text-left transition-all hover:bg-slate-950/90"
+                  >
+                    <Suspense fallback={<div className="hidden"></div>}>
+                      <LazyIconComponent className="text-xl mr-3" />
+                    </Suspense>
+                    {title}
+                    <IoIosArrowDown
+                      className={`ml-auto transition-transform duration-300 ${dropdowns[title] ? "rotate-180" : "rotate-0"
+                        }`}
+                    />
+                  </button>
+                ) : (
+                  // Normal Link
+                  <Link
+                    to={path}
+                    onClick={closeMenu}
+                    className="flex items-center text-white px-6 py-4 w-full transition-all no-underline hover:bg-gray-800"
+                  >
+                    <Suspense fallback={<div className="hidden"></div>}>
+                      <LazyIconComponent className="text-xl mr-3" />
+                    </Suspense>
+                    {title}
+                  </Link>
+                )}
+
+                {/* Mobile Dropdown - Now Fully Visible */}
+                {subLinks && (
+                  <div
+                    className={`bg-slate-950 transition-all duration-500 overflow-hidden ${dropdowns[title] ? "max-h-96 opacity-100 py-2" : "max-h-0 opacity-0"
+                      }`}
+                  >
+                    {subLinks.map((subLink) => (
+                      <Link
+                        key={subLink.path}
+                        to={subLink.path}
+                        onClick={closeMenu}
+                        className="block px-8 py-2 no-underline text-gray-300 hover:text-white hover:bg-gray-900 transition-all duration-300"
+                      >
+                        {subLink.title}
+                      </Link>
+                    ))}
                   </div>
-                );
-              })}
-            </div>
-          )}
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
+
     </nav>
   );
 };
