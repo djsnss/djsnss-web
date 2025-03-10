@@ -8,7 +8,7 @@ import Impact from "../components/home/impact";
 import Team from "../components/home/team";
 import Events from "../components/home/events";
 import Initiatives from "../components/home/Initiatives";
-
+import DistinguishedAlumni from "../pages/alumni/DistinguishedAlumni";
 const data = [
   { src: DJSNSSLogo, alt: "NSS DJSCE Logo", link: "/" },
   { src: DJSLogo, alt: "DJS Logo", link: "https://djsce.ac.in/" },
@@ -26,6 +26,7 @@ export default function Home() {
         <Initiatives/>
         <Team />
         <Events />
+        <DistinguishedAlumni />
       </main>
     </div>
   )

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import TeamCard from "./TeamCard";
 
 const TeamSection = ({ title, members }) => {
@@ -14,6 +15,16 @@ const TeamSection = ({ title, members }) => {
       </div>
     </div>
   );
+};
+TeamSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  members: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      role: PropTypes.string.isRequired,
+      image: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 };
 
 export default TeamSection;

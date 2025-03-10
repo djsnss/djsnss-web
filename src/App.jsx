@@ -14,10 +14,10 @@ import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
 import { Toaster } from "react-hot-toast";
-import AllAlumni from "./components/home/AllAlumni";
 
 // Lazy-loaded components
 const Home = React.lazy(() => import("./pages/Landing"));
+const AllAlumni = React.lazy(() => import("./pages/alumni/AllAlumni"));
 const Volunteer = React.lazy(() => import("./pages/volunteer/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./pages/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./pages/volunteer/VolunteerRegistration"));
@@ -43,7 +43,7 @@ const VolunteerLogin = React.lazy(() => import("./pages/volunteer/VolLogin"));
 const VolunteerPass = React.lazy(() => import("./pages/volunteer/ChangePassword"));
 const FolderTree = React.lazy(() => import("./components/FolderTree"));
 const TechnicalProject = React.lazy(() => import("./pages/TechnicalProject"));
-
+const VolunteerDetails = React.lazy(() => import("./pages/alumni/AlumniDetails"));
 
 const App = () => {
   return (
@@ -110,7 +110,7 @@ const App = () => {
               <Route path="/drive" element={<FolderTree />} />
               <Route path="/alumni" element={<AllAlumni />} />
               <Route path="/reports" element={<FolderTree />} />
-
+              <Route path="/alumni-details/:name" element={<VolunteerDetails />} />
 
               {/* Dynamic routes for events */}
               {propsData.map((event) => (
