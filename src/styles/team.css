@@ -4,7 +4,7 @@
   padding: 0;
   background-color: #d9d9d9;
   background-image: url("/team.svg");
-  background-size: contain; /* ensures the whole image is visible */
+  background-size: cover; /* ensures the whole image is visible */
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;  /* fixes the background to the viewport */

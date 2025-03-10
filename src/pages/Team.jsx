@@ -23,7 +23,8 @@ const Team = () => {
     <div className="team-page-bg overflow-y-scroll w-full min-h-screen">
       <div className="h-full w-full text-center px-5 py-8 md:py-10 relative">
         <h1 className="flex mx-auto mb-2 h-max w-full justify-center items-center text-3xl md:text-7xl text-black pt-16">MEET OUR TEAM</h1>
-
+        <p className="text-lg md:text-2xl text-black">The team that makes it all happen. Our dedicated members work tirelessly to ensure the success of our projects and initiatives. From planning to execution, each team member plays a crucial role in driving our mission forward. Get to know the talented individuals behind our achievements. </p>
+        <a href="/alumni" className="text-blue-500 text-lg md:text-2xl underline">Meet our Alumni</a>
         {/* Dropdown to select the year */}
           <div className="my-4 flex justify-center items-center">
             <label htmlFor="year-select" className="mr-2 text-lg font-semibold text-black">Select Year:</label>

@@ -21,7 +21,6 @@ TeamSection.propTypes = {
   members: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      role: PropTypes.string.isRequired,
       image: PropTypes.string.isRequired,
     })
   ).isRequired,
