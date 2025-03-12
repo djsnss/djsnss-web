@@ -471,8 +471,56 @@ export const getEventStats = async (req, res) => {
   }
 };
 
+const updateEventStatus = async () => {
+  try {
+    const currentDate = new Date();
+
+    // Find all expired upcoming events
+    const expiredEvents = await EventModel.find({
+      status: "Upcoming",
+      date: { $lt: currentDate }, // Events with past dates
+    });
+
+    if (expiredEvents.length > 0) {
+      // Update their status to "Past"
+      await EventModel.updateMany(
+        { _id: { $in: expiredEvents.map((event) => event._id) } },
+        { $set: { status: "Past" } }
+      );
+
+      console.log(`✅ Updated ${expiredEvents.length} events to Past`);
+
+      // Remove only the modified events from Redis cache
+      const upcomingEventsCache = await redisClient.get("upcomingEvents");
+      if (upcomingEventsCache) {
+        let cachedEvents = JSON.parse(upcomingEventsCache);
+        cachedEvents = cachedEvents.filter(
+          (event) =>
+            !expiredEvents.some(
+              (expired) => String(expired._id) === String(event._id)
+            )
+        );
+        await redisClient.setEx(
+          "upcomingEvents",
+          3600,
+          JSON.stringify(cachedEvents)
+        );
+      }
+
+      // Add these events to pastEvents cache
+      const pastEventsCache = await redisClient.get("pastEvents");
+      let pastEvents = pastEventsCache ? JSON.parse(pastEventsCache) : [];
+      pastEvents = [...expiredEvents, ...pastEvents]; // Append to pastEvents
+      await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
+    }
+  } catch (err) {
+    console.error("❌ Error updating event statuses:", err);
+  }
+};
+
 export const getUpcomingEvents = async (req, res) => {
   try {
+    await updateEventStatus();
     const cachedEvents = await redisClient.get("upcomingEvents");
     if (cachedEvents) {
       return res.status(200).json({
