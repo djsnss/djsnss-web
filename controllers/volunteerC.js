@@ -118,7 +118,8 @@ const login = async (req, res) => {
     }
     const token = jwt.sign(
       { volunteerId: volunteer._id, role: "volunteer" },
-      Secret,{expiresIn:"7d"}
+      Secret,
+      { expiresIn: "7d" }
     );
     sendLogin(req, res);
     return res.status(200).json({ token, volunteer });
@@ -151,10 +152,13 @@ const registerEvent = async (req, res) => {
       event.registeredVolunteers = [];
     }
     //Avoid duplicate registration
-    const eventIdString = String(eventId);
+    const eventIdString = eventId.toString();
+
+    // Avoid duplicate registration
     if (
       volunteer.connectedEvents.some(
-        (event) => String(event.eventId) === eventIdString
+        (registeredEvent) =>
+          registeredEvent.eventId.toString() === eventIdString
       )
     ) {
       return res

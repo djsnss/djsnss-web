@@ -19,8 +19,30 @@ redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
   if (!redisClient.isOpen) {
     await redisClient.connect();
     console.log("✅ Redis Connected!");
+    preloadCache();
   }
 })();
+
+const preloadCache = async () => {
+  console.log("🚀 Preloading cache...");
+  try {
+    const upcomingEvents = await EventModel.find({ status: "Upcoming" })
+      .sort({ date: 1 })
+      .lean();
+    const pastEvents = await EventModel.find({ status: "Past" })
+      .sort({ date: 1 })
+      .lean();
+    await redisClient.setEx(
+      "upcomingEvents",
+      3600,
+      JSON.stringify(upcomingEvents)
+    );
+    await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
+    console.log("✅ Cache preloaded!");
+  } catch (err) {
+    console.error("⚠️ Error preloading cache:", err);
+  }
+};
 
 env.config();
 const Secret = process.env.SecretKey;
