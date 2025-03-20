@@ -37,7 +37,7 @@ const preloadCache = async () => {
       3600,
       JSON.stringify(upcomingEvents)
     );
-    await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
+    await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
     console.log("✅ Cache preloaded!");
   } catch (err) {
     console.error("⚠️ Error preloading cache:", err);
@@ -500,18 +500,14 @@ const updateEventStatus = async () => {
               (expired) => String(expired._id) === String(event._id)
             )
         );
-        await redisClient.setEx(
-          "upcomingEvents",
-          3600,
-          JSON.stringify(cachedEvents)
-        );
+        await redisClient.setEx("upcomingEvents", JSON.stringify(cachedEvents));
       }
 
       // Add these events to pastEvents cache
       const pastEventsCache = await redisClient.get("pastEvents");
       let pastEvents = pastEventsCache ? JSON.parse(pastEventsCache) : [];
       pastEvents = [...expiredEvents, ...pastEvents]; // Append to pastEvents
-      await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
+      await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
     }
   } catch (err) {
     console.error("❌ Error updating event statuses:", err);
@@ -533,11 +529,7 @@ export const getUpcomingEvents = async (req, res) => {
         date: 1,
       })
       .lean();
-    await redisClient.setEx(
-      "upcomingEvents",
-      3600,
-      JSON.stringify(upcomingEvents)
-    );
+    await redisClient.setEx("upcomingEvents", JSON.stringify(upcomingEvents));
     return res.status(200).json({
       message: "Upcoming events fetched successfully",
       events: upcomingEvents,
@@ -561,7 +553,7 @@ export const getPastEvents = async (req, res) => {
         date: 1,
       })
       .lean();
-    await redisClient.setEx("pastEvents", 3600, JSON.stringify(pastEvents));
+    await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
     return res.status(200).json({
       message: "Past events fetched successfully",
       events: pastEvents,
