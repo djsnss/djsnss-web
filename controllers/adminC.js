@@ -34,7 +34,6 @@ const preloadCache = async () => {
       .lean();
     await redisClient.setEx(
       "upcomingEvents",
-      3600,
       JSON.stringify(upcomingEvents)
     );
     await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
