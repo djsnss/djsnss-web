@@ -19,11 +19,14 @@ import {
   getAllEvents,
   updateEventDetails,
   deleteEvent,
+  forgotPassword,
+  resetPassword,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
 
 import { uploadNormal } from "../middlewares/multer.js";
+import { otpLimiter, passwordLimiter } from "../middlewares/rateLimiter.js";
 
 const router = express.Router();
 
@@ -68,11 +71,14 @@ router.put(
 
 router.get("/getAttendanceList/:eventId", authAdmin, getAttendanceList); //get attendance list
 
-router.put("/change-email", changeEmail); //route to change email of admin
+router.put("/change-email", authAdmin, changeEmail); // now protected
 
-router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for password change
+router.post("/send-otp", authAdmin, otpLimiter, sendOtpForPasswordChange); // now protected & rate limited
 
-router.put("/change-password", changePassword); //route to change password of admin
+router.put("/change-password", authAdmin, passwordLimiter, changePassword); // now protected & rate limited
+
+router.post("/forgot-password", otpLimiter, forgotPassword); // public, rate limited
+router.post("/reset-password", passwordLimiter, resetPassword); // public, rate limited
 
 router.post("/logout", authAdmin, logout); //logout API for admin
 

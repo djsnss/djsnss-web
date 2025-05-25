@@ -818,3 +818,50 @@ export const deleteEvent = async (req, res) => {
     });
   }
 };
+
+// Public: Send OTP for forgot password
+export const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    // Validate email format to prevent NoSQL injection
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+    const admin = await AdminModel.findOne({ email });
+    if (!admin) return res.status(404).json({ message: "Admin not found" });
+    const otp = crypto.randomInt(100000, 999999).toString();
+    const expiresAt = Date.now() + 10 * 60 * 1000;
+    otpStore[email] = { otp, expiresAt };
+    await sendOTP(email, otp);
+    return res.status(200).json({ message: "OTP sent to email" });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};
+
+// Public: Reset password with OTP
+export const resetPassword = async (req, res) => {
+  try {
+    const { email, otp, newPassword } = req.body;
+    // Validate email format to prevent NoSQL injection
+    if (!email || !/^\S+@\S+\.\S+$/.test(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+    const admin = await AdminModel.findOne({ email });
+    if (!admin) return res.status(404).json({ message: "Admin not found" });
+    const storedOtpData = otpStore[email];
+    if (!storedOtpData) return res.status(400).json({ message: "No OTP found. Please request a new one." });
+    const { otp: storedOtp, expiresAt } = storedOtpData;
+    if (Date.now() > expiresAt) {
+      delete otpStore[email];
+      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+    }
+    if (storedOtp !== otp) return res.status(400).json({ message: "Invalid OTP" });
+    admin.password = await bcrypt.hash(newPassword, 10);
+    await admin.save();
+    delete otpStore[email];
+    return res.status(200).json({ message: "Password reset successfully" });
+  } catch (err) {
+    return res.status(500).json({ message: "Server error" });
+  }
+};
