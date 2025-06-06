@@ -110,11 +110,11 @@ const login = async (req, res) => {
       "studentDetails.email": email,
     });
     if (!volunteer) {
-      return res.status(400).send("Invalid sapId or email");
+      return res.status(400).json({message:"Invalid sapId or email"});
     }
     const match = await bcrypt.compare(password, volunteer.password);
     if (!match) {
-      return res.status(400).send("Invalid password");
+      return res.status(400).json({message:"Invalid password"});
     }
     const token = jwt.sign(
       { volunteerId: volunteer._id, role: "volunteer" },
@@ -133,16 +133,16 @@ const registerEvent = async (req, res) => {
   try {
     const volunteerId = req.volunteer?.volunteerId;
     if (!volunteerId) {
-      return res.status(400).send("Volunteer not found in request");
+      return res.status(400).json({message:"Volunteer not found in request"});
     }
     const volunteer = await VolunteerModel.findById(volunteerId);
     if (!volunteer) {
-      return res.status(404).send("Volunteer not found");
+      return res.status(404).json({message:"Volunteer not found"});
     }
     const eventId = req.params.eventId;
     const event = await EventModel.findById(eventId);
     if (!event) {
-      return res.status(404).send("Event not found");
+      return res.status(404).json({message:"Event not found"});
     }
     // Ensure arrays exist
     if (!Array.isArray(volunteer.connectedEvents)) {
@@ -163,7 +163,7 @@ const registerEvent = async (req, res) => {
     ) {
       return res
         .status(400)
-        .send({ message: `Already registered for ${event.name}` });
+        .json({ message: `Already registered for ${event.name}` });
     }
     // Register the volunteer
     volunteer.connectedEvents.push({ eventId: eventId });
@@ -173,7 +173,7 @@ const registerEvent = async (req, res) => {
     await event.save();
     return res
       .status(200)
-      .send({ message: `Successfully registered for ${event.name}` });
+      .json({ message: `Successfully registered for ${event.name}` });
   } catch (err) {
     console.error("Register Event Error:", err);
     return res.status(500).json({ message: "Server error" });
@@ -183,14 +183,14 @@ const registerEvent = async (req, res) => {
 const uploadNormalPhoto = async (req, res) => {
   try {
     if (!req.file) {
-      return res.status(400).send("File not found");
+      return res.status(400).json({message:"File not found"});
     }
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: "normalPhoto",
     });
     const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
     if (!volunteer) {
-      return res.status(404).send("Volunteer not found.");
+      return res.status(404).json({message:"Volunteer not found."});
     }
     volunteer.normalPhoto.url = result.secure_url;
     volunteer.normalPhoto.public_id = result.public_id;
@@ -201,7 +201,7 @@ const uploadNormalPhoto = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error uploading image");
+    return res.status(500).json({message:"Error uploading image"});
   }
 };
 
@@ -209,7 +209,7 @@ const updateNormalPhoto = async (req, res) => {
   try {
     const volunteer = await VolunteerModel.findById(req.volunteer.volunteerId);
     if (!volunteer) {
-      return res.status(404).send("Volunteer not found");
+      return res.status(404).json({message:"Volunteer not found"});
     }
     if (volunteer.normalPhoto && volunteer.normalPhoto.public_id) {
       await cloudinary.uploader.destroy(volunteer.normalPhoto.public_id);
@@ -226,7 +226,7 @@ const updateNormalPhoto = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error updating image");
+    return res.status(500).json({message:"Error updating image"});
   }
 };
 
@@ -239,7 +239,7 @@ const checkHours = async (req, res) => {
       select: "name TotalNoOfHours",
     });
     if (!volunteer) {
-      return res.status(404).send("Volunteer not found");
+      return res.status(404).json({message:"Volunteer not found"});
     }
     const connectedEvents = volunteer.connectedEvents
       .map((event) => {
@@ -263,7 +263,7 @@ const checkHours = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error checking hours");
+    return res.status(500).json({message:"Error checking hours"});
   }
 };
 
@@ -373,11 +373,11 @@ const logout = (req, res) => {
 
 const verifyToken = async (req, res) => {
   const token = req.header("Authorization");
-  if (!token) return res.status(401).send("Access Denied");
+  if (!token) return res.status(401).json({message:"Access Denied"});
   try {
     const bearerToken = token.split(" ")[1];
     if (bearerToken == null) {
-      return res.status(401).send("token null");
+      return res.status(401).json({message:"token null"});
     }
     const verified = jwt.verify(bearerToken, process.env.SecretKey);
     req.volunteer = verified;
@@ -385,7 +385,7 @@ const verifyToken = async (req, res) => {
       .status(200)
       .json({ message: "Token verified successfully", volunteer: verified });
   } catch (err) {
-    return res.status(400).send("Invalid token");
+    return res.status(400).json({message:"Invalid token"});
   }
 };
 

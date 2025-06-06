@@ -53,11 +53,11 @@ export const login = async (req, res) => {
     }
     const admin = await AdminModel.findOne({ email: email });
     if (!admin) {
-      return res.status(400).send("Invalid email");
+      return res.status(400).json({message:"Invalid email"});
     }
     const match = await bcrypt.compare(password, admin.password);
     if (!match) {
-      return res.status(400).send("Invalid password");
+      return res.status(400).json({message:"Invalid password"});
     }
     const token = jwt.sign({ adminId: admin._id, role: "admin" }, Secret, {
       expiresIn: "1d",
@@ -532,7 +532,7 @@ export const getUpcomingEvents = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error fetching upcoming events");
+    return res.status(500).json({message:"Error fetching upcoming events"});
   }
 };
 export const getPastEvents = async (req, res) => {
@@ -556,7 +556,7 @@ export const getPastEvents = async (req, res) => {
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).send("Error fetching past events");
+    return res.status(500).json({message:"Error fetching past events"});
   }
 };
 
@@ -620,7 +620,7 @@ export const changeEmail = async (req, res) => {
     }
     const match = await bcrypt.compare(currentPassword, admin.password);
     if (!match) {
-      return res.status(400).send("Invalid password");
+      return res.status(400).json({message:"Invalid password"});
     }
     // Update email
     admin.email = newEmail;
@@ -871,11 +871,11 @@ export const resetPassword = async (req, res) => {
 
 export const verifyToken = async (req, res) => {
   const token = req.header("Authorization");
-  if (!token) return res.status(401).send("Access Denied");
+  if (!token) return res.status(401).json({message:"Access Denied"});
   try {
     const bearerToken = token.split(" ")[1];
     if (bearerToken == null) {
-      return res.status(401).send("token null");
+      return res.status(401).json({message:"token null"});
     }
     const verified = jwt.verify(bearerToken, process.env.SecretKey);
     req.admin = verified;
@@ -883,6 +883,6 @@ export const verifyToken = async (req, res) => {
       .status(200)
       .json({ message: "Token verified successfully", admin: verified });
   } catch (err) {
-    return res.status(400).send("Invalid token");
+    return res.status(400).json({message:"Invalid token"});
   }
 };
