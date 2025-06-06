@@ -32,10 +32,7 @@ const preloadCache = async () => {
     const pastEvents = await EventModel.find({ status: "Past" })
       .sort({ date: 1 })
       .lean();
-    await redisClient.setEx(
-      "upcomingEvents",
-      JSON.stringify(upcomingEvents)
-    );
+    await redisClient.setEx("upcomingEvents", JSON.stringify(upcomingEvents));
     await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
     console.log("✅ Cache preloaded!");
   } catch (err) {
@@ -850,18 +847,42 @@ export const resetPassword = async (req, res) => {
     const admin = await AdminModel.findOne({ email });
     if (!admin) return res.status(404).json({ message: "Admin not found" });
     const storedOtpData = otpStore[email];
-    if (!storedOtpData) return res.status(400).json({ message: "No OTP found. Please request a new one." });
+    if (!storedOtpData)
+      return res
+        .status(400)
+        .json({ message: "No OTP found. Please request a new one." });
     const { otp: storedOtp, expiresAt } = storedOtpData;
     if (Date.now() > expiresAt) {
       delete otpStore[email];
-      return res.status(400).json({ message: "OTP has expired. Please request a new one." });
+      return res
+        .status(400)
+        .json({ message: "OTP has expired. Please request a new one." });
     }
-    if (storedOtp !== otp) return res.status(400).json({ message: "Invalid OTP" });
+    if (storedOtp !== otp)
+      return res.status(400).json({ message: "Invalid OTP" });
     admin.password = await bcrypt.hash(newPassword, 10);
     await admin.save();
     delete otpStore[email];
     return res.status(200).json({ message: "Password reset successfully" });
   } catch (err) {
     return res.status(500).json({ message: "Server error" });
+  }
+};
+
+export const verifyToken = async (req, res) => {
+  const token = req.header("Authorization");
+  if (!token) return res.status(401).send("Access Denied");
+  try {
+    const bearerToken = token.split(" ")[1];
+    if (bearerToken == null) {
+      return res.status(401).send("token null");
+    }
+    const verified = jwt.verify(bearerToken, process.env.SecretKey);
+    req.admin = verified;
+    return res
+      .status(200)
+      .json({ message: "Token verified successfully", admin: verified });
+  } catch (err) {
+    return res.status(400).send("Invalid token");
   }
 };

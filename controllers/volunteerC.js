@@ -371,6 +371,24 @@ const logout = (req, res) => {
   }
 };
 
+const verifyToken = async (req, res) => {
+  const token = req.header("Authorization");
+  if (!token) return res.status(401).send("Access Denied");
+  try {
+    const bearerToken = token.split(" ")[1];
+    if (bearerToken == null) {
+      return res.status(401).send("token null");
+    }
+    const verified = jwt.verify(bearerToken, process.env.SecretKey);
+    req.volunteer = verified;
+    return res
+      .status(200)
+      .json({ message: "Token verified successfully", volunteer: verified });
+  } catch (err) {
+    return res.status(400).send("Invalid token");
+  }
+};
+
 export {
   signup,
   login,
@@ -381,4 +399,5 @@ export {
   sendOtpForPasswordChange,
   changePassword,
   logout,
+  verifyToken,
 };

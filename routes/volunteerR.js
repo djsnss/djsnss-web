@@ -11,6 +11,7 @@ import {
   changePassword,
   sendOtpForPasswordChange,
   logout,
+  verifyToken,
 } from "../controllers/volunteerC.js";
 
 import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
@@ -42,5 +43,7 @@ router.post("/send-otp", sendOtpForPasswordChange); //route to get otp for passw
 router.put("/change-password", changePassword); //route to change password of volunteer
 
 router.post("/logout", authVolunteer, logout); //logout API for volunteer
+
+router.get("/verify-token", verifyToken);
 
 export default router;

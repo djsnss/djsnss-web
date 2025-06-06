@@ -21,6 +21,7 @@ import {
   deleteEvent,
   forgotPassword,
   resetPassword,
+  verifyToken,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
@@ -83,6 +84,8 @@ router.post("/reset-password", passwordLimiter, resetPassword); // public, rate 
 router.post("/logout", authAdmin, logout); //logout API for admin
 
 router.delete("/deleteEvent", authAdmin, deleteEvent);
+
+router.get("/verify-token", verifyToken);
 
 export default router;
 
