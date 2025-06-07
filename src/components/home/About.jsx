@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import Initiatives from "../../components/home/Initiatives";
 import DistinguishedAlumni from "../../pages/alumni/DistinguishedAlumni";
 import AboutSection from "./AboutSection";
-import Impact from "../../components/home/Impact";
+import Impact from "../../components/home/impact";
 import Events from "../../components/home/Events";
 
 const About = () => {
