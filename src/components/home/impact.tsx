@@ -5,25 +5,25 @@ import StatCard from "./stat-card"
 export default function Impact() {
   const stats = [
     {
-      number: "50+",
+      number: 50,
       label: "Events Organized",
       bgColor: "bg-blue-50",
       textColor: "text-blue-600",
     },
     {
-      number: "5000+",
+      number: 5000,
       label: "Lives Impacted",
       bgColor: "bg-sky-50",
       textColor: "text-sky-600",
     },
     {
-      number: "1000+",
+      number: 1000,
       label: "Volunteer Hours",
       bgColor: "bg-cyan-50",
       textColor: "text-cyan-600",
     },
     {
-      number: "200+",
+      number: 200,
       label: "Active Volunteers",
       bgColor: "bg-indigo-50",
       textColor: "text-indigo-600",
@@ -49,7 +49,7 @@ export default function Impact() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {stats.map((stat, index) => (
             <StatCard
               key={index}
@@ -62,7 +62,7 @@ export default function Impact() {
           ))}
         </div>
 
-        <motion.div
+        {/* <motion.div
           className="mt-16 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-2xl p-8 md:p-12 shadow-sm"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -73,12 +73,11 @@ export default function Impact() {
             <div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-blue-800">Sustainable Development Goals</h3>
               <p className="text-gray-600 mb-6">
-                Our initiatives align with the UN's Sustainable Development Goals, focusing particularly on quality
-                education, good health and well-being, and climate action.
+                Our initiatives align with the UN's Sustainable Development Goals, focusing particularly on quality education, good health and well-being, and climate action.
               </p>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   )

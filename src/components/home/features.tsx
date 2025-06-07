@@ -25,7 +25,7 @@ export default function Features() {
   ]
 
   return (
-    <section id="about" className="bg-white">
+    <section id="about" className="bg-blue-50 py-8">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="max-w-3xl mx-auto text-center"

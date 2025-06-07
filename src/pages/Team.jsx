@@ -15,7 +15,7 @@ const Team = () => {
 
   // Check if team data exists for the selected year
   const currentYearData = teamData[selectedYear];
-  if (!currentYearData) return <div><Loader /></div>;
+  if (!currentYearData) return <div className="min-h-screen max-w-screen flex items-center justify-center bg-cream"><Loader /></div>;
 
   let sectionIndex = 0;
 
@@ -27,12 +27,12 @@ const Team = () => {
         <a href="/alumni" className="text-blue-500 text-lg md:text-2xl">Meet our Alumni</a>
         {/* Dropdown to select the year */}
           <div className="my-4 flex justify-center items-center">
-            <label htmlFor="year-select" className="mr-2 text-lg font-semibold text-black">Select Year:</label>
+            <label htmlFor="year-select" className="text-base sm:text-xl font-semibold text-black">Select Year:</label>
             <select
               id="year-select"
               value={selectedYear}
               onChange={handleYearChange}
-              className="bg-gray-100 text-black border-2 border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-blue-500 bg-transparent text-lg underline rounded-lg p-2 focus:outline-none focus:ring-none focus:ring-blue-500"
             >
               {/* List all years */}
               {Object.keys(teamData).map((year) => (
@@ -74,7 +74,25 @@ const Team = () => {
             );
           })}
         </div>
-
+       
+        {/* Student Leader Section */}
+        {currentYearData.leader &&
+          <div className="relative">
+            <h2 className="text-2xl md:text-4xl font-bold uppercase text-center my-4 sm:my-12 text-black underline">Student Leader</h2>
+            {Object.entries(currentYearData.leader).map(([title, members]) => {
+              sectionIndex++;
+              return (
+                <TeamSection
+                  key={sectionIndex}
+                  index={sectionIndex}
+                  title={title}
+                  members={members}
+                  />
+                );
+              })}
+          </div>
+        }
+        
         {/* Heads Section */}
         <div className="relative">
           <h2 className="text-2xl md:text-4xl font-bold uppercase text-center my-4 sm:my-12 text-black underline">Heads</h2>

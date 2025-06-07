@@ -1,8 +1,9 @@
 import React from "react"
 import { motion } from "framer-motion"
+import CountUp from './CountUp'
 
 interface StatCardProps {
-  number: string
+  number: number
   label: string
   bgColor: string
   textColor: string
@@ -18,8 +19,19 @@ export default function StatCard({ number, label, bgColor, textColor, delay = 0 
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
     >
-      <h3 className={`text-4xl md:text-5xl font-bold ${textColor} mb-2`}>{number}</h3>
-      <p className="text-gray-700">{label}</p>
+      <h3 className={`text-4xl md:text-5xl font-bold ${textColor} mb-2`}>
+        <CountUp
+          from={0}
+          to={number}
+          separator=","
+          direction="up"
+          duration={1}
+          className="count-up-text"
+          onStart={() => {}}
+          onEnd={() => {}}
+        />+
+      </h3>
+      <p className="text-lg text-gray-700">{label}</p>
     </motion.div>
   )
 }

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ const Login = () => {
         throw new Error(data.message || "Login failed. Please try again.");
       }
 
-      alert("Login successful");
+      toast.success("Login successful");
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("volunteer", JSON.stringify(data.volunteer));
 

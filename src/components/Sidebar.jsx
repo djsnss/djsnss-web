@@ -2,7 +2,7 @@ import React, { useState, useEffect, Suspense } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome } from "react-icons/fi"; // Keep core icons like this for immediate use
 import { IoIosArrowDown } from "react-icons/io";
-import { LuPanelRightClose } from "react-icons/lu";
+import { LuPanelRightClose, LuPanelLeftClose } from "react-icons/lu";
 
 // Manual Icon Mapping
 const iconMap = {
@@ -75,8 +75,6 @@ const Sidebar = () => {
   const navigationLinks = [
     { Icon: "FiHome", title: "Home", path: "/" },
     { Icon: "SiRotaryinternational", title: "About NSS", path: "/aboutus" },
-    { Icon: "GrGallery", title: "Gallery", path: "/gallery" },
-    { Icon: "FaQuestion", title: "FAQ", path: "/faq" },
     {
       Icon: "MdEventNote",
       title: "Events",
@@ -101,13 +99,25 @@ const Sidebar = () => {
         { title: "Volunteer Policy", path: "/volunteer/volunteer-policy" },
       ],
     },
-    { Icon: "FaRegCalendarAlt", title: "Calendar", path: "/calendar" },
-    { Icon: "FaRegFileAlt", title: "Reports", path: "/reports" },
-    { Icon: "LiaCertificateSolid", title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" },
+    {
+      Icon: "FaRegFileAlt",
+      title: "See More",
+      subLinks: [
+        { title: "FAQ", path: "/faq" },
+        { title: "Gallery", path: "/gallery" },
+        { title: "Calendar", path: "/calendar" },
+        { title: "Reports", path: "/reports" },
+        { title: "NSS Format", path: "/nss-format" },
+        { title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" }
+      ],
+    },
   ];
 
   const handleNavigation = (path) => {
     setActiveRoute(path);
+    if (isSmallScreen) {
+      setOpen(false);
+    }
     if (path.startsWith("/")) {
       const element = document.getElementById(path.substring(2));
       element?.scrollIntoView({ behavior: "smooth" });
@@ -121,7 +131,7 @@ const Sidebar = () => {
         backgroundColor: isSmallScreen ? "rgba(0,0,0,0.5)" : "",
         backgroundImage: !isSmallScreen
           // ? "linear-gradient(150deg, rgba(37,150,190,1) 0%, rgba(37,150,190,1) 100%)"
-          ? "linear-gradient(150deg, rgba(3,4,94,1) 0%, rgba(0,119,182,1) 75%, rgba(3,4,94,1) 100%)"
+          ? "linear-gradient(150deg, #00308F 0%, #0066b2 50%, #00308F 100%)"
           // ? "linear-gradient(150deg, rgba(4,24,119,1) 0%, rgba(4,24,119,1) 100%)"
           : "none",
         backgroundSize: isSmallScreen ? "auto" : open ? "150% 150%" : "200% 200%",
@@ -137,10 +147,10 @@ const Sidebar = () => {
         className={`flex w-full h-8 items-center justify-center mb-2 rounded-lg ${open ? "bg-indigo-100" : "bg-slate-100"} transition-colors duration-200`}
       >
         <LuPanelRightClose
-          className={`flex aspect-square text-black text-lg sm:p-0 transition-transform ${open && "hidden"}`}
+          className={`flex aspect-square text-black text-lg sm:p-0 ${open && "hidden"}`}
         />
         <p className={`text-black text-lg sm:text-lg font-semibold text-center ${open ? "my-2 flex" : "hidden"}`}>
-          Close
+          <LuPanelLeftClose />
         </p>
       </button>
 
@@ -157,6 +167,7 @@ const Sidebar = () => {
                     setOpen(true); // Open sidebar when clicking
                     if (subLinks) {
                       toggleDropdown(title); // Open the dropdown
+                      setOpen(true);
                     } else {
                       handleNavigation(path);
                       setDropdowns({});
@@ -165,8 +176,13 @@ const Sidebar = () => {
                   className={`w-full flex items-center no-underline p-2 rounded-lg transition-all duration-300 ${activeRoute === path ? "bg-indigo-100 text-indigo-600" : "text-white hover:text-black hover:bg-gray-100/40"
                     }`}
                 >
-                  <Suspense fallback={<div className="hidden"></div>}>
-                    <LazyIconComponent className={`text-lg sm:text-xl ${open ? "" : "mx-auto"} transition-transform`} />
+                  <Suspense fallback={
+                    <div className={`flex items-center justify-center w-5 h-5 text-lg sm:text-xl ${open ? "" : "mx-auto"}`} style={{ minWidth: '1.25rem', minHeight: '1.25rem' }}>
+                      {/* Invisible placeholder with same dimensions */}
+                      <span className="opacity-0">●</span>
+                    </div>
+                  }>
+                    <LazyIconComponent className={`text-lg sm:text-xl ${open ? "" : "mx-auto"}`} style={{ minWidth: '1.25rem', minHeight: '1.25rem' }} />
                   </Suspense>
 
                   {open && (
@@ -202,7 +218,6 @@ const Sidebar = () => {
                       to={subLink.path}
                       onClick={() => {
                         handleNavigation(subLink.path);
-                        setOpen(true);
                         setDropdowns((prev) => ({
                           ...prev,
                           [title]: false, // Close dropdown after navigation
