@@ -3,7 +3,7 @@ import Initiatives from "../../components/home/Initiatives";
 import DistinguishedAlumni from "../../pages/alumni/DistinguishedAlumni";
 import AboutSection from "./AboutSection";
 import Impact from "../../components/home/impact";
-import Events from "../../components/home/Events";
+import Events from "../../components/home/events";
 
 const About = () => {
   return (
