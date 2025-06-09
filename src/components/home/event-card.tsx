@@ -10,6 +10,7 @@ interface EventCardProps {
   location: string;
   icon: LucideIcon;
   iconColor: string;
+  bgColor: string;
   delay?: number;
 }
 
@@ -19,6 +20,7 @@ export default function EventCard({
   location,
   icon: Icon,
   iconColor,
+  bgColor,
   delay = 0,
 }: EventCardProps) {
   return (
@@ -31,10 +33,7 @@ export default function EventCard({
     >
       <div className="flex items-center mb-4">
         <div
-          className={`${iconColor.replace("text-", "bg-").replace(
-            "-500",
-            "-100"
-          )} p-2 rounded-full mr-3`}
+          className={`${bgColor} p-2 rounded-full mr-3`}
         >
           <Icon className={`h-5 w-5 ${iconColor}`} />
         </div>

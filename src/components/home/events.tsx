@@ -3,42 +3,38 @@
 import React from "react";
 import { motion } from "framer-motion";
 import EventCard from "./event-card";
-import { ArrowRight, Heart, Leaf, BookOpen, HandHeart } from "lucide-react";
+import { ArrowRight, Heart, Leaf, BookOpen, Tent, Droplets } from "lucide-react";
 
 export default function Events() {
   const events = [
     {
-      title: "Volunteer Registration Drive",
-      date: "TBA",
-      location: "AIML Section, DJ Sanghvi College",
-      icon: Heart,
-      iconColor: "text-red-500",
-    },
-    {
-      title: "Tree Plantation Drive",
-      date: "TBA",
-      location: "National Park",
-      icon: Leaf,
-      iconColor: "text-green-500",
-    },
-    {
-      title: "Stem Cell Donation Awareness",
-      date: "TBA",
-      location: "Ground Floor, DJ Sanghvi College",
-      icon: HandHeart,
-      iconColor: "text-purple-500",
+      title: "NSS Annual Camp",
+      date: "December 2023",
+      location: "Rural Community Site",
+      icon: Tent,
+      iconColor: "text-emerald-600",
+      bgColor: "bg-emerald-100",
     },
     {
       title: "Grain-A-Thon",
-      date: "TBA",
+      date: "February 2024",
       location: "DJ Sanghvi College",
       icon: BookOpen,
       iconColor: "text-yellow-500",
+      bgColor: "bg-yellow-100",
     },
+    {
+      title: "Blood Donation Drive",
+      date: "October 2023",
+      location: "Main Hall, DJ Sanghvi College",
+      icon: Droplets,
+      iconColor: "text-red-600",
+      bgColor: "bg-red-100",
+    }
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-20 bg-white-50">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="max-w-3xl mx-auto text-center mb-16"
@@ -47,11 +43,11 @@ export default function Events() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">
-            Upcoming Events
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 py-2">
+            Main Events
           </h2>
           <p className="text-lg text-gray-600">
-            Join us for these upcoming activities and be part of creating
+            Join us for these activities and be part of creating
             positive change in our community.
           </p>
         </motion.div>
@@ -65,6 +61,7 @@ export default function Events() {
               location={event.location}
               icon={event.icon}
               iconColor={event.iconColor}
+              bgColor={event.bgColor}
               delay={index * 0.1}
             />
           ))}
@@ -79,7 +76,7 @@ export default function Events() {
         >
           <a
             href="/events"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group"
+            className="inline-flex items-center text-blue-600 hover:text-blue-700 font-medium group underline"
           >
             View All Events{" "}
             <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />

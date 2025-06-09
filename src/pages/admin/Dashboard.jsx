@@ -40,13 +40,6 @@ const Dashboard = () => {
     navigate("/admin/login");
   };
 
-  useEffect(() => {
-    if (!localStorage.getItem("adminAuthToken")) {
-      // Redirect to login if not authenticated
-      window.location.href = "/unauthorized";
-    }
-  }, []);
-
   return (
     <div className="w-full min-h-screen flex flex-col bg-white">
       {/* Main Dashboard Header */}

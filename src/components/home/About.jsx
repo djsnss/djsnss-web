@@ -1,13 +1,15 @@
 import { motion } from "framer-motion";
-import Initiatives from "./Initiatives";
-import DistinguishedAlumni from "./DistinguishedAlumni";
+import Initiatives from "../../components/home/Initiatives";
+import DistinguishedAlumni from "../../pages/alumni/DistinguishedAlumni";
 import AboutSection from "./AboutSection";
-
+import Impact from "../../components/home/impact";
+import Activities from "../../components/home/activities";
 
 const About = () => {
   return (
     <div className=" text-black">
       <AboutSection />
+      <Impact />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -16,6 +18,7 @@ const About = () => {
       >
         <Initiatives />
       </motion.div>
+      <Activities />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -1,30 +1,56 @@
+// 2025-26  
+// import DhvanilShah from "../assets/Team25-26/Dhvanil Shah.jpg";
+// import ZeelBhadra from "../assets/Team25-26/Zeel Bhadra.jpg";
+// import VaishveeGandhi from "../assets/Team25-26/Vaishvee Gandhi.jpg";
+// import ManavBhansali from "../assets/Team25-26/Manav Bhansali.jpg";
+// import JaineelPandya from "../assets/Team25-26/Jaineel Pandya.jpg";
+// import KrishKambhadiya from "../assets/Team25-26/Krish Kambhadiya.jpg";
+// import AvummDedhia from "../assets/Team25-26/Avumm Dedhia.jpg";
+// import SwayamShah from "../assets/Team25-26/Swayam Shah.jpg";
+// import DishaGaglani from "../assets/Team25-26/Disha Gaglani.jpg";
+// import DhvaniShah from "../assets/Team25-26/Dhvani Shah.jpg";
+// import PratyakshaKhamkar from "../assets/Team25-26/Pratyaksha Khamkar.jpg";
+// import AryaShah from "../assets/Team25-26/Arya Shah.jpg";
+// import TanishShah from "../assets/Team25-26/Tanish Shah.jpg";
+// import YashManek from "../assets/Team25-26/Yash Manek.jpg";
+// import ShrawaniJagtap from "../assets/Team25-26/Shrawani Jagtap.jpg";
+// import MihirSanghvi from "../assets/Team25-26/Mihir Sanghvi.jpg";
+// import HarshShah from "../assets/Team25-26/Harsh Shah.jpg";
+// import DiyaMehtaliya from "../assets/Team25-26/Diya Mehtaliya.jpg";
+// import DhairviSangani from "../assets/Team25-26/Dhairvi Sangani.jpg";
+// import AryanKhanna from "../assets/Team25-26/Aryan Khanna.jpg";
+// import AyushTrada from "../assets/Team25-26/Ayush Trada.jpg";
+// import SaumyaGala from "../assets/Team25-26/Saumya Gala.jpg";
+// import MuktiBhavsar from "../assets/Team25-26/Mukti Bhavsar.jpg";
+// import KaustubhPansania from "../assets/Team25-26/Kaustubh Pansania.jpg";
+
 // 2024-25
-import AnshShah from "../assets/Team/Ansh Shah.jpg";
-import BhavyShah from "../assets/Team/Bhavy Shah.jpg";
-import CleonLopes from "../assets/Team/Cleon Lopes.jpg";
-import DevPopat from "../assets/Team/Dev Popat.jpg";
-import ManitRathod from "../assets/Team/Manit Rathod.jpg";
-import ParnaMishra from "../assets/Team/Parna Mishra.jpg";
-import RushabhMehta from "../assets/Team/Rushabh Mehta.jpg";
-import ShashankNaik from "../assets/Team/Shashank Naik.jpg";
-import AgamKamdar from "../assets/Team/Agam Kamdar.jpg";
-import YashDalvi from "../assets/Team/Yash Dalvi.jpg";
-import ArchiPatel from "../assets/Team/Archi Patel.jpg";
-import JaiwinMehta from "../assets/Team/Jaiwin Mehta.jpg";
-import JheelPatel from "../assets/Team/Jheel Patel.jpg";
-import ShrirangDeshmukh from "../assets/Team/Shrirang Deshmukh.jpg";
-import DevShah from "../assets/Team/Dev Shah.jpg";
-import MahekSureja from "../assets/Team/Mahek Sureja.jpg";
-import AsmiSavla from "../assets/Team/Asmi Savla.jpg";
-import HarshKeniya from "../assets/Team/Harsh Keniya.jpg";
-import AsviShah from "../assets/Team/Asvi Shah.jpg";
-import DeepDoshi from "../assets/Team/Deep Doshi.jpg";
-import ShriyaKela from "../assets/Team/Shriya Kela.jpg";
-import DiyanMehta from "../assets/Team/Diyan Mehta.jpg";
-import HitanshuShah from "../assets/Team/Hitanshu Shah.jpg";
-import DhruviShah from "../assets/Team/Dhruvi Shah.jpg";
-import UmangDuwani from "../assets/Team/Umang Duwani.jpg";
-import NeetJain from "../assets/Team/Neet Jain.jpg";
+import AnshShah from "../assets/Team24-25/Ansh Shah.jpg";
+import BhavyShah from "../assets/Team24-25/Bhavy Shah.jpg";
+import CleonLopes from "../assets/Team24-25/Cleon Lopes.jpg";
+import DevPopat from "../assets/Team24-25/Dev Popat.jpg";
+import ManitRathod from "../assets/Team24-25/Manit Rathod.jpg";
+import ParnaMishra from "../assets/Team24-25/Parna Mishra.jpg";
+import RushabhMehta from "../assets/Team24-25/Rushabh Mehta.jpg";
+import ShashankNaik from "../assets/Team24-25/Shashank Naik.jpg";
+import AgamKamdar from "../assets/Team24-25/Agam Kamdar.jpg";
+import YashDalvi from "../assets/Team24-25/Yash Dalvi.jpg";
+import ArchiPatel from "../assets/Team24-25/Archi Patel.jpg";
+import JaiwinMehta from "../assets/Team24-25/Jaiwin Mehta.jpg";
+import JheelPatel from "../assets/Team24-25/Jheel Patel.jpg";
+import ShrirangDeshmukh from "../assets/Team24-25/Shrirang Deshmukh.jpg";
+import DevShah from "../assets/Team24-25/Dev Shah.jpg";
+import MahekSureja from "../assets/Team24-25/Mahek Sureja.jpg";
+import AsmiSavla from "../assets/Team24-25/Asmi Savla.jpg";
+import HarshKeniya from "../assets/Team24-25/Harsh Keniya.jpg";
+import AsviShah from "../assets/Team24-25/Asvi Shah.jpg";
+import DeepDoshi from "../assets/Team24-25/Deep Doshi.jpg";
+import ShriyaKela from "../assets/Team24-25/Shriya Kela.jpg";
+import DiyanMehta from "../assets/Team24-25/Diyan Mehta.jpg";
+import HitanshuShah from "../assets/Team24-25/Hitanshu Shah.jpg";
+import DhruviShah from "../assets/Team24-25/Dhruvi Shah.jpg";
+import UmangDuwani from "../assets/Team24-25/Umang Duwani.jpg";
+import NeetJain from "../assets/Team24-25/Neet Jain.jpg";
 
 import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal.jpg";
@@ -49,6 +75,94 @@ import LabdhiShah from "../assets/alumini/LabdhiShah.webp";
 import ShaileeGala from "../assets/alumini/ShaileeGala.webp";
 
 const TeamData = {
+  // "2025-26": {
+  //   faculty: {
+  //     principal: [
+  //       { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, },
+  //     ],
+  //     "Program Officers": [
+  //       { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, },
+  //       { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, },
+  //       { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, },
+  //     ],
+  //   },
+  //   upperCore: {
+  //     chairperson: [
+  //       { name: "Dhvanil Shah", position: "Chairperson", image: DhvanilShah },
+  //     ],
+  //     "vice Chairpersons": [
+  //       { name: "Zeel Bhadra", position: "Vice Chairperson", image: ZeelBhadra },
+  //       { name: "Vaishvee Gandhi", position: "Vice Chairperson", image: VaishveeGandhi },
+  //     ],
+  //     secretary: [
+  //       { name: "Manav Bhansali", position: "Secretary", image: ManavBhansali },
+  //     ],
+  //     "joint Secretaries": [
+  //       { name: "Jaineel Pandya", position: "Joint Secretary", image: JaineelPandya },
+  //     ],
+  //     treasurer: [
+  //       { name: "Krish Kambhadiya", position: "Treasurer", image: KrishKambhadiya },
+  //     ],
+  //     "joint Treasurers": [
+  //       { name: "Avumm Dedhia", position: "Joint Treasurer", image: AvummDedhia },
+  //     ],
+  //   },
+  //   leader:{
+  //     "": [
+  //       { name: "Swayam Shah", position: "Student Leader", image: SwayamShah },
+  //       { name: "Disha Gaglani", position: "Student Leader", image: DishaGaglani },
+  //     ]
+  //   },
+  //   heads: {
+  //     departments: [
+  //       {
+  //         name: "Publicity",
+  //         members: [
+  //           { name: "Dhvani Shah", position: "Head of Publicity", image: DhvaniShah },
+  //           { name: "Pratyaksha Khamkar", position: "Head of Publicity", image: PratyakshaKhamkar },
+  //           { name: "Arya Shah", position: "Head of Publicity", image: AryaShah },
+  //         ],
+  //       },
+  //       {
+  //         name: "Technical",
+  //         members: [
+  //           { name: "Tanish Shah", position: "Head of Technical", image: TanishShah },
+  //           { name: "Yash Manek", position: "Head of Technical", image: YashManek },
+  //         ],
+  //       },
+  //       {
+  //         name: "Events",
+  //         members: [
+  //           { name: "Shrawani Jagtap", position: "Head of Events", image: ShrawaniJagtap },
+  //           { name: "Mihir Sanghvi", position: "Head of Events", image: MihirSanghvi },
+  //           { name: "Harsh Shah", position: "Head of Events", image: HarshShah },
+  //         ],
+  //       },
+  //       {
+  //         name: "Creatives",
+  //         members: [
+  //           { name: "Diya Mehtaliya", position: "Head of Creatives", image: DiyaMehtaliya },
+  //           { name: "Dhairvi Sangani", position: "Head of Creatives", image: DhairviSangani },
+  //         ],
+  //       },
+  //       {
+  //         name: "Social Media",
+  //         members: [
+  //           { name: "Aryan Khanna", position: "Head of Social Media", image: AryanKhanna },
+  //           { name: "Ayush Trada", position: "Head of Social Media", image: AyushTrada },
+  //         ],
+  //       },
+  //       {
+  //         name: "Editorial",
+  //         members: [
+  //           { name: "Saumya Gala", position: "Head of Editorial", image: SaumyaGala },
+  //           { name: "Mukti Bhavsar", position: "Head of Editorial", image: MuktiBhavsar },
+  //           { name: "Kaustubh Pansania", position: "Head of Editorial", image: KaustubhPansania },
+  //         ],
+  //       },
+  //     ],
+  //   },
+  // },
   "2024-25": {
     faculty: {
       principal: [

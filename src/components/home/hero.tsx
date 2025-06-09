@@ -27,7 +27,7 @@ export default function Hero () {
           transition={{ duration: 0.5 }}
         >
           <motion.h1
-            className='text-4xl md:text-6xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400'
+            className='text-4xl md:text-6xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-sky-500 to-cyan-400 py-4'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.7 }}

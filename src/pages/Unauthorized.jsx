@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import { XCircle } from 'lucide-react';
 
-const Unauthorized = ({ onBackToHome }) => {
+const Unauthorized = () => {
+  const navigate = useNavigate();
   return (
     <div className="w-full h-screen flex flex-col bg-white">
       {/* Content */}
@@ -13,10 +15,10 @@ const Unauthorized = ({ onBackToHome }) => {
           credentials or contact support if you believe this is an error.
         </p>
         <button
-          onClick={onBackToHome}
+          onClick={()=>navigate("/admin/login")}
           className="mt-6 px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
         >
-          Back to Home
+          Back to Login
         </button>
       </div>
     </div>

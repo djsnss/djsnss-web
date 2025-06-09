@@ -6,19 +6,13 @@ import NSSLogo from "../../assets/NSSLogo.png";
 import { MdOutlineModeEdit } from "react-icons/md";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import CustomLoader2 from "../../components/Loaders/CustomLoader2";
 
 const CheckHoursNew = () => {
   const [userData, setUserData] = useState(null);
   const fileInputRef = useRef(null);
   const [image, setImage] = useState(NSSLogo);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (!localStorage.getItem("authToken")) {
-      // Redirect to login if not authenticated
-      window.location.href = "/unauthorized";
-    }
-  }, []);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -56,6 +50,7 @@ const CheckHoursNew = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
+    toast.success("Logged out successfully");
     navigate("/");
   };
 
@@ -92,8 +87,8 @@ const CheckHoursNew = () => {
 
   if (!userData) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        Loading...
+      <div className="min-h-screen w-screen flex items-center justify-center bg-cream">
+        <CustomLoader2 />
       </div>
     );
   }
