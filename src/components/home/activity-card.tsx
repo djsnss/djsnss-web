@@ -25,7 +25,7 @@ export default function ActivityCard({
 }: ActivityCardProps) {
   return (
     <motion.div
-      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 group"
+      className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 group"
       initial={{ opacity: 0, x: direction === "left" ? -20 : 20 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}

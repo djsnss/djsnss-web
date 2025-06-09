@@ -3,7 +3,7 @@ import Initiatives from "../../components/home/Initiatives";
 import DistinguishedAlumni from "../../pages/alumni/DistinguishedAlumni";
 import AboutSection from "./AboutSection";
 import Impact from "../../components/home/impact";
-import Events from "../../components/home/events";
+import Activities from "../../components/home/activities";
 
 const About = () => {
   return (
@@ -18,7 +18,7 @@ const About = () => {
       >
         <Initiatives />
       </motion.div>
-      <Events />
+      <Activities />
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
