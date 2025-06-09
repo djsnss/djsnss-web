@@ -26,12 +26,23 @@ redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
 const preloadCache = async () => {
   console.log("🚀 Preloading cache...");
   try {
-    const upcomingEvents = await EventModel.find({ status: "Upcoming" })
-      .sort({ date: 1 })
+    // Instead of fetching all and sorting in memory, let MongoDB sort
+    const upcomingEvents = await EventModel.find({
+      status: "Upcoming",
+      date: { $gte: new Date() }, // Only fetch future events
+    })
+      .sort({ date: 1 }) // MongoDB will use index to sort efficiently
+      .limit(50) // Limit results for better performance
       .lean();
-    const pastEvents = await EventModel.find({ status: "Past" })
-      .sort({ date: 1 })
+
+    const pastEvents = await EventModel.find({
+      status: "Past",
+      date: { $lt: new Date() }, // Only fetch past events
+    })
+      .sort({ date: -1 }) // Recent past events first
+      .limit(20) // Limit to recent past events
       .lean();
+
     await redisClient.setEx("upcomingEvents", JSON.stringify(upcomingEvents));
     await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
     console.log("✅ Cache preloaded!");
@@ -40,8 +51,87 @@ const preloadCache = async () => {
   }
 };
 
+const getCachedEvents = async () => {
+  const cacheKey = "events:all";
+
+  try {
+    // Try to get from cache first
+    const cached = await redisClient.get(cacheKey);
+    if (cached) {
+      return JSON.parse(cached);
+    }
+
+    // If not in cache, fetch from DB with optimized query
+    const [upcomingEvents, pastEvents] = await Promise.all([
+      EventModel.find({
+        status: "Upcoming",
+        date: { $gte: new Date() },
+      })
+        .sort({ date: 1 })
+        .limit(50)
+        .select(
+          "name description date location maxVolunteers registeredVolunteers photo status"
+        ) // Match your schema fields
+        .lean(),
+
+      EventModel.find({
+        status: "Past",
+        date: { $lt: new Date() },
+      })
+        .sort({ date: -1 })
+        .limit(20)
+        .select(
+          "name description date location maxVolunteers registeredVolunteers photo status"
+        )
+        .lean(),
+    ]);
+
+    const result = { upcomingEvents, pastEvents };
+
+    // Cache for 5 minutes
+    await redisClient.setEx(cacheKey, 300, JSON.stringify(result));
+
+    return result;
+  } catch (error) {
+    console.error("Redis error:", error);
+    // Fallback to direct DB query
+    const [upcomingEvents, pastEvents] = await Promise.all([
+      EventModel.find({
+        status: "Upcoming",
+        date: { $gte: new Date() },
+      })
+        .sort({ date: 1 })
+        .limit(50)
+        .lean(),
+
+      EventModel.find({
+        status: "Past",
+        date: { $lt: new Date() },
+      })
+        .sort({ date: -1 })
+        .limit(20)
+        .lean(),
+    ]);
+
+    return { upcomingEvents, pastEvents };
+  }
+};
+
 env.config();
 const Secret = process.env.SecretKey;
+
+const clearCache = async () => {
+  try {
+    await Promise.all([
+      redisClient.del("upcomingEvents"),
+      redisClient.del("pastEvents"),
+      redisClient.del("events:all"),
+    ]);
+    console.log("🗑️ All caches cleared");
+  } catch (error) {
+    console.error("❌ Error clearing cache:", error);
+  }
+};
 
 export const login = async (req, res) => {
   try {
@@ -53,11 +143,11 @@ export const login = async (req, res) => {
     }
     const admin = await AdminModel.findOne({ email: email });
     if (!admin) {
-      return res.status(400).json({message:"Invalid email"});
+      return res.status(400).json({ message: "Invalid email" });
     }
     const match = await bcrypt.compare(password, admin.password);
     if (!match) {
-      return res.status(400).json({message:"Invalid password"});
+      return res.status(400).json({ message: "Invalid password" });
     }
     const token = jwt.sign({ adminId: admin._id, role: "admin" }, Secret, {
       expiresIn: "1d",
@@ -214,75 +304,6 @@ export const deleteVolunteer = async (req, res) => {
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: error.message });
-  }
-};
-
-const clearCache = async () => {
-  await redisClient.del("upcomingEvents");
-  await redisClient.del("pastEvents");
-};
-
-export const createEvent = async (req, res) => {
-  try {
-    const {
-      name,
-      slug,
-      description,
-      longDescription,
-      startHours,
-      endHours,
-      TotalNoOfHours,
-      date,
-      location,
-      maxVolunteers,
-      scope,
-    } = req.body;
-    // Check if the event already exists
-    const existingEvent = await EventModel.findOne({ name });
-    if (existingEvent) {
-      return res.status(400).json({ message: "Event already exists" });
-    }
-    // Calculate the event status
-    const currentDate = new Date();
-    const eventDate = new Date(date);
-    const isSameDay =
-      currentDate.toISOString().split("T")[0] ===
-      eventDate.toISOString().split("T")[0];
-    let status = eventDate > currentDate || isSameDay ? "Upcoming" : "Past";
-    // Create the new event
-    const newEvent = new EventModel({
-      name,
-      slug,
-      description,
-      longDescription,
-      startHours,
-      endHours,
-      TotalNoOfHours,
-      date,
-      location,
-      maxVolunteers,
-      status,
-      scope,
-    });
-    if (req.file) {
-      // Upload the photo if provided
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "EventPhoto",
-      });
-      newEvent.photo = {
-        url: result.secure_url,
-        public_id: result.public_id,
-      };
-    }
-    await newEvent.save();
-    await clearCache();
-    return res.status(200).json({
-      message: "Successfully created new Event",
-      Event: newEvent,
-    });
-  } catch (err) {
-    console.error(err);
-    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -513,50 +534,29 @@ const updateEventStatus = async () => {
 export const getUpcomingEvents = async (req, res) => {
   try {
     await updateEventStatus();
-    const cachedEvents = await redisClient.get("upcomingEvents");
-    if (cachedEvents) {
-      return res.status(200).json({
-        message: "Upcoming events fetched successfully (from cache)",
-        events: JSON.parse(cachedEvents),
-      });
-    }
-    const upcomingEvents = await EventModel.find({ status: "Upcoming" })
-      .sort({
-        date: 1,
-      })
-      .lean();
-    await redisClient.setEx("upcomingEvents", JSON.stringify(upcomingEvents));
+
+    const { upcomingEvents } = await getCachedEvents();
+
     return res.status(200).json({
       message: "Upcoming events fetched successfully",
       events: upcomingEvents,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({message:"Error fetching upcoming events"});
+    return res.status(500).json({ message: "Error fetching upcoming events" });
   }
 };
 export const getPastEvents = async (req, res) => {
   try {
-    const cachedEvents = await redisClient.get("pastEvents");
-    if (cachedEvents) {
-      return res.status(200).json({
-        message: "Past events fetched successfully (from cache)",
-        events: JSON.parse(cachedEvents),
-      });
-    }
-    const pastEvents = await EventModel.find({ status: "Past" })
-      .sort({
-        date: 1,
-      })
-      .lean();
-    await redisClient.setEx("pastEvents", JSON.stringify(pastEvents));
+    const { pastEvents } = await getCachedEvents();
+
     return res.status(200).json({
       message: "Past events fetched successfully",
       events: pastEvents,
     });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({message:"Error fetching past events"});
+    return res.status(500).json({ message: "Error fetching past events" });
   }
 };
 
@@ -620,7 +620,7 @@ export const changeEmail = async (req, res) => {
     }
     const match = await bcrypt.compare(currentPassword, admin.password);
     if (!match) {
-      return res.status(400).json({message:"Invalid password"});
+      return res.status(400).json({ message: "Invalid password" });
     }
     // Update email
     admin.email = newEmail;
@@ -737,55 +737,64 @@ export const getEventById = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    const events = await EventModel.find().lean();
-    // Retrieve all events
-    if (!events.length) {
+    await updateEventStatus(); // Update any expired events first
+
+    const { upcomingEvents, pastEvents } = await getCachedEvents();
+    const allEvents = [...upcomingEvents, ...pastEvents];
+
+    if (!allEvents.length) {
       return res.status(404).json({ message: "No events found" });
     }
-    return res.status(200).json(events); // Send events as a response
+
+    return res.status(200).json({
+      message: "All events fetched successfully",
+      events: allEvents,
+      upcoming: upcomingEvents.length,
+      past: pastEvents.length,
+    });
   } catch (error) {
     console.error("Error fetching events:", error);
-    return res
-      .status(500)
-      .json({ message: "Server error while fetching events" });
+    return res.status(500).json({
+      message: "Server error while fetching events",
+    });
   }
 };
 
 export const updateEventDetails = async (req, res) => {
   try {
-    const { eventId } = req.params; // Extract event ID from route parameter
-    const updatedData = req.body; // Data to update is expected in the request body
+    const { eventId } = req.params;
+    const updatedData = req.body;
 
-    // Validate if the event exists
     const event = await EventModel.findById(eventId);
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
+
     // Handle photo update if a new file is provided
     if (req.file) {
-      // Delete the old photo if it exists
       if (event.photo && event.photo.public_id) {
         await cloudinary.uploader.destroy(event.photo.public_id);
       }
-      // Upload the new photo
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "EventPhoto",
       });
-      // Update the event's photo details
       updatedData.photo = {
         url: result.secure_url,
         public_id: result.public_id,
       };
     }
-    // Update the event details
+
     const updatedEvent = await EventModel.findByIdAndUpdate(
       eventId,
       updatedData,
       {
-        new: true, // Return the updated document
-        runValidators: true, // Ensure validation is applied on updates
+        new: true,
+        runValidators: true,
       }
     );
+
+    await clearCache(); // Clear cache after updating event
+
     return res.status(200).json({
       message: "Event updated successfully",
       event: updatedEvent,
@@ -806,6 +815,9 @@ export const deleteEvent = async (req, res) => {
     if (!event) {
       return res.status(404).json({ message: "Event not found" });
     }
+
+    await clearCache(); // Clear cache after deleting event
+
     return res.status(200).json({ message: "Event successfully deleted" });
   } catch (err) {
     console.error("Error deleting events:", err);
@@ -871,11 +883,11 @@ export const resetPassword = async (req, res) => {
 
 export const verifyToken = async (req, res) => {
   const token = req.header("Authorization");
-  if (!token) return res.status(401).json({message:"Access Denied"});
+  if (!token) return res.status(401).json({ message: "Access Denied" });
   try {
     const bearerToken = token.split(" ")[1];
     if (bearerToken == null) {
-      return res.status(401).json({message:"token null"});
+      return res.status(401).json({ message: "token null" });
     }
     const verified = jwt.verify(bearerToken, process.env.SecretKey);
     req.admin = verified;
@@ -883,6 +895,70 @@ export const verifyToken = async (req, res) => {
       .status(200)
       .json({ message: "Token verified successfully", admin: verified });
   } catch (err) {
-    return res.status(400).json({message:"Invalid token"});
+    return res.status(400).json({ message: "Invalid token" });
+  }
+};
+
+export const createEvent = async (req, res) => {
+  try {
+    const {
+      name,
+      slug,
+      description,
+      longDescription,
+      startHours,
+      endHours,
+      TotalNoOfHours,
+      date,
+      location,
+      maxVolunteers,
+      scope,
+    } = req.body;
+    // Check if the event already exists
+    const existingEvent = await EventModel.findOne({ name });
+    if (existingEvent) {
+      return res.status(400).json({ message: "Event already exists" });
+    }
+    // Calculate the event status
+    const currentDate = new Date();
+    const eventDate = new Date(date);
+    const isSameDay =
+      currentDate.toISOString().split("T")[0] ===
+      eventDate.toISOString().split("T")[0];
+    let status = eventDate > currentDate || isSameDay ? "Upcoming" : "Past";
+    // Create the new event
+    const newEvent = new EventModel({
+      name,
+      slug,
+      description,
+      longDescription,
+      startHours,
+      endHours,
+      TotalNoOfHours,
+      date,
+      location,
+      maxVolunteers,
+      status,
+      scope,
+    });
+    if (req.file) {
+      // Upload the photo if provided
+      const result = await cloudinary.uploader.upload(req.file.path, {
+        folder: "EventPhoto",
+      });
+      newEvent.photo = {
+        url: result.secure_url,
+        public_id: result.public_id,
+      };
+    }
+    await newEvent.save();
+    await clearCache();
+    return res.status(200).json({
+      message: "Successfully created new Event",
+      Event: newEvent,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ message: err.message });
   }
 };

@@ -83,7 +83,7 @@ router.post("/reset-password", passwordLimiter, resetPassword); // public, rate 
 
 router.post("/logout", authAdmin, logout); //logout API for admin
 
-router.delete("/deleteEvent", authAdmin, deleteEvent);
+router.delete("/deleteEvent/:eventId", authAdmin, deleteEvent);
 
 router.get("/verify-token", verifyToken);
 

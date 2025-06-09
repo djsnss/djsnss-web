@@ -1,0 +1,124 @@
+config:
+  target: "http://localhost:3000" # Your local server
+  phases:
+    - duration: 30 # 30 seconds warmup
+      arrivalRate: 2 # 2 new users every second
+    - duration: 60 # 1 minute sustained load
+      arrivalRate: 10 # 10 new users every second
+    - duration: 30 # 30 seconds peak load
+      arrivalRate: 20 # 20 new users every second (your target)
+    - duration: 60 # 1 minute cool down
+      arrivalRate: 5 # 5 new users every second
+
+scenarios:
+  # 40% of users just browse events (most common scenario)
+  - name: "Browse Events"
+    weight: 40
+    flow:
+      - get:
+          url: "/events/upcoming-events"
+          capture:
+            - json: "$.events.length"
+              as: "eventCount"
+      - think: 2 # Wait 2 seconds (realistic user behavior)
+      - get:
+          url: "/events/past-events"
+      - think: 1
+      - get:
+          url: "/events/upcoming-events" # Test cache hit
+
+  # 30% of users try to register (registration rush scenario)
+  - name: "Volunteer Registration Rush"
+    weight: 30
+    flow:
+      - post:
+          url: "/volunteer/signup"
+          beforeRequest: "setDynamicData"
+          json:
+            studentDetails:
+              name: "Test User {{ $randomString() }}"
+              email: "test{{ $randomInt(1, 10000) }}@djsce.ac.in"
+              sapId: "{{ $randomInt(60000000000, 69999999999) }}"
+              phoneNumber: "{{ $randomInt(7000000000, 9999999999) }}"
+              course: "B.Tech"
+              branch: "{{ branch }}"
+              year: "{{ year }}"
+              section: "{{ section }}"
+              caste: "General"
+              gender: "{{ gender }}"
+              hobbies: "Reading, Sports"
+              password: "TestPass123!"
+            parentDetails:
+              fatherName: "Test Father {{ $randomString() }}"
+              motherName: "Test Mother {{ $randomString() }}"
+              parentPhone: "{{ $randomInt(7000000000, 9999999999) }}"
+              fatherEmail: "father{{ $randomInt(1, 1000) }}@email.com"
+              motherEmail: "mother{{ $randomInt(1, 1000) }}@email.com"
+              description: "Test volunteer registration"
+
+  # 20% of users login and try to register for events
+  - name: "Event Registration"
+    weight: 20
+    flow:
+      - get:
+          url: "/events/upcoming-events"
+      - think: 2
+      - post:
+          url: "/volunteer/login"
+          json:
+            sapId: "60001234567" # Test user
+            password: "testpass123"
+          capture:
+            - json: "$.token"
+              as: "authToken"
+      - think: 1
+      # Simulate event registration (would need valid event ID)
+      - get:
+          url: "/events/upcoming-events"
+          headers:
+            Authorization: "Bearer {{ authToken }}"
+
+  # 10% admin operations (realistic admin usage)
+  - name: "Admin Operations"
+    weight: 10
+    flow:
+      - post:
+          url: "/admin/login"
+          json:
+            email: "admin@djsce.ac.in"
+            password: "adminpass123"
+          capture:
+            - json: "$.token"
+              as: "adminToken"
+      - get:
+          url: "/admin/getAllEvents"
+          headers:
+            Authorization: "Bearer {{ adminToken }}"
+      - think: 3
+      - get:
+          url: "/admin/getAllVolunteers"
+          headers:
+            Authorization: "Bearer {{ adminToken }}"
+
+# Custom JavaScript functions for dynamic data
+processor:
+  setDynamicData: |
+    function setDynamicData(requestParams, context, ee, next) {
+      const branches = ['CSE', 'IT', 'ECE', 'MECH', 'CIVIL', 'CHEM'];
+      const years = ['1', '2', '3', '4'];
+      const sections = ['A', 'B', 'C', 'D'];
+      const genders = ['Male', 'Female', 'Other'];
+      
+      context.vars.branch = branches[Math.floor(Math.random() * branches.length)];
+      context.vars.year = years[Math.floor(Math.random() * years.length)];
+      context.vars.section = sections[Math.floor(Math.random() * sections.length)];
+      context.vars.gender = genders[Math.floor(Math.random() * genders.length)];
+      
+      return next();
+    }
+
+# Performance expectations
+expectations:
+  - http.response_time.p95: 2000 # 95% of requests should complete within 2 seconds
+  - http.response_time.p99: 3000 # 99% of requests should complete within 3 seconds
+  - http.codes.200: 95 # 95% success rate minimum
