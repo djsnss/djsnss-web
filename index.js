@@ -55,7 +55,7 @@ const preloadCache = async () => {
         .sort({ date: 1 })
         .limit(50)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status"
+          "name description date location maxVolunteers registeredVolunteers photo status scope" // ADD scope here
         )
         .lean(),
 
@@ -66,7 +66,7 @@ const preloadCache = async () => {
         .sort({ date: -1 })
         .limit(20)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status"
+          "name description date location maxVolunteers registeredVolunteers photo status scope" // ADD scope here
         )
         .lean(),
     ]);
