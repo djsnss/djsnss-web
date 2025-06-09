@@ -3,18 +3,16 @@ import chalk from "chalk";
 import { faker } from "@faker-js/faker";
 
 const BASE_URL = "http://localhost:3000";
-const CONCURRENT_USERS = 25; // Your target load
-const TEST_DURATION = 120000; // 2 minutes
+const CONCURRENT_USERS = 25;
+const TEST_DURATION = 120000;
 
-// Test configuration
 const config = {
   totalUsers: CONCURRENT_USERS,
-  registrationUsers: Math.floor(CONCURRENT_USERS * 0.4), // 40% registration
-  browsingUsers: Math.floor(CONCURRENT_USERS * 0.4), // 40% browsing
-  eventRegUsers: Math.floor(CONCURRENT_USERS * 0.2), // 20% event registration
+  registrationUsers: Math.floor(CONCURRENT_USERS * 0.4),
+  browsingUsers: Math.floor(CONCURRENT_USERS * 0.4),
+  eventRegUsers: Math.floor(CONCURRENT_USERS * 0.2),
 };
 
-// Statistics tracking
 const stats = {
   requests: {
     total: 0,
@@ -26,11 +24,10 @@ const stats = {
   startTime: Date.now(),
 };
 
-// Generate realistic test data
 const generateVolunteerData = () => ({
   studentDetails: {
     name: faker.person.fullName(),
-    email: faker.internet.email().replace("@", `${Date.now()}@`), // Ensure unique emails
+    email: faker.internet.email().replace("@", `${Date.now()}@`),
     sapId: faker.string.numeric(11),
     phoneNumber: faker.phone.number("##########"),
     course: faker.helpers.arrayElement(["B.Tech", "M.Tech", "MBA", "MCA"]),
