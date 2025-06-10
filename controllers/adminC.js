@@ -7,6 +7,7 @@ import env from "dotenv";
 import { sendLogin, sendOTP } from "./nodemailerC.js";
 import AdminModel from "../models/admin.js";
 import crypto from "crypto";
+import mongoose from "mongoose";
 import { createClient } from "redis";
 
 const redisClient = createClient({
@@ -23,14 +24,12 @@ redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
   }
 })();
 
+// 1. Standardize preloadCache (Fix the inconsistent cache duration)
 const preloadCache = async () => {
   try {
     console.log("🚀 Preloading cache...");
-
-    // Wait a bit more to ensure connection is stable
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
-    // Check if connection is ready
     if (mongoose.connection.readyState !== 1) {
       console.log("⚠️ MongoDB not ready, skipping cache preload");
       return;
@@ -44,8 +43,8 @@ const preloadCache = async () => {
         .sort({ date: 1 })
         .limit(50)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status scope"
-        ) // Include scope
+          "name description date location maxVolunteers photo status scope"
+        ) // Removed registeredVolunteers for performance
         .lean(),
 
       EventModel.find({
@@ -55,14 +54,13 @@ const preloadCache = async () => {
         .sort({ date: -1 })
         .limit(20)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status scope"
-        ) // Include scope
+          "name description date location maxVolunteers photo status scope"
+        ) // Removed registeredVolunteers for performance
         .lean(),
     ]);
 
-    // Use the SAME cache key as getCachedEvents
     const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.setEx("events:all", 600, JSON.stringify(cacheData));
+    await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // 4 hours - consistent duration
 
     console.log(
       `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
@@ -75,43 +73,50 @@ const preloadCache = async () => {
 const getCachedEvents = async () => {
   try {
     const cachedData = await redisClient.get("events:all");
+    const cacheAge = await redisClient.ttl("events:all");
+
+    // If cache exists, return it immediately
     if (cachedData) {
+      // If cache expires in less than 1 hour, refresh in background
+      if (cacheAge < 3600) {
+        // 1 hour
+        console.log("🔄 Refreshing cache in background...");
+        setImmediate(async () => {
+          try {
+            await fetchAndCacheEvents();
+          } catch (error) {
+            console.error("Background cache refresh failed:", error);
+          }
+        });
+      }
       return JSON.parse(cachedData);
     }
+
+    // If no cache, fetch now
+    return await fetchAndCacheEvents();
   } catch (error) {
     console.error("Cache retrieval error:", error);
+    return await fetchAndCacheEvents();
   }
+};
 
-  // If cache miss, fetch from database
+const fetchAndCacheEvents = async () => {
   const [upcomingEvents, pastEvents] = await Promise.all([
-    EventModel.find({
-      status: "Upcoming",
-      date: { $gte: new Date() },
-    })
+    EventModel.find({ status: "Upcoming", date: { $gte: new Date() } })
       .sort({ date: 1 })
       .limit(50)
-      .select(
-        "name description date location maxVolunteers registeredVolunteers photo status scope"
-      ) // ADD scope here
+      .select("name description date location maxVolunteers photo status scope")
       .lean(),
-
-    EventModel.find({
-      status: "Past",
-      date: { $lt: new Date() },
-    })
+    EventModel.find({ status: "Past", date: { $lt: new Date() } })
       .sort({ date: -1 })
       .limit(20)
-      .select(
-        "name description date location maxVolunteers registeredVolunteers photo status scope"
-      ) // ADD scope here
+      .select("name description date location maxVolunteers photo status scope")
       .lean(),
   ]);
 
-  // Cache the results
   const cacheData = { upcomingEvents, pastEvents };
-  await redisClient.setEx("events:all", 600, JSON.stringify(cacheData));
-
-  return { upcomingEvents, pastEvents };
+  await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // Change from 7200 to 14400
+  return cacheData;
 };
 
 env.config();
@@ -119,12 +124,8 @@ const Secret = process.env.SecretKey;
 
 const clearCache = async () => {
   try {
-    await Promise.all([
-      redisClient.del("upcomingEvents"), // Remove old cache keys
-      redisClient.del("pastEvents"), // Remove old cache keys
-      redisClient.del("events:all"), // Main cache key
-    ]);
-    console.log("🗑️ All caches cleared");
+    await redisClient.del("events:all");
+    console.log("🗑️ Cache cleared manually");
   } catch (error) {
     console.error("❌ Error clearing cache:", error);
   }
@@ -944,3 +945,17 @@ export const createEvent = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+// Add this function to warm cache before expiry
+const warmCache = async () => {
+  try {
+    console.log("🔥 Warming cache...");
+    await fetchAndCacheEvents(); // Use fetchAndCacheEvents instead of getCachedEvents
+    console.log("✅ Cache warmed successfully");
+  } catch (error) {
+    console.error("❌ Error warming cache:", error);
+  }
+};
+
+// Set up cache warming every 90 minutes (before 2-hour expiry)
+setInterval(warmCache, 3 * 60 * 60 * 1000); // 3 hours

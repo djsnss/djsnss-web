@@ -40,7 +40,8 @@ const preloadCache = async () => {
   try {
     console.log("🚀 Preloading cache...");
 
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    // Wait longer for stable connections
+    await new Promise((resolve) => setTimeout(resolve, 2000));
 
     if (mongoose.connection.readyState !== 1) {
       console.log("⚠️ MongoDB not ready, skipping cache preload");
@@ -55,7 +56,7 @@ const preloadCache = async () => {
         .sort({ date: 1 })
         .limit(50)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status scope" // ADD scope here
+          "name description date location maxVolunteers photo status scope" // Removed registeredVolunteers for performance
         )
         .lean(),
 
@@ -66,13 +67,13 @@ const preloadCache = async () => {
         .sort({ date: -1 })
         .limit(20)
         .select(
-          "name description date location maxVolunteers registeredVolunteers photo status scope" // ADD scope here
+          "name description date location maxVolunteers photo status scope" // Removed registeredVolunteers for performance
         )
         .lean(),
     ]);
 
     const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.setEx("events:all", 600, JSON.stringify(cacheData));
+    await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // 4 hours - consistent with adminC.js
 
     console.log(
       `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
@@ -82,7 +83,10 @@ const preloadCache = async () => {
   }
 };
 
-await preloadCache();
+// Add safer preload execution
+setTimeout(async () => {
+  await preloadCache();
+}, 3000); // Wait 3 seconds instead of immediate execution
 
 // Compression middleware for better performance
 app.use(
@@ -173,6 +177,9 @@ cron.schedule("0 * * * *", async () => {
       console.log(`✅ Updated ${result.modifiedCount} events to Past status`);
       await redisClient.del("events:all");
       console.log("🗑️ Cache cleared after status update");
+
+      // Preload fresh cache immediately after clearing
+      setTimeout(preloadCache, 1000);
     }
   } catch (error) {
     console.error("❌ Status update job failed:", error);
