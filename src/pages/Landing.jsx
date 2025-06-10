@@ -88,6 +88,7 @@ import NSSLogo from "../assets/NSSLogo.png";
 import Background from "../assets/Events/TreePlantation.png";
 import About from "../components/home/About";
 import { useState, useEffect } from "react";
+import SocialSide from "./SocialSide";
 
 const data = [
   { src: DJSLogo, alt: "DJS Logo", link: "https://djsce.ac.in/" },
@@ -107,6 +108,7 @@ const Landing = () => {
 
   return (
     <div className="flex flex-col">
+      <SocialSide />
       {/* Parallax Section */}
       <motion.div
         className={`w-full h-screen bg-cover bg-fixed bg-center ${loading ? "bg-white/100 text-dark-navy" : "text-white"}`}
@@ -128,7 +130,7 @@ const Landing = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1.2 }}
               >
-                <img src={d.src} alt={d.alt} className="h-10 md:h-40" />
+                <img src={d.src} alt={d.alt} className="h-10 md:h-40" loading="lazy" decoding="async"/>
               </motion.a>
             ))}
           </div>

@@ -44,6 +44,7 @@ const VolunteerPass = React.lazy(() => import("./pages/volunteer/ChangePassword"
 const FolderTree = React.lazy(() => import("./components/FolderTree"));
 const TechnicalProject = React.lazy(() => import("./pages/TechnicalProject"));
 const VolunteerDetails = React.lazy(() => import("./pages/alumni/AlumniDetails"));
+const NSSFormat = React.lazy(() => import("./pages/NSSFormat"));
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -105,9 +106,9 @@ const App = () => {
               <Route element={<ProtectedRoute authTokenKey="authToken" userType="volunteer"/>}>
                 <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
               </Route>
-              <Route path="/drive" element={<FolderTree />} />
               <Route path="/alumni" element={<AllAlumni />} />
               <Route path="/reports" element={<FolderTree />} />
+              <Route path="/nss-format" element={<NSSFormat />} />
               <Route path="/alumni-details/:name" element={<VolunteerDetails />} />
 
               {/* Dynamic routes for events */}

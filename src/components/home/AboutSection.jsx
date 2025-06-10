@@ -10,7 +10,7 @@ const AboutSection = () => {
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className='p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row items-center justify-center bg-blue-50'
+        className='p-6 sm:p-8 md:p-10 flex flex-col lg:flex-row items-center justify-center bg-white'
       >
         <img
           src={Image1}

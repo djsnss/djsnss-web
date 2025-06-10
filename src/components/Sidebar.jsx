@@ -31,11 +31,11 @@ const Sidebar = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setOpen(false); // Mobile view
-      } else {
-        setOpen(true); // Other views
-      }
+      // if (window.innerWidth <= 768) {
+      //   setOpen(false); // Mobile view
+      // } else {
+      //   setOpen(true); // Other views
+      // }
     };
 
     handleResize();
@@ -105,6 +105,7 @@ const Sidebar = () => {
       subLinks: [
         { title: "FAQ", path: "/faq" },
         { title: "Gallery", path: "/gallery" },
+        { title: "Alumni", path: "/alumni" },
         { title: "Calendar", path: "/calendar" },
         { title: "Reports", path: "/reports" },
         { title: "NSS Format", path: "/nss-format" },

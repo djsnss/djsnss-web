@@ -1,17 +1,14 @@
-import React from "react";
+import React from 'react'
 
-const FolderTree = () => {
+const NSSFormat = () => {
   const folders = [
-    // { id: "1yxHNE5oqHz9klpiyMy8Jg_XpdmtWO2zr", name: "NSS 2024-25" },
-    { id: "1FoHoeDFnDCoUotFnnl32TvzVNmGHSEl_", name: "NSS 2023-24" },
-    { id: "1fEoRDGItZ0kKU2SJy1p1483npJtvmeVL", name: "NSS 2022-23" },
-    { id: "1EWjCkmfvYinTh5-JGdzQnHeCGOZy_OVY", name: "NSS 2021-22" },
+    { id: "1Vv4QxMRkkRicvYI6m2n6BfRBQry4RIcb", name: "" },
   ]; 
   
   return (
     <div className="w-full p-4 font-poppins pt-16">
       <h1 className="flex mx-auto mb-2 py-4 h-max w-full justify-center items-center text-3xl md:text-7xl text-black">
-        NSS Reports
+        NSS Format
       </h1>
 
       <div className="space-y-8 px-4 md:px-8 lg:px-16">
@@ -34,6 +31,6 @@ const FolderTree = () => {
       </div>
     </div>
   );
-};
+}
 
-export default FolderTree;
+export default NSSFormat

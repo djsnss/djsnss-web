@@ -4,11 +4,13 @@ import DistinguishedAlumni from "../../pages/alumni/DistinguishedAlumni";
 import AboutSection from "./AboutSection";
 import Impact from "../../components/home/impact";
 import Activities from "../../components/home/activities";
+import Announcement from "../../components/home/Announcement";
 
 const About = () => {
   return (
     <div className=" text-black">
       <AboutSection />
+      <Announcement />
       <Impact />
       <motion.div
         initial={{ opacity: 0, y: 50 }}

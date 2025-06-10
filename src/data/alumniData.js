@@ -214,7 +214,7 @@ const alumini = [
     image: ShashankNaik,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/shashank-naik09061319/",
     url: "/alumni-details/ShashankNaik",
   },
   {
@@ -224,7 +224,7 @@ const alumini = [
     image: ParnaMishra,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/parnamishra5/",
     url: "/alumni-details/ParnaMishra",
   },
   {
@@ -234,7 +234,7 @@ const alumini = [
     image: RushabhMehta,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/rushabh-mehta-174b3b249/",
     url: "/alumni-details/RushabhMehta",
   },
   {
@@ -244,7 +244,7 @@ const alumini = [
     image: YashDalvi,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/yashdalvi04/",
     url: "/alumni-details/YashDalvi",
   },
   {
@@ -254,7 +254,7 @@ const alumini = [
     image: BhavyShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/bhavyshah13/",
     url: "/alumni-details/BhavyShah",
   },
   {
@@ -264,7 +264,7 @@ const alumini = [
     image: CleonLopes,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/cleon-lopes/",
     url: "/alumni-details/CleonLopes",
   },
   {
@@ -274,7 +274,7 @@ const alumini = [
     image: ArchiPatel,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/archi-patel-431b56259/",
     url: "/alumni-details/ArchiPatel",
   },
   {
@@ -284,7 +284,7 @@ const alumini = [
     image: ManitRathod,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/manit-rathod-65397a274/",
     url: "/alumni-details/ManitRathod",
   },
   {
@@ -294,7 +294,7 @@ const alumini = [
     image: UmangDuwani,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/umang-duwani-10a430281/",
     url: "/alumni-details/UmangDuwani",
   },
   {
@@ -304,7 +304,7 @@ const alumini = [
     image: AgamKamdar,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/agam-kamdar-00894325b/",
     url: "/alumni-details/AgamKamdar",
   },
   {
@@ -314,7 +314,7 @@ const alumini = [
     image: NeetJain,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/neet-jain-2a882a25b/",
     url: "/alumni-details/NeetJain",
   },
   {
@@ -324,7 +324,7 @@ const alumini = [
     image: JaiwinMehta,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/jaiwin-mehta-134978199/",
     url: "/alumni-details/JaiwinMehta",
   },
   {
@@ -334,7 +334,7 @@ const alumini = [
     image: AnshShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/anshshah23/",
     url: "/alumni-details/AnshShah",
   },
   {
@@ -354,7 +354,7 @@ const alumini = [
     image: DevShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/dev-shah-38ba01270/",
     url: "/alumni-details/DevShah",
   },
   {
@@ -364,7 +364,7 @@ const alumini = [
     image: MahekSureja,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/maheksureja/",
     url: "/alumni-details/MahekSureja",
   },
   {
@@ -374,7 +374,7 @@ const alumini = [
     image: JheelPatel,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/jheel-patel-98a87a256/",
     url: "/alumni-details/JheelPatel",
   },
   {
@@ -384,7 +384,7 @@ const alumini = [
     image: AsmiSavla,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/asmi-savla-78671b271/",
     url: "/alumni-details/AsmiSavla",
   },
   {
@@ -394,7 +394,7 @@ const alumini = [
     image: HarshKeniya,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/harsh-keniya-358878248/",
     url: "/alumni-details/HarshKeniya",
   },
   {
@@ -404,7 +404,7 @@ const alumini = [
     image: AsviShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/asvi-shah-a1a426272/",
     url: "/alumni-details/AsviShah",
   },
   {
@@ -414,7 +414,7 @@ const alumini = [
     image: DeepDoshi,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/deep-doshi-666a7b275/",
     url: "/alumni-details/DeepDoshi",
   },
   {
@@ -424,7 +424,7 @@ const alumini = [
     image: ShriyaKela,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/shriya-kela-b438ba153/",
     url: "/alumni-details/ShriyaKela",
   },
   {
@@ -434,7 +434,7 @@ const alumini = [
     image: DiyanMehta,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/diyanmehta/",
     url: "/alumni-details/DiyanMehta",
   },
   {
@@ -444,7 +444,7 @@ const alumini = [
     image: HitanshuShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/hitanshu-shah-9a24a5258/",
     url: "/alumni-details/HitanshuShah",
   },
   {
@@ -454,7 +454,7 @@ const alumini = [
     image: DhruviShah,
     details: "",
     year: "2024-25",
-    linkedin: "",
+    linkedin: "https://www.linkedin.com/in/dhruvi-shah-b82520339/",
     url: "/alumni-details/DhruviShah",
   },
 ];
