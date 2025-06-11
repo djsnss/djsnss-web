@@ -6,7 +6,8 @@ import CustomLoader2 from '../Loaders/CustomLoader2';
 const Announcement = () => {
   const navigate = useNavigate();
   const [upcomingEventsData, setUpcomingEventsData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading1, setLoading1] = useState(false);
+  const [loading2, setLoading2] = useState(true);
   const [activeTab, setActiveTab] = useState('announcements');
 
   const announcements = [
@@ -50,12 +51,12 @@ const Announcement = () => {
             return { ...event, formattedDate: "Date to be announced" };
           }
         });
-
+        console.log(formattedEvents);
         setUpcomingEventsData(formattedEvents);
       } catch (error) {
         console.error(error.message);
       } finally {
-        setLoading(false);
+        setLoading2(false);
       }
     };
     fetchData();
@@ -73,7 +74,7 @@ const Announcement = () => {
           </div>
           
           <div className="h-[350px] overflow-y-auto p-4">
-            {loading ? (
+            {loading1 ? (
               <div className="h-48 flex justify-center items-center">
                 <CustomLoader2 />
               </div>
@@ -130,7 +131,7 @@ const Announcement = () => {
           </div>
           
           <div className="h-[350px] overflow-y-auto p-4">
-            {loading ? (
+            {loading2 ? (
               <div className="h-48 flex justify-center items-center">
                 <CustomLoader2 />
               </div>

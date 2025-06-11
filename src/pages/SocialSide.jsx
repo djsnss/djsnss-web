@@ -45,7 +45,7 @@ const SocialSide = () => {
       
       {/* Social Icons - Shown below the button when expanded */}
       <div className={`flex flex-col gap-3 mt-3 transition-all duration-300 ${isExpanded ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10 pointer-events-none'}`}>
-        {SocialLinks.map((socialLink) => (
+        {SocialLinks.filter((social)=> social.name === "Instagram" || social.name === "Linkedin").map((socialLink) => (
           <a 
             key={socialLink.id}
             href={socialLink.link}
