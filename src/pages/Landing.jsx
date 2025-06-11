@@ -130,7 +130,7 @@ const Landing = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1.2 }}
               >
-                <img src={d.src} alt={d.alt} className="h-10 md:h-40" loading="lazy" decoding="async"/>
+                <img src={d.src} alt={d.alt} className="h-10 md:h-40"/>
               </motion.a>
             ))}
           </div>
