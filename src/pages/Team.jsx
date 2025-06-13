@@ -6,7 +6,7 @@ import '../styles/team.css';
 
 const Team = () => {
   // State to handle the selected year
-  const [selectedYear, setSelectedYear] = useState("2024-25");
+  const [selectedYear, setSelectedYear] = useState("2025-26");
 
   // Handler for the dropdown change
   const handleYearChange = (event) => {
