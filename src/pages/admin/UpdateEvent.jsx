@@ -394,17 +394,30 @@ export default function UpdateEventPage() {
 
     async function fetchEvents() {
       try {
-        const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
+        const token = localStorage.getItem("adminAuthToken");
         const response = await axios.get(
           "https://djsnss-web.onrender.com/admin/getAllEvents",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setEvents(response.data || []);
-        console.log(response);
+
+        // Check if response.data exists and has the expected structure
+        if (response.data && Array.isArray(response.data)) {
+          setEvents(response.data);
+        } else if (response.data && Array.isArray(response.data.events)) {
+          // If the events are nested in a property called 'events'
+          setEvents(response.data.events);
+        } else {
+          // Handle unexpected response format
+          console.error("Unexpected response format:", response.data);
+          setEvents([]);
+          setErrorMessage("Invalid data format received from server");
+        }
       } catch (error) {
+        console.error("Error fetching events:", error);
         setErrorMessage(error.message);
+        setEvents([]); // Initialize as empty array to avoid map errors
       } finally {
         setLoadingEvents(false);
       }
@@ -441,7 +454,7 @@ export default function UpdateEventPage() {
     <div className="w-full h-screen flex flex-col bg-white">
       {/* Page Heading */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="text-4xl font-bold">Update Event</h1>
+        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Update Event</h1>
         <p className="mt-2 text-xl">Select an event to update its details</p>
       </div>
 
@@ -456,22 +469,28 @@ export default function UpdateEventPage() {
 
         {/* Grid of events */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-          {events.map((event) => (
-            <div
-              key={event._id}
-              className="p-4 border border-gray-300 rounded-lg cursor-pointer hover:shadow"
-              onClick={() => handleSelectEvent(event)}
-            >
-              <h2 className="text-lg font-bold text-[#003366]">{event.name}</h2>
-              <p className="text-sm text-gray-500">
-                Date: {new Date(event.date).toLocaleDateString()}
-              </p>
-              <p className="text-sm text-gray-500">
-                Location: {event.location}
-              </p>
-              <p className="text-sm text-gray-500">Status: {event.status}</p>
-            </div>
-          ))}
+          {Array.isArray(events) && events.length > 0 ? (
+            events.map((event) => (
+              <div
+                key={event._id}
+                className="p-4 border border-gray-300 rounded-lg cursor-pointer hover:shadow"
+                onClick={() => handleSelectEvent(event)}
+              >
+                <h2 className="text-lg font-bold text-[#003366]">{event.name}</h2>
+                <p className="text-sm text-gray-500">
+                  Date: {new Date(event.date).toLocaleDateString()}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Location: {event.location}
+                </p>
+                <p className="text-sm text-gray-500">Status: {event.status}</p>
+              </div>
+            ))
+          ) : (
+            <p className="col-span-3 text-center text-[#003366]">
+              No events available
+            </p>
+          )}
         </div>
       </div>
 

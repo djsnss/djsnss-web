@@ -15,10 +15,10 @@ const Unauthorized = () => {
           credentials or contact support if you believe this is an error.
         </p>
         <button
-          onClick={()=>navigate("/admin/login")}
+          onClick={()=>navigate("/")}
           className="mt-6 px-6 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
         >
-          Back to Login
+          Back to Home
         </button>
       </div>
     </div>

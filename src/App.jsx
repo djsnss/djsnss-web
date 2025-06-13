@@ -38,6 +38,8 @@ const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const AdminPass = React.lazy(() => import("./pages/admin/ChangePassword"));
 const AdminEmail = React.lazy(() => import("./pages/admin/ChangeEmail"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
+const CreateAnnouncement = React.lazy(() => import("./pages/admin/CreateAnnouncement"));
+const UpdateAnnouncement = React.lazy(() => import("./pages/admin/UpdateAnnouncement"));
 const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
 const VolunteerLogin = React.lazy(() => import("./pages/volunteer/VolLogin"));
 const VolunteerPass = React.lazy(() => import("./pages/volunteer/ChangePassword"));
@@ -95,6 +97,8 @@ const App = () => {
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/create-event" element={<CreateEvent />} />
                 <Route path="/admin/update-event" element={<UpdateEvent />} />
+                <Route path="/admin/create-announcement" element={<CreateAnnouncement />} />
+                <Route path="/admin/update-announcement" element={<UpdateAnnouncement />} />
                 <Route path="/admin/change-password" element={<AdminPass />} />
                 <Route path="/admin/edit-details" element={<EditVolunteerDetails />} />
                 <Route path="/admin/change-email" element={<AdminEmail />} />

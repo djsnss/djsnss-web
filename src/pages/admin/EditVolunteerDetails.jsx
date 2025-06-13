@@ -116,7 +116,7 @@ const EditVolunteerDetails = () => {
 
   return (
     <div className="p-6 bg-[#f1f8ff] min-h-screen">
-      <h1 className="text-3xl font-bold text-[#003366] mb-8 text-center">
+      <h1 className="mt-6 md:mt-9 text-3xl font-bold text-[#003366] mb-8 text-center">
         Edit Volunteer Details
       </h1>
 

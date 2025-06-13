@@ -137,7 +137,7 @@ const CreateEvent = () => {
     <div className="w-full flex flex-col bg-white">
       {/* Header */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="text-4xl font-bold">Create Event</h1>
+        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Create Event</h1>
         <p className="mt-2 text-xl">Fill in the event details below</p>
       </div>
 
