@@ -97,13 +97,13 @@ const TeamData = {
       secretary: [
         { name: "Manav Bhansali", position: "Secretary", image: ManavBhansali },
       ],
-      "joint Secretaries": [
+      "joint Secretary": [
         { name: "Jaineel Pandya", position: "Joint Secretary", image: JaineelPandya },
       ],
       treasurer: [
         { name: "Krish Khambhadiya", position: "Treasurer", image: KrishKhambhadiya },
       ],
-      "joint Treasurers": [
+      "joint Treasurer": [
         { name: "Avumm Dedhiaa", position: "Joint Treasurer", image: AvummDedhiaa },
       ],
     },
