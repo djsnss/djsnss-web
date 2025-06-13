@@ -49,7 +49,7 @@ export default function Activities() {
       link: "/eventdetails/annual-charity-drive",
       icon: Leaf,
       iconColor: "text-green-500",
-      direction: "left" as const,
+      direction: "right" as const,
     },
   ];
 

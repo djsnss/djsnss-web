@@ -118,7 +118,7 @@ const Landing = () => {
         transition={{ duration: 1 }}
       >
         <div className="w-full h-full bg-black bg-opacity-75 flex flex-col items-center justify-center">
-          <div className="flex flex-row justify-evenly items-center">
+          {/* <div className="flex flex-row justify-evenly items-center">
             {data.map((d, idx) => (
               <motion.a
                 key={idx}
@@ -133,7 +133,7 @@ const Landing = () => {
                 <img src={d.src} alt={d.alt} className="h-10 md:h-40"/>
               </motion.a>
             ))}
-          </div>
+          </div> */}
           <motion.h1
             className={`text-xl md:text-5xl sm:text-3xl font-bold mx-2 mt-4 text-center ${loading ? "text-dark-navy" : "text-white"}`}
             initial={{ y: -50, opacity: 0 }}

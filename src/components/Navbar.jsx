@@ -67,6 +67,16 @@ const Navbar = () => {
     setDropdowns({});
   };
 
+  const toggleNav = () => {
+    const newNavState = !navOpen;
+    setNavOpen(newNavState);
+
+    // If nav is being closed, also close all dropdowns
+    if (!newNavState) {
+      setDropdowns({});
+    }
+  };
+
   const navigationLinks = [
     { Icon: "FiHome", title: "Home", path: "/" },
     { Icon: "SiRotaryinternational", title: "About", path: "/aboutus" },
@@ -98,147 +108,63 @@ const Navbar = () => {
       Icon: "FaRegFileAlt",
       title: "See More",
       subLinks: [
-        { title: "Alumni", path: "/alumni" },
-        { title: "Reports", path: "/reports" },
-        { title: "Gallery", path: "/gallery" },
         { title: "FAQ", path: "/faq" },
+        { title: "Gallery", path: "/gallery" },
+        { title: "Alumni", path: "/alumni" },
         { title: "Calendar", path: "/calendar" },
+        { title: "Reports", path: "/reports" },
+        { title: "NSS Format", path: "/nss-format" },
+        { title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" }
       ],
     }
   ];
 
   return (
-    <nav
-      ref={menuRef}
-      className="fixed top-0 left-1/2 transform -translate-x-1/2 w-full md:w-max md:top-5 md:max-w-4xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
-    >
-      {/* Desktop Navbar */}
-      <div className="hidden md:flex items-center space-x-6 px-6 py-1">
-        {navigationLinks.map(({ Icon, title, path, subLinks }) => {
-          const LazyIconComponent = iconMap[Icon];
-          return (
-            <div key={title} className="relative group">
-              {subLinks ? (
-                <button
-                  onClick={() => toggleDropdown(title)}
-                  className="flex items-center text-white px-3 py-2 rounded-md transition hover:bg-white/10"
-                >
-                  <Suspense fallback={<div className="hidden"></div>}>
-                    <LazyIconComponent className="text-xl mr-2" />
-                  </Suspense>
-                  <span>{title}</span>
-                  <IoIosArrowDown className="ml-1" />
-                </button>
-              ) : (
-                <Link
-                  to={path}
-                  onClick={closeMenu}
-                  className={`flex items-center text-white px-3 py-1 rounded-md no-underline transition ${activeRoute === path ? "bg-white/20" : "hover:bg-white/10"
-                    }`}
-                >
-                  <Suspense fallback={<div className="hidden"></div>}>
-                    <LazyIconComponent className="text-xl mr-2" />
-                  </Suspense>
-                  <span>{title}</span>
-                </Link>
-              )}
-
-              {/* Desktop Dropdown */}
-              {subLinks && dropdowns[title] && (
-                <div className="absolute left-0 mt-2 bg-white backdrop-blur-lg shadow-lg rounded-lg w-52 py-2">
-                  {subLinks.map((subLink) => (
-                    <Link
-                      key={subLink.path}
-                      to={subLink.path}
-                      onClick={closeMenu}
-                      className="block px-4 py-2 no-underline text-gray-700 hover:bg-gray-100"
-                    >
-                      {subLink.title}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Mobile Navbar */}
-      <div
-        className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navOpen ? "h-screen bg-black backdrop-blur-md" : "h-12 bg-black/90 backdrop-blur-lg"
-          } flex flex-col items-center`}
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
+      <nav
+        ref={menuRef}
+        className="pointer-events-auto w-full md:w-max md:mt-3 md:max-w-4xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
       >
-        {/* Mobile Menu Button & Logo */}
-        <div className="flex items-center justify-between px-3 py-2 w-full">
-          {/* Logo */}
-          <a
-            href="/"
-            className={`text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300 ${navOpen ? "opacity-0" : "opacity-100"
-              }`}
-          >
-            DJS NSS
-          </a>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setNavOpen((prev) => !prev)}
-            className={`text-white text-3xl transition-transform duration-300 ${navOpen ? "rotate-180" : "rotate-0"
-              }`}
-          >
-            {navOpen ? <LuPanelRightClose /> : <IoIosArrowDown />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div
-          className={`w-full flex flex-col items-center overflow-hidden transition-all duration-500 ${navOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
-            }`}
-        >
+        {/* Desktop Navbar */}
+        <div className="hidden md:flex items-center space-x-6 px-6 py-1">
           {navigationLinks.map(({ Icon, title, path, subLinks }) => {
             const LazyIconComponent = iconMap[Icon];
             return (
-              <div key={title} className="w-full">
+              <div key={title} className="relative group">
                 {subLinks ? (
-                  // Dropdown Button
                   <button
                     onClick={() => toggleDropdown(title)}
-                    className="flex items-center text-white px-6 py-4 w-full text-left transition-all hover:bg-slate-950/90"
+                    className="flex items-center text-white px-3 py-2 rounded-md transition hover:bg-white/10"
                   >
                     <Suspense fallback={<div className="hidden"></div>}>
-                      <LazyIconComponent className="text-xl mr-3" />
+                      <LazyIconComponent className="text-xl mr-2" />
                     </Suspense>
-                    {title}
-                    <IoIosArrowDown
-                      className={`ml-auto transition-transform duration-300 ${dropdowns[title] ? "rotate-180" : "rotate-0"
-                        }`}
-                    />
+                    <span>{title}</span>
+                    <IoIosArrowDown className="ml-1" />
                   </button>
                 ) : (
-                  // Normal Link
                   <Link
                     to={path}
                     onClick={closeMenu}
-                    className="flex items-center text-white px-6 py-4 w-full transition-all no-underline hover:bg-gray-800"
+                    className={`flex items-center text-white px-3 py-1 rounded-md no-underline transition ${activeRoute === path ? "bg-white/20" : "hover:bg-white/10"
+                      }`}
                   >
                     <Suspense fallback={<div className="hidden"></div>}>
-                      <LazyIconComponent className="text-xl mr-3" />
+                      <LazyIconComponent className="text-xl mr-2" />
                     </Suspense>
-                    {title}
+                    <span>{title}</span>
                   </Link>
                 )}
 
-                {/* Mobile Dropdown - Now Fully Visible */}
-                {subLinks && (
-                  <div
-                    className={`bg-slate-950 transition-all duration-500 overflow-hidden ${dropdowns[title] ? "max-h-96 opacity-100 py-2" : "max-h-0 opacity-0"
-                      }`}
-                  >
+                {/* Desktop Dropdown */}
+                {subLinks && dropdowns[title] && (
+                  <div className="absolute left-0 mt-2 bg-white backdrop-blur-lg shadow-lg rounded-lg w-52 py-2">
                     {subLinks.map((subLink) => (
                       <Link
                         key={subLink.path}
                         to={subLink.path}
                         onClick={closeMenu}
-                        className="block px-8 py-2 no-underline text-gray-300 hover:text-white hover:bg-gray-900 transition-all duration-300"
+                        className="block px-4 py-2 no-underline text-gray-700 hover:bg-gray-100"
                       >
                         {subLink.title}
                       </Link>
@@ -249,9 +175,99 @@ const Navbar = () => {
             );
           })}
         </div>
-      </div>
 
-    </nav>
+        {/* Mobile Navbar */}
+        <div
+          className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navOpen ? "h-screen bg-black backdrop-blur-md overflow-y-auto" : "h-12 bg-black/90 backdrop-blur-lg"
+            } flex flex-col items-center`}
+        >
+          {/* Mobile Menu Button & Logo */}
+          <div className="flex items-center justify-between px-3 py-2 w-full sticky top-0 bg-black z-10">
+            {/* Logo */}
+            <a
+              href="/"
+              className={`text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300
+              }`}
+            >
+              DJS NSS
+            </a>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={toggleNav}
+              className={`text-white text-3xl transition-transform duration-300 ${navOpen ? "rotate-180" : "rotate-0"
+                }`}
+            >
+              {navOpen ? <LuPanelRightClose /> : <IoIosArrowDown />}
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          <div
+            className={`w-full flex flex-col items-center overflow-y-auto transition-all duration-500 ${
+              navOpen ? "max-h-[calc(100vh-3rem)] opacity-100 pb-16" : "max-h-0 opacity-0"
+            }`}
+          >
+            {navigationLinks.map(({ Icon, title, path, subLinks }) => {
+              const LazyIconComponent = iconMap[Icon];
+              return (
+                <div key={title} className="w-full">
+                  {subLinks ? (
+                    // Dropdown Button
+                    <button
+                      onClick={() => toggleDropdown(title)}
+                      className="flex items-center text-white px-6 py-4 w-full text-left transition-all hover:bg-slate-950/90"
+                    >
+                      <Suspense fallback={<div className="hidden"></div>}>
+                        <LazyIconComponent className="text-xl mr-3" />
+                      </Suspense>
+                      {title}
+                      <IoIosArrowDown
+                        className={`ml-auto transition-transform duration-300 ${dropdowns[title] ? "rotate-180" : "rotate-0"
+                          }`}
+                      />
+                    </button>
+                  ) : (
+                    // Normal Link
+                    <Link
+                      to={path}
+                      onClick={closeMenu}
+                      className="flex items-center text-white px-6 py-4 w-full transition-all no-underline hover:bg-gray-800"
+                    >
+                      <Suspense fallback={<div className="hidden"></div>}>
+                        <LazyIconComponent className="text-xl mr-3" />
+                      </Suspense>
+                      {title}
+                    </Link>
+                  )}
+
+                  {/* Mobile Dropdown - Now Fully Visible */}
+                  {subLinks && (
+                    <div
+                      className={`bg-slate-950 transition-all duration-300 overflow-y-auto ${
+                        dropdowns[title] ? "m-2 max-h-[50vh] opacity-100 py-2" : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      {subLinks.map((subLink) => (
+                        <Link
+                          key={subLink.path}
+                          to={subLink.path}
+                          onClick={closeMenu}
+                          className="block px-8 py-2 no-underline text-gray-300 hover:text-white hover:bg-gray-900 transition-all duration-300"
+                        >
+                          {subLink.title}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+      </nav>
+    </div>
   );
 };
 

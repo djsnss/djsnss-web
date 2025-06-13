@@ -8,7 +8,7 @@ const AllAlumni = () => {
   return (
     <div className=" bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center">
+        <h1 className="text-3xl md:text-4xl mt-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center">
           Alumni Directory
         </h1>
         <p className="text-light-gray mt-2 text-lg">
