@@ -8,6 +8,7 @@ import cron from "node-cron";
 import adminRouter from "./routes/adminR.js";
 import volunteerRouter from "./routes/volunteerR.js";
 import eventRouter from "./routes/eventR.js";
+import announcementRouter from "./routes/announcementR.js";
 import mongoose from "mongoose";
 import EventModel from "./models/event.js";
 import { createClient } from "redis";
@@ -125,6 +126,7 @@ app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 app.use("/admin", adminRouter);
 app.use("/volunteer", volunteerRouter);
 app.use("/events", eventRouter);
+app.use("/announcement", announcementRouter);
 
 // Health check endpoint for monitoring
 app.get("/health", async (req, res) => {

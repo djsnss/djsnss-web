@@ -49,4 +49,25 @@ const uploadNormal = multer({
   },
 });
 
-export { uploadPassport, uploadNormal };
+const uploadAnnouncement = multer({
+  storage: storage,
+  limits: {
+    fileSize: 10 * 1024 * 1024, // 10MB for PDFs
+  },
+  fileFilter: (req, file, cb) => {
+    const fileTypes = /jpeg|jpg|png|pdf/;
+    const extname = fileTypes.test(
+      path.extname(file.originalname).toLowerCase()
+    );
+    const mimeType =
+      file.mimetype === "application/pdf" || file.mimetype.startsWith("image/");
+
+    if (extname && mimeType) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only JPEG, JPG, PNG images or PDF files are allowed"));
+    }
+  },
+});
+
+export { uploadPassport, uploadNormal, uploadAnnouncement };
