@@ -9,6 +9,7 @@ import adminRouter from "./routes/adminR.js";
 import volunteerRouter from "./routes/volunteerR.js";
 import eventRouter from "./routes/eventR.js";
 import announcementRouter from "./routes/announcementR.js";
+import contactRouter from "./routes/contactR.js";
 import mongoose from "mongoose";
 import EventModel from "./models/event.js";
 import { createClient } from "redis";
@@ -127,6 +128,7 @@ app.use("/admin", adminRouter);
 app.use("/volunteer", volunteerRouter);
 app.use("/events", eventRouter);
 app.use("/announcement", announcementRouter);
+app.use("/contact", contactRouter);
 
 // Health check endpoint for monitoring
 app.get("/health", async (req, res) => {
