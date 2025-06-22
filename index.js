@@ -58,7 +58,7 @@ const preloadCache = async () => {
         .sort({ date: 1 })
         .limit(50)
         .select(
-          "name description date location maxVolunteers photo status scope" // Removed registeredVolunteers for performance
+          "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
         )
         .lean(),
 
@@ -69,7 +69,7 @@ const preloadCache = async () => {
         .sort({ date: -1 })
         .limit(20)
         .select(
-          "name description date location maxVolunteers photo status scope" // Removed registeredVolunteers for performance
+          "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
         )
         .lean(),
     ]);

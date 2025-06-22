@@ -43,8 +43,8 @@ const preloadCache = async () => {
         .sort({ date: 1 })
         .limit(50)
         .select(
-          "name description date location maxVolunteers photo status scope"
-        ) // Removed registeredVolunteers for performance
+          "name description date location maxVolunteers photo status scope slug"
+        )
         .lean(),
 
       EventModel.find({
@@ -54,13 +54,13 @@ const preloadCache = async () => {
         .sort({ date: -1 })
         .limit(20)
         .select(
-          "name description date location maxVolunteers photo status scope"
-        ) // Removed registeredVolunteers for performance
+          "name description date location maxVolunteers photo status scope slug"
+        )
         .lean(),
     ]);
 
     const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // 4 hours - consistent duration
+    await redisClient.set("events:all", JSON.stringify(cacheData)); // Infinite cache
 
     console.log(
       `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
@@ -105,17 +105,21 @@ const fetchAndCacheEvents = async () => {
     EventModel.find({ status: "Upcoming", date: { $gte: new Date() } })
       .sort({ date: 1 })
       .limit(50)
-      .select("name description date location maxVolunteers photo status scope")
+      .select(
+        "name description date location maxVolunteers photo status scope slug"
+      )
       .lean(),
     EventModel.find({ status: "Past", date: { $lt: new Date() } })
       .sort({ date: -1 })
       .limit(20)
-      .select("name description date location maxVolunteers photo status scope")
+      .select(
+        "name description date location maxVolunteers photo status scope slug"
+      )
       .lean(),
   ]);
 
   const cacheData = { upcomingEvents, pastEvents };
-  await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // Change from 7200 to 14400
+  await redisClient.set("events:all", JSON.stringify(cacheData)); // Infinite cache
   return cacheData;
 };
 
