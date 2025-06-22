@@ -29,14 +29,22 @@ export const createAnnouncement = async (req, res) => {
         return res.status(400).json({ message: "PDF file is required" });
       }
 
-      // Upload to Cloudinary
+      const publicId = `announcements/pdfs/announcement_pdf_${Date.now()}`;
+
       const result = await cloudinary.uploader.upload(req.file.path, {
         folder: "announcements/pdfs",
-        resource_type: "raw", // Use raw for PDF files
-        public_id: `announcement_pdf_${Date.now()}`,
+        resource_type: "raw",
+        type: "authenticated",
+        public_id: publicId,
       });
 
-      announcementData.pdfLink = result.secure_url;
+      const signedUrl = cloudinary.utils.download_url(`${publicId}.pdf`, {
+        type: "authenticated",
+        resource_type: "raw",
+        expires_at: 2147483647,
+      });
+
+      announcementData.pdfLink = signedUrl;
     } else if (typeOfContent === "link") {
       if (!urlLink) {
         return res
@@ -125,7 +133,7 @@ export const updateAnnouncement = async (req, res) => {
               publicIdWithExtension.split(".")[0]
             }`;
             await cloudinary.uploader.destroy(publicId, {
-              resource_type: "raw",
+              resource_type: "auto",
             });
           } catch (cloudinaryError) {
             console.error(
@@ -135,13 +143,22 @@ export const updateAnnouncement = async (req, res) => {
           }
         }
 
-        // Upload new PDF
+        const publicId = `announcements/pdfs/announcement_pdf_${Date.now()}`;
+
         const result = await cloudinary.uploader.upload(req.file.path, {
           folder: "announcements/pdfs",
           resource_type: "raw",
-          public_id: `announcement_pdf_${Date.now()}`,
+          type: "authenticated",
+          public_id: publicId,
         });
-        updateData.pdfLink = result.secure_url;
+
+        const signedUrl = cloudinary.utils.download_url(`${publicId}.pdf`, {
+          type: "authenticated",
+          resource_type: "raw",
+          expires_at: 2147483647,
+        });
+
+        updateData.pdfLink = signedUrl;
       } else {
         // Keep existing pdfLink if no new file
         updateData.pdfLink = announcement.pdfLink;
@@ -196,7 +213,7 @@ export const deleteAnnouncement = async (req, res) => {
         const publicId = `announcements/pdfs/${
           publicIdWithExtension.split(".")[0]
         }`;
-        await cloudinary.uploader.destroy(publicId, { resource_type: "raw" });
+        await cloudinary.uploader.destroy(publicId, { resource_type: "auto" });
       } catch (cloudinaryError) {
         console.error("Error deleting from Cloudinary:", cloudinaryError);
         // Don't fail the entire operation if Cloudinary deletion fails
