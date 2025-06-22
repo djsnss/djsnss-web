@@ -15,7 +15,23 @@ const Announcement = () => {
       try {
         const response = await fetch("https://djsnss-web.onrender.com/announcement/get-announcements");
         const data = await response.json();
-        setAnnouncementsData(data.announcements || []);
+        
+        // Format the dates for announcements
+        const formattedAnnouncements = data.announcements?.map(announcement => {
+          if (announcement.date) {
+            const announcementDate = new Date(announcement.date);
+            const formattedDate = announcementDate.toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric"
+            });
+            return { ...announcement, formattedDate };
+          } else {
+            return { ...announcement, formattedDate: "Date not specified" };
+          }
+        }) || [];
+        
+        setAnnouncementsData(formattedAnnouncements);
       } catch (error) {
         console.error("Error fetching announcements:", error.message);
       } finally {
@@ -102,7 +118,7 @@ const Announcement = () => {
                             href={announcement.pdfLink} 
                             className="text-grey-800 font-medium hover:underline"
                             target="_blank"
-                            rel="noopener noreferrer"
+                            download={`${announcement.title}.pdf`}
                             >
                             {announcement.title}
                             </a>
@@ -115,12 +131,14 @@ const Announcement = () => {
                             >
                             {announcement.title}
                             </a>
-                        ) : (
-                            <p className="font-medium text-gray-800">{announcement.title}</p>
+                        ) : (<>
+                        <p className="font-medium` text-gray-800">{announcement.title}</p>
+                        <p className="font-normal text-gray-800">{announcement.content}</p>
+                          </>
                         )}
                         
                         <div className="text-sm text-gray-500 mt-1">
-                            {announcement.date}
+                            {announcement.formattedDate}
                         </div>
                         </div>
                     </div>

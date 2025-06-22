@@ -10,9 +10,11 @@ const CreateAnnouncement = () => {
     typeOfContent: "text", // Default to text announcement
     content: "",
     urlLink: "",
-    pdfLink: null,
+    pdfLink: "",
+    isNew: true, // Added isNew field with default as true
   });
 
+  const [pdfFile, setPdfFile] = useState(null);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -35,10 +37,11 @@ const CreateAnnouncement = () => {
       if (!formData.content?.trim())
         newErrors.content = "Content is required for text announcements.";
     } else if (formData.typeOfContent === "pdf") {
-      if (!formData.pdfLink)
-        newErrors.pdfLink = "pdfLink is required for PDF announcements.";
+      if (!pdfFile && !formData.pdfLink)
+        newErrors.pdfLink = "PDF document is required for PDF announcements.";
     } else if (formData.typeOfContent === "link") {
-      if (!formData.urlLink?.trim()) newErrors.urlLink = "urlLink is required for link announcements.";
+      if (!formData.urlLink?.trim()) 
+        newErrors.urlLink = "URL is required for link announcements.";
     }
 
     setErrors(newErrors);
@@ -46,20 +49,17 @@ const CreateAnnouncement = () => {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
-  const handlepdfLinkUpload = (e) => {
-    const pdfLink = e.target.pdfLinks[0];
-    if (pdfLink) {
-      setFormData((prev) => ({
-        ...prev,
-        pdfLink: pdfLink,
-      }));
+  const handlePdfUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPdfFile(file);
     }
   };
 
@@ -67,12 +67,16 @@ const CreateAnnouncement = () => {
     const newType = e.target.value;
     setFormData((prev) => ({
       ...prev,
-      type: newType,
+      typeOfContent: newType,
       // Reset type-specific fields when changing types
-      ...(newType === "text" ? { urlLink: "", pdfLink: null } : {}),
+      ...(newType === "text" ? { urlLink: "", pdfLink: "" } : {}),
       ...(newType === "pdf" ? { content: "", urlLink: "" } : {}),
-      ...(newType === "link" ? { content: "", pdfLink: null } : {}),
+      ...(newType === "link" ? { content: "", pdfLink: "" } : {}),
     }));
+    
+    if (newType !== "pdf") {
+      setPdfFile(null);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -90,16 +94,20 @@ const CreateAnnouncement = () => {
 
       // Add common fields
       formDataToSend.append("title", formData.title);
-      formDataToSend.append("type", formData.type);
+      formDataToSend.append("typeOfContent", formData.typeOfContent);
+      formDataToSend.append("isNew", formData.isNew);
 
       // Add type-specific fields
       if (formData.typeOfContent === "text") {
         formDataToSend.append("content", formData.content);
       } else if (formData.typeOfContent === "link") {
-        formDataToSend.append("urlLink", formData.urlLink); // Changed from 'link' to 'urlLink'
+        formDataToSend.append("urlLink", formData.urlLink);
       } else if (formData.typeOfContent === "pdf") {
-        formDataToSend.append("pdfLink", formData.pdfLink); 
-        // The server will generate the pdf_link from the uploaded pdfLink
+        if (pdfFile) {
+          formDataToSend.append("announcement", pdfFile);
+        } else if (formData.pdfLink) {
+          formDataToSend.append("pdfLink", formData.pdfLink);
+        }
       }
 
       const response = await axios.post(
@@ -122,8 +130,10 @@ const CreateAnnouncement = () => {
         typeOfContent: "text",
         content: "",
         urlLink: "",
-        pdfLink: null,
+        pdfLink: "",
+        isNew: true,
       });
+      setPdfFile(null);
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
       setErrorMessage(
@@ -137,7 +147,7 @@ const CreateAnnouncement = () => {
   return (
     <div className="w-full flex flex-col bg-white">
       {/* Header */}
-      <div className="bg-[#003366] text-center text-white py-8">
+      <div className="bg-[#003366] text-center text-white py-8 relative">
         {/* Back Button */}
         <div className="mt-5 md:mt-8 ml-4">
           <button
@@ -155,7 +165,7 @@ const CreateAnnouncement = () => {
       {/* Form */}
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 p-6 bg-[#f1f8ff] w-full"
+        className="space-y-6 p-6 bg-[#f1f8ff] w-full mx-auto"
       >
         {successMessage && (
           <div className="bg-green-100 text-green-800 p-4 rounded-md">
@@ -188,13 +198,28 @@ const CreateAnnouncement = () => {
           )}
         </div>
 
+        {/* Mark as New */}
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            id="isNew"
+            name="isNew"
+            checked={formData.isNew}
+            onChange={handleInputChange}
+            className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+          />
+          <label htmlFor="isNew" className="ml-2 text-sm font-medium text-[#003366]">
+            Mark as New (displays a "New" badge on the announcement)
+          </label>
+        </div>
+
         {/* Announcement Type */}
         <div>
           <label className="block text-sm font-medium text-[#003366]">
             Announcement Type *
           </label>
           <select
-            name="type"
+            name="typeOfContent"
             value={formData.typeOfContent}
             onChange={handleTypeChange}
             className="w-full p-2 border border-[#387fa8] rounded-md"
@@ -233,7 +258,7 @@ const CreateAnnouncement = () => {
               External Link URL *
             </label>
             <input
-              type="urlLink"
+              type="url"
               name="urlLink"
               value={formData.urlLink}
               onChange={handleInputChange}
@@ -251,41 +276,63 @@ const CreateAnnouncement = () => {
         {formData.typeOfContent === "pdf" && (
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Upload PDF Document *
+              PDF Document *
             </label>
-            <div className="relative">
-              {formData.pdfLink ? (
-                <div className="flex items-center justify-between p-2 border rounded-md border-[#387fa8]">
-                  <span>{formData.pdfLink.name}</span>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData((prev) => ({ ...prev, pdfLink: null }))
-                    }
-                    className="text-red-500"
-                  >
-                    Remove
-                  </button>
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-[#003366] mb-1">
+                  Upload PDF File
+                </label>
+                <div className="relative">
+                  {pdfFile ? (
+                    <div className="flex items-center justify-between p-2 border rounded-md border-[#387fa8]">
+                      <span>{pdfFile.name}</span>
+                      <button
+                        type="button"
+                        onClick={() => setPdfFile(null)}
+                        className="text-red-500 hover:text-red-700"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center w-full h-32 border-2 border-dashed rounded-lg">
+                      <div className="text-center">
+                        <label className="block mt-2">
+                          <span className="px-4 py-2 bg-[#387fa8] text-white rounded cursor-pointer hover:bg-[#005a8e]">
+                            Choose PDF File
+                          </span>
+                          <input
+                            type="file"
+                            accept=".pdf"
+                            onChange={handlePdfUpload}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <div className="flex items-center justify-center w-full h-32 border-2 border-dashed rounded-lg">
-                  <div className="text-center">
-                    <label className="block mt-2">
-                      <span className="text-[#fff] p-4 bg-black/40 cursor-pointer">
-                        Upload a PDF pdfLink
-                      </span>
-                      <input
-                        type="pdfLink"
-                        accept=".pdf"
-                        onChange={handlepdfLinkUpload}
-                        className="hidden"
-                      />
-                      {errors.pdfLink && (
-                        <p className="text-red-500 mt-6 text-sm">{errors.pdfLink}</p>
-                      )}
-                    </label>
-                  </div>
-                </div>
+              </div>
+              
+              <div className="text-center text-sm text-gray-500">- OR -</div>
+              
+              <div>
+                <label className="block text-sm font-medium text-[#003366] mb-1">
+                  Provide PDF Link
+                </label>
+                <input
+                  type="url"
+                  name="pdfLink"
+                  value={formData.pdfLink}
+                  onChange={handleInputChange}
+                  placeholder="https://example.com/document.pdf"
+                  className="w-full p-2 border border-[#387fa8] rounded-md"
+                />
+              </div>
+              
+              {errors.pdfLink && (
+                <p className="text-red-500 text-sm">{errors.pdfLink}</p>
               )}
             </div>
           </div>
@@ -296,7 +343,7 @@ const CreateAnnouncement = () => {
           <button
             type="submit"
             disabled={loading}
-            className="px-4 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e]"
+            className="px-4 py-2 bg-[#387fa8] text-white rounded-md hover:bg-[#005a8e] disabled:bg-gray-400"
           >
             {loading ? "Creating..." : "Create Announcement"}
           </button>

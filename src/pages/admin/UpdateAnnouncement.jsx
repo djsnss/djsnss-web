@@ -11,18 +11,18 @@ import { ArrowLeft } from "lucide-react";
 function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated }) {
   const [formData, setFormData] = useState({
     title: announcement.title,
-    type: announcement.type,
+    typeOfContent: announcement.typeOfContent,
     content: announcement.content || "",
-    url: announcement.url || "",
-    file: null,
-    // Store the existing file info if available
-    existingFile: announcement.type === "pdf" ? announcement.link : null,
+    urlLink: announcement.urlLink || "",
+    pdfLink: announcement.pdfLink || "",
+    isNew: announcement.isNew || false,
   });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [fileSelected, setFileSelected] = useState(false);
 
   // Validate form based on announcement type
   const validateForm = () => {
@@ -30,17 +30,15 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
 
     if (!formData.title?.trim()) newErrors.title = "Title is required.";
 
-    if (formData.type === "text") {
+    if (formData.typeOfContent === "text") {
       if (!formData.content?.trim())
         newErrors.content = "Content is required for text announcements.";
-    } else if (formData.type === "pdf") {
-      // If updating a PDF announcement, we don't require a new file
-      // unless the existing file is being replaced
-      if (!formData.existingFile && !formData.file) {
-        newErrors.file = "File is required for PDF announcements.";
+    } else if (formData.typeOfContent === "pdf") {
+      if (!formData.pdfLink && !fileSelected) {
+        newErrors.pdfLink = "PDF document is required for PDF announcements.";
       }
-    } else if (formData.type === "link") {
-      if (!formData.url?.trim()) newErrors.url = "URL is required for link announcements.";
+    } else if (formData.typeOfContent === "link") {
+      if (!formData.urlLink?.trim()) newErrors.urlLink = "URL is required for link announcements.";
     }
 
     setErrors(newErrors);
@@ -48,20 +46,21 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
   const handleFileUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setFormData((prev) => ({
+      setFileSelected(true);
+      // Just store the file in formData.pdfLink
+      setFormData(prev => ({
         ...prev,
-        file: file,
-        existingFile: null, // Clear existing file as we're uploading a new one
+        pdfLink: file, // The backend will handle converting this to a URL
       }));
     }
   };
@@ -70,12 +69,13 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
     const newType = e.target.value;
     setFormData((prev) => ({
       ...prev,
-      type: newType,
+      typeOfContent: newType,
       // Reset type-specific fields when changing types
-      ...(newType === "text" ? { url: "", file: null, existingFile: null } : {}),
-      ...(newType === "pdf" ? { content: "", url: "" } : {}),
-      ...(newType === "link" ? { content: "", file: null, existingFile: null } : {}),
+      ...(newType === "text" ? { urlLink: "", pdfLink: "" } : {}),
+      ...(newType === "pdf" ? { content: "", urlLink: "" } : {}),
+      ...(newType === "link" ? { content: "", pdfLink: "" } : {}),
     }));
+    setFileSelected(false);
   };
 
   const handleSubmit = async (e) => {
@@ -89,21 +89,24 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
     try {
       const token = localStorage.getItem("adminAuthToken");
       const formDataToSend = new FormData();
-      
+
       // Add common fields
       formDataToSend.append("title", formData.title);
-      formDataToSend.append("type", formData.type);
-      
+      formDataToSend.append("typeOfContent", formData.typeOfContent);
+      formDataToSend.append("isNew", formData.isNew);
+
       // Add type-specific fields
-      if (formData.type === "text") {
+      if (formData.typeOfContent === "text") {
         formDataToSend.append("content", formData.content);
-      } else if (formData.type === "link") {
-        formDataToSend.append("url", formData.url);
-      } else if (formData.type === "pdf") {
-        if (formData.file) {
-          formDataToSend.append("file", formData.file);
-        } else if (formData.existingFile) {
-          formDataToSend.append("existingFile", "keep"); // Signal to keep existing file
+      } else if (formData.typeOfContent === "link") {
+        formDataToSend.append("urlLink", formData.urlLink);
+      } else if (formData.typeOfContent === "pdf") {
+        if (fileSelected && formData.pdfLink instanceof File) {
+          // Backend expects file in field named "announcement"
+          formDataToSend.append("announcement", formData.pdfLink);
+        } else if (typeof formData.pdfLink === "string" && formData.pdfLink) {
+          // No new file selected, send the existing pdfLink as a string
+          formDataToSend.append("pdfLink", formData.pdfLink);
         }
       }
 
@@ -119,13 +122,14 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
       );
 
       setSuccessMessage("Announcement updated successfully");
-      onAnnouncementUpdated({
+
+      // Use the response data for the updated announcement
+      const updatedData = response.data?.announcement || {
         ...announcement,
         ...formData,
-        link: formData.type === "pdf" ? 
-          (formData.file ? URL.createObjectURL(formData.file) : announcement.link) : 
-          undefined
-      });
+      };
+
+      onAnnouncementUpdated(updatedData);
       setTimeout(() => {
         onClose();
       }, 1000);
@@ -203,14 +207,29 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
             )}
           </div>
 
+          {/* Mark as New */}
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="isNew"
+              name="isNew"
+              checked={formData.isNew}
+              onChange={handleInputChange}
+              className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+            />
+            <label htmlFor="isNew" className="ml-2 text-sm font-medium text-[#003366]">
+              Mark as New (displays a "New" badge on the announcement)
+            </label>
+          </div>
+
           {/* Announcement Type */}
           <div>
             <label className="block text-sm font-medium text-[#003366]">
               Announcement Type *
             </label>
             <select
-              name="type"
-              value={formData.type}
+              name="typeOfContent"
+              value={formData.typeOfContent}
               onChange={handleTypeChange}
               className="w-full p-2 border border-[#387fa8] rounded-md"
             >
@@ -221,7 +240,7 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
           </div>
 
           {/* Conditional fields based on announcement type */}
-          {formData.type === "text" && (
+          {formData.typeOfContent === "text" && (
             <div>
               <label className="block text-sm font-medium text-[#003366]">
                 Announcement Content *
@@ -242,55 +261,46 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
             </div>
           )}
 
-          {formData.type === "link" && (
+          {formData.typeOfContent === "link" && (
             <div>
               <label className="block text-sm font-medium text-[#003366]">
                 External Link URL *
               </label>
               <input
                 type="url"
-                name="url"
-                value={formData.url}
+                name="urlLink"
+                value={formData.urlLink}
                 onChange={handleInputChange}
                 className={`w-full p-2 border rounded-md ${
-                  errors.url ? "border-red-500" : "border-[#387fa8]"
+                  errors.urlLink ? "border-red-500" : "border-[#387fa8]"
                 }`}
                 placeholder="https://example.com"
               />
-              {errors.url && (
-                <p className="text-red-500 text-sm">{errors.url}</p>
+              {errors.urlLink && (
+                <p className="text-red-500 text-sm">{errors.urlLink}</p>
               )}
             </div>
           )}
 
-          {formData.type === "pdf" && (
+          {formData.typeOfContent === "pdf" && (
             <div>
               <label className="block text-sm font-medium text-[#003366]">
-                PDF Document
+                PDF Document *
               </label>
-              <div className="relative">
-                {formData.existingFile && !formData.file ? (
+              <div className="space-y-4">
+                {fileSelected ? (
                   <div className="flex items-center justify-between p-2 border rounded-md border-[#387fa8]">
-                    <span>Current file: {formData.existingFile.split('/').pop()}</span>
+                    <span>Selected file: {formData.pdfLink.name}</span>
                     <button
                       type="button"
-                      onClick={() => setFormData((prev) => ({ ...prev, existingFile: null }))}
-                      className="text-red-500"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                ) : formData.file ? (
-                  <div className="flex items-center justify-between p-2 border rounded-md border-[#387fa8]">
-                    <span>{formData.file.name}</span>
-                    <button
-                      type="button"
-                      onClick={() => setFormData((prev) => ({ 
-                        ...prev, 
-                        file: null,
-                        existingFile: announcement.type === "pdf" ? announcement.link : null
-                      }))}
-                      className="text-red-500"
+                      onClick={() => {
+                        setFormData(prev => ({
+                          ...prev,
+                          pdfLink: announcement.typeOfContent === "pdf" ? announcement.pdfLink : ""
+                        }));
+                        setFileSelected(false);
+                      }}
+                      className="text-red-500 hover:text-red-700"
                     >
                       Remove
                     </button>
@@ -299,8 +309,8 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
                   <div className="flex items-center justify-center w-full h-32 border-2 border-dashed rounded-lg">
                     <div className="text-center">
                       <label className="block mt-2">
-                        <span className="text-[#fff] p-4 bg-black/40 cursor-pointer">
-                          Upload a PDF file
+                        <span className="px-4 py-2 bg-[#387fa8] text-white rounded cursor-pointer hover:bg-[#005a8e]">
+                          Choose PDF File
                         </span>
                         <input
                           type="file"
@@ -308,12 +318,13 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
                           onChange={handleFileUpload}
                           className="hidden"
                         />
-                        {errors.file && (
-                          <p className="text-red-500 mt-6 text-sm">{errors.file}</p>
-                        )}
                       </label>
                     </div>
                   </div>
+                )}
+                
+                {errors.pdfLink && (
+                  <p className="text-red-500 text-sm">{errors.pdfLink}</p>
                 )}
               </div>
             </div>
@@ -444,7 +455,11 @@ const UpdateAnnouncement = () => {
   // Format date for display
   const formatDate = (dateString) => {
     try {
-      return new Date(dateString).toLocaleDateString();
+      return new Date(dateString).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      });
     } catch (e) {
       return dateString;
     }
@@ -453,7 +468,7 @@ const UpdateAnnouncement = () => {
   return (
     <div className="w-full flex flex-col bg-white min-h-screen">
       {/* Header */}
-      <div className="bg-[#003366] text-center text-white py-8">
+      <div className="bg-[#003366] text-center text-white py-8 relative">
         {/* Back Button */}
         <div className="mt-5 md:mt-8 ml-4">
           <button
@@ -492,6 +507,7 @@ const UpdateAnnouncement = () => {
                       <th className="px-4 py-2 text-left">Title</th>
                       <th className="px-4 py-2 text-left">Type</th>
                       <th className="px-4 py-2 text-left">Date</th>
+                      <th className="px-4 py-2 text-left">Status</th>
                       <th className="px-4 py-2 text-left">Actions</th>
                     </tr>
                   </thead>
@@ -499,8 +515,15 @@ const UpdateAnnouncement = () => {
                     {announcements.map((announcement) => (
                       <tr key={announcement._id} className="border-t hover:bg-gray-50">
                         <td className="px-4 py-3">{announcement.title}</td>
-                        <td className="px-4 py-3 capitalize">{announcement.type}</td>
+                        <td className="px-4 py-3 capitalize">{announcement.typeOfContent}</td>
                         <td className="px-4 py-3">{formatDate(announcement.date)}</td>
+                        <td className="px-4 py-3">
+                          {announcement.isNew ? (
+                            <span className="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
+                              New
+                            </span>
+                          ) : "Regular"}
+                        </td>
                         <td className="px-4 py-3">
                           <div className="flex space-x-2">
                             <button
