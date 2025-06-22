@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 /**
  * Popup component for editing an event.
@@ -380,6 +382,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
  * Main component that lists events and uses EditEventPopup to edit them.
  */
 export default function UpdateEventPage() {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [loadingEvents, setLoadingEvents] = useState(true);
@@ -454,7 +457,17 @@ export default function UpdateEventPage() {
     <div className="w-full h-screen flex flex-col bg-white">
       {/* Page Heading */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Update Event</h1>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-8 ml-4">
+          <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </button>
+        </div>
+        <h1 className="mt-4 text-4xl font-bold">Update Event</h1>
         <p className="mt-2 text-xl">Select an event to update its details</p>
       </div>
 

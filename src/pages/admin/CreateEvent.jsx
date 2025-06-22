@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const CreateEvent = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     slug: "",
@@ -137,7 +140,17 @@ const CreateEvent = () => {
     <div className="w-full flex flex-col bg-white">
       {/* Header */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Create Event</h1>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-8 ml-4">
+          <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </button>
+        </div>
+        <h1 className="mt-4 text-4xl font-bold">Create Event</h1>
         <p className="mt-2 text-xl">Fill in the event details below</p>
       </div>
 

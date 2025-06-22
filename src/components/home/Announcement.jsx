@@ -1,33 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MapPin, CalendarDays, FileText } from 'lucide-react';
+import { MapPin, CalendarDays, FileText, Link as LinkIcon } from 'lucide-react';
 import CustomLoader2 from '../Loaders/CustomLoader2';
 
 const Announcement = () => {
   const navigate = useNavigate();
   const [upcomingEventsData, setUpcomingEventsData] = useState([]);
-  const [loading1, setLoading1] = useState(false);
+  const [announcementsData, setAnnouncementsData] = useState([]);
+  const [loading1, setLoading1] = useState(true);
   const [loading2, setLoading2] = useState(true);
-  const [activeTab, setActiveTab] = useState('announcements');
 
-  const announcements = [
-    // {
-    //   id: 1,
-    //   title: 'Times of India Survey 2025',
-    //   type: 'text',
-    //   content: 'Our institution ranked in top 10 according to TOI Survey 2025',
-    //   date: '10-06-2025',
-    //   isNew: true
-    // },
-    // {
-    //   id: 2,
-    //   title: 'Timetable Engg Graphics - Sem II (May 2025)',
-    //   type: 'pdf',
-    //   link: '/documents/timetable-sem2-may2025.pdf',
-    //   date: '08-06-2025',
-    //   isNew: false
-    // },
-  ];
+  useEffect(() => {
+    const fetchAnnouncements = async () => {
+      try {
+        const response = await fetch("https://djsnss-web.onrender.com/announcement/get-announcements");
+        const data = await response.json();
+        setAnnouncementsData(data.announcements || []);
+      } catch (error) {
+        console.error("Error fetching announcements:", error.message);
+      } finally {
+        setLoading1(false);
+      }
+    };
+    fetchAnnouncements();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,30 +74,41 @@ const Announcement = () => {
               <div className="h-48 flex justify-center items-center">
                 <CustomLoader2 />
               </div>
-            ) : announcements.length === 0 ? (
+            ) : announcementsData.length === 0 ? (
               <p className="text-lg text-center font-medium text-gray-600 py-10">
                 No Announcement
               </p>
             ) : (
                 <ul className="divide-y divide-gray-200">
-                {announcements.map((announcement) => (
-                    <li key={announcement.id} className="px-6 py-4 hover:bg-gray-50 relative">
+                {announcementsData.map((announcement) => (
+                    <li key={announcement._id} className="px-6 py-4 hover:bg-gray-50 relative">
                     {announcement.isNew && (
                       <span className="absolute top-2 right-2 bg-[#0066b2] text-white text-xs font-bold px-2 py-0.5 rounded uppercase">
                         New
                       </span>
                     )}
                     <div className="flex items-start">
-                        {announcement.type === 'pdf' ? (
-                        <FileText className="w-5 h-5 text-red-500 mt-1 flex-shrink-0 mr-2" />
+                        {announcement.typeOfContent === 'pdf' ? (
+                          <FileText className="w-5 h-5 text-red-500 mt-1 flex-shrink-0 mr-2" />
+                        ) : announcement.typeOfContent === 'link' ? (
+                          <LinkIcon className="w-5 h-5 text-blue-500 mt-1 flex-shrink-0 mr-2" />
                         ) : (
-                        <div className="w-2 h-2 bg-[#0066b2] rounded-full mt-2 flex-shrink-0 mr-3"></div>
+                          <div className="w-2 h-2 bg-[#0066b2] rounded-full mt-2 flex-shrink-0 mr-3"></div>
                         )}
                         
                         <div className="flex-1">
-                        {announcement.type === 'pdf' ? (
+                        {announcement.typeOfContent === 'pdf' ? (
                             <a 
-                            href={announcement.link} 
+                            href={announcement.pdfLink} 
+                            className="text-grey-800 font-medium hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >
+                            {announcement.title}
+                            </a>
+                        ) : announcement.typeOfContent === 'link' ? (
+                            <a 
+                            href={announcement.urlLink} 
                             className="text-grey-800 font-medium hover:underline"
                             target="_blank"
                             rel="noopener noreferrer"

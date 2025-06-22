@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 /**
  * Popup component for editing an announcement.
@@ -106,7 +108,7 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
       }
 
       const response = await axios.put(
-        `https://djsnss-web.onrender.com/admin/announcement/update-announcement/${announcement._id}`,
+        `https://djsnss-web.onrender.com/announcement/update-announcement/${announcement._id}`,
         formDataToSend,
         {
           headers: {
@@ -344,6 +346,7 @@ function EditAnnouncementPopup({ announcement, onClose, onAnnouncementUpdated })
  * Main component that lists announcements and provides editing capabilities.
  */
 const UpdateAnnouncement = () => {
+  const navigate = useNavigate();
   const [announcements, setAnnouncements] = useState([]);
   const [selectedAnnouncement, setSelectedAnnouncement] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -361,7 +364,7 @@ const UpdateAnnouncement = () => {
       try {
         const token = localStorage.getItem("adminAuthToken");
         const response = await axios.get(
-          "https://djsnss-web.onrender.com/admin/announcement/get-announcements",
+          "https://djsnss-web.onrender.com/announcement/get-announcements",
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -420,7 +423,7 @@ const UpdateAnnouncement = () => {
     try {
       const token = localStorage.getItem("adminAuthToken");
       await axios.delete(
-        `https://djsnss-web.onrender.com/admin/announcement/delete-announcement/${deleteConfirmation._id}`,
+        `https://djsnss-web.onrender.com/announcement/delete-announcement/${deleteConfirmation._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -451,8 +454,18 @@ const UpdateAnnouncement = () => {
     <div className="w-full flex flex-col bg-white min-h-screen">
       {/* Header */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Manage Announcements</h1>
-        <p className="mt-2 text-xl">Edit or delete existing announcements</p>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-8 ml-4">
+          <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </button>
+        </div>
+        <h1 className="mt-4 text-4xl font-bold">Manage Announcements</h1>
+        <p className="mt-2 text-xl">Select an announcement to update its details</p>
       </div>
 
       {/* Content */}

@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const CreateAnnouncement = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
-    type: "text", // Default to text announcement
+    typeOfContent: "text", // Default to text announcement
     content: "",
-    url: "",
-    file: null,
+    urlLink: "",
+    pdfLink: null,
   });
 
   const [errors, setErrors] = useState({});
@@ -28,14 +31,14 @@ const CreateAnnouncement = () => {
 
     if (!formData.title?.trim()) newErrors.title = "Title is required.";
 
-    if (formData.type === "text") {
+    if (formData.typeOfContent === "text") {
       if (!formData.content?.trim())
         newErrors.content = "Content is required for text announcements.";
-    } else if (formData.type === "pdf") {
-      if (!formData.file)
-        newErrors.file = "File is required for PDF announcements.";
-    } else if (formData.type === "link") {
-      if (!formData.url?.trim()) newErrors.url = "URL is required for link announcements.";
+    } else if (formData.typeOfContent === "pdf") {
+      if (!formData.pdfLink)
+        newErrors.pdfLink = "pdfLink is required for PDF announcements.";
+    } else if (formData.typeOfContent === "link") {
+      if (!formData.urlLink?.trim()) newErrors.urlLink = "urlLink is required for link announcements.";
     }
 
     setErrors(newErrors);
@@ -50,12 +53,12 @@ const CreateAnnouncement = () => {
     }));
   };
 
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
+  const handlepdfLinkUpload = (e) => {
+    const pdfLink = e.target.pdfLinks[0];
+    if (pdfLink) {
       setFormData((prev) => ({
         ...prev,
-        file: file,
+        pdfLink: pdfLink,
       }));
     }
   };
@@ -66,9 +69,9 @@ const CreateAnnouncement = () => {
       ...prev,
       type: newType,
       // Reset type-specific fields when changing types
-      ...(newType === "text" ? { url: "", file: null } : {}),
-      ...(newType === "pdf" ? { content: "", url: "" } : {}),
-      ...(newType === "link" ? { content: "", file: null } : {}),
+      ...(newType === "text" ? { urlLink: "", pdfLink: null } : {}),
+      ...(newType === "pdf" ? { content: "", urlLink: "" } : {}),
+      ...(newType === "link" ? { content: "", pdfLink: null } : {}),
     }));
   };
 
@@ -90,17 +93,17 @@ const CreateAnnouncement = () => {
       formDataToSend.append("type", formData.type);
 
       // Add type-specific fields
-      if (formData.type === "text") {
+      if (formData.typeOfContent === "text") {
         formDataToSend.append("content", formData.content);
-      } else if (formData.type === "link") {
-        formDataToSend.append("url", formData.url); // Changed from 'link' to 'url'
-      } else if (formData.type === "pdf") {
-        formDataToSend.append("file", formData.file); 
-        // The server will generate the pdf_link from the uploaded file
+      } else if (formData.typeOfContent === "link") {
+        formDataToSend.append("urlLink", formData.urlLink); // Changed from 'link' to 'urlLink'
+      } else if (formData.typeOfContent === "pdf") {
+        formDataToSend.append("pdfLink", formData.pdfLink); 
+        // The server will generate the pdf_link from the uploaded pdfLink
       }
 
       const response = await axios.post(
-        "https://djsnss-web.onrender.com/admin/announcement/create",
+        "https://djsnss-web.onrender.com/announcement/create",
         formDataToSend,
         {
           headers: {
@@ -116,10 +119,10 @@ const CreateAnnouncement = () => {
       // Reset form
       setFormData({
         title: "",
-        type: "text",
+        typeOfContent: "text",
         content: "",
-        url: "",
-        file: null,
+        urlLink: "",
+        pdfLink: null,
       });
     } catch (error) {
       console.error("Error:", error.response?.data || error.message);
@@ -135,7 +138,17 @@ const CreateAnnouncement = () => {
     <div className="w-full flex flex-col bg-white">
       {/* Header */}
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Create Announcement</h1>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-8 ml-4">
+          <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </button>
+        </div>
+        <h1 className="mt-4 text-4xl font-bold">Create Announcement</h1>
         <p className="mt-2 text-xl">Add a new announcement to the system</p>
       </div>
 
@@ -182,7 +195,7 @@ const CreateAnnouncement = () => {
           </label>
           <select
             name="type"
-            value={formData.type}
+            value={formData.typeOfContent}
             onChange={handleTypeChange}
             className="w-full p-2 border border-[#387fa8] rounded-md"
           >
@@ -193,7 +206,7 @@ const CreateAnnouncement = () => {
         </div>
 
         {/* Conditional fields based on announcement type */}
-        {formData.type === "text" && (
+        {formData.typeOfContent === "text" && (
           <div>
             <label className="block text-sm font-medium text-[#003366]">
               Announcement Content *
@@ -214,40 +227,40 @@ const CreateAnnouncement = () => {
           </div>
         )}
 
-        {formData.type === "link" && (
+        {formData.typeOfContent === "link" && (
           <div>
             <label className="block text-sm font-medium text-[#003366]">
               External Link URL *
             </label>
             <input
-              type="url"
-              name="url"
-              value={formData.url}
+              type="urlLink"
+              name="urlLink"
+              value={formData.urlLink}
               onChange={handleInputChange}
               className={`w-full p-2 border rounded-md ${
-                errors.url ? "border-red-500" : "border-[#387fa8]"
+                errors.urlLink ? "border-red-500" : "border-[#387fa8]"
               }`}
               placeholder="https://example.com"
             />
-            {errors.url && (
-              <p className="text-red-500 text-sm">{errors.url}</p>
+            {errors.urlLink && (
+              <p className="text-red-500 text-sm">{errors.urlLink}</p>
             )}
           </div>
         )}
 
-        {formData.type === "pdf" && (
+        {formData.typeOfContent === "pdf" && (
           <div>
             <label className="block text-sm font-medium text-[#003366]">
               Upload PDF Document *
             </label>
             <div className="relative">
-              {formData.file ? (
+              {formData.pdfLink ? (
                 <div className="flex items-center justify-between p-2 border rounded-md border-[#387fa8]">
-                  <span>{formData.file.name}</span>
+                  <span>{formData.pdfLink.name}</span>
                   <button
                     type="button"
                     onClick={() =>
-                      setFormData((prev) => ({ ...prev, file: null }))
+                      setFormData((prev) => ({ ...prev, pdfLink: null }))
                     }
                     className="text-red-500"
                   >
@@ -259,16 +272,16 @@ const CreateAnnouncement = () => {
                   <div className="text-center">
                     <label className="block mt-2">
                       <span className="text-[#fff] p-4 bg-black/40 cursor-pointer">
-                        Upload a PDF file
+                        Upload a PDF pdfLink
                       </span>
                       <input
-                        type="file"
+                        type="pdfLink"
                         accept=".pdf"
-                        onChange={handleFileUpload}
+                        onChange={handlepdfLinkUpload}
                         className="hidden"
                       />
-                      {errors.file && (
-                        <p className="text-red-500 mt-6 text-sm">{errors.file}</p>
+                      {errors.pdfLink && (
+                        <p className="text-red-500 mt-6 text-sm">{errors.pdfLink}</p>
                       )}
                     </label>
                   </div>

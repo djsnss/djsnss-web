@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 const EditVolunteerDetails = () => {
+  const navigate = useNavigate();
   const [events, setEvents] = useState([]); // List of events
   const [selectedEvent, setSelectedEvent] = useState(""); // Selected event
   const [volunteers, setVolunteers] = useState([]); // List of registered volunteers
@@ -116,7 +119,17 @@ const EditVolunteerDetails = () => {
 
   return (
     <div className="p-6 bg-[#f1f8ff] min-h-screen">
-      <h1 className="mt-6 md:mt-9 text-3xl font-bold text-[#003366] mb-8 text-center">
+      {/* Back Button */}
+      <div className="mt-8 ml-4">
+        <button
+          onClick={() => navigate("/admin/dashboard")}
+          className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+        >
+          <ArrowLeft size={18} />
+          Back to Dashboard
+        </button>
+      </div>
+      <h1 className="mt-4 text-3xl font-bold text-[#003366] mb-8 text-center">
         Edit Volunteer Details
       </h1>
 

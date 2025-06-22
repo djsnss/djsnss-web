@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loaders/CustomLoader2";
+import { ArrowLeft } from "lucide-react";
 
 const ChangeEmailPage = () => {
   const [formData, setFormData] = useState({
@@ -88,7 +89,17 @@ const ChangeEmailPage = () => {
   return (
     <div className="w-full h-screen flex flex-col bg-white">
       <div className="bg-[#003366] text-center text-white py-8">
-        <h1 className="mt-5 md:mt-8 text-4xl font-bold">Change Email</h1>
+        {/* Back Button */}
+        <div className="mt-5 md:mt-8 ml-4">
+          <button
+            onClick={() => navigate("/admin/dashboard")}
+            className="flex items-center gap-1 bg-white/80 hover:bg-white px-3 py-2 rounded-md shadow-sm text-[#003366] font-medium transition-colors"
+          >
+            <ArrowLeft size={18} />
+            Back to Dashboard
+          </button>
+        </div>
+        <h1 className="mt-4 text-4xl font-bold">Change Email</h1>
         <p className="mt-2 text-xl">Update your account email</p>
       </div>
 
