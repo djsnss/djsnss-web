@@ -8,7 +8,7 @@ const announcementSchema = new mongoose.Schema(
     },
     typeOfContent: {
       type: String,
-      enum: ["text", "pdf"],
+      enum: ["text", "pdf", "link"],
       required: true,
     },
     content: {
@@ -17,10 +17,16 @@ const announcementSchema = new mongoose.Schema(
         return this.typeOfContent === "text";
       },
     },
-    link: {
+    pdfLink: {
       type: String,
       required: function () {
         return this.typeOfContent === "pdf";
+      },
+    },
+    urlLink: {
+      type: String,
+      required: function () {
+        return this.typeOfContent === "link";
       },
     },
     date: {
