@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { FaLinkedin } from "react-icons/fa";
 
-const TeamCard = ({ name, position, image }) => {
+const TeamCard = ({ name, position, image, linkedin }) => {
   return (
     <StyledWrapper>
       <div className="card h-[250px] w-[200px] sm:h-[300px] sm:w-[250px]">
@@ -14,8 +15,13 @@ const TeamCard = ({ name, position, image }) => {
           className="team-card-image min-h-full max-h-[45vh] w-full"
         />
         <div
-          className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20">
+          className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20 flex justify-center mt-2">
           <h3 className="text-xs sm:text-lg font-bold">{name}</h3>
+          {linkedin && (
+            <a href={`https://{linkedin}`} target="_blank" rel="noopener">
+              <FaLinkedin className="text-2xl text-white ml-2" />
+            </a>
+          )}
         </div>
         <div className="textBox">
           <p className="text head">{position}</p>

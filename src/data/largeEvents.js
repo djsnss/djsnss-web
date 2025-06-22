@@ -4,6 +4,7 @@ import NSSCamp from "../assets/Events/NSSCamp.jpg";
 import AnnualCharity from "../assets/Events/AnnualCharity.png";
 import VoterRegistration from "../assets/Events/VoterRegistration.png";
 import BDD from "../assets/Events/bdd/BDD.jpg";
+import StemCell from "../assets/Events/Stemcell.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
 import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
 import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
@@ -131,6 +132,23 @@ export const largeEventsData = [
   },
   {
     id: 8,
+    title: "STEM CELL DONATION DRIVE",
+    description: "Be a hero, save a life",
+    slug: "stem-cell-donation-drive",
+    link: "/eventdetails/stem-cell-donation-drive",
+    background: "bg-yellow-400",
+    imageURL: StemCell,
+    longDescription:
+      "On 16th August 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a Stem Cell Donation Drive in collaboration with the DATRI Blood Stem Cell Donors Registry. The event aimed to raise awareness about the importance of stem cell donation and encourage students to register as potential donors. The drive featured informative sessions, interactive activities, and inspiring stories of lives saved through stem cell transplants. Our college students broke the current record of donatons by donating a record 560 swabs, showcasing their commitment to helping those in need. The event highlighted the power of compassion and solidarity in supporting patients battling life-threatening diseases. The enthusiasm and generosity of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to save lives and promote health and well-being.",
+    scale: "Large",
+    duration: "1 day",
+    location: "DJ Sanghvi College",
+    date: "16th Aug 2024",
+    icon: FaHeart,
+    color: "#F4A261",
+  },
+  {
+    id: 9,
     title: "INDEPENDENCE DAY RALLY",
     description: "Celebrating freedom with unity",
     slug: "independence-day-rally",
@@ -145,22 +163,5 @@ export const largeEventsData = [
     date: "15th Aug 2024",
     icon: FaFlag ,
     color: "#FFA500",
-  },
-  {
-    id: 9,
-    title: "STEM CELL DONATION DRIVE",
-    description: "Be a hero, save a life",
-    slug: "stem-cell-donation-drive",
-    link: "/eventdetails/stem-cell-donation-drive",
-    background: "bg-yellow-400",
-    imageURL: GrainAThon,
-    longDescription:
-      "On 16th August 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a Stem Cell Donation Drive in collaboration with the DATRI Blood Stem Cell Donors Registry. The event aimed to raise awareness about the importance of stem cell donation and encourage students to register as potential donors. The drive featured informative sessions, interactive activities, and inspiring stories of lives saved through stem cell transplants. Our college students broke the current record of donatons by donating a record 560 swabs, showcasing their commitment to helping those in need. The event highlighted the power of compassion and solidarity in supporting patients battling life-threatening diseases. The enthusiasm and generosity of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to save lives and promote health and well-being.",
-    scale: "Large",
-    duration: "1 day",
-    location: "DJ Sanghvi College",
-    date: "16th Aug 2024",
-    icon: FaHeart,
-    color: "#F4A261",
   },
 ];
