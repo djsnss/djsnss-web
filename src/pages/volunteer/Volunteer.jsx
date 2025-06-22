@@ -122,16 +122,13 @@ const Volunteer = () => {
         </div>
 
         {/* Three Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 w-full">
+        <div className="grid grid-cols-1 md:grid-cols-2 w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             className="bg-[#a2b9d8] p-6 md:p-12 hover:bg-[#cce7ff] transition-colors duration-300"
           >
             <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Why Volunteer?</h3>
-            <div className="aspect-square bg-[#387fa8] overflow-hidden">
-              <img src={AboutUs} alt="Why Volunteer" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-            </div>
             <p className="text-[#003b5c] my-6">
               Volunteering provides an opportunity to enhance your skills, build networks, and give back to the community. Make a tangible difference and grow personally and professionally.
             </p>
@@ -150,9 +147,6 @@ const Volunteer = () => {
             className="bg-[#003366] p-6 md:p-12 hover:bg-[#005a8e] transition-colors duration-300"
           >
             <h3 className="text-xl md:text-2xl font-semibold mb-6 text-white">How to Get Involved</h3>
-            <div className="aspect-square bg-[#003b5c] overflow-hidden">
-              <img src={CyberSavvy} alt="Get Involved" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-            </div>
             <p className="text-[#cce7ff] my-6">
               Explore ways to contribute, from signing up for programs to participating in community events and special projects tailored to your interests and skills.
             </p>
@@ -162,32 +156,6 @@ const Volunteer = () => {
               <li>Join special projects and initiatives</li>
               <li>Attend orientation and training sessions</li>
 
-            </ul>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-[#a2b9d8] p-6 md:p-12 hover:bg-[#cce7ff] transition-colors duration-300"
-          >
-            <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Upcoming Events</h3>
-            <div className="aspect-square bg-[#387fa8] overflow-hidden">
-              <img src={Upcoming} alt="Upcoming Events" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
-            </div>
-            <ul className="space-y-4 text-[#003b5c] mt-6">
-              <li className="border-b border-[#387fa8] pb-3">
-                <span className="text-[#005a8e] font-semibold">Oct 15, 2024</span>
-                <div className="font-medium">Community Clean-Up Day</div>
-              </li>
-              <li className="border-b border-[#387fa8] pb-3">
-                <span className="text-[#005a8e] font-semibold">Nov 10, 2024</span>
-                <div className="font-medium">Annual Charity Run</div>
-              </li>
-              <li>
-                <span className="text-[#005a8e] font-semibold">Dec 5, 2024</span>
-                <div className="font-medium">Food Drive</div>
-              </li>
             </ul>
           </motion.div>
         </div>

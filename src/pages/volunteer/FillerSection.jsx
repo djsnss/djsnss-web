@@ -13,7 +13,7 @@ const VolunteerFillerSection = () => {
   return (
     <div className="w-full">
       {/* Notable People Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 w-full">
+      <div className="w-full">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -22,8 +22,8 @@ const VolunteerFillerSection = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-[#003366] mb-8">
             Notable Volunteers & Stories
           </h2>
-          <div className="space-y-8">
-            <div className="flex flex-col md:flex-row gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 space-y-8">
+            <div className="flex flex-col gap-6">
               <div className="w-full md:w-1/3 aspect-square bg-[#387fa8] overflow-hidden">
                 <img
                   src={MotherTeresa}
@@ -39,7 +39,7 @@ const VolunteerFillerSection = () => {
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-6">
+            <div className="flex flex-col gap-6">
               <div className="w-full md:w-1/3 aspect-square bg-[#387fa8] overflow-hidden">
                 <img
                   src={AbdulKalam}
@@ -53,40 +53,6 @@ const VolunteerFillerSection = () => {
                   Dr. APJ Abdul Kalam, the &apos;People&apos;s President,&apos; emphasized giving back to society through education and social service.
                 </p>
               </div>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          className="bg-[#003366] p-6 md:p-12 text-white"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-8">NSS Alumni Success</h2>
-          <div className="aspect-video bg-[#005a8e] overflow-hidden mb-6">
-            <img
-              src={Event3}
-              alt="NSS Alumni"
-              className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-            />
-          </div>
-          <p className="text-[#cce7ff] text-lg mb-6">
-            National Service Scheme (NSS) alumni have achieved remarkable success, including K. Radhakrishnan, former ISRO chairman, who actively volunteered during his college days, instilling a lifelong spirit of service.
-          </p>
-          <div className="grid grid-cols-2 gap-4">
-            <div className="aspect-square bg-[#005a8e] overflow-hidden">
-              <img
-                src={Event1}
-                alt="Alumni Achievement 1"
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              />
-            </div>
-            <div className="aspect-square bg-[#005a8e] overflow-hidden">
-              <img
-                src={Event2}
-                alt="Alumni Achievement 2"
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-              />
             </div>
           </div>
         </motion.div>
