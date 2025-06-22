@@ -38,13 +38,7 @@ export const createAnnouncement = async (req, res) => {
         public_id: publicId,
       });
 
-      const signedUrl = cloudinary.utils.download_url(`${publicId}.pdf`, {
-        type: "authenticated",
-        resource_type: "raw",
-        expires_at: 2147483647,
-      });
-
-      announcementData.pdfLink = signedUrl;
+      announcementData.pdfLink = result.secure_url;
     } else if (typeOfContent === "link") {
       if (!urlLink) {
         return res
@@ -152,13 +146,7 @@ export const updateAnnouncement = async (req, res) => {
           public_id: publicId,
         });
 
-        const signedUrl = cloudinary.utils.download_url(`${publicId}.pdf`, {
-          type: "authenticated",
-          resource_type: "raw",
-          expires_at: 2147483647,
-        });
-
-        updateData.pdfLink = signedUrl;
+        updateData.pdfLink = result.secure_url;
       } else {
         // Keep existing pdfLink if no new file
         updateData.pdfLink = announcement.pdfLink;
@@ -198,15 +186,21 @@ export const updateAnnouncement = async (req, res) => {
 export const deleteAnnouncement = async (req, res) => {
   try {
     const { announcementId } = req.params;
+    console.log("Delete request for announcementId:", announcementId);
 
     const announcement = await AnnouncementModel.findById(announcementId);
     if (!announcement) {
+      console.log("Announcement not found");
       return res.status(404).json({ message: "Announcement not found" });
     }
 
     // If it's a PDF, delete from Cloudinary first
     if (announcement.typeOfContent === "pdf" && announcement.pdfLink) {
       try {
+        console.log(
+          "Attempting to delete PDF from Cloudinary:",
+          announcement.pdfLink
+        );
         // Extract public_id from Cloudinary URL
         const urlParts = announcement.pdfLink.split("/");
         const publicIdWithExtension = urlParts[urlParts.length - 1];
@@ -214,6 +208,7 @@ export const deleteAnnouncement = async (req, res) => {
           publicIdWithExtension.split(".")[0]
         }`;
         await cloudinary.uploader.destroy(publicId, { resource_type: "auto" });
+        console.log("Cloudinary deletion attempted for:", publicId);
       } catch (cloudinaryError) {
         console.error("Error deleting from Cloudinary:", cloudinaryError);
         // Don't fail the entire operation if Cloudinary deletion fails
@@ -221,8 +216,13 @@ export const deleteAnnouncement = async (req, res) => {
     }
 
     // Delete from database
-    await AnnouncementModel.findByIdAndDelete(announcementId);
+    const deleted = await AnnouncementModel.findByIdAndDelete(announcementId);
+    if (!deleted) {
+      console.log("MongoDB deletion failed");
+      return res.status(404).json({ message: "Announcement not found in DB" });
+    }
 
+    console.log("Announcement deleted from DB:", announcementId);
     return res
       .status(200)
       .json({ message: "Announcement deleted successfully" });
