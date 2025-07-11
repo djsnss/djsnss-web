@@ -1,4 +1,4 @@
-// 2025-26  
+// 2025-26
 import DhvanilShah from "../assets/Team25-26/Dhvanil Shah.jpg";
 import ZeelBhadra from "../assets/Team25-26/Zeel Bhadra.jpg";
 import VaishveeGandhi from "../assets/Team25-26/Vaishvee Gandhi.jpg";
@@ -78,86 +78,229 @@ const TeamData = {
   "2025-26": {
     faculty: {
       principal: [
-        { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, linkedin: "" },
+        {
+          name: "Dr. Hari Vasudevan",
+          position: "Principal",
+          image: HariVasudevan,
+          linkedin: "",
+        },
       ],
       "Program Officers": [
-        { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, linkedin: "" },
-        { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, linkedin: "" },
-        { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, linkedin: "" },
+        {
+          name: "Prof. Alisha Banz",
+          position: "Program Officer",
+          image: AlishaBanz,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Rahul Taware",
+          position: "Program Officer",
+          image: RahulTaware,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Vyankatesh Bagal",
+          position: "Program Officer",
+          image: VyankateshBagal,
+          linkedin: "",
+        },
       ],
     },
     upperCore: {
       chairperson: [
-        { name: "Dhvanil Shah", position: "Chairperson", image: DhvanilShah, linkedin: "" },
+        {
+          name: "Dhvanil Shah",
+          position: "Chairperson",
+          image: DhvanilShah,
+          linkedin: "https://www.linkedin.com/in/dhvanil-shah-79352028b/",
+        },
       ],
       "vice Chairpersons": [
-        { name: "Zeel Bhadra", position: "Vice Chairperson", image: ZeelBhadra, linkedin: "" },
-        { name: "Vaishvee Gandhi", position: "Vice Chairperson", image: VaishveeGandhi, linkedin: "" },
+        {
+          name: "Zeel Bhadra",
+          position: "Vice Chairperson",
+          image: ZeelBhadra,
+          linkedin: "https://www.linkedin.com/in/zeel-bhadra-004370265/",
+        },
+        {
+          name: "Vaishvee Gandhi",
+          position: "Vice Chairperson",
+          image: VaishveeGandhi,
+          linkedin: "https://www.linkedin.com/in/vaishvee-gandhi-761267290/",
+        },
       ],
       secretary: [
-        { name: "Manav Bhansali", position: "Secretary", image: ManavBhansali, linkedin: "" },
+        {
+          name: "Manav Bhansali",
+          position: "Secretary",
+          image: ManavBhansali,
+          linkedin: "",
+        },
       ],
       "joint Secretary": [
-        { name: "Jaineel Pandya", position: "Joint Secretary", image: JaineelPandya, linkedin: "" },
+        {
+          name: "Jaineel Pandya",
+          position: "Joint Secretary",
+          image: JaineelPandya,
+          linkedin: "https://www.linkedin.com/in/jaineel-pandya-3a0982278/",
+        },
       ],
       treasurer: [
-        { name: "Krish Khambhadiya", position: "Treasurer", image: KrishKhambhadiya, linkedin: "" },
+        {
+          name: "Krish Khambhadiya",
+          position: "Treasurer",
+          image: KrishKhambhadiya,
+          linkedin: "https://www.linkedin.com/in/krish-khambhadiya-334419289/",
+        },
       ],
       "joint Treasurer": [
-        { name: "Avumm Dedhiaa", position: "Joint Treasurer", image: AvummDedhiaa, linkedin: "" },
+        {
+          name: "Avumm Dedhiaa",
+          position: "Joint Treasurer",
+          image: AvummDedhiaa,
+          linkedin: "https://www.linkedin.com/in/avumm-dedhiaa-7a8609326/",
+        },
       ],
     },
-    leader:{
+    leader: {
       "": [
-        { name: "Swayam Shah", position: "Student Leader", image: SwayamShah, linkedin: "" },
-        { name: "Disha Gaglani", position: "Student Leader", image: DishaGaglani, linkedin: "" },
-      ]
+        {
+          name: "Swayam Shah",
+          position: "Student Leader",
+          image: SwayamShah,
+          linkedin: "https://www.linkedin.com/in/swayam-shah-088b9b289/",
+        },
+        {
+          name: "Disha Gaglani",
+          position: "Student Leader",
+          image: DishaGaglani,
+          linkedin: "https://www.linkedin.com/in/disha-gaglani-258894289/",
+        },
+      ],
     },
     heads: {
       departments: [
         {
           name: "Publicity",
           members: [
-            { name: "Dhvani Shah", position: "Head of Publicity", image: DhvaniShah, linkedin: "" },
-            { name: "Pratyaksha Khamkar", position: "Head of Publicity", image: PratyakshaKhamkar, linkedin: "" },
-            { name: "Arya Shah", position: "Head of Publicity", image: AryaShah, linkedin: "" },
+            {
+              name: "Dhvani Shah",
+              position: "Head of Publicity",
+              image: DhvaniShah,
+              linkedin: "https://www.linkedin.com/in/dhvani-shah12/",
+            },
+            {
+              name: "Pratyaksha Khamkar",
+              position: "Head of Publicity",
+              image: PratyakshaKhamkar,
+              linkedin: "",
+            },
+            {
+              name: "Arya Shah",
+              position: "Head of Publicity",
+              image: AryaShah,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Technical",
           members: [
-            { name: "Tanish Shah", position: "Head of Technical", image: TanishShah, linkedin: "" },
-            { name: "Yash Manek", position: "Head of Technical", image: YashManek, linkedin: "" },
+            {
+              name: "Tanish Shah",
+              position: "Head of Technical",
+              image: TanishShah,
+              linkedin: "https://www.linkedin.com/in/tanish-shah-/",
+            },
+            {
+              name: "Yash Manek",
+              position: "Head of Technical",
+              image: YashManek,
+              linkedin: "https://www.linkedin.com/in/yash-manek-/",
+            },
           ],
         },
         {
           name: "Events",
           members: [
-            { name: "Shrawani Jagtap", position: "Head of Events", image: ShrawaniJagtap, linkedin: "" },
-            { name: "Mihir Sanghvi", position: "Head of Events", image: MihirSanghvi, linkedin: "" },
-            { name: "Harsh Shah", position: "Head of Events", image: HarshShah, linkedin: "" },
+            {
+              name: "Shrawani Jagtap",
+              position: "Head of Events",
+              image: ShrawaniJagtap,
+              linkedin:
+                "https://www.linkedin.com/in/shrawani-jagtap-947772353/",
+            },
+            {
+              name: "Mihir Sanghvi",
+              position: "Head of Events",
+              image: MihirSanghvi,
+              linkedin: "https://www.linkedin.com/in/mihirsanghvi23/",
+            },
+            {
+              name: "Harsh Shah",
+              position: "Head of Events",
+              image: HarshShah,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Creatives",
           members: [
-            { name: "Diya Mehtalia", position: "Head of Creatives", image: DiyaMehtalia, linkedin: "" },
-            { name: "Dhairvi Sangani", position: "Head of Creatives", image: DhairviSangani, linkedin: "" },
+            {
+              name: "Diya Mehtalia",
+              position: "Head of Creatives",
+              image: DiyaMehtalia,
+              linkedin: "https://www.linkedin.com/in/diya-mehtalia-aa23352bb/",
+            },
+            {
+              name: "Dhairvi Sangani",
+              position: "Head of Creatives",
+              image: DhairviSangani,
+              linkedin:
+                "https://www.linkedin.com/in/dhairvi-sangani-3668b4290/",
+            },
           ],
         },
         {
           name: "Social Media",
           members: [
-            { name: "Aaryan Khanna", position: "Head of Social Media", image: AaryanKhanna, linkedin: "" },
-            { name: "Aayush Trada", position: "Head of Social Media", image: AayushTrada, linkedin: "" },
+            {
+              name: "Aaryan Khanna",
+              position: "Head of Social Media",
+              image: AaryanKhanna,
+              linkedin: "https://www.linkedin.com/in/aaryan-khanna-263458313/",
+            },
+            {
+              name: "Aayush Trada",
+              position: "Head of Social Media",
+              image: AayushTrada,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Editorial",
           members: [
-            { name: "Soumya Gala", position: "Head of Editorial", image: SoumyaGala, linkedin: "" },
-            { name: "Mukti Bhavsar", position: "Head of Editorial", image: MuktiBhavsar, linkedin: "" },
-            { name: "Kaustubh Pansania", position: "Head of Editorial", image: KaustubhPansania, linkedin: "" },
+            {
+              name: "Soumya Gala",
+              position: "Head of Editorial",
+              image: SoumyaGala,
+              linkedin: "https://www.linkedin.com/in/soumyagala/",
+            },
+            {
+              name: "Mukti Bhavsar",
+              position: "Head of Editorial",
+              image: MuktiBhavsar,
+              linkedin: "https://www.linkedin.com/in/mukti-bhavsar-7502702b7/",
+            },
+            {
+              name: "Kaustubh Pansania",
+              position: "Head of Editorial",
+              image: KaustubhPansania,
+              linkedin:
+                "https://www.linkedin.com/in/kaustubh-pansania-8b3b21323/",
+            },
           ],
         },
       ],
@@ -166,35 +309,100 @@ const TeamData = {
   "2024-25": {
     faculty: {
       principal: [
-        { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, linkedin: "" },
+        {
+          name: "Dr. Hari Vasudevan",
+          position: "Principal",
+          image: HariVasudevan,
+          linkedin: "",
+        },
       ],
       "Program Officers": [
-        { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, linkedin: "" },
-        { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, linkedin: "" },
-        { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, linkedin: "" },
+        {
+          name: "Prof. Alisha Banz",
+          position: "Program Officer",
+          image: AlishaBanz,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Rahul Taware",
+          position: "Program Officer",
+          image: RahulTaware,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Vyankatesh Bagal",
+          position: "Program Officer",
+          image: VyankateshBagal,
+          linkedin: "",
+        },
       ],
     },
     upperCore: {
       chairperson: [
-        { name: "Dev Popat", position: "Chairperson", image: DevPopat, linkedin: "" },
+        {
+          name: "Dev Popat",
+          position: "Chairperson",
+          image: DevPopat,
+          linkedin: "",
+        },
       ],
       "vice Chairpersons": [
-        { name: "Shashank Naik", position: "Vice Chairperson", image: ShashankNaik, linkedin: "" },
-        { name: "Parna Mishra", position: "Vice Chairperson", image: ParnaMishra, linkedin: "" },
+        {
+          name: "Shashank Naik",
+          position: "Vice Chairperson",
+          image: ShashankNaik,
+          linkedin: "",
+        },
+        {
+          name: "Parna Mishra",
+          position: "Vice Chairperson",
+          image: ParnaMishra,
+          linkedin: "",
+        },
       ],
       secretary: [
-        { name: "Rushabh Mehta", position: "Secretary", image: RushabhMehta, linkedin: "" },
+        {
+          name: "Rushabh Mehta",
+          position: "Secretary",
+          image: RushabhMehta,
+          linkedin: "",
+        },
       ],
       "joint Secretaries": [
-        { name: "Yash Dalvi", position: "Joint Secretary", image: YashDalvi, linkedin: "" },
-        { name: "Bhavy Shah", position: "Joint Secretary", image: BhavyShah, linkedin: "" },
+        {
+          name: "Yash Dalvi",
+          position: "Joint Secretary",
+          image: YashDalvi,
+          linkedin: "",
+        },
+        {
+          name: "Bhavy Shah",
+          position: "Joint Secretary",
+          image: BhavyShah,
+          linkedin: "",
+        },
       ],
       treasurer: [
-        { name: "Cleon Lopes", position: "Treasurer", image: CleonLopes, linkedin: "" },
+        {
+          name: "Cleon Lopes",
+          position: "Treasurer",
+          image: CleonLopes,
+          linkedin: "",
+        },
       ],
       "joint Treasurers": [
-        { name: "Archi Patel", position: "Joint Treasurer", image: ArchiPatel, linkedin: "" },
-        { name: "Manit Rathod", position: "Joint Treasurer", image: ManitRathod, linkedin: "" },
+        {
+          name: "Archi Patel",
+          position: "Joint Treasurer",
+          image: ArchiPatel,
+          linkedin: "",
+        },
+        {
+          name: "Manit Rathod",
+          position: "Joint Treasurer",
+          image: ManitRathod,
+          linkedin: "",
+        },
       ],
     },
     heads: {
@@ -202,48 +410,133 @@ const TeamData = {
         {
           name: "Publicity",
           members: [
-            { name: "Umang Duwani", position: "Head of Publicity", image: UmangDuwani, linkedin: "" },
-            { name: "Agam Kamdar", position: "Head of Publicity", image: AgamKamdar, linkedin: "" },
-            { name: "Neet Jain", position: "Head of Publicity", image: NeetJain, linkedin: "" },
-            { name: "Jaiwin Mehta", position: "Head of Publicity", image: JaiwinMehta, linkedin: "" },
+            {
+              name: "Umang Duwani",
+              position: "Head of Publicity",
+              image: UmangDuwani,
+              linkedin: "",
+            },
+            {
+              name: "Agam Kamdar",
+              position: "Head of Publicity",
+              image: AgamKamdar,
+              linkedin: "",
+            },
+            {
+              name: "Neet Jain",
+              position: "Head of Publicity",
+              image: NeetJain,
+              linkedin: "",
+            },
+            {
+              name: "Jaiwin Mehta",
+              position: "Head of Publicity",
+              image: JaiwinMehta,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Technical",
           members: [
-            { name: "Ansh Shah", position: "Head of Technical", image: AnshShah, linkedin: "" },
+            {
+              name: "Ansh Shah",
+              position: "Head of Technical",
+              image: AnshShah,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Events",
           members: [
-            { name: "Shrirang Deshmukh", position: "Head of Events", image: ShrirangDeshmukh, linkedin: "" },
-            { name: "Dev Shah", position: "Head of Events", image: DevShah, linkedin: "" },
-            { name: "Mahek Sureja", position: "Head of Events", image: MahekSureja, linkedin: "" },
-            { name: "Jheel Patel", position: "Head of Events", image: JheelPatel, linkedin: "" },
+            {
+              name: "Shrirang Deshmukh",
+              position: "Head of Events",
+              image: ShrirangDeshmukh,
+              linkedin: "",
+            },
+            {
+              name: "Dev Shah",
+              position: "Head of Events",
+              image: DevShah,
+              linkedin: "",
+            },
+            {
+              name: "Mahek Sureja",
+              position: "Head of Events",
+              image: MahekSureja,
+              linkedin: "",
+            },
+            {
+              name: "Jheel Patel",
+              position: "Head of Events",
+              image: JheelPatel,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Creatives",
           members: [
-            { name: "Asmi Savla", position: "Head of Creatives", image: AsmiSavla, linkedin: "" },
-            { name: "Harsh Keniya", position: "Head of Creatives", image: HarshKeniya, linkedin: "" },
+            {
+              name: "Asmi Savla",
+              position: "Head of Creatives",
+              image: AsmiSavla,
+              linkedin: "",
+            },
+            {
+              name: "Harsh Keniya",
+              position: "Head of Creatives",
+              image: HarshKeniya,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Social Media",
           members: [
-            { name: "Asvi Shah", position: "Head of Social Media", image: AsviShah, linkedin: "" },
-            { name: "Deep Doshi", position: "Head of Social Media", image: DeepDoshi, linkedin: "" },
+            {
+              name: "Asvi Shah",
+              position: "Head of Social Media",
+              image: AsviShah,
+              linkedin: "",
+            },
+            {
+              name: "Deep Doshi",
+              position: "Head of Social Media",
+              image: DeepDoshi,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Editorial",
           members: [
-            { name: "Shriya Kela", position: "Head of Editorial", image: ShriyaKela, linkedin: "" },
-            { name: "Diyan Mehta", position: "Head of Editorial", image: DiyanMehta, linkedin: "" },
-            { name: "Hitanshu Shah", position: "Head of Editorial", image: HitanshuShah, linkedin: "" },
-            { name: "Dhruvi Shah", position: "Head of Editorial", image: DhruviShah, linkedin: "" },
+            {
+              name: "Shriya Kela",
+              position: "Head of Editorial",
+              image: ShriyaKela,
+              linkedin: "",
+            },
+            {
+              name: "Diyan Mehta",
+              position: "Head of Editorial",
+              image: DiyanMehta,
+              linkedin: "",
+            },
+            {
+              name: "Hitanshu Shah",
+              position: "Head of Editorial",
+              image: HitanshuShah,
+              linkedin: "",
+            },
+            {
+              name: "Dhruvi Shah",
+              position: "Head of Editorial",
+              image: DhruviShah,
+              linkedin: "",
+            },
           ],
         },
       ],
@@ -252,27 +545,72 @@ const TeamData = {
   "2020-21": {
     faculty: {
       principal: [
-        { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, linkedin: "" },
+        {
+          name: "Dr. Hari Vasudevan",
+          position: "Principal",
+          image: HariVasudevan,
+          linkedin: "",
+        },
       ],
       "Program Officers": [
-        { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, linkedin: "" },
-        { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, linkedin: "" },
-        { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, linkedin: "" },
+        {
+          name: "Prof. Alisha Banz",
+          position: "Program Officer",
+          image: AlishaBanz,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Rahul Taware",
+          position: "Program Officer",
+          image: RahulTaware,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Vyankatesh Bagal",
+          position: "Program Officer",
+          image: VyankateshBagal,
+          linkedin: "",
+        },
       ],
     },
     upperCore: {
       chairperson: [
-        { name: "Tanushree Saraf", position: "Chairperson", image: TanushreeSaraf, linkedin: "" },
+        {
+          name: "Tanushree Saraf",
+          position: "Chairperson",
+          image: TanushreeSaraf,
+          linkedin: "",
+        },
       ],
       "vice Chairpersons": [
-        { name: "Ahan Dalia", position: "Vice Chairperson", image: AhanDalia, linkedin: "" },
-        { name: "Tanushree Saraf", position: "Vice Chairperson", image: TanushreeSaraf, linkedin: "" },
+        {
+          name: "Ahan Dalia",
+          position: "Vice Chairperson",
+          image: AhanDalia,
+          linkedin: "",
+        },
+        {
+          name: "Tanushree Saraf",
+          position: "Vice Chairperson",
+          image: TanushreeSaraf,
+          linkedin: "",
+        },
       ],
       secretary: [
-        { name: "Labdhi Shah", position: "Secretary", image: LabdhiShah, linkedin: "" },
+        {
+          name: "Labdhi Shah",
+          position: "Secretary",
+          image: LabdhiShah,
+          linkedin: "",
+        },
       ],
       "joint Secretaries": [
-        { name: "Shailee Gala", position: "Joint Secretary", image: ShaileeGala, linkedin: "" },
+        {
+          name: "Shailee Gala",
+          position: "Joint Secretary",
+          image: ShaileeGala,
+          linkedin: "",
+        },
       ],
     },
     heads: {
@@ -280,7 +618,12 @@ const TeamData = {
         {
           name: "Technical",
           members: [
-            { name: "Shubh Padechia", position: "Head of Technical", image: ShubhPadechia, linkedin: "" },
+            {
+              name: "Shubh Padechia",
+              position: "Head of Technical",
+              image: ShubhPadechia,
+              linkedin: "",
+            },
           ],
         },
       ],
@@ -289,35 +632,100 @@ const TeamData = {
   "2019-20": {
     faculty: {
       principal: [
-        { name: "Dr. Hari Vasudevan", position: "Principal", image: HariVasudevan, linkedin: "" },
+        {
+          name: "Dr. Hari Vasudevan",
+          position: "Principal",
+          image: HariVasudevan,
+          linkedin: "",
+        },
       ],
       "Program Officers": [
-        { name: "Prof. Alisha Banz", position: "Program Officer", image: AlishaBanz, linkedin: "" },
-        { name: "Prof. Rahul Taware", position: "Program Officer", image: RahulTaware, linkedin: "" },
-        { name: "Prof. Vyankatesh Bagal", position: "Program Officer", image: VyankateshBagal, linkedin: "" },
+        {
+          name: "Prof. Alisha Banz",
+          position: "Program Officer",
+          image: AlishaBanz,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Rahul Taware",
+          position: "Program Officer",
+          image: RahulTaware,
+          linkedin: "",
+        },
+        {
+          name: "Prof. Vyankatesh Bagal",
+          position: "Program Officer",
+          image: VyankateshBagal,
+          linkedin: "",
+        },
       ],
     },
     upperCore: {
       chairperson: [
-        { name: "Nilay Shah", position: "Chairperson", image: NilayShah, linkedin: "" },
-        { name: "Ritvi Shetty", position: "Co-Chairperson", image: RitviShetty, linkedin: "" },
+        {
+          name: "Nilay Shah",
+          position: "Chairperson",
+          image: NilayShah,
+          linkedin: "",
+        },
+        {
+          name: "Ritvi Shetty",
+          position: "Co-Chairperson",
+          image: RitviShetty,
+          linkedin: "",
+        },
       ],
       "vice Chairpersons": [
-        { name: "Tanaya Parab", position: "Vice Chairperson", image: TanayaParab, linkedin: "" },
-        { name: "Vishwa Mehta", position: "Vice Chairperson", image: VishwaMehta, linkedin: "" },
+        {
+          name: "Tanaya Parab",
+          position: "Vice Chairperson",
+          image: TanayaParab,
+          linkedin: "",
+        },
+        {
+          name: "Vishwa Mehta",
+          position: "Vice Chairperson",
+          image: VishwaMehta,
+          linkedin: "",
+        },
       ],
       secretary: [
-        { name: "Maitri Shah", position: "Secretary", image: MaitriShah, linkedin: "" },
+        {
+          name: "Maitri Shah",
+          position: "Secretary",
+          image: MaitriShah,
+          linkedin: "",
+        },
       ],
       "joint Secretaries": [
-        { name: "Jignesh Thakur", position: "Joint Secretary", image: JigneshThakur, linkedin: "" },
-        { name: "Nidhi Joshi", position: "Joint Secretary", image: NidhiJoshi, linkedin: "" },
+        {
+          name: "Jignesh Thakur",
+          position: "Joint Secretary",
+          image: JigneshThakur,
+          linkedin: "",
+        },
+        {
+          name: "Nidhi Joshi",
+          position: "Joint Secretary",
+          image: NidhiJoshi,
+          linkedin: "",
+        },
       ],
       treasurer: [
-        { name: "Jignesh Thakur", position: "Treasurer", image: JigneshThakur, linkedin: "" },
+        {
+          name: "Jignesh Thakur",
+          position: "Treasurer",
+          image: JigneshThakur,
+          linkedin: "",
+        },
       ],
       "joint Treasurers": [
-        { name: "Maitri Shah", position: "Joint Treasurer", image: MaitriShah, linkedin: "" },
+        {
+          name: "Maitri Shah",
+          position: "Joint Treasurer",
+          image: MaitriShah,
+          linkedin: "",
+        },
       ],
     },
     heads: {
@@ -325,18 +733,28 @@ const TeamData = {
         {
           name: "Creatives",
           members: [
-            { name: "Riya Kothari", position: "Head of Creatives", image: RiyaKothari, linkedin: "" },
+            {
+              name: "Riya Kothari",
+              position: "Head of Creatives",
+              image: RiyaKothari,
+              linkedin: "",
+            },
           ],
         },
         {
           name: "Technical",
           members: [
-            { name: "Ritik Shah", position: "Head of Technical", image: RitikShah, linkedin: "" },
+            {
+              name: "Ritik Shah",
+              position: "Head of Technical",
+              image: RitikShah,
+              linkedin: "",
+            },
           ],
         },
       ],
     },
-  }
-}
+  },
+};
 
 export default TeamData;
