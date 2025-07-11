@@ -32,6 +32,7 @@ const announcementSchema = new mongoose.Schema(
     date: {
       type: Date,
       default: Date.now,
+      index: true,
     },
     isNew: {
       type: Boolean,
@@ -45,9 +46,14 @@ const announcementSchema = new mongoose.Schema(
 // Clean up fields during save
 announcementSchema.pre("save", function (next) {
   if (this.typeOfContent === "text") {
-    this.link = undefined; // Clear link for text type
+    this.pdfLink = undefined;
+    this.urlLink = undefined;
   } else if (this.typeOfContent === "pdf") {
-    this.content = undefined; // Clear content for pdf type
+    this.content = undefined;
+    this.urlLink = undefined;
+  } else if (this.typeOfContent === "link") {
+    this.content = undefined;
+    this.pdfLink = undefined;
   }
   next();
 });
