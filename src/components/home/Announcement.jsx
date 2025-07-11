@@ -63,7 +63,6 @@ const Announcement = () => {
             return { ...event, formattedDate: "Date to be announced" };
           }
         });
-        console.log(formattedEvents);
         setUpcomingEventsData(formattedEvents);
       } catch (error) {
         console.error(error.message);
@@ -132,8 +131,8 @@ const Announcement = () => {
                             {announcement.title}
                             </a>
                         ) : (<>
-                        <p className="font-medium` text-gray-800">{announcement.title}</p>
-                        <p className="font-normal text-gray-800">{announcement.content}</p>
+                        <p className="font-medium text-gray-800">{announcement.title}</p>
+                        <p className="font-normal text-gray-800 leading-relaxed  whitespace-pre-line"                        >{announcement.content}</p>
                           </>
                         )}
                         
