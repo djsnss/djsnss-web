@@ -10,7 +10,7 @@ import Loader from "./components/Loaders/CustomLoader2";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import ChatBot from "./components/ChatBot.jsx";
+import Bot from "./components/Bot";
 import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
@@ -56,7 +56,7 @@ const App = () => {
       {/* Scroll to top and Scroll tracking components */}
       <ScrollTT />
       <ScrollToTop />
-      <ChatBot />
+      <Bot />
       <Toaster position="top-right" reverseOrder={false} />
 
       <div className="justify-start min-h-screen w-screen bg-white">

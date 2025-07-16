@@ -4,7 +4,7 @@ import { RiRobot3Line } from "react-icons/ri";
 import { IoMdSend } from "react-icons/io";
 import Logo from "../assets/DJSNSSLogo.png"; 
 
-const ChatBot = () => {
+const Bot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     { sender: "bot", text: "Welcome to Chatbot, How can I assist you?" }
@@ -167,4 +167,4 @@ const ChatBot = () => {
   );
 };
 
-export default ChatBot;
+export default Bot;
