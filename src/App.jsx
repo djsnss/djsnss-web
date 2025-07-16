@@ -26,7 +26,8 @@ const CheckHoursNew = React.lazy(() => import("./pages/volunteer/CheckHoursNew")
 const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
-const TimelineComponent = React.lazy(() => import("./pages/Timeline"));
+// const TimelineComponent = React.lazy(() => import("./pages/Timeline"));
+const TimelineTour = React.lazy(() => import("./pages/TimelineModel/TimelineTour"));
 const AboutUs = React.lazy(() => import("./pages/AboutUs"));
 const Calendar = React.lazy(() => import("./pages/calendar/calendar"));
 const EventDetails = React.lazy(() => import("./pages/EventDetails"));
@@ -83,7 +84,8 @@ const App = () => {
               <Route path="/volunteer/volunteer-policy" element={<VolunteerPolicy />} />
               <Route path="/events" element={<Events />} />
               <Route path="/volunteer/volunteer-registration" element={<VolunteerRegistration />} />
-              <Route path="/timeline" element={<TimelineComponent />} />
+              {/* <Route path="/timeline" element={<TimelineComponent />} /> */}
+              <Route path="/timeline-tour" element={<TimelineTour />} />
               <Route path="/technical-project" element={<TechnicalProject />} />
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />

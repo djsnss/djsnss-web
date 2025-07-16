@@ -85,7 +85,8 @@ const Navbar = () => {
       title: "Events",
       subLinks: [
         { title: "Events", path: "/events" },
-        { title: "Timeline", path: "/timeline" },
+        // { title: "Timeline", path: "/timeline" },
+        { title: "Timeline Tour", path: "/timeline-tour" },
         { title: "Technical Project", path: "/technical-project" },
         { title: "Camp", path: "/nss-camp" },
         { title: "Grain-A-Thon", path: "/grain-a-thon" },
