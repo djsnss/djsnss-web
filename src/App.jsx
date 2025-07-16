@@ -10,7 +10,7 @@ import Loader from "./components/Loaders/CustomLoader2";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
-import ChatBot from "./components/ChatBot";
+import ChatBot from "./components/ChatBot.jsx";
 import ScrollTT from "./components/ScrollTT";
 import { propsData } from "./data/dynamicPageData"; // Import data
 import DynamicPage from "./pages/ThemedPages"; // Import DynamicPage
