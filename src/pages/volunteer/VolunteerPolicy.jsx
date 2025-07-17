@@ -3,12 +3,12 @@ import { motion } from "framer-motion";
 import PolicyImg from "../../assets/policy.png"; 
 
 const sectionColors = [
-  "#a2b9d8", 
-  "#387fa8", 
-  "#cce7ff", 
-  "#003b5c", 
   "#003366", 
-  "#005a8e", 
+  "#387fa8", 
+  "#387fa8", 
+  "#003366", 
+  "#003366", 
+  "#387fa8", 
 ];
 
 const volunteerPolicy = () => {

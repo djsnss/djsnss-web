@@ -18,7 +18,7 @@ const TeamCard = ({ name, position, image, linkedin }) => {
           className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20 flex justify-center mt-2">
           <h3 className="text-xs sm:text-lg font-bold">{name}</h3>
           {linkedin && (
-            <a href={`https://{linkedin}`} target="_blank" rel="noopener">
+            <a href={`${linkedin}`} target="_blank" rel="noopener">
               <FaLinkedin className="text-2xl text-white ml-2" />
             </a>
           )}

@@ -66,10 +66,10 @@ const Features = () => {
               ></div>
 
               {/* Content with hover effect for background */}
-              <div className="relative z-10 text-center text-slate-800 group-hover:bg-white group-hover:bg-opacity-50 p-5 transition duration-500">
+              <div className="relative z-10 text-center text-slate-800 group-hover:bg-white group-hover:bg-opacity-80 p-5 transition duration-500">
                 <h2 className="text-2xl font-bold mb-4">{feature.title}</h2>
                 <div className="w-full mx-auto border-slate-800 mb-2 border-b-4"></div>
-                <p className="mb-1">{feature.description}</p>
+                <p className="mb-1 text-lg">{feature.description}</p>
                 <Link
                   to={feature.link}
                   className="hover:text-blue-500 font-semibold"

@@ -9,7 +9,7 @@ import './ExhibitWalkthrough.css';
 import { largeEventsData } from '../../data/timelineData';
 
 // Create navigation points from large events data
-const NAVIGATION_POINTS = largeEventsData.map((event, index) => {
+const NAVIGATION_POINTS = largeEventsData.slice().reverse().map((event, index) => {
   // Calculate positions in a circular arrangement
   const radius = 21;
   const angle = (index / largeEventsData.length) * Math.PI * 2;
@@ -352,7 +352,7 @@ function EventDisplay({ event, position, rotation, onClick }) {
     <group position={position} rotation={rotation} onClick={onClick}>
       {/* Main image display - increased size */}
       <mesh position={[0, 1, 0]}>
-        <planeGeometry args={[event.id === 0 ? 6 : 8, 4]} />
+        <planeGeometry args={[event.id === 0 ? 6 : 8,event.id === 0 ? 4 : 5]} />
         <meshBasicMaterial map={texture} transparent={false} />
       </mesh>
       
@@ -481,28 +481,76 @@ const ExhibitWalkthrough = () => {
 
     const controls = controlsRef.current;
     const camera = controls.object;
-
-    setCurrentPointIndex(NAVIGATION_POINTS.findIndex(p => p.id === point.id));
-    const angle = Math.atan2(point.position[0], point.position[2]);
-    const viewDistance = isMobile? 10: 8; // Distance from the image to view from
     
-    const viewX = point.position[0] - Math.sin(angle) * viewDistance;
-    const viewZ = point.position[2] - Math.cos(angle) * viewDistance;
-
+    const newIndex = NAVIGATION_POINTS.findIndex(p => p.id === point.id);
+    const currentPoint = NAVIGATION_POINTS[currentPointIndex];
+    
+    // Calculate angles for circular movement
+    const currentAngle = Math.atan2(currentPoint.position[0], currentPoint.position[2]);
+    const targetAngle = Math.atan2(point.position[0], point.position[2]);
+    
+    // Handle angle wrapping for smooth circular transition
+    let angleDiff = targetAngle - currentAngle;
+    if (angleDiff > Math.PI) angleDiff -= 2 * Math.PI;
+    if (angleDiff < -Math.PI) angleDiff += 2 * Math.PI;
+    
+    const viewDistance = isMobile ? 10 : 8;
+    
+    // Calculate intermediate positions for smooth circular arc
+    const steps = 30; // Reduced steps for more consistent timing
+    const positions = [];
+    
+    for (let i = 0; i <= steps; i++) {
+        const progress = i / steps;
+        const intermediateAngle = currentAngle + (angleDiff * progress);
+        
+        // Use the same radius as the points for circular movement
+        const radius = 21;
+        const circleX = Math.sin(intermediateAngle) * radius;
+        const circleZ = Math.cos(intermediateAngle) * radius;
+        
+        // Calculate camera position at this angle
+        const viewX = circleX - Math.sin(intermediateAngle) * viewDistance;
+        const viewZ = circleZ - Math.cos(intermediateAngle) * viewDistance;
+        
+        positions.push({ x: viewX, y: 1.6, z: viewZ });
+    }
+    
+    setCurrentPointIndex(newIndex);
+    
+    // Use a single smooth animation instead of multiple steps for uniform speed
+    const finalPosition = positions[positions.length - 1];
+    
     gsap.to(camera.position, {
-        x: viewX,
-        y: 1.6, // Eye level
-        z: viewZ,
-        duration: 1.5,
-        ease: 'power2.inOut',
+        x: finalPosition.x,
+        y: finalPosition.y,
+        z: finalPosition.z,
+        duration: 2.0, // Fixed duration for all movements
+        ease: 'power2.out', // Consistent easing for all movements
         onUpdate: () => {
-        // Look at the image
-        controls.target.set(
-            point.position[0], 
-            1, // Image center height
-            point.position[2]
-        );
-        controls.update();
+            // Calculate current progress for smooth target interpolation
+            const currentX = camera.position.x;
+            const currentZ = camera.position.z;
+            const startX = currentPoint.position[0] - Math.sin(currentAngle) * viewDistance;
+            const startZ = currentPoint.position[2] - Math.cos(currentAngle) * viewDistance;
+            
+            // Calculate progress based on distance traveled
+            const totalDistance = Math.sqrt(
+                Math.pow(finalPosition.x - startX, 2) + 
+                Math.pow(finalPosition.z - startZ, 2)
+            );
+            const currentDistance = Math.sqrt(
+                Math.pow(currentX - startX, 2) + 
+                Math.pow(currentZ - startZ, 2)
+            );
+            const progress = Math.min(currentDistance / totalDistance, 1);
+            
+            // Smoothly interpolate the target look-at position
+            const lookAtX = currentPoint.position[0] + (point.position[0] - currentPoint.position[0]) * progress;
+            const lookAtZ = currentPoint.position[2] + (point.position[2] - currentPoint.position[2]) * progress;
+            
+            controls.target.set(lookAtX, 1, lookAtZ);
+            controls.update();
         }
     });
 };
@@ -516,14 +564,16 @@ const ExhibitWalkthrough = () => {
   const navigatePrevious = () => {
     updateActivity();
     const prevIndex = (currentPointIndex - 1 + NAVIGATION_POINTS.length) % NAVIGATION_POINTS.length;
-    setCurrentPointIndex(prevIndex);
+    
+    // Use the same navigateTo function for consistency
     navigateTo(NAVIGATION_POINTS[prevIndex]);
   };
 
   const navigateNext = () => {
     updateActivity();
     const nextIndex = (currentPointIndex + 1) % NAVIGATION_POINTS.length;
-    setCurrentPointIndex(nextIndex);
+    
+    // Use the same navigateTo function for consistency
     navigateTo(NAVIGATION_POINTS[nextIndex]);
   };
   
@@ -541,7 +591,7 @@ const ExhibitWalkthrough = () => {
       
       // If inactive for more than 8 seconds, navigate to next point
       if (inactiveTime > 8000 && controlsRef.current) {
-        navigateNext();
+        navigatePrevious();
       }
     };
     
@@ -570,12 +620,28 @@ const ExhibitWalkthrough = () => {
   useEffect(() => {
     // Wait for loading to complete and controls to be initialized
     if (!isLoading && controlsRef.current && NAVIGATION_POINTS.length > 0) {
-      // Navigate to the first navigation point
-      setTimeout(() => {
-        navigateTo(NAVIGATION_POINTS[0]);
-      }, 500); // Small delay to ensure everything is loaded
+      // Set initial camera position and target immediately without animation
+      const firstPoint = NAVIGATION_POINTS[0];
+      const controls = controlsRef.current;
+      const camera = controls.object;
+      
+      // Calculate proper initial position
+      const viewDistance = isMobile ? 10 : 8;
+      const angle = Math.atan2(firstPoint.position[0], firstPoint.position[2]);
+      const initialX = firstPoint.position[0] - Math.sin(angle) * viewDistance;
+      const initialZ = firstPoint.position[2] - Math.cos(angle) * viewDistance;
+      
+      // Set camera position immediately
+      camera.position.set(initialX, 1.6, initialZ);
+      
+      // Set camera target to look at the first exhibit
+      controls.target.set(firstPoint.position[0], 1, firstPoint.position[2]);
+      controls.update();
+      
+      // Update current point index
+      setCurrentPointIndex(0);
     }
-  }, [isLoading, controlsRef.current]); // Only run when loading completes and controls are available
+  }, [isLoading, controlsRef.current, isMobile]); // Add isMobile to dependencies
   
   return (
     <div className="exhibit-container">
@@ -679,7 +745,14 @@ const ExhibitWalkthrough = () => {
       <Canvas 
         shadows
         style={{ width: '100%', height: '100%' }}
-        camera={{ position: [0, 1, 12], fov: 60, rotation: [0, Math.PI, 0]}}
+        camera={{ 
+          position: [
+            NAVIGATION_POINTS[0].position[0] - Math.sin(Math.atan2(NAVIGATION_POINTS[0].position[0], NAVIGATION_POINTS[0].position[2])) * (isMobile ? 10 : 8), 
+            1.6, 
+            NAVIGATION_POINTS[0].position[2] - Math.cos(Math.atan2(NAVIGATION_POINTS[0].position[0], NAVIGATION_POINTS[0].position[2])) * (isMobile ? 10 : 8)
+          ], 
+          fov: 60 
+        }}
       >
         <Suspense fallback={null}>
           <MuseumModel setSceneRef={setSceneRef} navigateTo={navigateTo} />
@@ -692,10 +765,13 @@ const ExhibitWalkthrough = () => {
             shadow-mapSize-height={2048}
           />
           <Environment preset="sunset" />
+          {/* Add MovementControls component */}
+          <MovementControls controlsRef={controlsRef} scene={sceneRef} speed={0.1} />
         </Suspense>
         
         <OrbitControls 
           ref={controlsRef}
+          target={[NAVIGATION_POINTS[0].position[0], 1, NAVIGATION_POINTS[0].position[2]]} // Set initial target
           maxDistance={10}
           minDistance={1}
           enableZoom={true}

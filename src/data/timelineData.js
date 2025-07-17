@@ -13,13 +13,6 @@ import { GiTreehouse, GiWheat } from "react-icons/gi";
 
 export const largeEventsData = [
   {
-    id: 0,
-    title: "DJS NSS",
-    imageURL: Logo,
-    longDescription:
-      "DJS NSS, the NSS unit of Dwarkadas J. Sanghvi College of Engineering, started in 2005. Our mission is to foster the all-round development of society, addressing socio-economic problems and sustainability crises caused by global warming. We aim to transform individuals into resilient and capable citizens, encouraging both technical advancements and societal contributions.",
-  },
-  {
     id: 1,
     title: "NSS CAMP",
     description: "A camp to remember",
@@ -171,5 +164,12 @@ export const largeEventsData = [
     date: "15th Aug 2024",
     icon: FaFlag ,
     color: "#FFA500",
+  },
+  {
+    id: 0,
+    title: "DJS NSS",
+    imageURL: Logo,
+    longDescription:
+      "DJS NSS, the NSS unit of Dwarkadas J. Sanghvi College of Engineering, started in 2005. Our mission is to foster the all-round development of society, addressing socio-economic problems and sustainability crises caused by global warming. We aim to transform individuals into resilient and capable citizens, encouraging both technical advancements and societal contributions.",
   },
 ];

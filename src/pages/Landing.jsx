@@ -85,7 +85,7 @@ import { motion } from "framer-motion";
 import DJSLogo from "../assets/DJSLogo.png";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 import NSSLogo from "../assets/NSSLogo.png";
-import Background from "../assets/Events/TreePlantation.png";
+import Background from "../assets/Events/EducationDrive25.jpg";
 import About from "../components/home/About";
 import { useState, useEffect } from "react";
 import SocialSide from "./SocialSide";
@@ -149,7 +149,7 @@ const Landing = () => {
             transition={{ duration: 1.5 }}
           >
             <div className="w-full border-white my-5 border-b-4"></div>
-            FOR YOU, WITH YOU, ALWAYS!
+            NOT ME, BUT YOU!
           </motion.div>
         </div>
       </motion.div>
