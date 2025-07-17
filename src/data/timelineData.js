@@ -1,10 +1,10 @@
 import Logo from "../assets/DJSNSSLogo.jpg";
-import GrainAThon from "../assets/Events/grainathon/GrainAThon.png";
-import BorivaliTP from "../assets/Events/TreePlantation.png";
-import NSSCamp from "../assets/Events/NSSCamp.jpg";
+import GrainAThon from "../assets/Events/grainathon25/grainathon1.jpg";
+import BorivaliTP from "../assets/Events/TreePlantation25.jpg";
+import NSSCamp from "../assets/Events/camp25/camp2.jpeg";
 import AnnualCharity from "../assets/Events/AnnualCharity.png";
 import VoterRegistration from "../assets/Events/VoterRegistration.png";
-import BDD from "../assets/Events/bdd/BDD.jpg";
+import BDD from "../assets/Events/bdd25/bdd2.jpg";
 import StemCell from "../assets/Events/Stemcell.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
 import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
@@ -28,11 +28,11 @@ export const largeEventsData = [
     background: "bg-teal-400",
     imageURL: NSSCamp,
     longDescription:
-      "From January 26 to 31, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized an enriching camp at Dahanu, focusing on community service and personal growth. The camp kicked off with cleanliness drives, team-building activities, and creative tasks like poster making and wall painting, all fostering a spirit of teamwork and community engagement. Throughout the week, volunteers participated in impactful initiatives, including educational outreach, a medical camp, and environmental awareness drives. The installation of solar street lights highlighted the camp's commitment to sustainability. The camp concluded with cultural celebrations and a strong sense of accomplishment among participants, leaving a lasting impact on the community and volunteers alike.",
+      "From January 21 to 28, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized an enriching camp at Dahanu, focusing on community service and personal growth. The camp kicked off with cleanliness drives, team-building activities, and creative tasks like poster making and wall painting, all fostering a spirit of teamwork and community engagement. Throughout the week, volunteers participated in impactful initiatives, including educational outreach, a medical camp, and environmental awareness drives. The installation of solar street lights highlighted the camp's commitment to sustainability. The camp concluded with cultural celebrations and a strong sense of accomplishment among participants, leaving a lasting impact on the community and volunteers alike.",
     scale: "Large",
-    duration: "6 days",
+    duration: "7 days",
     location: "Dahanu",
-    date: "26th Jan - 31st Jan 2024",
+    date: "21st Jan - 28th Jan 2025",
     icon: FaFlag,
     color: "#4C9D8F",
   },
@@ -45,11 +45,11 @@ export const largeEventsData = [
     background: "bg-red-400",
     imageURL: BDD,
     longDescription:
-      "Set up for success: Blood Donation Drive On 14th February 2023, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a blood donation drive in collaboration with the Red Cross Society. The event, held at DJ Sanghvi College, aimed to raise awareness about the importance of blood donation and encourage students to contribute to this life-saving cause. The drive was a resounding success, with over 100 volunteers donating blood and many more participating in the event. The drive featured informative sessions on the benefits of blood donation, dispelling myths and misconceptions and inspiring participants to make a difference. The event showcased the power of collective action and community involvement in saving lives and promoting health and well-being. The enthusiasm and dedication of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to support public health and welfare.",
+      "Set up for success: Blood Donation Drive On 4th March 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a blood donation drive in collaboration with the Red Cross Society. The event, held at DJ Sanghvi College, aimed to raise awareness about the importance of blood donation and encourage students to contribute to this life-saving cause. The drive was a resounding success, with over 100 volunteers donating blood and many more participating in the event. The drive featured informative sessions on the benefits of blood donation, dispelling myths and misconceptions and inspiring participants to make a difference. The event showcased the power of collective action and community involvement in saving lives and promoting health and well-being. The enthusiasm and dedication of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to support public health and welfare.",
     scale: "Large",
     duration: "1 day",
     location: "DJ Sanghvi College",
-    date: "14th Feb 2024",
+    date: "4th March 2025",
     icon: FaHeart,
     color: "#D72638",
   },
@@ -62,11 +62,11 @@ export const largeEventsData = [
     background: "bg-yellow-400",
     imageURL: GrainAThon,
     longDescription:
-      "Scarcity to abundance: Grain-a-thon On 15th August 2023, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a Grain-a-thon, a food donation drive to support underprivileged communities. The event, held at DJ Sanghvi College, aimed to raise awareness about food insecurity and encourage students to contribute to this vital cause. The drive was a resounding success, with over 200 volunteers donating grains and other essential food items. The drive featured inspiring speeches, interactive sessions, and engaging activities that highlighted the importance of community service and collective action. The event showcased the power of empathy and compassion in addressing social challenges and fostering a culture of giving. The enthusiasm and generosity of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to support vulnerable communities and promote social justice.",
+      "Scarcity to abundance: Grain-a-thon On 17th - 18th October 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a Grain-a-thon, a food donation drive to support underprivileged communities. The event, held at DJ Sanghvi College, aimed to raise awareness about food insecurity and encourage students to contribute to this vital cause. The drive was a resounding success, with over 200 volunteers donating grains and other essential food items. The drive featured inspiring speeches, interactive sessions, and engaging activities that highlighted the importance of community service and collective action. The event showcased the power of empathy and compassion in addressing social challenges and fostering a culture of giving. The enthusiasm and generosity of all participants made the drive a memorable and impactful experience, setting the stage for future initiatives to support vulnerable communities and promote social justice.",
     scale: "Large",
     duration: "1 day",
     location: "DJ Sanghvi College",
-    date: "15th Aug 2024",
+    date: "17th Oct - 18th Oct 2024",
     icon: GiWheat,
     color: "#F4A261",
   },
@@ -79,11 +79,11 @@ export const largeEventsData = [
     background: "bg-blue-400",
     imageURL: BorivaliTP,
     longDescription:
-      "Tree Plantation Drive: 'Meri Mitti Mera Desh' On 9th August 2023, the NSS unit of Dwarkadas J. Sanghvi College of Engineering successfully organized a tree plantation drive at Veer Savarkar Udhyan, Borivali West. The event, themed 'Meri Mitti Mera Desh', aimed to foster environmental responsibility and raise awareness about the vital role of trees in combating climate change. Around 80 dedicated volunteers, including students and organizers, participated in planting over 110 saplings of native species, carefully chosen to enhance the local ecosystem. The drive began with inspiring speeches, and participants eagerly engaged in planting activities, showcasing their commitment to creating a greener future. The event highlighted the power of collective action and community involvement in environmental conservation. The enthusiasm and teamwork displayed by all contributed to the event's resounding success, marking a significant step toward a sustainable environment.",
+      "Tree Plantation Drive: On 28th June 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering successfully organized a tree plantation at Aarey Colony, Mumbai West.",
     scale: "Medium",
     duration: "1 day",
-    location: "Veer Savarkar Udhyan, Borivali West",
-    date: "9th Aug 2024",
+    location: "Aarey Colony, Mumbai",
+    date: "28th June 2025",
     icon: GiTreehouse,
     color: "#2E8B57",
   },
