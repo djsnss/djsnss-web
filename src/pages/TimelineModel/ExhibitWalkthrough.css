@@ -88,41 +88,10 @@
   }
 }
 
-/* Virtual joystick styles */
-.virtual-joystick {
-  position: absolute;
-  bottom: 100px;
-  left: 100px;
-  width: 100px;
-  height: 100px;
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  z-index: 20;
-  touch-action: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.joystick-knob {
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  touch-action: none;
-}
-
 /* Mobile responsive adjustments */
 @media (max-width: 768px) {
-  .virtual-joystick {
-    bottom: 40px;
-    left: 40px;
-  }
-  
   .back-button {
-    top: 15px;
+    top: 20px;
     left: 15px;
   }
   

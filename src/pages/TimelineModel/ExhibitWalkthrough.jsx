@@ -35,95 +35,7 @@ const NAVIGATION_POINTS = largeEventsData.map((event, index) => {
   };
 });
 
-// Virtual Joystick for Mobile
-const VirtualJoystick = ({ onMove }) => {
-  const joystickRef = useRef(null);
-  const knobRef = useRef(null);
-  const [active, setActive] = useState(false);
-  const [origin, setOrigin] = useState({ x: 0, y: 0 });
-  const [movement, setMovement] = useState({ x: 0, y: 0 });
-  
-  const handleStart = (e) => {
-    e.preventDefault();
-    const touch = e.touches ? e.touches[0] : e;
-    if (!joystickRef.current) return;
-    
-    const rect = joystickRef.current.getBoundingClientRect();
-    setOrigin({
-      x: rect.left + rect.width / 2,
-      y: rect.top + rect.height / 2
-    });
-    setActive(true);
-  };
-  
-  const handleMove = (e) => {
-    e.preventDefault();
-    if (!active || !knobRef.current) return;
-    
-    const touch = e.touches ? e.touches[0] : e;
-    const maxDistance = 40; // Maximum distance the joystick can move
-    
-    let dx = touch.clientX - origin.x;
-    let dy = touch.clientY - origin.y;
-    
-    // Normalize if distance is greater than maxDistance
-    const distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance > maxDistance) {
-      dx = (dx / distance) * maxDistance;
-      dy = (dy / distance) * maxDistance;
-    }
-    
-    // Update joystick position
-    knobRef.current.style.transform = `translate(${dx}px, ${dy}px)`;
-    
-    // Calculate movement values (-1 to 1)
-    const normalized = {
-      x: dx / maxDistance,
-      y: dy / maxDistance
-    };
-    setMovement(normalized);
-    
-    // Call the movement callback
-    onMove(normalized);
-  };
-  
-  const handleEnd = (e) => {
-    e.preventDefault();
-    if (!knobRef.current) return;
-    
-    // Reset joystick position
-    knobRef.current.style.transform = 'translate(0, 0)';
-    setActive(false);
-    setMovement({ x: 0, y: 0 });
-    onMove({ x: 0, y: 0 });
-  };
-  
-  useEffect(() => {
-    const knob = knobRef.current;
-    
-    if (!knob) return;
-    
-    knob.addEventListener('touchstart', handleStart);
-    window.addEventListener('touchmove', handleMove, { passive: false });
-    window.addEventListener('touchend', handleEnd);
-    
-    return () => {
-      knob.removeEventListener('touchstart', handleStart);
-      window.removeEventListener('touchmove', handleMove);
-      window.removeEventListener('touchend', handleEnd);
-    };
-  }, [active, origin]);
-  
-  return (
-    <div className="virtual-joystick" ref={joystickRef}>
-      <div 
-        className="joystick-knob" 
-        ref={knobRef}
-        onTouchStart={handleStart}
-      />
-    </div>
-  );
-};
+
 
 // Collision detection and movement logic
 function MovementControls({ controlsRef, scene, speed = 0.1 }) {
@@ -200,11 +112,6 @@ function MovementControls({ controlsRef, scene, speed = 0.1 }) {
       window.removeEventListener('keyup', handleKeyUp);
     };
   }, []);
-  
-  // Handle joystick movement for mobile
-  const handleJoystickMove = (data) => {
-    setJoystickMovement(data);
-  };
   
   // Check for collisions in a given direction
   const checkCollision = (position, direction) => {
@@ -373,17 +280,14 @@ const InfoPanel = styled.div`
   overflow-y: auto;
   
   @media (max-width: 768px) {
-    width: 80%;
+    width: 50%;
     top: auto;
-    bottom: 80px;
-    right: 50%;
+    bottom: 90px;
+    right: 30%;
     transform: translateX(50%);
-  }
-  
-  img {
-    width: 100%;
-    border-radius: 4px;
-    margin-bottom: 10px;
+    padding: 12px;
+    max-height: 50vh;
+    font-size: 0.95rem;
   }
   
   h3 {
@@ -403,6 +307,21 @@ const InfoPanel = styled.div`
     
     span {
       font-weight: bold;
+    }
+  }
+  
+  .view-more-button {
+    background-color: ${props => props.color || '#4C9D8F'};
+    transition: all 0.2s ease;
+    
+    &:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+    
+    @media (max-width: 768px) {
+      padding: 10px 0;
+      margin-top: 8px;
     }
   }
 `;
@@ -516,7 +435,10 @@ const ExhibitWalkthrough = () => {
   const [showControls, setShowControls] = useState(true);
   const [sceneRef, setSceneRef] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [joystickMovement, setJoystickMovement] = useState({ x: 0, y: 0 });
+  // Add state for tracking last activity time
+  const [lastActivityTime, setLastActivityTime] = useState(Date.now());
+  // Add state to control auto-navigation
+  const [autoNavigationEnabled, setAutoNavigationEnabled] = useState(true);
   const controlsRef = useRef(null);
   
   // Check if on mobile device
@@ -532,11 +454,6 @@ const ExhibitWalkthrough = () => {
       window.removeEventListener('resize', checkDevice);
     };
   }, []);
-  
-  // Handle joystick movement for mobile
-  const handleJoystickMove = (data) => {
-    setJoystickMovement(data);
-  };
   
   // Handle loading state
   useEffect(() => {
@@ -560,12 +477,14 @@ const ExhibitWalkthrough = () => {
   const navigateTo = (point) => {
     if (!controlsRef.current) return;
 
+    updateActivity(); // Update activity timestamp
+
     const controls = controlsRef.current;
     const camera = controls.object;
 
     setCurrentPointIndex(NAVIGATION_POINTS.findIndex(p => p.id === point.id));
     const angle = Math.atan2(point.position[0], point.position[2]);
-    const viewDistance = 6; // Distance from the image to view from
+    const viewDistance = isMobile? 10: 8; // Distance from the image to view from
     
     const viewX = point.position[0] - Math.sin(angle) * viewDistance;
     const viewZ = point.position[2] - Math.cos(angle) * viewDistance;
@@ -588,13 +507,21 @@ const ExhibitWalkthrough = () => {
     });
 };
 
+  // Update activity timestamp whenever user interacts
+  const updateActivity = () => {
+    setLastActivityTime(Date.now());
+  };
+
+  // Update navigatePrevious and navigateNext
   const navigatePrevious = () => {
+    updateActivity();
     const prevIndex = (currentPointIndex - 1 + NAVIGATION_POINTS.length) % NAVIGATION_POINTS.length;
     setCurrentPointIndex(prevIndex);
     navigateTo(NAVIGATION_POINTS[prevIndex]);
   };
 
   const navigateNext = () => {
+    updateActivity();
     const nextIndex = (currentPointIndex + 1) % NAVIGATION_POINTS.length;
     setCurrentPointIndex(nextIndex);
     navigateTo(NAVIGATION_POINTS[nextIndex]);
@@ -603,6 +530,41 @@ const ExhibitWalkthrough = () => {
   const handleBackClick = () => {
     navigate("/");
   };
+
+  // Auto-navigation timer effect
+  useEffect(() => {
+    if (!autoNavigationEnabled || isLoading) return;
+    
+    const checkInactivity = () => {
+      const currentTime = Date.now();
+      const inactiveTime = currentTime - lastActivityTime;
+      
+      // If inactive for more than 8 seconds, navigate to next point
+      if (inactiveTime > 8000 && controlsRef.current) {
+        navigateNext();
+      }
+    };
+    
+    const timer = setInterval(checkInactivity, 1000);
+    return () => clearInterval(timer);
+  }, [lastActivityTime, currentPointIndex, isLoading, autoNavigationEnabled]);
+
+  // Listen for user movement to reset inactivity timer
+  useEffect(() => {
+    const handleKeyDown = () => updateActivity();
+    const handleMouseMove = () => updateActivity();
+    const handleTouch = () => updateActivity();
+    
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchstart', handleTouch);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchstart', handleTouch);
+    };
+  }, []);
 
   // Add useEffect to navigate to first point on initial load
   useEffect(() => {
@@ -631,34 +593,25 @@ const ExhibitWalkthrough = () => {
       </button>
       
       {/* Controls Hint */}
-      {showControls && (
+      {showControls && !isMobile && (
         <ControlsHint>
           <strong>Movement Controls:</strong><br />
-          {isMobile ? (
-            <>Use the joystick in the bottom left corner<br />to move around the museum</>
-          ) : (
-            <>
               W - Move forward<br />
               S - Move backward<br />
               A - Strafe left<br />
               D - Strafe right<br />
               Mouse - Look around
-            </>
-          )}
         </ControlsHint>
       )}
       
-      {/* Virtual Joystick - Render outside Canvas */}
-      {isMobile && <VirtualJoystick onMove={handleJoystickMove} />}
-      
       {/* Arrow Navigation */}
       <NavigationContainer>
-        <ArrowButton onClick={navigatePrevious}>
+        <ArrowButton onClick={navigateNext}>
           <svg viewBox="0 0 24 24">
             <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z"/>
           </svg>
         </ArrowButton>
-        <ArrowButton onClick={navigateNext}>
+        <ArrowButton onClick={navigatePrevious}>
           <svg viewBox="0 0 24 24">
             <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z"/>
           </svg>
@@ -667,61 +620,61 @@ const ExhibitWalkthrough = () => {
 
       {/* Updated Info Panel */}
       <InfoPanel color={NAVIGATION_POINTS[currentPointIndex].color}>
-        {NAVIGATION_POINTS[currentPointIndex].id ===0?(
+        {NAVIGATION_POINTS[currentPointIndex].id === 0 ? (
             <>
                 <img 
                 src={NAVIGATION_POINTS[currentPointIndex].imageURL} 
                 alt={NAVIGATION_POINTS[currentPointIndex].name} 
-                className='h-40 w-full object-contain rounded-lg mb-4'
+                className='h-32 sm:h-40 w-full object-contain rounded-lg mb-2 sm:mb-4'
                 />
-                <h3>{NAVIGATION_POINTS[currentPointIndex].name}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold">
+                    {NAVIGATION_POINTS[currentPointIndex].name}
+                </h3>
             </>
-        ):(
+        ) : (
             <>
                 <img 
                 src={NAVIGATION_POINTS[currentPointIndex].imageURL} 
                 alt={NAVIGATION_POINTS[currentPointIndex].name} 
-                className='h-40 w-full object-cover rounded-lg mb-4'
+                className='h-32 sm:h-40 w-full object-cover rounded-lg mb-2 sm:mb-4'
                 />
-                <h3>{NAVIGATION_POINTS[currentPointIndex].id}. {NAVIGATION_POINTS[currentPointIndex].name}</h3>
+                <h3 className="text-lg sm:text-xl font-semibold">
+                    {NAVIGATION_POINTS[currentPointIndex].id}. {NAVIGATION_POINTS[currentPointIndex].name}
+                </h3>
             </>
         )}
-        <p>{NAVIGATION_POINTS[currentPointIndex].description}</p>
+        <p className="text-sm sm:text-base mb-2">{NAVIGATION_POINTS[currentPointIndex].description}</p>
         
-        <div className="event-details">
+        <div className="event-details mb-3">
             {NAVIGATION_POINTS[currentPointIndex].location && (
-              <p><span>Location:</span> {NAVIGATION_POINTS[currentPointIndex].location}</p>
+              <p className="text-sm sm:text-base my-1"><span className="font-bold">Location:</span> {NAVIGATION_POINTS[currentPointIndex].location}</p>
             )}
             {NAVIGATION_POINTS[currentPointIndex].date && (
-              <p><span>Date:</span> {NAVIGATION_POINTS[currentPointIndex].date}</p>
-            )}
-            {NAVIGATION_POINTS[currentPointIndex].scale && (
-              <p><span>Scale:</span> {NAVIGATION_POINTS[currentPointIndex].scale}</p>
-            )}
-            {NAVIGATION_POINTS[currentPointIndex].duration && (
-              <p><span>Duration:</span> {NAVIGATION_POINTS[currentPointIndex].duration}</p>
+              <p className="text-sm sm:text-base my-1"><span className="font-bold">Date:</span> {NAVIGATION_POINTS[currentPointIndex].date}</p>
             )}
         </div>
         
-        {NAVIGATION_POINTS[currentPointIndex].id ===0 ? (
-            <p className="long-description">
+        {NAVIGATION_POINTS[currentPointIndex].id === 0 ? (
+            <p className="long-description text-sm sm:text-base">
             {NAVIGATION_POINTS[currentPointIndex].longDescription}
             </p>
-        ):(
-            <p className="long-description">
-            {NAVIGATION_POINTS[currentPointIndex].longDescription.substring(0, 150)}...
+        ) : (
+            <p className="long-description text-sm sm:text-base">
+            {window.innerWidth <= 768 
+                ? NAVIGATION_POINTS[currentPointIndex].longDescription.substring(0, 150) + '...'
+                : NAVIGATION_POINTS[currentPointIndex].longDescription.substring(0, 200) + '...'}
             </p>
         )}
         
-        {NAVIGATION_POINTS[currentPointIndex].id !=0 && (
+        {NAVIGATION_POINTS[currentPointIndex].id !== 0 && (
             <button 
-            className="view-more-button"
+            className="view-more-button w-full py-3 mt-2 text-center text-white rounded-md font-semibold"
             onClick={() => navigate(`/eventdetails/${NAVIGATION_POINTS[currentPointIndex].slug}`)}
             >
             View Full Details
             </button>
         )}
-      </InfoPanel>
+    </InfoPanel>
 
       <Canvas 
         shadows
@@ -739,12 +692,6 @@ const ExhibitWalkthrough = () => {
             shadow-mapSize-height={2048}
           />
           <Environment preset="sunset" />
-          <MovementControls 
-            controlsRef={controlsRef} 
-            scene={sceneRef} 
-            joystickMovement={joystickMovement}
-            isMobile={isMobile}
-          />
         </Suspense>
         
         <OrbitControls 
