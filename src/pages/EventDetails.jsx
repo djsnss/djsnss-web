@@ -5,8 +5,10 @@ import { largeEventsData } from "../data/largeEvents";
 // Import other event data arrays
 import { universityEventsData } from "../data/universityEvents";
 import { TechnicalProjects } from "../data/technicalProjects";
+import { useState, useEffect } from "react";
+
 // Combine all event data arrays
-const allEventsData = [
+const staticEventsData = [
   ...largeEventsData,
   ...universityEventsData,
   ...localEventsData,
@@ -15,7 +17,92 @@ const allEventsData = [
 
 const EventDetails = () => {
   const { slug } = useParams();
-  const eventDetail = allEventsData.find((event) => event.slug === slug);
+  const [eventDetail, setEventDetail] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        setLoading(true);
+        const staticEvent = staticEventsData.find((event) => event.slug === slug);
+
+        if (staticEvent) {
+          setEventDetail(staticEvent);
+          setLoading(false);
+          return;
+        }
+
+        // If not found in static data, fetch from API
+        const [pastEventsResponse, upcomingEventsResponse] = await Promise.all([
+          fetch("https://djsnss-web.onrender.com/events/past-events"),
+          fetch("https://djsnss-web.onrender.com/events/upcoming-events"),
+        ]);
+
+        if (!pastEventsResponse.ok || !upcomingEventsResponse.ok) {
+          throw new Error("Failed to fetch events");
+        }
+
+        const pastEventsData = await pastEventsResponse.json();
+        const upcomingEventsData = await upcomingEventsResponse.json();
+
+        // Handle different response structures
+        const pastEvents = Array.isArray(pastEventsData) ? pastEventsData : pastEventsData.events || pastEventsData.data || [];
+        const upcomingEvents = Array.isArray(upcomingEventsData) ? upcomingEventsData : upcomingEventsData.events || upcomingEventsData.data || [];
+
+        const allDynamicEvents = [...pastEvents, ...upcomingEvents];
+
+        const transformedEvents = allDynamicEvents.map(event => ({
+          title: event.name,
+          description: event.description,
+          longDescription: event.description, // You might want to add a longDescription field to your API
+          scale: event.scope,
+          duration: "TBD", // Add duration field to your API if needed
+          location: event.location,
+          date: new Date(event.date).toLocaleDateString(),
+          imageURL: event.photo?.url || '', // Handle the photo object
+          slug: event.slug
+        }));
+
+        // Find the event in API data
+        const foundEvent = transformedEvents.find((event) => event.slug === slug);
+
+        if (foundEvent) {
+          setEventDetail(foundEvent);
+        } else {
+          setError("Event not found");
+        }
+      } catch (err) {
+        setError("Failed to load event details");
+        console.error("Error fetching event:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchEventData();
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-2xl font-bold">Loading...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-red-500 mb-4">{error}</h1>
+          <Link to="/events" className="text-blue-500 hover:underline">
+            Back to Events
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -54,9 +141,6 @@ const EventDetails = () => {
                 <div className="space-y-2 mb-4">
                   <p className="text-base lg:text-lg">
                     <strong>Scale:</strong> {eventDetail.scale}
-                  </p>
-                  <p className="text-base lg:text-lg">
-                    <strong>Duration:</strong> {eventDetail.duration}
                   </p>
                   <p className="text-base lg:text-lg">
                     <strong>Location:</strong> {eventDetail.location}
