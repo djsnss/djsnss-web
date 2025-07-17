@@ -96,14 +96,14 @@ export const getAnnouncementById = async (req, res) => {
 export const updateAnnouncement = async (req, res) => {
   try {
     const { announcementId } = req.params;
-    const { title, typeOfContent, content, urlLink } = req.body;
+    const { title, typeOfContent, content, urlLink, isNew } = req.body;
 
     const announcement = await AnnouncementModel.findById(announcementId);
     if (!announcement) {
       return res.status(404).json({ message: "Announcement not found" });
     }
 
-    let updateData = { title, typeOfContent };
+    let updateData = { title, typeOfContent, isNew };
 
     if (typeOfContent === "text") {
       if (!content) {
