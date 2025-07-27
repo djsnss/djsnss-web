@@ -213,6 +213,30 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
             </div>
           </div>
 
+          {/* Scope Select */}
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-[#003366]">
+              Scope *
+            </label>
+            <select
+              name="scope"
+              value={formData.scope || ""}
+              onChange={handleInputChange}
+              className={`w-full p-2 border rounded-md ${
+                errors.scope ? "border-red-500" : "border-[#387fa8]"
+              }`}
+              required
+            >
+              <option value="">Select Scope</option>
+              <option value="Area">Area</option>
+              <option value="Local">Local</option>
+              <option value="University">University</option>
+            </select>
+            {errors.scope && (
+              <p className="text-red-500 text-sm">{errors.scope}</p>
+            )}
+          </div>
+
           {/* Description */}
           <div>
             <label className="block text-sm font-medium text-[#003366]">

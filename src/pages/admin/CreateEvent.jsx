@@ -43,7 +43,7 @@ const CreateEvent = () => {
       newErrors.description = "Description is required.";
     if (!formData.longDescription?.trim())
       newErrors.longDescription = "Long description is required.";
-    if (!formData.date) newErrors.date = "Date is required.";
+    // Removed date validation
     if (!formData.location?.trim())
       newErrors.location = "Location is required.";
     if (!formData.photo) newErrors.photo = "Event image is required.";
@@ -81,6 +81,13 @@ const CreateEvent = () => {
     e.preventDefault();
     setErrorMessage("");
     setSuccessMessage("");
+
+    // If date is empty, set it to 'TBD'
+    if (!formData.date) {
+      setFormData((prev) => ({ ...prev, date: "TBD" }));
+      // Wait for state update before continuing
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    }
 
     if (!validateForm()) return;
 
@@ -176,7 +183,7 @@ const CreateEvent = () => {
             Event Image *
           </label>
           <div className="relative">
-            {formData.photo? (
+            {formData.photo ? (
               <div className="relative">
                 <img
                   src={URL.createObjectURL(formData.photo)}
@@ -319,20 +326,17 @@ const CreateEvent = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Date *
+              Date
             </label>
             <input
               type="date"
               name="date"
-              value={formData.date}
+              value={formData.date === "TBD" ? "" : formData.date}
               onChange={handleInputChange}
               className={`w-full p-2 border rounded-md ${
                 errors.date ? "border-red-500" : "border-[#387fa8]"
               }`}
             />
-            {errors.date && (
-              <p className="text-red-500 text-sm">{errors.date}</p>
-            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">

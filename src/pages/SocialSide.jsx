@@ -25,7 +25,7 @@ const SocialSide = () => {
   };
 
   return (
-    <div className="fixed z-40 top-14 md:top-3 right-3 sm:top-6 sm:right-6 flex flex-col items-end">
+    <div className="fixed z-40 top-14 right-3 md:top-20 lg:top-6 sm:right-6 flex flex-col items-end">
       {/* Toggle Button - At the top */}
       <button 
         onClick={toggleExpanded}
