@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import Image1 from '../../assets/aboutus.jpg'
+import Image1 from '../../assets/Events/Yaarana/IMG_1628.jpg'
 
 const AboutSection = () => {
   return (
@@ -15,7 +15,7 @@ const AboutSection = () => {
         <img
           src={Image1}
           alt='NSS Event'
-          className='w-full md:w-1/2 h-60 md:h-[26rem] object-cover flex-grow rounded-lg mb-4 md:mb-0'
+          className='w-full md:w-1/2 h-60 md:h-96 object-cover flex-grow rounded-lg mb-4 md:mb-0'
         />
         <div className='w-full md:w-1/2 flex flex-col justify-center items-center lg:space-x-8'>
           <h2 className='text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center'>

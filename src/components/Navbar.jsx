@@ -107,7 +107,7 @@ const Navbar = () => {
     },
     {
       Icon: "FaRegFileAlt",
-      title: "See More",
+      title: "More",
       subLinks: [
         { title: "FAQ", path: "/faq" },
         { title: "Gallery", path: "/gallery" },
@@ -121,7 +121,7 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 md:px-4 z-50 flex justify-center pointer-events-none">
       <nav
         ref={menuRef}
         className="pointer-events-auto w-full md:w-max md:mt-3 md:max-w-4xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
