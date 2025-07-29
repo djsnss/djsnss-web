@@ -37,8 +37,8 @@ const EventSchema = new mongoose.Schema({
     required: true,
   },
   date: {
-    type: Date,
-    required: true,
+    type: mongoose.Schema.Types.Mixed, // Accepts Date or String
+    default: "TBD",
   },
   location: {
     type: String,
