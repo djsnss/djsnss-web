@@ -199,7 +199,7 @@ const TeamData = {
               name: "Arya Shah",
               position: "Head of Publicity",
               image: AryaShah,
-              linkedin: "https://x.com/aryasha21521109?s=21",
+              linkedin: "https://www.linkedin.com/in/arya-shah-3721ba210/",
             },
           ],
         },
