@@ -11,42 +11,8 @@ import { MapPin, CalendarDays } from "lucide-react";
 import CustomLoader2 from "../Loaders/CustomLoader2";
 import "./UniversityEvents.css";
 
-const AreaEvents = () => {
+const AreaEvents = ({loading, areaEventsData}) => {
   const navigate = useNavigate();
-  const [universityEventsData, setUniversityEventsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://djsnss-web.onrender.com/events/past-events");
-        const data = await response.json();
-        
-        const formattedEvents = data.events
-          .filter((event) => event.scope === "Area-Level" || event.scope ==="Area")
-          .map((event) => {
-            const eventDate = new Date(event.date);
-            const formattedDate = eventDate
-              .toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })
-              .split("/")
-              .join("-");
-            return { ...event, date: formattedDate };
-          });
-
-        setUniversityEventsData(formattedEvents);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 my-5 sm:my-10">
@@ -56,17 +22,17 @@ const AreaEvents = () => {
         <div className="flex justify-center items-center h-[50vh]">
           <CustomLoader2 />
         </div>
-      ) : universityEventsData.length === 0 ? (
+      ) : areaEventsData.length === 0 ? (
         <p className="text-2xl md:text-3xl w-full text-center font-bold text-black">
           No Area Events Available
         </p>
       ) : (
         <CCarousel
-          controls={universityEventsData.length > 1}
-          indicators={universityEventsData.length > 1}
-          interval={universityEventsData.length > 1 ? 5000 : false}
+          controls={areaEventsData.length > 1}
+          indicators={areaEventsData.length > 1}
+          interval={areaEventsData.length > 1 ? 5000 : false}
         >
-          {universityEventsData.map((event) => (
+          {areaEventsData.map((event) => (
             <CCarouselItem key={event._id}>
               <CImage
                 className="d-block w-100 rounded-lg h-[50vh] sm:h-[60vh] bg-center object-cover"

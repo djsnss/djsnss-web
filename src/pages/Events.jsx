@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import GenerateCertificate from "../components/events/generateCertificate";
 import LargeEvents from "../components/events/LargeEvents";
-import CollegeEvents from "../components/events/CollegeEvents";
-import UniversityEvents from "../components/events/UniversityEvents";
-import AreaEvents from "../components/events/AreaEvents";
 import { MapPin, CalendarDays } from "lucide-react";
 import {
   CCarousel,
@@ -13,6 +10,7 @@ import {
   CCarouselCaption,
 } from "@coreui/react";
 import CustomLoader2 from "../components/Loaders/CustomLoader2";
+import AllPastEvents from "../components/events/AllPastEvents";
 
 const Events = () => {
   const navigate = useNavigate();
@@ -111,9 +109,7 @@ const Events = () => {
       <div className="w-full flex flex-col gap-6">
         <LargeEvents />
         <GenerateCertificate />
-        <CollegeEvents />
-        <AreaEvents />
-        <UniversityEvents />
+        <AllPastEvents />
       </div>
     </div>
   );

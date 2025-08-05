@@ -134,7 +134,7 @@ const TeamData = {
           name: "Manav Bhansali",
           position: "Secretary",
           image: ManavBhansali,
-          linkedin: "",
+          linkedin: "https://www.linkedin.com/in/manav-bhansali-94156227b/",
         },
       ],
       "joint Secretary": [
@@ -187,13 +187,13 @@ const TeamData = {
               name: "Dhvani Shah",
               position: "Head of Publicity",
               image: DhvaniShah,
-              linkedin: "https://www.linkedin.com/in/dhvani-shah12/",
+              linkedin: "https://www.linkedin.com/in/dhvani-shah-813309289/",
             },
             {
               name: "Pratyaksha Khamkar",
               position: "Head of Publicity",
               image: PratyakshaKhamkar,
-              linkedin: "",
+              linkedin: "https://www.linkedin.com/in/pratyaksha-khamkar-056570372/",
             },
             {
               name: "Arya Shah",
@@ -227,8 +227,7 @@ const TeamData = {
               name: "Shrawani Jagtap",
               position: "Head of Events",
               image: ShrawaniJagtap,
-              linkedin:
-                "https://www.linkedin.com/in/shrawani-jagtap-947772353/",
+              linkedin: "https://www.linkedin.com/in/shrawani-jagtap-947772353/",
             },
             {
               name: "Mihir Sanghvi",
@@ -240,7 +239,7 @@ const TeamData = {
               name: "Harsh Shah",
               position: "Head of Events",
               image: HarshShah,
-              linkedin: "",
+              linkedin: "https://www.linkedin.com/in/harsh-shah-a285aa36b/",
             },
           ],
         },
@@ -257,8 +256,7 @@ const TeamData = {
               name: "Dhairvi Sangani",
               position: "Head of Creatives",
               image: DhairviSangani,
-              linkedin:
-                "https://www.linkedin.com/in/dhairvi-sangani-3668b4290/",
+              linkedin: "https://www.linkedin.com/in/dhairvi-sangani-3668b4290/",
             },
           ],
         },
@@ -275,7 +273,7 @@ const TeamData = {
               name: "Aayush Trada",
               position: "Head of Social Media",
               image: AayushTrada,
-              linkedin: "",
+              linkedin: "https://www.linkedin.com/in/aayush-trada-b4358328b/",
             },
           ],
         },
@@ -298,8 +296,7 @@ const TeamData = {
               name: "Kaustubh Pansania",
               position: "Head of Editorial",
               image: KaustubhPansania,
-              linkedin:
-                "https://www.linkedin.com/in/kaustubh-pansania-8b3b21323/",
+              linkedin: "https://www.linkedin.com/in/kaustubh-pansania-8b3b21323/",
             },
           ],
         },

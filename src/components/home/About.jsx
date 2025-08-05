@@ -5,6 +5,7 @@ import AboutSection from "./AboutSection";
 import Impact from "../../components/home/impact";
 import Activities from "../../components/home/activities";
 import Announcement from "../../components/home/Announcement";
+import ContactUs from "../../components/home/ContactUs";
 
 const About = () => {
   return (
@@ -28,6 +29,7 @@ const About = () => {
       >
         <DistinguishedAlumni />
       </motion.div>
+      <ContactUs />
     </div>
   );
 };

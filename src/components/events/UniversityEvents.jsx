@@ -228,42 +228,8 @@ import { MapPin, CalendarDays } from "lucide-react";
 import CustomLoader2 from "../Loaders/CustomLoader2";
 import "./UniversityEvents.css";
 
-const UniversityEvents = () => {
+const UniversityEvents = ({loading, universityEventsData}) => {
   const navigate = useNavigate();
-  const [universityEventsData, setUniversityEventsData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch("https://djsnss-web.onrender.com/events/past-events");
-        const data = await response.json();
-        
-        const formattedEvents = data.events
-          .filter((event) => event.scope === "University")
-          .map((event) => {
-            const eventDate = new Date(event.date);
-            const formattedDate = eventDate
-              .toLocaleDateString("en-GB", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              })
-              .split("/")
-              .join("-");
-            return { ...event, date: formattedDate };
-          });
-
-        setUniversityEventsData(formattedEvents);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
 
   return (
     <div className="h-[60vh] sm:h-[80vh] w-full px-4 my-5 sm:my-10">

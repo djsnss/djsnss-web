@@ -3,6 +3,7 @@ import { X } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
+import { MdOutlineDelete } from "react-icons/md";
 
 /**
  * Popup component for editing an event.
@@ -15,23 +16,6 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
   const [loading, setLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  /**
-   * Validate required fields before submitting.
-   */
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name) newErrors.name = "Name is required";
-    if (!formData.date) newErrors.date = "Date is required";
-    if (!formData.location) newErrors.location = "Location is required";
-    if (!formData.TotalNoOfHours)
-      newErrors.TotalNoOfHours = "Total hours is required";
-    if (formData.maxVolunteers < 1)
-      newErrors.maxVolunteers = "Must allow at least 1 volunteer";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
 
   /**
    * Handle input changes and update form state.
@@ -63,7 +47,6 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
 
     setLoading(true);
     setSuccessMessage("");
@@ -181,7 +164,7 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-[#003366]">
-                Event Name *
+                Event Name
               </label>
               <input
                 type="text"
@@ -240,14 +223,13 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
           {/* Description */}
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Description *
+              Description
             </label>
             <textarea
               name="description"
               value={formData.description}
               onChange={handleInputChange}
               rows={2}
-              required
               className="w-full p-2 border border-[#387fa8] rounded-md"
             />
           </div>
@@ -255,14 +237,13 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
           {/* Long Description */}
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Long Description *
+              Long Description
             </label>
             <textarea
               name="longDescription"
               value={formData.longDescription}
               onChange={handleInputChange}
               rows={4}
-              required
               className="w-full p-2 border border-[#387fa8] rounded-md"
             />
           </div>
@@ -477,8 +458,25 @@ export default function UpdateEventPage() {
     );
   };
 
+  /**
+   * Deletes an event by its ID.
+   */
+  const handleDeleteEvent = async (eventId) => {
+    if (!window.confirm("Are you sure you want to delete this event?")) return;
+    try {
+      const token = localStorage.getItem("adminAuthToken");
+      await axios.delete(
+        `https://djsnss-web.onrender.com/admin/deleteEvent/${eventId}`,
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setEvents((prev) => prev.filter((ev) => ev._id !== eventId));
+    } catch (error) {
+      setErrorMessage(error.message || "Failed to delete event");
+    }
+  };
+
   return (
-    <div className="w-full h-screen flex flex-col bg-white">
+    <div className="w-full min-h-screen h-max flex flex-col bg-white">
       {/* Page Heading */}
       <div className="bg-[#003366] text-center text-white py-8">
         {/* Back Button */}
@@ -496,7 +494,7 @@ export default function UpdateEventPage() {
       </div>
 
       {/* Event List Section */}
-      <div className="p-6 bg-[#f1f8ff] flex-1 overflow-auto">
+      <div className="p-6 bg-[#f1f8ff] flex-1 h-max w-full">
         {loadingEvents && (
           <p className="text-center text-[#003366]">Loading events...</p>
         )}
@@ -510,7 +508,7 @@ export default function UpdateEventPage() {
             events.map((event) => (
               <div
                 key={event._id}
-                className="p-4 border border-gray-300 rounded-lg cursor-pointer hover:shadow"
+                className="p-4 border border-gray-300 rounded-lg cursor-pointer hover:shadow relative"
                 onClick={() => handleSelectEvent(event)}
               >
                 <h2 className="text-lg font-bold text-[#003366]">{event.name}</h2>
@@ -521,6 +519,17 @@ export default function UpdateEventPage() {
                   Location: {event.location}
                 </p>
                 <p className="text-sm text-gray-500">Status: {event.status}</p>
+                {/* Delete Button */}
+                <button
+                  className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 z-10"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent opening the edit popup
+                    handleDeleteEvent(event._id);
+                  }}
+                  title="Delete Event"
+                >
+                  <MdOutlineDelete size={20}/>
+                </button>
               </div>
             ))
           ) : (
