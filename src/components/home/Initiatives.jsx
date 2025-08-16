@@ -1,9 +1,9 @@
 import Card from "./Card";
-import GrainAThon from "../../assets/Events/grainathon/GrainAThon.png";
+import GrainAThon from "../../assets/Events/grainathon25/grainathon4.jpg";
 import NSSCamp from "../../assets/Events/NSSCamp.jpg";
-import BDD from "../../assets/Events/bdd/BDD.jpg";
+import BDD from "../../assets/Events/bdd25/bdd2.jpg";
 import StemCell from "../../assets/Events/Stemcell.jpg";
-import ACD from "../../assets/Events/AnnualCharity.png";
+import ACD from "../../assets/Events/AnnualCharity25.png";
 import { motion } from "framer-motion";
 
 const Initiatives = () => {

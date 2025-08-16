@@ -3,11 +3,11 @@
 import { motion } from "framer-motion";
 import ActivityCard from "./activity-card";
 import { Heart, Leaf, BookOpen, HandHeart } from "lucide-react";
-import GrainAThon from "../../assets/Events/grainathon/GrainAThon.png";
+import GrainAThon from "../../assets/Events/grainathon25/grainathon4.jpg";
 import NSSCamp from "../../assets/Events/NSSCamp.jpg";
-import BDD from "../../assets/Events/bdd/BDD.jpg";
+import BDD from "../../assets/Events/bdd25/bdd2.jpg";
 import StemCell from "../../assets/Events/TirangaRally/IMG_4530.jpg";
-import ACD from "../../assets/Events/AnnualCharity.png";
+import ACD from "../../assets/Events/AnnualCharity25.png";
 
 export default function Activities() {
   const activities = [
