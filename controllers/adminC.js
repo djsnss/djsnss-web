@@ -10,6 +10,8 @@ import crypto from "crypto";
 import mongoose from "mongoose";
 import { createClient } from "redis";
 
+env.config();
+
 const redisClient = createClient({
   url: process.env.REDIS_URL,
   socket: { tls: true },
@@ -122,7 +124,6 @@ const fetchAndCacheEvents = async () => {
   return cacheData;
 };
 
-env.config();
 const Secret = process.env.SecretKey;
 
 const clearCache = async () => {
