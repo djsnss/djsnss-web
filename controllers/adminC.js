@@ -16,15 +16,6 @@ const redisClient = createClient({
 });
 redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
 
-(async () => {
-  if (!redisClient.isOpen) {
-    await redisClient.connect();
-    console.log("✅ Redis Connected!");
-    preloadCache();
-  }
-})();
-
-// 1. Standardize preloadCache (Fix the inconsistent cache duration)
 const preloadCache = async () => {
   try {
     console.log("🚀 Preloading cache...");
@@ -69,6 +60,14 @@ const preloadCache = async () => {
     console.error("⚠️ Error preloading cache:", error.message);
   }
 };
+
+(async () => {
+  if (!redisClient.isOpen) {
+    await redisClient.connect();
+    console.log("✅ Redis Connected!");
+    await preloadCache();
+  }
+})();
 
 const getCachedEvents = async () => {
   try {
