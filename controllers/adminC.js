@@ -18,7 +18,14 @@ const redisClient = createClient({
 });
 redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
 
+let cacheLock = false; // Add lock to prevent concurrent cache writes
+
 const preloadCache = async () => {
+  if (cacheLock) {
+    console.log("⚠️ Cache preload skipped (already running)");
+    return;
+  }
+  cacheLock = true;
   try {
     console.log("🚀 Preloading cache...");
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -50,14 +57,19 @@ const preloadCache = async () => {
         .lean(),
     ]);
 
-    const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.set("events:all", JSON.stringify(cacheData)); // Infinite cache
+    console.log(
+      `📊 Fetched: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
+    ); // Add this log
 
+    const cacheData = { upcomingEvents, pastEvents };
+    await redisClient.set("events:all", JSON.stringify(cacheData));
     console.log(
       `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
     );
   } catch (error) {
     console.error("⚠️ Error preloading cache:", error.message);
+  } finally {
+    cacheLock = false; // Release lock
   }
 };
 
@@ -99,25 +111,41 @@ const getCachedEvents = async () => {
   }
 };
 
-const fetchAndCacheEvents = async () => {
-  const [upcomingEvents, pastEvents] = await Promise.all([
-    EventModel.find({ status: "Upcoming", date: { $gte: new Date() } })
-      .sort({ date: 1 })
-      .select(
-        "name description date location maxVolunteers photo status scope slug"
-      )
-      .lean(),
-    EventModel.find({ status: "Past", date: { $lt: new Date() } })
-      .sort({ date: -1 })
-      .select(
-        "name description date location maxVolunteers photo status scope slug"
-      )
-      .lean(),
-  ]);
+export const fetchAndCacheEvents = async () => {
+  if (cacheLock) {
+    console.log("⚠️ fetchAndCacheEvents skipped (cache locked)");
+    return await getCachedEvents(); // Return existing cache if locked
+  }
+  cacheLock = true;
+  try {
+    const [upcomingEvents, pastEvents] = await Promise.all([
+      EventModel.find({ status: "Upcoming", date: { $gte: new Date() } })
+        .sort({ date: 1 })
+        .select(
+          "name description date location maxVolunteers photo status scope slug"
+        )
+        .lean(),
+      EventModel.find({ status: "Past", date: { $lt: new Date() } })
+        .sort({ date: -1 })
+        .select(
+          "name description date location maxVolunteers photo status scope slug"
+        )
+        .lean(),
+    ]);
 
-  const cacheData = { upcomingEvents, pastEvents };
-  await redisClient.set("events:all", JSON.stringify(cacheData)); // Infinite cache
-  return cacheData;
+    console.log(
+      `📊 Fetched: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
+    ); // Add this log
+
+    const cacheData = { upcomingEvents, pastEvents };
+    await redisClient.set("events:all", JSON.stringify(cacheData));
+    return cacheData;
+  } catch (error) {
+    console.error("Error in fetchAndCacheEvents:", error);
+    throw error;
+  } finally {
+    cacheLock = false; // Release lock
+  }
 };
 
 const Secret = process.env.SecretKey;
@@ -488,6 +516,7 @@ export const getEventStats = async (req, res) => {
 
 const updateEventStatus = async () => {
   try {
+    console.log("🔄 Running hourly event status update...");
     const currentDate = new Date();
 
     // Find all expired upcoming events
@@ -509,8 +538,10 @@ const updateEventStatus = async () => {
       await redisClient.del("events:all");
       console.log("🗑️ Cache cleared after status update");
     }
+    // After updating statuses, reload cache to reflect changes
+    await fetchAndCacheEvents();
   } catch (err) {
-    console.error("❌ Error updating event statuses:", err);
+    console.error("Error updating event status:", err);
   }
 };
 
