@@ -940,6 +940,7 @@ export const createEvent = async (req, res) => {
     }
     await newEvent.save();
     await clearCache();
+    await fetchAndCacheEvents();
     return res.status(200).json({
       message: "Successfully created new Event",
       Event: newEvent,
