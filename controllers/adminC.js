@@ -19,57 +19,131 @@ const redisClient = createClient({
 redisClient.on("error", (err) => console.error("❌ Redis Error:", err));
 
 let cacheLock = false; // Add lock to prevent concurrent cache writes
+let preloadedOnce = false; // Prevent duplicate automatic preloads
 
-const preloadCache = async () => {
+const safeDate = (raw) => {
+  if (!raw) return null;
+  if (raw instanceof Date) return raw;
+  const d = new Date(raw);
+  return isNaN(d.getTime()) ? null : d;
+};
+
+const splitEventsByDate = (allEvents) => {
+  const now = new Date();
+  const upcoming = [];
+  const past = [];
+  const bad = [];
+  for (const ev of allEvents) {
+    const parsed = safeDate(ev.date);
+    if (!parsed) {
+      bad.push({ id: ev._id, date: ev.date });
+      continue;
+    }
+    // classify by date (not by stored status)
+    if (parsed >= now) upcoming.push({ ...ev, date: parsed });
+    else past.push({ ...ev, date: parsed });
+  }
+  return { upcoming, past, bad };
+};
+
+const preloadCache = async (force = false) => {
   if (cacheLock) {
     console.log("⚠️ Cache preload skipped (already running)");
+    return;
+  }
+  if (preloadedOnce && !force) {
+    console.log("ℹ️ Cache already preloaded once, skipping automatic preload");
     return;
   }
   cacheLock = true;
   try {
     console.log("🚀 Preloading cache...");
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    await new Promise((r) => setTimeout(r, 500));
 
     if (mongoose.connection.readyState !== 1) {
       console.log("⚠️ MongoDB not ready, skipping cache preload");
       return;
     }
 
-    const [upcomingEvents, pastEvents] = await Promise.all([
-      EventModel.find({
-        status: "Upcoming",
-        date: { $gte: new Date() },
-      })
-        .sort({ date: 1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug"
-        )
-        .lean(),
+    // fetch all events and classify by computed date
+    const allEvents = await EventModel.find({})
+      .select(
+        "name description date location maxVolunteers photo status scope slug"
+      )
+      .lean();
 
-      EventModel.find({
-        status: "Past",
-        date: { $lt: new Date() },
-      })
-        .sort({ date: -1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug"
-        )
-        .lean(),
-    ]);
+    console.log(`📊 Total events fetched from DB: ${allEvents.length}`);
+
+    const { upcoming, past, bad } = splitEventsByDate(allEvents);
+
+    if (bad.length) {
+      console.warn("⚠️ Events with invalid dates found:", bad);
+    }
 
     console.log(
-      `📊 Fetched: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
-    ); // Add this log
-
-    const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.set("events:all", JSON.stringify(cacheData));
-    console.log(
-      `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
+      `📊 Computed: ${upcoming.length} upcoming, ${past.length} past events`
     );
+
+    const cacheData = {
+      upcomingEvents: upcoming.sort((a, b) => a.date - b.date),
+      pastEvents: past.sort((a, b) => b.date - a.date),
+    };
+
+    // set a TTL so cache doesn't permanently diverge (2 hours)
+    await redisClient.set("events:all", JSON.stringify(cacheData), {
+      EX: 7200,
+    });
+
+    console.log(
+      `✅ Cache preloaded: ${cacheData.upcomingEvents.length} upcoming, ${cacheData.pastEvents.length} past events`
+    );
+
+    preloadedOnce = true;
   } catch (error) {
-    console.error("⚠️ Error preloading cache:", error.message);
+    console.error("⚠️ Error preloading cache:", error);
   } finally {
-    cacheLock = false; // Release lock
+    cacheLock = false;
+  }
+};
+
+export const fetchAndCacheEvents = async (force = false) => {
+  if (cacheLock && !force) {
+    console.log("⚠️ fetchAndCacheEvents skipped (cache locked)");
+    return await getCachedEvents(); // return current cache if locked
+  }
+  cacheLock = true;
+  try {
+    // same approach: fetch all and compute by date
+    const allEvents = await EventModel.find({})
+      .select(
+        "name description date location maxVolunteers photo status scope slug"
+      )
+      .lean();
+
+    const { upcoming, past, bad } = splitEventsByDate(allEvents);
+
+    if (bad.length) {
+      console.warn("⚠️ Events with invalid dates found during fetch:", bad);
+    }
+
+    console.log(
+      `📊 Fetched: ${upcoming.length} upcoming, ${past.length} past events`
+    );
+
+    const cacheData = {
+      upcomingEvents: upcoming.sort((a, b) => a.date - b.date),
+      pastEvents: past.sort((a, b) => b.date - a.date),
+    };
+
+    await redisClient.set("events:all", JSON.stringify(cacheData), {
+      EX: 7200,
+    }); // 2 hours
+    return cacheData;
+  } catch (error) {
+    console.error("Error in fetchAndCacheEvents:", error);
+    throw error;
+  } finally {
+    cacheLock = false;
   }
 };
 
@@ -108,43 +182,6 @@ const getCachedEvents = async () => {
   } catch (error) {
     console.error("Cache retrieval error:", error);
     return await fetchAndCacheEvents();
-  }
-};
-
-export const fetchAndCacheEvents = async () => {
-  if (cacheLock) {
-    console.log("⚠️ fetchAndCacheEvents skipped (cache locked)");
-    return await getCachedEvents(); // Return existing cache if locked
-  }
-  cacheLock = true;
-  try {
-    const [upcomingEvents, pastEvents] = await Promise.all([
-      EventModel.find({ status: "Upcoming", date: { $gte: new Date() } })
-        .sort({ date: 1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug"
-        )
-        .lean(),
-      EventModel.find({ status: "Past", date: { $lt: new Date() } })
-        .sort({ date: -1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug"
-        )
-        .lean(),
-    ]);
-
-    console.log(
-      `📊 Fetched: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
-    ); // Add this log
-
-    const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.set("events:all", JSON.stringify(cacheData));
-    return cacheData;
-  } catch (error) {
-    console.error("Error in fetchAndCacheEvents:", error);
-    throw error;
-  } finally {
-    cacheLock = false; // Release lock
   }
 };
 
@@ -534,12 +571,13 @@ const updateEventStatus = async () => {
 
       console.log(`✅ Updated ${expiredEvents.length} events to Past`);
 
-      // Clear the unified cache instead of individual keys
+      // Only reload cache if updates happened
       await redisClient.del("events:all");
-      console.log("🗑️ Cache cleared after status update");
+      await fetchAndCacheEvents();
+    } else {
+      console.log("ℹ️ No events to update");
+      // Do not reload cache if no updates
     }
-    // After updating statuses, reload cache to reflect changes
-    await fetchAndCacheEvents();
   } catch (err) {
     console.error("Error updating event status:", err);
   }
@@ -547,8 +585,7 @@ const updateEventStatus = async () => {
 
 export const getUpcomingEvents = async (req, res) => {
   try {
-    await updateEventStatus();
-
+    // Remove updateEventStatus call here to prevent per-request triggers
     const { upcomingEvents } = await getCachedEvents();
 
     return res.status(200).json({
@@ -751,8 +788,7 @@ export const getEventById = async (req, res) => {
 
 export const getAllEvents = async (req, res) => {
   try {
-    await updateEventStatus(); // Update any expired events first
-
+    // Remove updateEventStatus call here to prevent per-request triggers
     const { upcomingEvents, pastEvents } = await getCachedEvents();
     const allEvents = [...upcomingEvents, ...pastEvents];
 
@@ -949,7 +985,7 @@ export const createEvent = async (req, res) => {
       startHours,
       endHours,
       TotalNoOfHours,
-      date,
+      date: eventDate,
       location,
       maxVolunteers,
       status,
@@ -990,4 +1026,4 @@ const warmCache = async () => {
 };
 
 // Set up cache warming every 90 minutes (before 2-hour expiry)
-setInterval(warmCache, 3 * 60 * 60 * 1000); // 3 hours
+setInterval(warmCache, 90 * 60 * 1000); // Fixed to 90 minutes

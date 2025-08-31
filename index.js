@@ -56,7 +56,6 @@ const preloadCache = async () => {
         date: { $gte: new Date() },
       })
         .sort({ date: 1 })
-        .limit(50)
         .select(
           "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
         )
@@ -67,7 +66,6 @@ const preloadCache = async () => {
         date: { $lt: new Date() },
       })
         .sort({ date: -1 })
-        .limit(20)
         .select(
           "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
         )
