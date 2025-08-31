@@ -12,7 +12,7 @@ import announcementRouter from "./routes/announcementR.js";
 import contactRouter from "./routes/contactR.js";
 import mongoose from "mongoose";
 import EventModel from "./models/event.js";
-import { createClient } from "redis";
+import { redisClient, connectRedis, preloadCache } from "./lib/cache.js";
 
 env.config();
 const PORT = process.env.Port;
@@ -21,72 +21,13 @@ const app = express();
 
 await ConnectMongoDb(URL);
 
-// Redis client configuration for caching
-const redisClient = createClient({
-  url: process.env.REDIS_URL,
-  socket: { tls: true },
-});
+// connect shared redis and preload once
+await connectRedis();
 
-redisClient.on("error", (err) => {
-  console.error("❌ Redis Client Error:", err);
-});
-
-redisClient.on("connect", () => {
-  console.log("✅ Redis Connected!");
-});
-
-await redisClient.connect();
-
-// Cache preloading function for better performance
-const preloadCache = async () => {
-  try {
-    console.log("🚀 Preloading cache...");
-
-    // Wait longer for stable connections
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    if (mongoose.connection.readyState !== 1) {
-      console.log("⚠️ MongoDB not ready, skipping cache preload");
-      return;
-    }
-
-    const [upcomingEvents, pastEvents] = await Promise.all([
-      EventModel.find({
-        status: "Upcoming",
-        date: { $gte: new Date() },
-      })
-        .sort({ date: 1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
-        )
-        .lean(),
-
-      EventModel.find({
-        status: "Past",
-        date: { $lt: new Date() },
-      })
-        .sort({ date: -1 })
-        .select(
-          "name description date location maxVolunteers photo status scope slug" // <-- Added slug here
-        )
-        .lean(),
-    ]);
-
-    const cacheData = { upcomingEvents, pastEvents };
-    await redisClient.setEx("events:all", 14400, JSON.stringify(cacheData)); // 4 hours - consistent with adminC.js
-
-    console.log(
-      `✅ Cache preloaded: ${upcomingEvents.length} upcoming, ${pastEvents.length} past events`
-    );
-  } catch (error) {
-    console.error("⚠️ Error preloading cache:", error.message);
-  }
-};
-
-// Add safer preload execution
+// preload cache once after short delay
 setTimeout(async () => {
   await preloadCache();
-}, 3000); // Wait 3 seconds instead of immediate execution
+}, 3000);
 
 // Compression middleware for better performance
 app.use(

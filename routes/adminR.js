@@ -22,7 +22,6 @@ import {
   forgotPassword,
   resetPassword,
   verifyToken,
-  fetchAndCacheEvents,
 } from "../controllers/adminC.js";
 
 import { authAdmin } from "../middlewares/authVerify.js";
@@ -71,16 +70,5 @@ router.post("/reset-password", passwordLimiter, resetPassword);
 router.post("/logout", authAdmin, logout);
 router.delete("/deleteEvent/:eventId", authAdmin, deleteEvent);
 router.get("/verify-token", verifyToken);
-
-// Route to reload the event cache
-router.post("/reload-cache", async (req, res) => {
-  try {
-    await fetchAndCacheEvents();
-    res.status(200).json({ message: "Cache reloaded successfully" });
-  } catch (error) {
-    console.error("Error reloading cache:", error);
-    res.status(500).json({ message: "Failed to reload cache" });
-  }
-});
 
 export default router;
