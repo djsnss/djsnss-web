@@ -2,62 +2,11 @@
 
 import { motion } from "framer-motion";
 import ActivityCard from "./activity-card";
-import { Heart, Leaf, BookOpen, HandHeart } from "lucide-react";
-import GrainAThon from "../../assets/Events/grainathon25/grainathon4.jpg";
-import NSSCamp from "../../assets/Events/NSSCamp.jpg";
-import BDD from "../../assets/Events/bdd25/bdd2.jpg";
-import StemCell from "../../assets/Events/TirangaRally/IMG_4530.jpg";
-import ACD from "../../assets/Events/AnnualCharity25.png";
+import {common} from "../../data/common.js";
 
 export default function Activities() {
-  const activities = [
-    {
-      image: GrainAThon,
-      title: "Grain-A-Thon",
-      description:
-        "Collected and donated grains of more than 1000kgs for the underprivileged.",
-      link: "/eventdetails/grain-a-thon",
-      icon: BookOpen,
-      iconColor: "text-yellow-500",
-      direction: "left" as const,
-    },
-    {
-      image: BDD,
-      title: "Blood Donation Drive",
-      description:
-        "Successful collection of 650+ blood bags for the needy.",
-      link: "/eventdetails/blood-donation-drive",
-      icon: Heart,
-      iconColor: "text-red-500",
-      direction: "right" as const,
-    },
-    {
-      image: NSSCamp,
-      title: "NSS Camp",
-      description:
-        "A camp to remember for the volunteers to learn and grow.",
-      link: "/eventdetails/nss-camp",
-      icon: Leaf,
-      iconColor: "text-green-500",
-      direction: "left" as const,
-    },
-    {
-      image: ACD,
-      title: "Annual Charity Drive",
-      description:
-        "A drive to collect clothes, books, and toys for the underprivileged.",
-      link: "/eventdetails/annual-charity-drive",
-      icon: Leaf,
-      iconColor: "text-green-500",
-      direction: "right" as const,
-    },
-  ];
-
   return (
-    <section
-      id="activities"
-      className="py-20 bg-white-50"
-    >
+    <section id="activities" className="py-20 bg-white-50">
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="max-w-3xl mx-auto text-center mb-16"
@@ -77,15 +26,15 @@ export default function Activities() {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-8">
-          {activities.map((activity, index) => (
+          {common.filter(activity => [1, 2, 3, 5].includes(activity.id)).map((activity, index) => (
             <ActivityCard
               key={index}
-              image={activity.image}
+              imageURL={activity.imageURL}
               title={activity.title}
               description={activity.description}
               link={activity.link}
               icon={activity.icon}
-              iconColor={activity.iconColor}
+              color={activity.color}
               direction={activity.direction}
             />
           ))}

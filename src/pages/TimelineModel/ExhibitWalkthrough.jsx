@@ -6,13 +6,13 @@ import gsap from 'gsap';
 import { useNavigate } from 'react-router-dom';
 import { Vector3, Raycaster } from 'three';
 import './ExhibitWalkthrough.css';
-import { largeEventsData } from '../../data/timelineData';
+import { common } from '../../data/common.js';
 
 // Create navigation points from large events data
-const NAVIGATION_POINTS = largeEventsData.slice().reverse().map((event, index) => {
+const NAVIGATION_POINTS = common.slice().reverse().map((event, index) => {
   // Calculate positions in a circular arrangement
   const radius = 21;
-  const angle = (index / largeEventsData.length) * Math.PI * 2;
+  const angle = (index / common.length) * Math.PI * 2;
   const x = Math.sin(angle) * radius;
   const z = Math.cos(angle) * radius;
   

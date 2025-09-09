@@ -5,22 +5,22 @@ import { motion } from "framer-motion";
 import { ChevronRight, type LucideIcon } from "lucide-react";
 
 interface ActivityCardProps {
-  image: string;
+  imageURL: string;
   title: string;
   description: string;
   link: string;
   icon: LucideIcon;
-  iconColor: string;
+  color: string;
   direction: "left" | "right";
 }
 
 export default function ActivityCard({
-  image,
+  imageURL,
   title,
   description,
   link,
   icon: Icon,
-  iconColor,
+  color,
   direction,
 }: ActivityCardProps) {
   return (
@@ -33,7 +33,7 @@ export default function ActivityCard({
     >
       <div className="relative h-64 overflow-hidden">
         <img
-          src={image || "/placeholder.svg"}
+          src={imageURL || "/placeholder.svg"}
           alt={title}
           className="object-cover transition-transform duration-500 group-hover:scale-105 w-full h-full"
         />
@@ -41,7 +41,7 @@ export default function ActivityCard({
       </div>
       <div className="p-6">
         <div className="flex items-center mb-3">
-          <Icon className={`h-5 w-5 ${iconColor} mr-2`} />
+          <Icon className={`h-5 w-5 ${color} mr-2`} />
           <h3 className="text-xl font-semibold">{title}</h3>
         </div>
         <p className="text-gray-600 mb-4">{description}</p>

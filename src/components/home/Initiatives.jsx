@@ -1,50 +1,10 @@
 import Card from "./Card";
-import GrainAThon from "../../assets/Events/grainathon25/grainathon4.jpg";
-import NSSCamp from "../../assets/Events/NSSCamp.jpg";
-import BDD from "../../assets/Events/bdd25/bdd2.jpg";
-import StemCell from "../../assets/Events/Stemcell.jpg";
-import ACD from "../../assets/Events/AnnualCharity25.png";
 import { motion } from "framer-motion";
+import { common } from "../../data/common";
 
 const Initiatives = () => {
-  const data = [
-    {
-      eventName: "Grain-A-Thon",
-      shortDesc: "Collected and donated grains of more than 1000kgs for the underprivileged.",
-      imageUrl: GrainAThon,
-      link: "/eventdetails/grain-a-thon",
-    },
-    {
-      eventName: "Blood Donation Drive",
-      shortDesc: "Successful collection of 650+ blood bags for the needy.",
-      imageUrl: BDD,
-      link: "/eventdetails/blood-donation-drive",
-    },
-    {
-      eventName: "NSS Camp",
-      shortDesc: "A camp to remember for the volunteers to learn and grow.",
-      imageUrl: NSSCamp,
-      link: "/eventdetails/nss-camp",
-    },
-    {
-      eventName: "Stem Cell Donation",
-      shortDesc: "A drive to raise awareness about stem cell donation.",
-      imageUrl: StemCell,
-      link: "/eventdetails/stem-cell-donation-drive",
-    },
-    {
-      eventName: "Annual Charity Drive",
-      shortDesc: "A drive to collect clothes, books, and toys for the underprivileged.",
-      imageUrl: ACD,
-      link: "/eventdetails/annual-charity-drive",
-    }
-  ];
-
   return (
-    <section
-      id="initiative"
-      className="py-20 bg-blue-50"
-    >
+    <section id="initiative" className="py-20 bg-blue-50">
       <motion.div
         className="max-w-3xl mx-auto text-center"
         initial={{ opacity: 0, y: 16 }}
@@ -56,26 +16,31 @@ const Initiatives = () => {
           Initiatives
         </h1>
         <p className="text-lg text-gray-800 mb-4 md:mb-8">
-          We have been involved in various initiatives that have made a significant impact on society. Here are some of the initiatives we have undertaken.
+          We have been involved in various initiatives that have made a
+          significant impact on society. Here are some of the initiatives we
+          have undertaken.
         </p>
       </motion.div>
       <div className="mx-auto flex flex-wrap justify-center gap-8">
-        {data.map((event, index) => {
-          return (
-            <div
-              key={index}
-              className={`transform transition-transform ${index % 2 === 0 ? "xl:mt-16" : "xl:mt-0"
+        {common
+          .filter((event) => [1, 2, 3, 5, 8].includes(event.id))
+          .map((event, index) => {
+            return (
+              <div
+                key={index}
+                className={`transform transition-transform ${
+                  index % 2 === 0 ? "xl:mt-16" : "xl:mt-0"
                 }`}
-            >
-              <Card
-                name={event.eventName}
-                imageUrl={event.imageUrl}
-                link={event.link}
-                shortDesc={event.shortDesc}
-              />
-            </div>
-          );
-        })}
+              >
+                <Card
+                  name={event.title}
+                  imageUrl={event.imageURL}
+                  link={event.link}
+                  shortDesc={event.description}
+                />
+              </div>
+            );
+          })}
       </div>
     </section>
   );

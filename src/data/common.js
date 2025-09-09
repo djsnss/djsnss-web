@@ -11,7 +11,7 @@ import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
 import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
 import { GiTreehouse, GiWheat } from "react-icons/gi";
 
-export const largeEventsData = [
+export const common = [
   {
     id: 1,
     title: "NSS CAMP",
@@ -28,6 +28,7 @@ export const largeEventsData = [
     date: "21st Jan - 28th Jan 2025",
     icon: FaFlag,
     color: "#4C9D8F",
+    direction: "left",
   },
   {
     id: 2,
@@ -45,6 +46,7 @@ export const largeEventsData = [
     date: "4th March 2025",
     icon: FaHeart,
     color: "#D72638",
+    direction: "right",
   },
   {
     id: 3,
@@ -62,6 +64,7 @@ export const largeEventsData = [
     date: "17th Oct - 18th Oct 2024",
     icon: GiWheat,
     color: "#F4A261",
+    direction: "right"
   },
   {
     id: 4,
@@ -96,6 +99,7 @@ export const largeEventsData = [
     date: "20th Feb - 24th Feb 2024",
     icon: FaHandHoldingHeart,
     color: "#4CAF50",
+    direction: "right",
   },
   {
     id: 6,
