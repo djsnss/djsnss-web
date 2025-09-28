@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import CustomLoader2 from "../../components/Loaders/CustomLoader2";
 
-const CheckHoursNew = () => {
+const CheckEvent = () => {
   const [userData, setUserData] = useState(null);
   const fileInputRef = useRef(null);
   const [image, setImage] = useState(NSSLogo);
@@ -184,4 +184,4 @@ const EventList = ({ events }) => (
   </div>
 );
 
-export default CheckHoursNew;
+export default CheckEvent;

@@ -22,7 +22,7 @@ const AllAlumni = React.lazy(() => import("./pages/alumni/AllAlumni"));
 const Volunteer = React.lazy(() => import("./pages/volunteer/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./pages/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./pages/volunteer/VolunteerRegistration"));
-const CheckHoursNew = React.lazy(() => import("./pages/volunteer/CheckHoursNew"));
+const CheckEvent = React.lazy(() => import("./pages/volunteer/CheckEvent"));
 const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
@@ -112,7 +112,7 @@ const App = () => {
               <Route path="/volunteer/change-password" element={<VolunteerPass />} />
               {/* Protected volunteer routes */}
               <Route element={<ProtectedRoute authTokenKey="authToken" userType="volunteer"/>}>
-                <Route path="/volunteer/checkhours" element={<CheckHoursNew />} />
+                <Route path="/volunteer/checkevent" element={<CheckEvent />} />
               </Route>
               <Route path="/alumni" element={<AllAlumni />} />
               <Route path="/reports" element={<FolderTree />} />

@@ -114,7 +114,7 @@ const Navbar = () => {
       title: "Volunteer",
       subLinks: [
         ...(localStorage.getItem("authToken")
-          ? [{ title: "Check Hours", path: "/volunteer/checkhours" }]
+          ? [{ title: "Check Event", path: "/volunteer/checkevent" }]
           : []),
         { title: "Volunteer", path: "/volunteer/" },
         {
