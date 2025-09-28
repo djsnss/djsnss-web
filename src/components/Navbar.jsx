@@ -1,4 +1,10 @@
-import React, { useState, useEffect, Suspense, useRef, useCallback } from "react";
+import React, {
+  useState,
+  useEffect,
+  Suspense,
+  useRef,
+  useCallback,
+} from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
@@ -7,7 +13,9 @@ import { LuPanelRightClose } from "react-icons/lu";
 const iconMap = {
   FiHome: FiHome,
   SiRotaryinternational: React.lazy(() =>
-    import("react-icons/si").then((module) => ({ default: module.SiRotaryinternational }))
+    import("react-icons/si").then((module) => ({
+      default: module.SiRotaryinternational,
+    }))
   ),
   GrGallery: React.lazy(() =>
     import("react-icons/gr").then((module) => ({ default: module.GrGallery }))
@@ -25,10 +33,17 @@ const iconMap = {
     import("react-icons/io5").then((module) => ({ default: module.IoPeople }))
   ),
   FaRegCalendarAlt: React.lazy(() =>
-    import("react-icons/fa").then((module) => ({ default: module.FaRegCalendarAlt }))
+    import("react-icons/fa").then((module) => ({
+      default: module.FaRegCalendarAlt,
+    }))
   ),
   FaRegFileAlt: React.lazy(() =>
-    import("react-icons/fa").then((module) => ({ default: module.FaRegFileAlt }))
+    import("react-icons/fa").then((module) => ({
+      default: module.FaRegFileAlt,
+    }))
+  ),
+  GrArticle: React.lazy(() =>
+    import("react-icons/gr").then((module) => ({ default: module.GrArticle }))
   ),
 };
 
@@ -98,9 +113,14 @@ const Navbar = () => {
       Icon: "IoPeople",
       title: "Volunteer",
       subLinks: [
-        ...(localStorage.getItem("authToken") ? [{ title: "Check Hours", path: "/volunteer/checkhours" }] : []),
+        ...(localStorage.getItem("authToken")
+          ? [{ title: "Check Hours", path: "/volunteer/checkhours" }]
+          : []),
         { title: "Volunteer", path: "/volunteer/" },
-        { title: "Volunteer Registration", path: "/volunteer/volunteer-registration" },
+        {
+          title: "Volunteer Registration",
+          path: "/volunteer/volunteer-registration",
+        },
         { title: "Volunteer Login", path: "/volunteer/volunteer-login" },
         { title: "Volunteer Policy", path: "/volunteer/volunteer-policy" },
       ],
@@ -115,9 +135,13 @@ const Navbar = () => {
         { title: "Calendar", path: "/calendar" },
         { title: "Reports", path: "/reports" },
         { title: "NSS Format", path: "/nss-format" },
-        { title: "Certificates", path: "https://djsnss-certificate.streamlit.app/" }
+        {
+          title: "Certificates",
+          path: "https://djsnss-certificate.streamlit.app/",
+        },
       ],
-    }
+    },
+    // { Icon: "GrArticle", title: "Blog", path: "/blog" },
   ];
 
   return (
@@ -147,8 +171,9 @@ const Navbar = () => {
                   <Link
                     to={path}
                     onClick={closeMenu}
-                    className={`flex items-center text-white px-3 py-1 rounded-md no-underline transition ${activeRoute === path ? "bg-white/20" : "hover:bg-white/10"
-                      }`}
+                    className={`flex items-center text-white px-3 py-1 rounded-md no-underline transition ${
+                      activeRoute === path ? "bg-white/20" : "hover:bg-white/10"
+                    }`}
                   >
                     <Suspense fallback={<div className="hidden"></div>}>
                       <LazyIconComponent className="text-xl mr-2" />
@@ -179,8 +204,11 @@ const Navbar = () => {
 
         {/* Mobile Navbar */}
         <div
-          className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${navOpen ? "h-screen bg-black backdrop-blur-md overflow-y-auto" : "h-12 bg-black/90 backdrop-blur-lg"
-            } flex flex-col items-center`}
+          className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+            navOpen
+              ? "h-screen bg-black backdrop-blur-md overflow-y-auto"
+              : "h-12 bg-black/90 backdrop-blur-lg"
+          } flex flex-col items-center`}
         >
           {/* Mobile Menu Button & Logo */}
           <div className="flex items-center justify-between px-3 py-2 w-full sticky top-0 bg-black z-10">
@@ -196,8 +224,9 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleNav}
-              className={`text-white text-3xl transition-transform duration-300 ${navOpen ? "rotate-180" : "rotate-0"
-                }`}
+              className={`text-white text-3xl transition-transform duration-300 ${
+                navOpen ? "rotate-180" : "rotate-0"
+              }`}
             >
               {navOpen ? <LuPanelRightClose /> : <IoIosArrowDown />}
             </button>
@@ -206,7 +235,9 @@ const Navbar = () => {
           {/* Mobile Menu */}
           <div
             className={`w-full flex flex-col items-center overflow-y-auto transition-all duration-500 ${
-              navOpen ? "max-h-[calc(100vh-3rem)] opacity-100 pb-16" : "max-h-0 opacity-0"
+              navOpen
+                ? "max-h-[calc(100vh-3rem)] opacity-100 pb-16"
+                : "max-h-0 opacity-0"
             }`}
           >
             {navigationLinks.map(({ Icon, title, path, subLinks }) => {
@@ -224,8 +255,9 @@ const Navbar = () => {
                       </Suspense>
                       {title}
                       <IoIosArrowDown
-                        className={`ml-auto transition-transform duration-300 ${dropdowns[title] ? "rotate-180" : "rotate-0"
-                          }`}
+                        className={`ml-auto transition-transform duration-300 ${
+                          dropdowns[title] ? "rotate-180" : "rotate-0"
+                        }`}
                       />
                     </button>
                   ) : (
@@ -246,7 +278,9 @@ const Navbar = () => {
                   {subLinks && (
                     <div
                       className={`bg-slate-950 transition-all duration-300 overflow-y-auto ${
-                        dropdowns[title] ? "m-2 max-h-[50vh] opacity-100 py-2" : "max-h-0 opacity-0"
+                        dropdowns[title]
+                          ? "m-2 max-h-[50vh] opacity-100 py-2"
+                          : "max-h-0 opacity-0"
                       }`}
                     >
                       {subLinks.map((subLink) => (
@@ -266,7 +300,6 @@ const Navbar = () => {
             })}
           </div>
         </div>
-
       </nav>
     </div>
   );

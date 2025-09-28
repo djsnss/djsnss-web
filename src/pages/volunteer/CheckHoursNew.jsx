@@ -161,10 +161,10 @@ const ProfileSummary = ({ events }) => {
         <p className="text-2xl font-bold">{totalEvents}</p>
         <p className="font-sans text-sm">Events Attended</p>
       </div>
-      <div className="text-center flex flex-col items-center justify-center text-white">
+      {/* <div className="text-center flex flex-col items-center justify-center text-white">
         <p className="text-2xl font-bold">{totalHours}</p>
         <p className="font-sans text-sm">Total Hours</p>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -172,7 +172,7 @@ const ProfileSummary = ({ events }) => {
 const EventCard = ({ event }) => (
   <div className="bg-black/40 shadow-lg p-4 rounded-lg flex flex-col items-center justify-center text-center">
     <h3 className="font-serif font-semibold text-white">{event.name}</h3>
-    <p className="font-sans text-sky-100 text-sm">Hours: {event.hours}</p>
+    {/* <p className="font-sans text-sky-100 text-sm">Hours: {event.hours}</p> */}
   </div>
 );
 

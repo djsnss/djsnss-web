@@ -6,6 +6,7 @@ import { largeEventsData } from "../data/largeEvents";
 import { universityEventsData } from "../data/universityEvents";
 import { TechnicalProjects } from "../data/technicalProjects";
 import { useState, useEffect } from "react";
+import toast from "react-hot-toast";
 
 // Combine all event data arrays
 const staticEventsData = [
@@ -25,7 +26,9 @@ const EventDetails = () => {
     const fetchEventData = async () => {
       try {
         setLoading(true);
-        const staticEvent = staticEventsData.find((event) => event.slug === slug);
+        const staticEvent = staticEventsData.find(
+          (event) => event.slug === slug
+        );
 
         if (staticEvent) {
           setEventDetail(staticEvent);
@@ -47,25 +50,33 @@ const EventDetails = () => {
         const upcomingEventsData = await upcomingEventsResponse.json();
 
         // Handle different response structures
-        const pastEvents = Array.isArray(pastEventsData) ? pastEventsData : pastEventsData.events || pastEventsData.data || [];
-        const upcomingEvents = Array.isArray(upcomingEventsData) ? upcomingEventsData : upcomingEventsData.events || upcomingEventsData.data || [];
+        const pastEvents = Array.isArray(pastEventsData)
+          ? pastEventsData
+          : pastEventsData.events || pastEventsData.data || [];
+        const upcomingEvents = Array.isArray(upcomingEventsData)
+          ? upcomingEventsData
+          : upcomingEventsData.events || upcomingEventsData.data || [];
 
         const allDynamicEvents = [...pastEvents, ...upcomingEvents];
 
-        const transformedEvents = allDynamicEvents.map(event => ({
+        const transformedEvents = allDynamicEvents.map((event) => ({
           title: event.name,
+          _id: event._id,
           description: event.description,
           longDescription: event.description, // You might want to add a longDescription field to your API
           scale: event.scope,
           duration: "TBD", // Add duration field to your API if needed
           location: event.location,
           date: new Date(event.date).toLocaleDateString(),
-          imageURL: event.photo?.url || '', // Handle the photo object
-          slug: event.slug
+          imageURL: event.photo?.url || "", // Handle the photo object
+          slug: event.slug,
+          status: event.status, // Default to 'upcoming' if status is missing
         }));
 
         // Find the event in API data
-        const foundEvent = transformedEvents.find((event) => event.slug === slug);
+        const foundEvent = transformedEvents.find(
+          (event) => event.slug === slug
+        );
 
         if (foundEvent) {
           setEventDetail(foundEvent);
@@ -82,6 +93,42 @@ const EventDetails = () => {
 
     fetchEventData();
   }, [slug]);
+
+  const handleRegister = async (eventId) => {
+    const authToken = localStorage.getItem("authToken");
+
+    if (!authToken) {
+      toast.error("You need to be logged in to register.");
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `https://djsnss-web.onrender.com/volunteer/events/${eventId}/register`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${authToken}`,
+          },
+          body: JSON.stringify({ eventId: eventId }),
+        }
+      );
+
+      if (response.ok) {
+        const result = await response.json();
+        console.log(result);
+        toast.success(`${result.message}`); // assuming the response contains eventName
+      } else {
+        // You can add a check here for specific error responses (e.g., 400, 401, etc.)
+        const errorData = await response.json();
+        toast.success(`${errorData.message}`);
+      }
+    } catch (error) {
+      console.error("Error registering:", error);
+      toast.error("An error occurred. Please try again later.");
+    }
+  };
 
   if (loading) {
     return (
@@ -150,14 +197,23 @@ const EventDetails = () => {
                   </p>
                 </div>
                 <div>
-                  <a
-                    href="https://djsnss-certificate.streamlit.app"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors no-underline hover:underline"
-                  >
-                    Generate Certificate &gt;
-                  </a>
+                  {eventDetail.status === "Upcoming" ? (
+                    <button
+                      onClick={() => handleRegister(eventDetail._id)}
+                      className="mt-3 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+                    >
+                      Register
+                    </button>
+                  ) : (
+                    <a
+                      href="https://djsnss-certificate.streamlit.app"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors no-underline hover:underline"
+                    >
+                      Generate Certificate &gt;
+                    </a>
+                  )}
                 </div>
               </div>
             </motion.div>

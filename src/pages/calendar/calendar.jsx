@@ -172,6 +172,7 @@
 import React, { useState, useEffect } from "react";
 import "./calendar.css";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const App = () => {
   const navigate = useNavigate();
@@ -241,7 +242,7 @@ const App = () => {
     const authToken = localStorage.getItem("authToken");
   
     if (!authToken) {
-      alert("You need to be logged in to register.");
+       toast.error("You need to be logged in to register.");
       return;
     }
   
@@ -257,15 +258,16 @@ const App = () => {
   
       if (response.ok) {
         const result = await response.json();
-        alert(`You have registered for ${result.name}`); // assuming the response contains eventName
+        console.log(result);
+        toast.success(`${result.message}`); // assuming the response contains eventName
       } else {
         // You can add a check here for specific error responses (e.g., 400, 401, etc.)
         const errorData = await response.json();
-        alert(`${errorData.message || 'An error occurred. Please try again later.'}`);
+        toast.success(`${errorData.message}`);
       }
     } catch (error) {
       console.error('Error registering:', error);
-      alert('An error occurred. Please try again later.');
+      toast.error('An error occurred. Please try again later.');
     }
   };
   
