@@ -53,21 +53,31 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
     setErrorMessage("");
 
     try {
-      // Make the API call to update the event
-      console.log(formData);
+      console.log("Submitting form data:", formData);
       const token = localStorage.getItem("adminAuthToken");
       const formDataToSend = new FormData();
+
       Object.keys(formData).forEach((key) => {
         if (key === "photo") {
-          formDataToSend.append("photo", formData.photo); // Append the file
+          // Only append if it's a File (not a preview object)
+          if (formData.photo instanceof File) {
+            formDataToSend.append("photo", formData.photo);
+          }
+          // Do NOT append photo if it's not a File
         } else {
           formDataToSend.append(key, formData[key]);
         }
       });
+
       await axios.put(
         `https://djsnss-web.onrender.com/admin/updateEvent/${formData._id}`,
-        { ...formDataToSend },
-        { headers: { Authorization: `Bearer ${token}` } }
+        formDataToSend,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            // Do not set Content-Type, let Axios handle it for FormData
+          },
+        }
       );
       setSuccessMessage("Event updated successfully");
       onEventUpdated(formData);
