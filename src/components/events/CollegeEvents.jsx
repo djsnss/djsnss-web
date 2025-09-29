@@ -252,7 +252,7 @@ const CollegeEvents = ({loading, localEventsData}) => {
           {localEventsData.map((event) => (
             <CCarouselItem key={event._id}>
               <CImage
-                className="d-block w-100 rounded-lg h-[50vh] sm:h-[60vh] bg-center object-cover"
+                className="d-block w-100 rounded-lg h-[60vh] sm:h-[65vh] bg-center object-cover"
                 src={event.photo.url}
                 alt={event.name}
               />
