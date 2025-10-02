@@ -1,7 +1,7 @@
 import cloudinary from "../config/cloudinary.js";
 import EventModel from "../models/event.js";
 import VolunteerModel from "../models/volunteer.js";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
 import { sendLogin, sendOTP } from "./nodemailerC.js";
