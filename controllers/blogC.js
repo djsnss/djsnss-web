@@ -9,7 +9,7 @@ export const createBlog = async (req, res, next) => {
     const { title, content, authorName } = req.body;
     if (!title || !content || !authorName) return res.status(400).json({ message: 'Missing required fields' });
 
-    const slug = title.lower().replace(' ', '-');
+    const slug = title.toLowerCase().replace(" ","-");
     
     // check unique slug
     const exists = await Blog.findOne({ slug });
