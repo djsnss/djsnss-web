@@ -19,8 +19,11 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       {/* Content Preview */}
       <div className="px-4 py-2 text-gray-700 text-sm ">{preview}</div>
       <div className="px-4 pb-4">
-        <Link to={`/blog/${slug}`} className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
+        <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
+         className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
       </div>
+     
+
       {/* Author & Date */}
       <div className="px-4 pb-2 text-xs text-gray-500">
         Author: <span className='font-bold underline '>{authorName}  </span> 
