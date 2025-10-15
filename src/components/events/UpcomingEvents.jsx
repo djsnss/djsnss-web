@@ -55,7 +55,7 @@ const UpcomingEvents = () => {
         </div>
       ) : upcomingEventsData.length === 0 ? (
         <p className="text-2xl md:text-3xl w-full text-center font-bold text-black">
-          No Local Events Available
+          No Upcoming Events Available
         </p>
       ) : (
         <CCarousel

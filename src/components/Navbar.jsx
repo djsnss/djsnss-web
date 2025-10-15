@@ -45,6 +45,9 @@ const iconMap = {
   GrArticle: React.lazy(() =>
     import("react-icons/gr").then((module) => ({ default: module.GrArticle }))
   ),
+  IoNewspaperOutline: React.lazy(() =>
+    import("react-icons/io5").then((module) => ({ default: module.IoNewspaperOutline }))
+  ),
 };
 
 const Navbar = () => {
@@ -108,6 +111,7 @@ const Navbar = () => {
         { title: "Blood Donation Drive", path: "/blood-donation-drive" },
       ],
     },
+    { Icon: "GrArticle", title: "Blog", path: "/blog" },
     { Icon: "IoIosPeople", title: "Team", path: "/team" },
     {
       Icon: "IoPeople",
@@ -141,14 +145,14 @@ const Navbar = () => {
         },
       ],
     },
-    // { Icon: "GrArticle", title: "Blog", path: "/blog" },
+    
   ];
 
   return (
     <div className="fixed top-0 left-0 right-0 md:px-4 z-50 flex justify-center pointer-events-none">
       <nav
         ref={menuRef}
-        className="pointer-events-auto w-full md:w-max md:mt-4 md:max-w-5xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50"
+        className="pointer-events-auto w-full md:w-max md:mt-3 md:max-w-5xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50 px-2 md:px-8"
       >
         {/* Desktop Navbar */}
         <div className="hidden md:flex items-center space-x-6 px-6 py-1">
