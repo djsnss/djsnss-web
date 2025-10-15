@@ -40,6 +40,8 @@ const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const AdminPass = React.lazy(() => import("./pages/admin/ChangePassword"));
 const AdminEmail = React.lazy(() => import("./pages/admin/ChangeEmail"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
+const UpdateBlog = React.lazy(() => import("./pages/admin/UpdateBlog"));
+const CreateBlog = React.lazy(() => import("./pages/admin/CreateBlog"));
 const CreateAnnouncement = React.lazy(() => import("./pages/admin/CreateAnnouncement"));
 const UpdateAnnouncement = React.lazy(() => import("./pages/admin/UpdateAnnouncement"));
 const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
@@ -49,6 +51,7 @@ const FolderTree = React.lazy(() => import("./components/FolderTree"));
 const TechnicalProject = React.lazy(() => import("./pages/TechnicalProject"));
 const VolunteerDetails = React.lazy(() => import("./pages/alumni/AlumniDetails"));
 const NSSFormat = React.lazy(() => import("./pages/NSSFormat"));
+const Blog = React.lazy(() => import("./pages/Blog"));
 import ProtectedRoute from "./components/ProtectedRoute";
 
 const App = () => {
@@ -88,6 +91,7 @@ const App = () => {
               <Route path="/timeline-tour" element={<TimelineTour />} />
               <Route path="/technical-project" element={<TechnicalProject />} />
               <Route path="/aboutus" element={<AboutUs />} />
+              {/* <Route path="/blog" element={<Blog />} /> */}
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/gallery" element={<Gallery />} />
               <Route path="/messages/:slug" element={<MessageDetails />} />
@@ -101,6 +105,8 @@ const App = () => {
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/create-event" element={<CreateEvent />} />
                 <Route path="/admin/update-event" element={<UpdateEvent />} />
+                <Route path="/admin/create-blog" element={<CreateBlog />} />
+                <Route path="/admin/update-blog" element={<UpdateBlog />} />
                 <Route path="/admin/create-announcement" element={<CreateAnnouncement />} />
                 <Route path="/admin/update-announcement" element={<UpdateAnnouncement />} />
                 <Route path="/admin/change-password" element={<AdminPass />} />
