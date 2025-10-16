@@ -1,15 +1,13 @@
 import React from 'react';
 import {Link} from "react-router-dom"; 
+import LinesEllipsis from 'react-lines-ellipsis';
 
 const Card = ({ title, image, content, authorName, date , slug }) => {
-
-  // Truncate content for preview
-  const preview = content.length > 180 ? content.slice(0, 180) + '...' : content;
 
   return (
     <div className="bg-white rounded-2xl shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins">
       {/* Title */}
-      <div className="px-4 pt-4  pb-2 font-semibold text-2xl">{title}</div>
+      <div className="px-11 py-8 font-semibold text-2xl font-sans">{title}</div>
       
       {/* Image */}
       <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh]">
@@ -17,16 +15,24 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       </div>
 
       {/* Content Preview */}
-      <div className="px-4 py-2 text-gray-700 text-sm ">{preview}</div>
+      <div className="px-4 py-5 text-black text-lg ">
+        <LinesEllipsis
+          text={content}
+          maxLine='5'
+          ellipsis='...'
+          trimRight
+          basedOn='letters'
+        />
+      </div>
       <div className="px-4 pb-4">
-        <Link to={`/blog/${slug}`} className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
+        <Link to={`/blog/${slug}`} className="text-[#041887] hover:underline text-md">Continue Reading →</Link>
       </div>
       {/* Author & Date */}
-      <div className="px-4 pb-2 text-xs text-gray-500">
-        Author: <span className='font-bold underline '>{authorName}  </span> 
+      <div className="px-4 pb-2 text-sm text-black">
+        Author: <span className='font-bold underline'>{authorName}  </span> 
       </div>
-      <div className="px-4 pb-2 text-xs text-gray-500">
-        Date: {date}   
+      <div className="px-4 pb-2 text-sm text-black">
+        Published On: {date}   
       </div>
       {/* Continue Reading */}
       
