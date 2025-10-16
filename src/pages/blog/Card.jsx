@@ -24,9 +24,12 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
           basedOn='letters'
         />
       </div>
-      <div className="px-4 pb-4">
-        <Link to={`/blog/${slug}`} className="text-[#041887] hover:underline text-md">Continue Reading →</Link>
-      </div>
+        <div className="px-4 pb-4">
+          <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
+           className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
+        </div>
+     
+
       {/* Author & Date */}
       <div className="px-4 pb-2 text-sm text-black">
         Author: <span className='font-bold underline'>{authorName}  </span> 
