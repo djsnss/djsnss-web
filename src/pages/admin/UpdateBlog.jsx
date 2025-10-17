@@ -3,9 +3,9 @@ import axios from "axios";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
-import EditBlogPopup from "../EditBlogPopup";
+import EditBlogPopup from "./EditBlogPopup";
 
-export default function UpdateBlogPage() {
+export default function UpdateBlog() {
   const [blogs, setBlogs] = useState([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
