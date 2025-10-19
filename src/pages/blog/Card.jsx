@@ -6,12 +6,14 @@ import logo from '../../assets/DJSNSSLogo.png';
 const Card = ({ title, image, content, authorName, date , slug }) => {
 
   return (
-    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins">
+    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins relative">
       {/* Title */}
-      <div className="px-11  pt-8 pb-6 font-semibold text-2xl font-sans">{title}</div>
+      <div className="px-11 py-6 font-semibold text-2xl font-sans">{title}</div>
       
        {/* Image */}
       <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh] relative">
+        {/* top-center "v" notch overlapping the title area - adjust w-6/h-6 and -top-3 to change size/position */}
+        <div className="absolute -top-3 left-12  w-6 h-6 rotate-45 bg-white shadow-md z-20 pointer-events-none" />
         <img src={image} alt={title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
         <img 
           src={logo} 
