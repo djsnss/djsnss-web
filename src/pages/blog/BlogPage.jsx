@@ -15,7 +15,7 @@ const BlogPage = () => {
           {title}
         </div>
 
-        <div className=" w-full mb-6 rounded-md overflow-hidden rounded-xl">
+        <div className=" w-full mb-6 rounded-md overflow-hidden">
           <img src={image} alt={title}></img>
         </div>
 
