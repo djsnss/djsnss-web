@@ -1,17 +1,23 @@
 import React from 'react';
 import {Link} from "react-router-dom"; 
 import LinesEllipsis from 'react-lines-ellipsis';
+import logo from '../../assets/DJSNSSLogo.png';
 
 const Card = ({ title, image, content, authorName, date , slug }) => {
 
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins">
+    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins">
       {/* Title */}
-      <div className="px-11 py-8 font-semibold text-2xl font-sans">{title}</div>
+      <div className="px-11  pt-8 pb-6 font-semibold text-2xl font-sans">{title}</div>
       
-      {/* Image */}
-      <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh]">
-        <img src={image} alt={title} className=" w-full h-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85 " />
+       {/* Image */}
+      <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh] relative">
+        <img src={image} alt={title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
+        <img 
+          src={logo} 
+          alt="NSS Logo" 
+          className="absolute top-2 right-2 w-12 h-12 object-contain bg-white/70 backdrop-blur-sm rounded-full p-1"
+        />
       </div>
 
       {/* Content Preview */}
