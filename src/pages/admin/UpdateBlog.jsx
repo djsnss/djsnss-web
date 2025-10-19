@@ -4,28 +4,29 @@ import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { MdOutlineDelete } from "react-icons/md";
 import EditBlogPopup from "./EditBlogPopup";
+import toast from "react-hot-toast";
 
 export default function UpdateBlog() {
   const [blogs, setBlogs] = useState([]);
   const [loadingBlogs, setLoadingBlogs] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedBlog, setSelectedBlog] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null); // for confirmation modal
   const navigate = useNavigate();
 
-  // Check admin auth
+  // ✅ Check admin auth
   useEffect(() => {
     if (!localStorage.getItem("adminAuthToken")) {
       navigate("/unauthorized");
     }
   }, [navigate]);
 
-  // Fetch blogs
+  // ✅ Fetch blogs
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
         const res = await axios.get("https://djsnss-web.onrender.com/blogs");
 
-        // ✅ Handle correct key and structure
         const blogsData = Array.isArray(res.data.Blogs)
           ? res.data.Blogs
           : Array.isArray(res.data.blogs)
@@ -36,6 +37,7 @@ export default function UpdateBlog() {
       } catch (err) {
         console.error("Error fetching blogs:", err);
         setErrorMessage("Failed to load blogs.");
+        toast.error("Failed to load blogs.");
       } finally {
         setLoadingBlogs(false);
       }
@@ -43,27 +45,38 @@ export default function UpdateBlog() {
     fetchBlogs();
   }, []);
 
-  // Delete blog
-  const handleDeleteBlog = async (slug) => {
-    if (window.confirm("Are you sure you want to delete this blog?")) {
-      try {
-        await axios.delete(`https://djsnss-web.onrender.com/blogs/${slug}`);
-        setBlogs((prev) => prev.filter((b) => b.slug !== slug));
-      } catch (error) {
-        console.error("Error deleting blog:", error);
-        setErrorMessage("Failed to delete blog. Please try again.");
-      }
+  // ✅ Delete blog (triggered after confirmation)
+  const confirmDeleteBlog = async () => {
+    if (!deleteTarget) return;
+    try {
+       const token = localStorage.getItem("adminAuthToken");
+      await axios.delete(
+        `https://djsnss-web.onrender.com/blogs/${deleteTarget.slug}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setBlogs((prev) => prev.filter((b) => b.slug !== deleteTarget.slug));
+      toast.success("Blog deleted successfully!");
+    } catch (error) {
+      toast.error(error.message);
+    } finally {
+      setDeleteTarget(null);
     }
   };
 
-  // Edit blog popup
+  // ✅ Edit blog popup handlers
   const handleSelectBlog = (blog) => setSelectedBlog(blog);
   const closePopup = () => setSelectedBlog(null);
 
+  // ✅ Blog updated
   const handleBlogUpdated = (updated) => {
     setBlogs((prev) =>
       prev.map((b) => (b.slug === updated.slug ? updated : b))
     );
+    toast.success("Blog updated successfully!");
     closePopup();
   };
 
@@ -124,7 +137,7 @@ export default function UpdateBlog() {
                       Edit
                     </button>
                     <button
-                      onClick={() => handleDeleteBlog(blog.slug)}
+                      onClick={() => setDeleteTarget(blog)}
                       className="px-4 py-2 bg-[#d9534f] text-white rounded-md hover:bg-[#c9302c] flex items-center"
                     >
                       <MdOutlineDelete className="mr-1" /> Delete
@@ -137,13 +150,45 @@ export default function UpdateBlog() {
         )}
       </div>
 
-      {/* Popup */}
+      {/* Edit Popup */}
       {selectedBlog && (
         <EditBlogPopup
           blog={selectedBlog}
           onClose={closePopup}
           onBlogUpdated={handleBlogUpdated}
         />
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteTarget && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-xl p-6 w-[90%] max-w-md text-center">
+            <h3 className="text-xl font-semibold text-[#003366] mb-3">
+              Delete Blog?
+            </h3>
+            <p className="text-sm text-gray-600 mb-6">
+              Are you sure you want to delete{" "}
+              <span className="font-semibold text-[#003366]">
+                {deleteTarget.title}
+              </span>
+              ?
+            </p>
+            <div className="flex justify-center gap-4">
+              <button
+                onClick={confirmDeleteBlog}
+                className="px-5 py-2 bg-[#d9534f] text-white rounded-md hover:bg-[#c9302c] transition"
+              >
+                Delete
+              </button>
+              <button
+                onClick={() => setDeleteTarget(null)}
+                className="px-5 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );
