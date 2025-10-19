@@ -1,0 +1,1350 @@
+{
+  "info": {
+    "_postman_id": "e8a5b6d7-4c19-4e5f-8a3e-1f2b3c4d5e6f",
+    "name": "DJSNSS Website API",
+    "description": "Complete API collection for DJSNSS Website backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Admin Routes",
+      "description": "Endpoints for admin authentication and operations",
+      "item": [
+        {
+          "name": "Admin Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"yourpassword\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/login",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "login"]
+            },
+            "description": "Login for admin users"
+          }
+        },
+        {
+          "name": "Admin Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/logout",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "logout"]
+            },
+            "description": "Logout for admin users"
+          }
+        },
+        {
+          "name": "Verify Admin Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/verify-token",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "verify-token"]
+            },
+            "description": "Verify admin authentication token"
+          }
+        },
+        {
+          "name": "Get All Volunteers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/getAllVolunteers",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "getAllVolunteers"]
+            },
+            "description": "Get a list of all volunteers"
+          }
+        },
+        {
+          "name": "Get Volunteer by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/getVolunteer/:id",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "getVolunteer", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "volunteer_id_here"
+                }
+              ]
+            },
+            "description": "Get volunteer details by ID"
+          }
+        },
+        {
+          "name": "Update Volunteer",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"Updated Name\",\n    \"email\": \"updated@email.com\",\n    \"phoneNumber\": \"9876543210\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/updateVolunteer/:id",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "updateVolunteer", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "volunteer_id_here"
+                }
+              ]
+            },
+            "description": "Update volunteer details"
+          }
+        },
+        {
+          "name": "Delete Volunteer",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/deleteVolunteer/:id",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "deleteVolunteer", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "volunteer_id_here"
+                }
+              ]
+            },
+            "description": "Delete a volunteer"
+          }
+        },
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Event Name",
+                  "type": "text"
+                },
+                {
+                  "key": "slug",
+                  "value": "event-name",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Short description",
+                  "type": "text"
+                },
+                {
+                  "key": "longDescription",
+                  "value": "Long detailed description",
+                  "type": "text"
+                },
+                {
+                  "key": "startHours",
+                  "value": "10:00",
+                  "type": "text"
+                },
+                {
+                  "key": "endHours",
+                  "value": "14:00",
+                  "type": "text"
+                },
+                {
+                  "key": "TotalNoOfHours",
+                  "value": "4",
+                  "type": "text"
+                },
+                {
+                  "key": "date",
+                  "value": "2025-10-20",
+                  "type": "text"
+                },
+                {
+                  "key": "location",
+                  "value": "DJ Sanghvi College",
+                  "type": "text"
+                },
+                {
+                  "key": "maxVolunteers",
+                  "value": "50",
+                  "type": "text"
+                },
+                {
+                  "key": "status",
+                  "value": "Upcoming",
+                  "type": "text"
+                },
+                {
+                  "key": "scope",
+                  "value": "Local",
+                  "type": "text"
+                },
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": "/path/to/image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/createEvent",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "createEvent"]
+            },
+            "description": "Create a new event"
+          }
+        },
+        {
+          "name": "Get Event by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/event/:eventId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "event", ":eventId"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Get event details by ID"
+          }
+        },
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/getAllEvents",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "getAllEvents"]
+            },
+            "description": "Get all events"
+          }
+        },
+        {
+          "name": "Update Event",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Updated Event Name",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "Updated description",
+                  "type": "text"
+                },
+                {
+                  "key": "photo",
+                  "type": "file",
+                  "src": "/path/to/image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/updateEvent/:eventId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "updateEvent", ":eventId"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Update an existing event"
+          }
+        },
+        {
+          "name": "Delete Event",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/deleteEvent/:eventId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "deleteEvent", ":eventId"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Delete an event"
+          }
+        },
+        {
+          "name": "Get Volunteers by Event",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/:eventId/volunteers",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", ":eventId", "volunteers"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Get volunteers registered for a specific event"
+          }
+        },
+        {
+          "name": "Remove Volunteer from Event",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/:eventId/volunteers/:volunteerId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", ":eventId", "volunteers", ":volunteerId"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                },
+                {
+                  "key": "volunteerId",
+                  "value": "volunteer_id_here"
+                }
+              ]
+            },
+            "description": "Remove a volunteer from an event"
+          }
+        },
+        {
+          "name": "Update Volunteer Hours",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"eventId\": \"event_id_here\",\n    \"attendanceList\": [\n        {\n            \"volunteerId\": \"volunteer_id_here\",\n            \"attended\": true\n        }\n    ]\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/updateHours",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "updateHours"]
+            },
+            "description": "Update volunteer hours for an event"
+          }
+        },
+        {
+          "name": "Get Event Stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/:eventId/stats",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", ":eventId", "stats"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Get statistics for an event"
+          }
+        },
+        {
+          "name": "Get Attendance List",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/getAttendanceList/:eventId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "getAttendanceList", ":eventId"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Get attendance list for an event"
+          }
+        },
+        {
+          "name": "Change Admin Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"currentPassword\": \"oldpassword\",\n    \"newPassword\": \"newpassword\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/change-password",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "change-password"]
+            },
+            "description": "Change admin password"
+          }
+        },
+        {
+          "name": "Change Admin Email",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"password\": \"currentpassword\",\n    \"newEmail\": \"newemail@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/change-email",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "change-email"]
+            },
+            "description": "Change admin email"
+          }
+        },
+        {
+          "name": "Send OTP for Password Change",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/send-otp",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "send-otp"]
+            },
+            "description": "Send OTP for admin password change"
+          }
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/forgot-password",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "forgot-password"]
+            },
+            "description": "Request password reset for admin"
+          }
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"admin@example.com\",\n    \"otp\": \"123456\",\n    \"newPassword\": \"newpassword\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/admin/reset-password",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["admin", "reset-password"]
+            },
+            "description": "Reset admin password with OTP"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Volunteer Routes",
+      "description": "Endpoints for volunteer operations",
+      "item": [
+        {
+          "name": "Volunteer Registration",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "name",
+                  "value": "Volunteer Name",
+                  "type": "text"
+                },
+                {
+                  "key": "branch",
+                  "value": "Computer Engineering",
+                  "type": "text"
+                },
+                {
+                  "key": "sapId",
+                  "value": "60004210123",
+                  "type": "text"
+                },
+                {
+                  "key": "caste",
+                  "value": "General",
+                  "type": "text"
+                },
+                {
+                  "key": "gender",
+                  "value": "Male",
+                  "type": "text"
+                },
+                {
+                  "key": "phoneNumber",
+                  "value": "9876543210",
+                  "type": "text"
+                },
+                {
+                  "key": "email",
+                  "value": "volunteer@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "password",
+                  "value": "password123",
+                  "type": "text"
+                },
+                {
+                  "key": "hobbies",
+                  "value": "Reading, Sports",
+                  "type": "text"
+                },
+                {
+                  "key": "motherName",
+                  "value": "Mother Name",
+                  "type": "text"
+                },
+                {
+                  "key": "fatherName",
+                  "value": "Father Name",
+                  "type": "text"
+                },
+                {
+                  "key": "motherEmail",
+                  "value": "mother@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "fatherEmail",
+                  "value": "father@example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "description",
+                  "value": "About myself",
+                  "type": "text"
+                },
+                {
+                  "key": "passport",
+                  "type": "file",
+                  "src": "/path/to/passport.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/signup",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "signup"]
+            },
+            "description": "Register as a volunteer"
+          }
+        },
+        {
+          "name": "Volunteer Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"volunteer@example.com\",\n    \"password\": \"password123\",\n    \"sapId\": \"60004210123\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/login",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "login"]
+            },
+            "description": "Login for volunteers"
+          }
+        },
+        {
+          "name": "Volunteer Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/logout",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "logout"]
+            },
+            "description": "Logout for volunteer"
+          }
+        },
+        {
+          "name": "Verify Volunteer Token",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/verify-token",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "verify-token"]
+            },
+            "description": "Verify volunteer authentication token"
+          }
+        },
+        {
+          "name": "Register for Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"eventId\": \"event_id_here\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/events/:eventId/register",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "events", ":eventId", "register"],
+              "variable": [
+                {
+                  "key": "eventId",
+                  "value": "event_id_here"
+                }
+              ]
+            },
+            "description": "Register volunteer for an event"
+          }
+        },
+        {
+          "name": "Upload Profile Photo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/path/to/profile.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/upload-normalPhoto",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "upload-normalPhoto"]
+            },
+            "description": "Upload profile photo for volunteer"
+          }
+        },
+        {
+          "name": "Update Profile Photo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/path/to/profile.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/update-normalPhoto",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "update-normalPhoto"]
+            },
+            "description": "Update profile photo for volunteer"
+          }
+        },
+        {
+          "name": "Check Volunteered Hours",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{authToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/checkHours",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "checkHours"]
+            },
+            "description": "Check volunteer's completed hours"
+          }
+        },
+        {
+          "name": "Send OTP for Password Change",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"volunteer@example.com\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/send-otp",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "send-otp"]
+            },
+            "description": "Send OTP for volunteer password change"
+          }
+        },
+        {
+          "name": "Change Volunteer Password",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"volunteer@example.com\",\n    \"otp\": \"123456\",\n    \"newPassword\": \"newpassword\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/volunteer/change-password",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["volunteer", "change-password"]
+            },
+            "description": "Change volunteer password with OTP"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Event Routes",
+      "description": "Endpoints for event operations",
+      "item": [
+        {
+          "name": "Get Upcoming Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/events/upcoming-events",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["events", "upcoming-events"]
+            },
+            "description": "Get all upcoming events"
+          }
+        },
+        {
+          "name": "Get Past Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/events/past-events",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["events", "past-events"]
+            },
+            "description": "Get all past events"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blog Routes",
+      "description": "Endpoints for blog operations",
+      "item": [
+        {
+          "name": "Get All Blogs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/blogs",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["blogs"]
+            },
+            "description": "Get all blog posts"
+          }
+        },
+        {
+          "name": "Get Blog by Slug",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/blogs/:slug",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["blogs", ":slug"],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "blog-slug-here"
+                }
+              ]
+            },
+            "description": "Get blog details by slug"
+          }
+        },
+        {
+          "name": "Create Blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Blog Title",
+                  "type": "text"
+                },
+                {
+                  "key": "slug",
+                  "value": "blog-title",
+                  "type": "text"
+                },
+                {
+                  "key": "content",
+                  "value": "Blog content here",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/path/to/image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/blogs",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["blogs"]
+            },
+            "description": "Create a new blog post"
+          }
+        },
+        {
+          "name": "Update Blog",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Updated Blog Title",
+                  "type": "text"
+                },
+                {
+                  "key": "content",
+                  "value": "Updated blog content",
+                  "type": "text"
+                },
+                {
+                  "key": "image",
+                  "type": "file",
+                  "src": "/path/to/image.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/blogs/:slug",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["blogs", ":slug"],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "blog-slug-here"
+                }
+              ]
+            },
+            "description": "Update an existing blog post"
+          }
+        },
+        {
+          "name": "Delete Blog",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/blogs/:slug",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["blogs", ":slug"],
+              "variable": [
+                {
+                  "key": "slug",
+                  "value": "blog-slug-here"
+                }
+              ]
+            },
+            "description": "Delete a blog post"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Announcement Routes",
+      "description": "Endpoints for announcement operations",
+      "item": [
+        {
+          "name": "Get All Announcements",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/announcements/get-announcements",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["announcements", "get-announcements"]
+            },
+            "description": "Get all announcements"
+          }
+        },
+        {
+          "name": "Get Announcement by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/announcements/get-announcement/:announcementId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["announcements", "get-announcement", ":announcementId"],
+              "variable": [
+                {
+                  "key": "announcementId",
+                  "value": "announcement_id_here"
+                }
+              ]
+            },
+            "description": "Get announcement details by ID"
+          }
+        },
+        {
+          "name": "Create Announcement",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Announcement Title",
+                  "type": "text"
+                },
+                {
+                  "key": "typeOfContent",
+                  "value": "text",
+                  "type": "text",
+                  "description": "Options: text, url, pdf"
+                },
+                {
+                  "key": "content",
+                  "value": "Announcement content here",
+                  "type": "text"
+                },
+                {
+                  "key": "urlLink",
+                  "value": "https://example.com",
+                  "type": "text"
+                },
+                {
+                  "key": "announcement",
+                  "type": "file",
+                  "src": "/path/to/document.pdf",
+                  "description": "PDF file for announcement"
+                },
+                {
+                  "key": "isNew",
+                  "value": "true",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/announcements/create",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["announcements", "create"]
+            },
+            "description": "Create a new announcement"
+          }
+        },
+        {
+          "name": "Update Announcement",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "title",
+                  "value": "Updated Announcement Title",
+                  "type": "text"
+                },
+                {
+                  "key": "content",
+                  "value": "Updated announcement content",
+                  "type": "text"
+                },
+                {
+                  "key": "isNew",
+                  "value": "false",
+                  "type": "text"
+                },
+                {
+                  "key": "announcement",
+                  "type": "file",
+                  "src": "/path/to/document.pdf",
+                  "description": "PDF file for announcement"
+                }
+              ]
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/announcements/update-announcement/:announcementId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": [
+                "announcements",
+                "update-announcement",
+                ":announcementId"
+              ],
+              "variable": [
+                {
+                  "key": "announcementId",
+                  "value": "announcement_id_here"
+                }
+              ]
+            },
+            "description": "Update an existing announcement"
+          }
+        },
+        {
+          "name": "Delete Announcement",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{adminAuthToken}}"
+              }
+            ],
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/announcements/delete-announcement/:announcementId",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": [
+                "announcements",
+                "delete-announcement",
+                ":announcementId"
+              ],
+              "variable": [
+                {
+                  "key": "announcementId",
+                  "value": "announcement_id_here"
+                }
+              ]
+            },
+            "description": "Delete an announcement"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contact Routes",
+      "description": "Endpoints for contact form",
+      "item": [
+        {
+          "name": "Send Contact Message",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"name\": \"John Doe\",\n    \"email\": \"john@example.com\",\n    \"subject\": \"Inquiry\",\n    \"message\": \"This is a test message.\"\n}"
+            },
+            "url": {
+              "raw": "https://djsnss-web.onrender.com/contact/send-message",
+              "protocol": "https",
+              "host": ["djsnss-web.onrender.com"],
+              "path": ["contact", "send-message"]
+            },
+            "description": "Send a contact form message"
+          }
+        }
+      ]
+    }
+  ]
+}
