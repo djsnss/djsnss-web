@@ -35,11 +35,13 @@ const Events = React.lazy(() => import("./pages/Events"));
 const Team = React.lazy(() => import("./pages/Team"));
 const AdminDashboard = React.lazy(() => import("./pages/admin/Dashboard"));
 const CreateEvent = React.lazy(() => import("./pages/admin/CreateEvent"));
+const CreateBlog = React.lazy(() => import("./pages/admin/CreateBlog"));
 const Unauthorized = React.lazy(() => import("./pages/Unauthorized"));
 const AdminLogin = React.lazy(() => import("./pages/admin/Login"));
 const AdminPass = React.lazy(() => import("./pages/admin/ChangePassword"));
 const AdminEmail = React.lazy(() => import("./pages/admin/ChangeEmail"));
 const UpdateEvent = React.lazy(() => import("./pages/admin/UpdateEvent"));
+const UpdateBlog = React.lazy(() => import("./pages/admin/UpdateBlog"));
 const CreateAnnouncement = React.lazy(() => import("./pages/admin/CreateAnnouncement"));
 const UpdateAnnouncement = React.lazy(() => import("./pages/admin/UpdateAnnouncement"));
 const EditVolunteerDetails = React.lazy(() => import("./pages/admin/EditVolunteerDetails"));
@@ -104,6 +106,8 @@ const App = () => {
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/create-event" element={<CreateEvent />} />
                 <Route path="/admin/update-event" element={<UpdateEvent />} />
+                <Route path="/admin/create-blog" element={<CreateBlog />} />
+                <Route path="/admin/update-blog" element={<UpdateBlog />} />
                 <Route path="/admin/create-announcement" element={<CreateAnnouncement />} />
                 <Route path="/admin/update-announcement" element={<UpdateAnnouncement />} />
                 <Route path="/admin/change-password" element={<AdminPass />} />

@@ -33,6 +33,7 @@ export default function EditBlogPopup({ blog, onClose, onBlogUpdated }) {
 
     try {
       const data = new FormData();
+      const token = localStorage.getItem("adminAuthToken");
       data.append("title", formData.title);
       data.append("content", formData.content);
       data.append("authorName", formData.authorName);
@@ -41,7 +42,9 @@ export default function EditBlogPopup({ blog, onClose, onBlogUpdated }) {
       const res = await axios.put(
         `https://djsnss-web.onrender.com/blogs/${blog.slug}`,
         data,
-        { headers: { "Content-Type": "multipart/form-data" } }
+        { headers: {
+            Authorization: `Bearer ${token}`,
+          }, }
       );
 
       onBlogUpdated(res.data);
