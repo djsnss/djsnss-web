@@ -99,6 +99,9 @@ const App = () => {
               <Route path="/faq" element={<FAQ />} />
               <Route path="/update-event" element={<UpdateEvent />} />
               <Route path="/unauthorized" element={<Unauthorized />} />
+              {/* Blog route */}
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPage />} />
 
               <Route path="/admin/login" element={<AdminLogin />} />
               {/* Protected admin routes */}
@@ -126,9 +129,7 @@ const App = () => {
               <Route path="/nss-format" element={<NSSFormat />} />
               <Route path="/alumni-details/:name" element={<VolunteerDetails />} />
 
-              {/* Blog route */}
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPage />} />
+              
             
 
 
