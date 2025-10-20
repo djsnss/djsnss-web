@@ -10,10 +10,12 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       <div className="px-8 py-4 sm:px-11 sm:py-6 font-bold text-3xl sm:text-4xl font-lateef">{title}</div>
       
        {/* Image */}
-      <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh] relative">
+      <div className="overflow-hidden w-full max-h-[50vh] relative">
         {/* top-center "v" notch overlapping the title area - adjust w-6/h-6 and -top-3 to change size/position */}
         <div className="absolute -top-3 left-12  w-6 h-6 rotate-45 bg-white shadow-md z-20 pointer-events-none" />
-        <img src={image} alt={title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
+        
+        <img src={image} alt={title} className="w-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
+        
         <img 
           src={logo} 
           alt="NSS Logo" 
