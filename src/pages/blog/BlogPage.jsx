@@ -11,7 +11,8 @@ const BlogPage = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`https://djsnss-web.onrender.com/blogs/${slug}`);
+        const encodedSlug = encodeURIComponent(slug);
+        const res = await fetch(`https://djsnss-web.onrender.com/blogs/${encodedSlug}`);
         if (!res.ok) throw new Error("Failed to fetch blog");
         const data = await res.json();
         setBlog(data.Blog || data);

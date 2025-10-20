@@ -1,6 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom"; 
-import LinesEllipsis from 'react-lines-ellipsis';
+import {Link} from "react-router-dom";
 import logo from '../../assets/DJSNSSLogo.png';
 
 const Card = ({ title, image, content, authorName, date , slug }) => {
@@ -23,19 +22,14 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       </div>
 
       {/* Content Preview */}
-      <div className="px-4 py-5 text-black text-lg ">
-        <LinesEllipsis
-          text={content}
-          maxLine='5'
-          ellipsis='...'
-          trimRight
-          basedOn='letters'
-        />
+      <p className="px-4 py-5 text-black text-lg whitespace-pre-line">
+        {`${content.substring(0, 100)}...`}
+      </p>
+      
+      <div className="px-4 pb-4">
+        <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
+          className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
       </div>
-        <div className="px-4 pb-4">
-          <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
-           className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
-        </div>
      
 
       {/* Author & Date */}
