@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CustomLoader2 from "../../components/Loaders/CustomLoader2";
+import logo from '../../assets/DJSNSSLogo.png';
 
 const BlogPage = () => {
   const { slug } = useParams();
@@ -50,7 +51,7 @@ const BlogPage = () => {
       <div className="mt-10 relative bg-white shadow-lg w-[95%] sm:w-[90%] p-3 sm:p-4 md:p-8">
         {/* Logo */}
         <img
-          src="../src/assets/DJSNSSLogo.png"
+          src={logo}
           alt="Logo"
           className="absolute top-4 right-4 w-12 sm:w-14 md:w-20 object-cover"
         />
