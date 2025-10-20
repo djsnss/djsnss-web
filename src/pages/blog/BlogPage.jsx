@@ -61,7 +61,7 @@ const BlogPage = () => {
         </h1>
 
         {/* Image */}
-        <div className="w-full lg:h-[70vh] mb-6 rounded-xl overflow-hidden mt-4">
+        <div className="w-full max-h-[90vh] mb-6 rounded-xl overflow-hidden mt-4">
           <img src={image} alt={title} className="w-full object-contain" />
         </div>
 
