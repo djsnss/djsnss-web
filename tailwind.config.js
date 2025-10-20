@@ -7,6 +7,10 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+        opensans: ["Open Sans", "sans-serif"],
+        lateef: ["Lateef", "serif"],
+        geist: ["Geist", "sans-serif"],
       },
       backgroundImage: {
         'timeline': "url('./src/assets/Timeline/waves.gif')", 

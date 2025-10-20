@@ -5,9 +5,9 @@ import logo from '../../assets/DJSNSSLogo.png';
 const Card = ({ title, image, content, authorName, date , slug }) => {
 
   return (
-    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins relative">
+    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-roboto relative">
       {/* Title */}
-      <div className="px-11 py-6 font-semibold text-2xl font-sans">{title}</div>
+      <div className="px-8 py-4 sm:px-11 sm:py-6 font-bold text-3xl sm:text-4xl font-lateef">{title}</div>
       
        {/* Image */}
       <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh] relative">
@@ -22,21 +22,21 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       </div>
 
       {/* Content Preview */}
-      <p className="px-4 py-5 text-black text-lg whitespace-pre-line">
+      <p className="px-4 py-4 sm:py-5 text-black text-md sm:text-lg font-roboto whitespace-pre-line">
         {`${content.substring(0, 100)}...`}
       </p>
       
       <div className="px-4 pb-4">
         <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
-          className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
+          className="text-blue-600 hover:underline text-xs sm:text-sm">Continue Reading →</Link>
       </div>
      
 
       {/* Author & Date */}
-      <div className="px-4 pb-2 text-sm text-black">
+      <div className="px-4 pb-2 text-xs sm:text-sm text-black">
         Author: <span className='font-bold underline'>{authorName}  </span> 
       </div>
-      <div className="px-4 pb-2 text-sm text-black">
+      <div className="px-4 pb-2 text-xs sm:text-sm text-black">
         Published On: {date}   
       </div>
       {/* Continue Reading */}

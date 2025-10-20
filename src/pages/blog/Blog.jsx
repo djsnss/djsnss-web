@@ -37,8 +37,8 @@ const Blog = () => {
   }, []);
 
   return (
-    <div className="w-full bg-[#CBE3FF] min-h-screen flex flex-col items-center pt-20">
-      <h1 className="mx-auto mb-6 py-4 text-center text-3xl md:text-6xl font-bold text-black">
+    <div className="w-full bg-[#CBE3FF] min-h-screen flex flex-col items-center pt-20 font-roboto">
+      <h1 className="mx-auto mb-6 py-2 lg:py-4 text-center text-4xl md:text-5xl lg:text-6xl font-bold font-geist text-black">
         BLOG
       </h1>
       {loading ? (
