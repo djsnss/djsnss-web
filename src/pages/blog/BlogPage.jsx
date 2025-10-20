@@ -35,8 +35,8 @@ const BlogPage = () => {
       </div>
     );
   if (error)
-    return <div className="text-center py-20 text-red-500">{error}</div>;
-  if (!blog) return <div className="text-center py-20">No blog found</div>;
+    return <div className="min-h-screen max-w-screen flex items-center justify-center text-center font-roboto text-red-500">{error}</div>;
+  if (!blog) return <div className="min-h-screen max-w-screen flex items-center justify-center text-center font-roboto">No blog found</div>;
 
   const { title, image, content, authorName, date } = blog;
 
