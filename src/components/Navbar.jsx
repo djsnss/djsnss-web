@@ -9,6 +9,7 @@ import { Link, useLocation } from "react-router-dom";
 import { FiHome } from "react-icons/fi";
 import { IoIosArrowDown } from "react-icons/io";
 import { LuPanelRightClose } from "react-icons/lu";
+import logo from "../assets/DJSNSSLogo.png";
 
 const iconMap = {
   FiHome: FiHome,
@@ -149,13 +150,16 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="fixed top-0 left-0 right-0 md:px-4 z-50 flex justify-center pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 lg:px-4 z-50 flex justify-center pointer-events-none">
       <nav
         ref={menuRef}
-        className="pointer-events-auto w-full md:w-max md:mt-3 md:max-w-5xl bg-slate-950 md:bg-slate-950/50 text-white shadow-black/50 md:border shadow-lg backdrop-blur-md rounded-none md:rounded-full z-50 px-2 md:px-8"
+        className="pointer-events-auto w-full lg:w-full lg:mt-3 lg:max-w-5xl bg-slate-950 lg:bg-slate-950/50 text-white shadow-black/50 lg:border shadow-lg backdrop-blur-md rounded-none lg:rounded-full z-50 px-2 lg:px-8"
       >
         {/* Desktop Navbar */}
-        <div className="hidden md:flex items-center space-x-6 px-6 py-1">
+        <div className="hidden lg:flex items-center space-x-6 px-6 py-1">
+          <Link to="/" className="flex-shrink-0 h-9 w-9 items-center no-underline">
+            <img src={logo} alt="Logo" className="h-full w-full bg-white rounded-sm" />
+          </Link>
           {navigationLinks.map(({ Icon, title, path, subLinks }) => {
             const LazyIconComponent = iconMap[Icon];
             return (
@@ -208,7 +212,7 @@ const Navbar = () => {
 
         {/* Mobile Navbar */}
         <div
-          className={`md:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          className={`lg:hidden fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
             navOpen
               ? "h-screen bg-black backdrop-blur-md overflow-y-auto"
               : "h-12 bg-black/90 backdrop-blur-lg"
@@ -219,9 +223,10 @@ const Navbar = () => {
             {/* Logo */}
             <a
               href="/"
-              className={`text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300
+              className={`flex items-center gap-3 text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300
               }`}
             >
+              <img src={logo} alt="Logo" className="h-8 w-8 bg-white rounded-sm flex-shrink-0" />
               DJS NSS
             </a>
 

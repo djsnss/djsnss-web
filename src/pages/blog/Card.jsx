@@ -1,18 +1,21 @@
 import React from 'react';
-import {Link} from "react-router-dom"; 
-import LinesEllipsis from 'react-lines-ellipsis';
+import {Link} from "react-router-dom";
 import logo from '../../assets/DJSNSSLogo.png';
 
 const Card = ({ title, image, content, authorName, date , slug }) => {
 
   return (
-    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-poppins">
+    <div className="bg-white  shadow-md overflow-hidden m-4 w-full max-w-md flex flex-col h-full font-roboto relative">
       {/* Title */}
-      <div className="px-11  pt-8 pb-6 font-semibold text-2xl font-sans">{title}</div>
+      <div className="px-8 py-4 sm:px-11 sm:py-6 font-bold text-3xl sm:text-4xl font-lateef">{title}</div>
       
        {/* Image */}
-      <div className="overflow-hidden h-[40vh] sm:h-[38vh] lg:h-[35vh] relative">
-        <img src={image} alt={title} className="w-full h-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
+      <div className="overflow-hidden w-full max-h-[50vh] relative">
+        {/* top-center "v" notch overlapping the title area - adjust w-6/h-6 and -top-3 to change size/position */}
+        <div className="absolute -top-3 left-12  w-6 h-6 rotate-45 bg-white shadow-md z-20 pointer-events-none" />
+        
+        <img src={image} alt={title} className="w-full object-cover hover:scale-110 transition-transform duration-300 hover:opacity-85" />
+        
         <img 
           src={logo} 
           alt="NSS Logo" 
@@ -21,26 +24,21 @@ const Card = ({ title, image, content, authorName, date , slug }) => {
       </div>
 
       {/* Content Preview */}
-      <div className="px-4 py-5 text-black text-lg ">
-        <LinesEllipsis
-          text={content}
-          maxLine='5'
-          ellipsis='...'
-          trimRight
-          basedOn='letters'
-        />
+      <p className="px-4 py-4 sm:py-5 text-black text-md sm:text-lg font-roboto whitespace-pre-line">
+        {`${content.substring(0, 100)}...`}
+      </p>
+      
+      <div className="px-4 pb-4">
+        <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
+          className="text-blue-600 hover:underline text-xs sm:text-sm">Continue Reading →</Link>
       </div>
-        <div className="px-4 pb-4">
-          <Link to={`/blog/${slug}`} state={{ title, image, content, authorName, date }}
-           className="text-blue-600 hover:underline text-sm">Continue Reading →</Link>
-        </div>
      
 
       {/* Author & Date */}
-      <div className="px-4 pb-2 text-sm text-black">
+      <div className="px-4 pb-2 text-xs sm:text-sm text-black">
         Author: <span className='font-bold underline'>{authorName}  </span> 
       </div>
-      <div className="px-4 pb-2 text-sm text-black">
+      <div className="px-4 pb-2 text-xs sm:text-sm text-black">
         Published On: {date}   
       </div>
       {/* Continue Reading */}
