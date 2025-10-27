@@ -76,6 +76,18 @@ const EventSchema = new mongoose.Schema({
       attended: { type: Boolean, default: false },
     },
   ],
+  related_images: [
+    {
+      url: {
+        type: String,
+        default: "",
+      },
+      public_id: {
+        type: String,
+        default: "",
+      },
+    }
+  ],
 });
 const Event = mongoose.model("Event", EventSchema);
 

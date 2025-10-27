@@ -646,18 +646,41 @@ export const updateEventDetails = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Handle photo update if a new file is provided
-    if (req.file) {
-      if (event.photo && event.photo.public_id) {
-        await cloudinary.uploader.destroy(event.photo.public_id);
-      }
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "EventPhoto",
-      });
-      updatedData.photo = {
-        url: result.secure_url,
-        public_id: result.public_id,
-      };
+    // Get main photo: support multer.fields => req.files.photo[0], or multer.single => req.file
+    const mainPhoto =
+      req.file ||
+      (req.files && req.files.photo && Array.isArray(req.files.photo)
+        ? req.files.photo[0]
+        : null);
+
+    if (!mainPhoto) {
+      return res
+        .status(400)
+        .json({ message: "Main photo is required. Use key 'photo'." });
+    }
+
+    const mainResult = await cloudinary.uploader.upload(mainPhoto.path, {
+      folder: "EventPhoto",
+    });
+    updatedData.photo = {
+      url: mainResult.secure_url,
+      public_id: mainResult.public_id,
+    };
+
+    // Optional related images: expect req.files.related_images as array
+    const relatedFiles =
+      (req.files && (req.files.related_images || req.files["related_images"])) ||
+      [];
+
+    if (Array.isArray(relatedFiles) && relatedFiles.length > 0) {
+      const uploadPromises = relatedFiles.map((file) =>
+        cloudinary.uploader.upload(file.path, { folder: "RelatedEventPhoto" })
+      );
+      const uploadResults = await Promise.all(uploadPromises);
+      updatedData.related_images = uploadResults.map((r) => ({
+        url: r.secure_url,
+        public_id: r.public_id,
+      }));
     }
 
     const updatedEvent = await EventModel.findByIdAndUpdate(
@@ -817,15 +840,42 @@ export const createEvent = async (req, res) => {
       status,
       scope,
     });
-    if (req.file) {
-      // Upload the photo if provided
-      const result = await cloudinary.uploader.upload(req.file.path, {
-        folder: "EventPhoto",
-      });
-      newEvent.photo = {
-        url: result.secure_url,
-        public_id: result.public_id,
-      };
+
+    // Get main photo: support multer.fields => req.files.photo[0], or multer.single => req.file
+    const mainPhoto =
+      req.file ||
+      (req.files && req.files.photo && Array.isArray(req.files.photo)
+        ? req.files.photo[0]
+        : null);
+
+    if (!mainPhoto) {
+      return res
+        .status(400)
+        .json({ message: "Main photo is required. Use key 'photo'." });
+    }
+
+    const mainResult = await cloudinary.uploader.upload(mainPhoto.path, {
+      folder: "EventPhoto",
+    });
+    newEvent.photo = {
+      url: mainResult.secure_url,
+      public_id: mainResult.public_id,
+    };
+
+    // Optional related images: expect req.files.related_images as array
+    const relatedFiles =
+      (req.files && (req.files.related_images || req.files["related_images"])) ||
+      [];
+
+    if (Array.isArray(relatedFiles) && relatedFiles.length > 0) {
+      const uploadPromises = relatedFiles.map((file) =>
+        cloudinary.uploader.upload(file.path, { folder: "RelatedEventPhoto" })
+      );
+      const uploadResults = await Promise.all(uploadPromises);
+      newEvent.related_images = uploadResults.map((r) => ({
+        url: r.secure_url,
+        public_id: r.public_id,
+      }));
     }
     await newEvent.save();
     await clearCache();

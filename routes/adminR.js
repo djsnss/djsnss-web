@@ -41,7 +41,10 @@ router.delete("/deleteVolunteer/:id", authAdmin, deleteVolunteer);
 router.post(
   "/createEvent",
   authAdmin,
-  uploadNormal.single("photo"),
+  uploadNormal.fields([
+    { name: "photo", maxCount: 1 },
+    { name: "related_images", maxCount: 10 },
+  ]),
   createEvent
 );
 router.get("/:eventId/volunteers", authAdmin, getVolunteersByEvent);
@@ -57,7 +60,10 @@ router.get("/:eventId/stats", authAdmin, getEventStats);
 router.put(
   "/updateEvent/:eventId",
   authAdmin,
-  uploadNormal.single("photo"),
+  uploadNormal.fields([
+    { name: "photo", maxCount: 1 },
+    { name: "related_images", maxCount: 10 },
+  ]),
   updateEventDetails
 );
 router.get("/getAttendanceList/:eventId", authAdmin, getAttendanceList);
