@@ -23,7 +23,6 @@ const Volunteer = React.lazy(() => import("./pages/volunteer/Volunteer"));
 const VolunteerPolicy = React.lazy(() => import("./pages/volunteer/VolunteerPolicy"));
 const VolunteerRegistration = React.lazy(() => import("./pages/volunteer/VolunteerRegistration"));
 const CheckEvent = React.lazy(() => import("./pages/volunteer/CheckEvent"));
-const MessageDetails = React.lazy(() => import("./pages/Messages"));
 const FAQ = React.lazy(() => import("./pages/FAQ"));
 const Gallery = React.lazy(() => import("./pages/Gallery"));
 // const TimelineComponent = React.lazy(() => import("./pages/Timeline"));
@@ -95,7 +94,6 @@ const App = () => {
               <Route path="/aboutus" element={<AboutUs />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/gallery" element={<Gallery />} />
-              <Route path="/messages/:slug" element={<MessageDetails />} />
               <Route path="/faq" element={<FAQ />} />
               <Route path="/update-event" element={<UpdateEvent />} />
               <Route path="/unauthorized" element={<Unauthorized />} />

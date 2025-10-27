@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
 import Aboutusimg from "../assets/Events/IndependenceDay.png";
-import Card from "../components/aboutus/Card";
 import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal new.jpg";
 import AlishaBanz from "../assets/Faculty/Alisha Banz.jpg";
