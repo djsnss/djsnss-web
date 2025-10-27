@@ -16,6 +16,9 @@ export default {
         'timeline': "url('./src/assets/Timeline/waves.gif')", 
       },
       colors: {
+        "primary-blue": "#E7F2FF",
+        "secondary-blue": "#CBE3FF",
+        "dark-blue": "#041877",
         "dark-navy": "#000e23",
         "light-navy": "#000e2c",
         "deep-teal": "#213951",
