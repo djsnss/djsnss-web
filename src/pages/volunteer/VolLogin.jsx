@@ -57,10 +57,11 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
+    // <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
+     <div className="min-h-screen flex items-center justify-center bg-primary-blue pt-16">
       {/* Form Container */}
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-2xl">
-        <h1 className="text-2xl font-bold text-sky-900 text-center mb-6">
+        <h1 className="text-2xl font-bold text-sky-900 text-center mb-6 font-geist">
           Login
         </h1>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -68,7 +69,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="sapId"
-              className="block text-sky-900 font-medium mb-2"
+              className="block text-sky-900 font-medium mb-2 font-roboto"
             >
               SapId
             </label>
@@ -78,7 +79,7 @@ const Login = () => {
               name="sapId"
               value={formData.sapId}
               onChange={handleChange}
-              className="w-full p-3 bg-sky-50 text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+              className="w-full p-3 bg-sky-50 font-roboto text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
               placeholder="Enter your SapId"
               pattern="^\d{11}$"
               required
@@ -89,7 +90,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sky-900 font-medium mb-2"
+              className="block text-sky-900 font-medium mb-2 font-roboto"
             >
               Email
             </label>
@@ -99,7 +100,7 @@ const Login = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full p-3 bg-sky-50 text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+              className="w-full p-3 bg-primary-blue font-roboto text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
               placeholder="Enter your Email"
               required
             />
@@ -109,7 +110,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sky-900 font-medium mb-2"
+              className="block text-sky-900 font-medium mb-2 font-roboto"
             >
               Password
             </label>
@@ -120,14 +121,14 @@ const Login = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full p-3 bg-sky-50 text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
+                className="w-full p-3 bg-primary-blue font-roboto text-sky-900 border border-sky-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
                 placeholder="Enter your password"
                 required
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-3 flex items-center text-sky-600"
+                className="absolute inset-y-0 right-3 font-roboto flex items-center text-sky-900"
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
@@ -135,27 +136,27 @@ const Login = () => {
           </div>
 
           {/* Forgot Password Field */}
-          <Link to={"/volunteer/change-password"} className="mt-2 text-sky-600">
+          <Link to={"/volunteer/change-password"} className="mt-2 font-roboto text-sky-900">
             Forgot Password?
           </Link>
 
           {/* Error Message */}
-          {error && <p className="text-red-500 text-center">{error}</p>}
+          {error && <p className="text-red-500 font-roboto text-center">{error}</p>}
 
           {/* Actions */}
           <div className="space-y-4">
             <button
               type="submit"
-              className="w-full py-3 bg-sky-900 text-white font-semibold rounded-lg hover:bg-sky-800 transition duration-300"
+              className="w-full py-3 bg-dark-blue font-roboto text-white font-semibold rounded-lg hover:bg-sky-800 transition duration-300"
               disabled={loading}
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-            <p className="text-center text-sky-900">
+            <p className="text-center font-roboto text-sky-900">
               Don&#39;t have an account?{" "}
               <a
                 href="/volunteer/volunteer-registration"
-                className="text-sky-700 font-semibold hover:underline"
+                className="text-sky-700 font-semibold font-roboto hover:underline"
               >
                 Register
               </a>

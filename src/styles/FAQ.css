@@ -102,23 +102,25 @@ body {
   max-width: 600px;
   margin-bottom: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-left: auto;
 }
 
 .faq-answer {
-  background-color: #3b82f6;
-  color: white;
+  background-color: #CBE3FF; 
+  color: black;
   padding: 12px 20px;
   border-radius: 15px;
   width: 100%;
   max-width: 600px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-left: auto;
+  margin-right: auto;
 }
 
 .faq-question,
 .faq-answer {
   font-size: 16px;
   font-weight: normal;
+  font:roboto;
 }
 
 /* Chat-like Section after FAQs */
@@ -131,6 +133,8 @@ body {
   border-radius: 8px;
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  bottom:0;
 }
 
 .chat-icon {
@@ -140,6 +144,7 @@ body {
   padding: 12px;
   font-size: 32px;
   cursor: pointer;
+  font:roboto;
 }
 
 .chat-input {
@@ -150,7 +155,7 @@ body {
   border: 1px solid #ddd;
   font-size: 16px;
   margin-right: 10px;
-  background-color: #fff;
+  background-color: white;
   pointer-events: none; /* Disable typing */
 }
 

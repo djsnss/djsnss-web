@@ -85,15 +85,15 @@ const VolunteerRegistration = () => {
 
   return (
     <div className="min-h-screen p-6 flex flex-col items-center bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
-      <h2 className="text-5xl font-bold text-sky-900 mb-6 text-center">
+      <h2 className="text-5xl font-bold text-dark-blue mb-6 text-center">
         Volunteer Registration
       </h2>
       <div>
-        <p className="text-sky-900 text-lg text-center">
+        <p className="text-dark-blue text-lg text-center">
           Already Registered?{" "}
           <a
             href="/volunteer/volunteer-login"
-            className="text-sky-600 hover:underline"
+            className="text-dark-blue hover:underline"
           >
             Login
           </a>
@@ -110,7 +110,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Name
               </label>
@@ -120,14 +120,14 @@ const VolunteerRegistration = () => {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="branch"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Branch
               </label>
@@ -137,7 +137,7 @@ const VolunteerRegistration = () => {
                 name="branch"
                 value={formData.branch}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
                 required
               >
                 <option value="" disabled>Select Branch</option>
@@ -154,7 +154,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="sapId"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 SAP ID
               </label>
@@ -164,7 +164,7 @@ const VolunteerRegistration = () => {
                 name="sapId"
                 value={formData.sapId}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                className="w-full p-2 mt-2 bg-secondary-blue  text-dark-blue rounded appearance-none [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                 pattern="^\d{11}$"
                 required
               />
@@ -172,7 +172,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="phoneNumber"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Phone Number
               </label>
@@ -182,7 +182,7 @@ const VolunteerRegistration = () => {
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-sky-200 text-dark-blue rounded"
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 required
               />
@@ -190,7 +190,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="hobbies"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Hobbies
               </label>
@@ -200,11 +200,11 @@ const VolunteerRegistration = () => {
                 name="hobbies"
                 value={formData.hobbies}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
             <div>
-              <label htmlFor="gender" className="block text-sky-900 font-semibold">
+              <label htmlFor="gender" className="block text-dark-blue font-semibold">
                 Gender
               </label>
               <select
@@ -212,7 +212,7 @@ const VolunteerRegistration = () => {
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               >
                 <option value="" disabled>Select Gender</option>
                 <option value="Male">Male</option>
@@ -223,7 +223,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="caste"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Caste
               </label>
@@ -233,7 +233,7 @@ const VolunteerRegistration = () => {
                 name="caste"
                 value={formData.caste}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
           </div>
@@ -243,7 +243,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Email
               </label>
@@ -253,14 +253,14 @@ const VolunteerRegistration = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
                 required
               />
             </div>
             <div>
               <label
                 htmlFor="password"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Password
               </label>
@@ -271,7 +271,7 @@ const VolunteerRegistration = () => {
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
-                  className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                  className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
                   required
                 />
                 <button
@@ -286,7 +286,7 @@ const VolunteerRegistration = () => {
             <div>
               <label
                 htmlFor="motherName"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Mother&apos;s Name
               </label>
@@ -296,13 +296,13 @@ const VolunteerRegistration = () => {
                 name="motherName"
                 value={formData.motherName}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
             <div>
               <label
                 htmlFor="motherEmail"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Mother&apos;s Email
               </label>
@@ -312,13 +312,13 @@ const VolunteerRegistration = () => {
                 name="motherEmail"
                 value={formData.motherEmail}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
             <div>
               <label
                 htmlFor="fatherName"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Father&apos;s Name
               </label>
@@ -328,13 +328,13 @@ const VolunteerRegistration = () => {
                 name="fatherName"
                 value={formData.fatherName}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
             <div>
               <label
                 htmlFor="fatherEmail"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Father&apos;s Email
               </label>
@@ -344,13 +344,13 @@ const VolunteerRegistration = () => {
                 name="fatherEmail"
                 value={formData.fatherEmail}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
             <div>
               <label
                 htmlFor="description"
-                className="block text-sky-900 font-semibold"
+                className="block text-dark-blue font-semibold"
               >
                 Description
               </label>
@@ -359,7 +359,7 @@ const VolunteerRegistration = () => {
                 name="description"
                 value={formData.description}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               />
             </div>
           </div>
@@ -368,7 +368,7 @@ const VolunteerRegistration = () => {
           <div className="col-span-1 md:col-span-2">
             <label
               htmlFor="passport"
-              className="block text-sky-900 font-semibold text-center"
+              className="block text-dark-blue font-semibold text-center"
             >
               Passport Size Photo
             </label>
@@ -378,7 +378,7 @@ const VolunteerRegistration = () => {
               name="passport"
               accept="image/*"
               onChange={handleChange}
-              className="w-full p-2 mt-2 bg-sky-200 text-sky-900 rounded"
+              className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
               required
             />
           </div>
@@ -387,7 +387,7 @@ const VolunteerRegistration = () => {
           <div className="col-span-1 md:col-span-2 mt-6">
             <button
               type="submit"
-              className="w-full bg-sky-600 text-white py-2 rounded-lg hover:bg-sky-700"
+              className="w-full bg-dark-blue text-white py-2 rounded-lg hover:bg-sky-700"
             >
               Register
             </button>

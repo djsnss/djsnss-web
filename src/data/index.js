@@ -1,25 +1,44 @@
 const MenuLinks = [
-  {
-    id: 1,
-    name: "Home",
-    link: "",
-  },
-  {
-    id: 2,
-    name: "About Us",
-    link: "aboutus",
-  },
-  {
-    id: 3,
-    name: "Events",
-    link: "events",
-  },
-  {
-    id: 4,
-    name: "Team",
-    link: "team",
-  },
+   { id: 1, name: "Dwarkadas J. Sanghvi College of Engineering", link: "https://www.djsce.ac.in/", external: true },
+   { id: 2, name: "National Service Scheme", link: "https://www.nss.gov.in/", external: true },
+     { id: 3, name: "Events", link: "events" },
+  { id: 4, name: "Report", link: "reports" },
+    { id: 5, name: "Volunteer Policy", link: "volunteer/volunteer-policy" },
+    { id: 6, name: "Technical Project", link: "technical-project" },
+  { id: 7, name: "Certificate", link: "https://djsnss-certificate.streamlit.app/", external: true },
 ];
+
+  // {
+  //   id: 1,
+  //   name: "Report",
+  //   link: "reports",
+  // },
+  // {
+  //   id: 2,
+  //   name: "Certificate",
+  //   link: "",
+  // },
+  // {
+  //   id: 3,
+  //   name: "Events",
+  //   link: "events",
+  // },
+  // {
+  //   id: 4,
+  //   name: "DJ Sanghavi",
+  //   link: "https://www.djsce.ac.in/",
+  // },
+  //  {
+  //   id: 5,
+  //   name: "Technical Project",
+  //   link: "technical-project",
+  // },
+  //  {
+  //   id: 6,
+  //   name: "NSS",
+  //   link: "https://www.nss.gov.in",
+  // },
+//];
 
 export { MenuLinks };
 

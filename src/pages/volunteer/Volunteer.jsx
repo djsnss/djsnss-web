@@ -22,10 +22,10 @@ const Volunteer = () => {
       {/* Hero Section */}
       <div className="relative h-[100vh] w-full overflow-hidden">
         <div className="absolute inset-0 grid grid-cols-1 md:grid-cols-2">
-          <div className="hidden md:block bg-[#003366] h-full" />
+          <div className="hidden md:block bg-dark-blue h-full" />
           <div className="relative h-full">
             <img src={Image1} alt="Tree Plantation" className="h-full w-full object-cover" />
-            <div className="absolute inset-0 bg-[#003b5c]/70 md:bg-[#003b5c]/40" />
+            <div className="absolute inset-0 bg-dark-blue md:bg-[#003b5c]/40" />
           </div>
         </div>
         <div className="relative z-10 h-full">
@@ -75,17 +75,17 @@ const Volunteer = () => {
               By offering your time, skills, and unwavering passion, you can make a profound impact on our community and inspire positive change.
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <div className="aspect-square bg-primary-blue overflow-hidden">
                 <img src={Impact} alt="Volunteer Activity" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
-              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <div className="aspect-square bg-primary-blue overflow-hidden">
                 <img src={Impact2} alt="Community Impact" className="w-full h-full object-cover transition-transform duration-300 hover:scale-105" />
               </div>
             </div>
           </motion.div>
-          <div className="col-span-1 md:col-span-4 bg-[#005a8e] p-6 md:p-12">
-            <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-white">Volunteer Benefits</h3>
-            <ul className="space-y-4 text-base md:text-lg text-[#cce7ff]">
+          <div className="col-span-1 md:col-span-4 bg-primary-blue p-6 md:p-12">
+            <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-dark-blue">Volunteer Benefits</h3>
+            <ul className="space-y-4 text-base md:text-lg text-dark-blue">
               <li className="flex items-start">
                 <span className="mr-2">•</span>
                 <span>Develop leadership and teamwork skills</span>
@@ -113,7 +113,7 @@ const Volunteer = () => {
         {/* Full-Width Image Section */}
         <div className="relative h-64 md:h-96 w-full">
           <img src={Yaarana} alt="Volunteer Impact" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-[#003366]/60" />
+          <div className="absolute inset-0 bg-dark-blue" />
           <div className="absolute inset-0 flex items-center justify-center p-4">
             <p className="text-2xl md:text-4xl font-bold text-white text-center max-w-4xl">
               Make a difference while gaining valuable skills and experiences
@@ -126,7 +126,7 @@ const Volunteer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="bg-[#a2b9d8] p-6 md:p-12 hover:bg-[#cce7ff] transition-colors duration-300"
+            className="bg-primary-blue p-6 md:p-12 hover:bg-secondary-blue transition-colors duration-300"
           >
             <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Why Volunteer?</h3>
             <p className="text-[#003b5c] my-6">
@@ -144,13 +144,13 @@ const Volunteer = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-[#003366] p-6 md:p-12 hover:bg-[#005a8e] transition-colors duration-300"
+            className="bg-secondary-blue p-6 md:p-12 hover:bg-primary-blue transition-colors duration-300"
           >
-            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-white">How to Get Involved</h3>
-            <p className="text-[#cce7ff] my-6">
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-dark-blue">How to Get Involved</h3>
+            <p className="text-dark-blue my-6">
               Explore ways to contribute, from signing up for programs to participating in community events and special projects tailored to your interests and skills.
             </p>
-            <ul className="list-disc ml-5 text-[#cce7ff] space-y-3">
+            <ul className="list-disc ml-5 text-dark-blue space-y-3">
               <li>Sign up for volunteer programs</li>
               <li>Participate in community outreach</li>
               <li>Join special projects and initiatives</li>
@@ -165,25 +165,25 @@ const Volunteer = () => {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="col-span-1 md:col-span-7 bg-[#387fa8] p-6 md:p-12"
+            className="col-span-1 md:col-span-7 bg-dark-blue p-6 md:p-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-8 text-white">NSS Events & Activities</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-              <div className="aspect-square bg-[#003b5c] overflow-hidden col-span-2 md:col-span-2 row-span-2">
+              <div className="aspect-square bg-dark-blue overflow-hidden col-span-2 md:col-span-2 row-span-2">
                 <img
                   src={Event1}
                   alt="NSS Activity Main"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
-              <div className="aspect-square bg-[#003b5c] overflow-hidden">
+              <div className="aspect-square bg-primary-blue overflow-hidden">
                 <img
                   src={Event2}
                   alt="NSS Activity 2"
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
-              <div className="aspect-square bg-[#003b5c] overflow-hidden">
+              <div className="aspect-square bg-primary-blue overflow-hidden">
                 <img
                   src={Event3}
                   alt="NSS Activity 3"
@@ -191,15 +191,15 @@ const Volunteer = () => {
                 />
               </div>
             </div>
-            <p className="text-[#cce7ff] text-base md:text-lg mb-8">
+            <p className="text-primary-blue text-base md:text-lg mb-8">
               NSS frequently organizes events such as rural development projects, cleanliness drives, health awareness programs, and environmental conservation campaigns. These events are perfect opportunities for volunteers to give back to society while learning new skills.
             </p>
-            <p className="text-[#cce7ff] text-base md:text-lg mb-8">
+            <p className="text-secondary-blue text-base md:text-lg mb-8">
               From regular meetups to special camps, NSS events bring together people from diverse backgrounds with a common goal of community service. Volunteers often form lasting bonds, build teamwork, and foster lifelong friendships.
             </p>
             <Link
               to="/volunteer/volunteer-policy"
-              className="no-underline inline-block px-3 md:px-6 py-1 md:py-2 bg-[#cce7ff] text-[#003b5c] text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
+              className="no-underline inline-block px-3 md:px-6 py-1 md:py-2 bg-primary-blue text-dark-blue text-base md:text-lg font-semibold transition duration-300 mb-4 w-max vol-button"
             >
               View Volunteer Policy
             </Link>
@@ -207,18 +207,18 @@ const Volunteer = () => {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            className="col-span-1 md:col-span-5 bg-[#cce7ff] p-6 md:p-12"
+            className="col-span-1 md:col-span-5 bg-secondary-blue p-6 md:p-12"
           >
-            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-[#003366]">Build Lifelong Friendships</h3>
+            <h3 className="text-xl md:text-2xl font-semibold mb-6 text-dark-blue ">Build Lifelong Friendships</h3>
             <div className="grid grid-cols-2 gap-4 mb-6">
-              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <div className="aspect-square bg-primary-blue overflow-hidden">
                 <img
                   src={LF1}
                   alt=""
                   className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 />
               </div>
-              <div className="aspect-square bg-[#387fa8] overflow-hidden">
+              <div className="aspect-square bg-secondary-blue overflow-hidden">
                 <img
                   src={LF2}
                   alt="Friendships 2"
@@ -226,12 +226,12 @@ const Volunteer = () => {
                 />
               </div>
             </div>
-            <p className="text-[#003b5c] text-base md:text-lg">
+            <p className="text-dark-blue text-base md:text-lg">
               The NSS experience fosters deep friendships and connections with like-minded individuals. By working together on projects, volunteers not only grow as individuals but also form a network of lifelong companions.
             </p>
             <br></br>
             <br></br>
-            <p className="text-[#003b5c] text-base md:text-lg">
+            <p className="text-secondary-blue text-base md:text-lg">
               Frequent meetups, discussions, and group activities create an environment where volunteers share their passion for social service while developing strong relationships that last a lifetime.
             </p>
           </motion.div>
