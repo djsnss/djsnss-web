@@ -646,33 +646,48 @@ export const updateEventDetails = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Get main photo: support multer.fields => req.files.photo[0], or multer.single => req.file
+    const hasBodyFields = Object.keys(updatedData).length > 0;
+    const hasFiles =
+      req.file || (req.files && Object.keys(req.files).length > 0);
+
+    if (!hasBodyFields && !hasFiles) {
+      return res.status(400).json({
+        message: "At least one field is required to update the event",
+      });
+    }
+
     const mainPhoto =
       req.file ||
       (req.files && req.files.photo && Array.isArray(req.files.photo)
         ? req.files.photo[0]
         : null);
 
-    if (!mainPhoto) {
-      return res
-        .status(400)
-        .json({ message: "Main photo is required. Use key 'photo'." });
+    if (mainPhoto) {
+      if (event.photo && event.photo.public_id) {
+        await cloudinary.uploader.destroy(event.photo.public_id);
+      }
+
+      const mainResult = await cloudinary.uploader.upload(mainPhoto.path, {
+        folder: "EventPhoto",
+      });
+      updatedData.photo = {
+        url: mainResult.secure_url,
+        public_id: mainResult.public_id,
+      };
     }
-
-    const mainResult = await cloudinary.uploader.upload(mainPhoto.path, {
-      folder: "EventPhoto",
-    });
-    updatedData.photo = {
-      url: mainResult.secure_url,
-      public_id: mainResult.public_id,
-    };
-
-    // Optional related images: expect req.files.related_images as array
     const relatedFiles =
-      (req.files && (req.files.related_images || req.files["related_images"])) ||
+      (req.files &&
+        (req.files.related_images || req.files["related_images"])) ||
       [];
 
     if (Array.isArray(relatedFiles) && relatedFiles.length > 0) {
+      if (event.related_images && event.related_images.length > 0) {
+        const deletePromises = event.related_images.map((img) =>
+          cloudinary.uploader.destroy(img.public_id)
+        );
+        await Promise.all(deletePromises);
+      }
+
       const uploadPromises = relatedFiles.map((file) =>
         cloudinary.uploader.upload(file.path, { folder: "RelatedEventPhoto" })
       );
@@ -864,7 +879,8 @@ export const createEvent = async (req, res) => {
 
     // Optional related images: expect req.files.related_images as array
     const relatedFiles =
-      (req.files && (req.files.related_images || req.files["related_images"])) ||
+      (req.files &&
+        (req.files.related_images || req.files["related_images"])) ||
       [];
 
     if (Array.isArray(relatedFiles) && relatedFiles.length > 0) {
