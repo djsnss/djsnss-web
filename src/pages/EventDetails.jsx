@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { localEventsData } from "../data/areaEvents";
 import { largeEventsData } from "../data/largeEvents";
@@ -63,7 +63,7 @@ const EventDetails = () => {
           title: event.name,
           _id: event._id,
           description: event.description,
-          longDescription: event.description, // You might want to add a longDescription field to your API
+          longDescription: event.longDescription,
           scale: event.scope,
           duration: "TBD", // Add duration field to your API if needed
           location: event.location,
@@ -71,6 +71,7 @@ const EventDetails = () => {
           imageURL: event.photo?.url || "", // Handle the photo object
           slug: event.slug,
           status: event.status, // Default to 'upcoming' if status is missing
+          related_images: event.related_images || [],
         }));
 
         // Find the event in API data
@@ -152,13 +153,13 @@ const EventDetails = () => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="w-full">
       <div>
         {eventDetail ? (
           <motion.div
-            className={`w-full pt-16 p-6 flex flex-col lg:flex-row bg-sky-100 text-black`}
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
+            className={`w-full min-h-screen pt-24 p-6 md:p-12 flex flex-col lg:flex-row items-center justify-center bg-primary-blue text-black`}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <motion.img
@@ -175,16 +176,16 @@ const EventDetails = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <h1 className="text-4xl lg:text-5xl font-bold mb-4">
+              <h1 className="text-4xl lg:text-5xl font-geist font-bold mb-4">
                 {eventDetail.title}
               </h1>
-              <p className="text-lg lg:text-xl mb-2">
+              <p className="text-lg lg:text-xl font-roboto mb-2">
                 {eventDetail.description}
               </p>
-              <p className="text-sm text-justify lg:text-base mb-4 opacity-90">
+              <p className="text-sm font-roboto text-justify lg:text-base mb-4 opacity-90">
                 {eventDetail.longDescription}
               </p>
-              <div className="flex flex-col lg:flex-row justify-between mt-4 ">
+              <div className="font-roboto flex flex-col lg:flex-row justify-between mt-4 ">
                 <div className="space-y-2 mb-4">
                   <p className="text-base lg:text-lg">
                     <strong>Scale:</strong> {eventDetail.scale}
@@ -219,7 +220,7 @@ const EventDetails = () => {
             </motion.div>
           </motion.div>
         ) : (
-          <div className="flex items-center justify-center h-screen">
+          <div className="flex items-center justify-center h-screen font-roboto">
             <h1 className="text-3xl font-bold text-red-500">Event Not Found</h1>
             <Link to="/events" className="ml-4 text-blue-500">
               Back to Events
@@ -227,6 +228,26 @@ const EventDetails = () => {
           </div>
         )}
       </div>
+
+      {/* Related Images Section */}
+      {eventDetail?.related_images && eventDetail.related_images.length > 0 && (
+        <div className="my-10">
+          <h2 className="text-2xl font-giest font-bold mb-4 px-6 md:px-12">
+            Event Related Images
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12">
+            {eventDetail.related_images.map((img, idx) => (
+              <div key={img._id || idx} className="w-full flex justify-center">
+                <img
+                  src={img.url}
+                  alt={`Related Memory ${idx + 1}`}
+                  className="rounded-lg shadow-lg w-full max-w-xs md:max-w-sm lg:max-w-md aspect-[3/4] object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
