@@ -11,6 +11,7 @@ const CreateEvent = () => {
     description: "",
     longDescription: "",
     photo: null,
+    related_images: [], // <-- Add this line
     startHours: "",
     endHours: "",
     TotalNoOfHours: "",
@@ -43,7 +44,7 @@ const CreateEvent = () => {
       newErrors.description = "Description is required.";
     if (!formData.longDescription?.trim())
       newErrors.longDescription = "Long description is required.";
-    // Removed date validation
+    if (!formData.date?.trim()) newErrors.date = "Date is required."; // <-- Make date compulsory
     if (!formData.location?.trim())
       newErrors.location = "Location is required.";
     if (!formData.photo) newErrors.photo = "Event image is required.";
@@ -77,6 +78,14 @@ const CreateEvent = () => {
     }
   };
 
+  const handleRelatedImagesUpload = (e) => {
+    const files = Array.from(e.target.files);
+    setFormData((prev) => ({
+      ...prev,
+      related_images: files,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
@@ -85,7 +94,6 @@ const CreateEvent = () => {
     // If date is empty, set it to 'TBD'
     if (!formData.date) {
       setFormData((prev) => ({ ...prev, date: "TBD" }));
-      // Wait for state update before continuing
       await new Promise((resolve) => setTimeout(resolve, 0));
     }
 
@@ -94,17 +102,21 @@ const CreateEvent = () => {
     setLoading(true);
 
     try {
-      const token = localStorage.getItem("adminAuthToken"); // Replace with your token logic
+      const token = localStorage.getItem("adminAuthToken");
       const formDataToSend = new FormData();
       Object.keys(formData).forEach((key) => {
-        if (key === "photo") {
-          formDataToSend.append("photo", formData.photo); // Append the file
-        } else {
+        if (key === "photo" && formData.photo) {
+          formDataToSend.append("photo", formData.photo);
+        } else if (key === "related_images" && formData.related_images.length > 0) {
+          formData.related_images.forEach((file) => {
+            formDataToSend.append("related_images", file);
+          });
+        } else if (key !== "related_images" && key !== "photo") {
           formDataToSend.append(key, formData[key]);
         }
       });
       const response = await axios.post(
-        "https://djsnss-web.onrender.com/admin/createEvent", // API endpoint
+        "https://djsnss-web.onrender.com/admin/createEvent",
         formDataToSend,
         {
           headers: {
@@ -114,16 +126,14 @@ const CreateEvent = () => {
         }
       );
 
-      console.log("Response:", response);
       setSuccessMessage("Event created successfully!");
-
-      // Reset the form on success
       setFormData({
         name: "",
         slug: "",
         description: "",
         longDescription: "",
         photo: null,
+        related_images: [],
         startHours: "",
         endHours: "",
         TotalNoOfHours: "",
@@ -134,7 +144,6 @@ const CreateEvent = () => {
         scope: "Local",
       });
     } catch (error) {
-      console.error("Error:", error.response?.data || error.message);
       setErrorMessage(
         error.response?.data?.message || "An unexpected error occurred."
       );
@@ -326,7 +335,7 @@ const CreateEvent = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-[#003366]">
-              Date
+              Date *
             </label>
             <input
               type="date"
@@ -337,6 +346,9 @@ const CreateEvent = () => {
                 errors.date ? "border-red-500" : "border-[#387fa8]"
               }`}
             />
+            {errors.date && (
+              <p className="text-red-500 text-sm">{errors.date}</p>
+            )}
           </div>
           <div>
             <label className="block text-sm font-medium text-[#003366]">
@@ -434,6 +446,64 @@ const CreateEvent = () => {
               <option value="University">University</option>
             </select>
           </div>
+        </div>
+
+        {/* Related Images */}
+        <div className="space-y-2">
+          <label className="block text-sm font-medium text-[#003366]">
+            Related Images (optional, add one by one)
+          </label>
+          <div className="flex gap-2 items-center">
+            <input
+              type="file"
+              accept="image/*"
+              id="related-image-input"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                if (file) {
+                  setFormData((prev) => ({
+                    ...prev,
+                    related_images: [...prev.related_images, file],
+                  }));
+                  // Reset input so same file can be added again if needed
+                  e.target.value = "";
+                }
+              }}
+              className="block text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-md file:border-0
+                file:text-sm file:font-semibold
+                file:bg-[#387fa8] file:text-white
+                hover:file:bg-[#005a8e]"
+            />
+          </div>
+          {/* Preview selected related images */}
+          {formData.related_images && formData.related_images.length > 0 && (
+            <div className="flex flex-wrap gap-3 mt-2">
+              {formData.related_images.map((file, idx) => (
+                <div key={idx} className="relative group">
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt={`Related preview ${idx + 1}`}
+                    className="w-20 h-20 object-cover rounded shadow"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFormData((prev) => ({
+                        ...prev,
+                        related_images: prev.related_images.filter((_, i) => i !== idx),
+                      }));
+                    }}
+                    className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-80 hover:opacity-100"
+                    title="Remove"
+                  >
+                    ×
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Submit Button */}

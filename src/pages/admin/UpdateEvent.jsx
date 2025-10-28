@@ -10,7 +10,10 @@ import { MdOutlineDelete } from "react-icons/md";
  * Receives an event and callbacks for closing and updating.
  */
 function EditEventPopup({ event, onClose, onEventUpdated }) {
-  const [formData, setFormData] = useState(event);
+  const [formData, setFormData] = useState({
+    ...event,
+    related_images: event.related_images || [],
+  });
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
@@ -53,21 +56,39 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
     setErrorMessage("");
 
     try {
-      console.log("Submitting form data:", formData);
       const token = localStorage.getItem("adminAuthToken");
       const formDataToSend = new FormData();
 
+      // This flag will track if the user has modified the related images
+      let relatedImagesModified = false;
+
       Object.keys(formData).forEach((key) => {
         if (key === "photo") {
-          // Only append if it's a File (not a preview object)
           if (formData.photo instanceof File) {
             formDataToSend.append("photo", formData.photo);
           }
-          // Do NOT append photo if it's not a File
-        } else {
+        } else if (key === "related_images" && Array.isArray(formData.related_images)) {
+          // Check if the current related_images differ from the original event's
+          if (JSON.stringify(formData.related_images) !== JSON.stringify(event.related_images)) {
+            relatedImagesModified = true;
+          }
+          
+          formData.related_images.forEach((img) => {
+            if (img instanceof File) {
+              formDataToSend.append("related_images", img);
+            }
+          });
+        } else if (key !== "related_images") {
+          // Append all other form data fields
           formDataToSend.append(key, formData[key]);
         }
       });
+
+      // If images were modified and the final list is empty, send an empty array
+      // to trigger the backend's "delete all" logic.
+      if (relatedImagesModified && formData.related_images.length === 0) {
+        formDataToSend.append("related_images", []);
+      }
 
       await axios.put(
         `https://djsnss-web.onrender.com/admin/updateEvent/${formData._id}`,
@@ -75,7 +96,6 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            // Do not set Content-Type, let Axios handle it for FormData
           },
         }
       );
@@ -368,6 +388,70 @@ function EditEventPopup({ event, onClose, onEventUpdated }) {
                 <p className="text-red-500 text-sm">{errors.maxVolunteers}</p>
               )}
             </div>
+          </div>
+
+          {/* Related Images */}
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-[#003366]">
+              Related Images (to update this, delete all existing and add new ones)
+            </label>
+            <div className="flex gap-2 items-center">
+              <input
+                type="file"
+                accept="image/*"
+                id="related-image-input"
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    setFormData((prev) => ({
+                      ...prev,
+                      related_images: [
+                        ...(Array.isArray(prev.related_images) ? prev.related_images : []),
+                        file,
+                      ],
+                    }));
+                    e.target.value = "";
+                  }
+                }}
+                className="block text-sm text-gray-500
+                  file:mr-4 file:py-2 file:px-4
+                  file:rounded-md file:border-0
+                  file:text-sm file:font-semibold
+                  file:bg-[#387fa8] file:text-white
+                  hover:file:bg-[#005a8e]"
+              />
+            </div>
+            {/* Preview selected related images */}
+            {formData.related_images && formData.related_images.length > 0 && (
+              <div className="flex flex-wrap gap-3 mt-2">
+                {formData.related_images.map((img, idx) => (
+                  <div key={idx} className="relative group">
+                    <img
+                      src={
+                        img instanceof File
+                          ? URL.createObjectURL(img)
+                          : img.url // for already uploaded images
+                      }
+                      alt={`Related preview ${idx + 1}`}
+                      className="w-20 h-20 object-cover rounded shadow"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setFormData((prev) => ({
+                          ...prev,
+                          related_images: prev.related_images.filter((_, i) => i !== idx),
+                        }));
+                      }}
+                      className="absolute top-0 right-0 bg-red-600 text-white rounded-full w-5 h-5 flex items-center justify-center text-xs opacity-80 hover:opacity-100"
+                      title="Remove"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Form Buttons */}

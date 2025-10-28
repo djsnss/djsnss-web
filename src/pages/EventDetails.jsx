@@ -230,24 +230,32 @@ const EventDetails = () => {
       </div>
 
       {/* Related Images Section */}
-      {eventDetail?.related_images && eventDetail.related_images.length > 0 && (
-        <div className="my-10">
-          <h2 className="text-2xl font-giest font-bold mb-4 px-6 md:px-12">
-            Event Related Images
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12">
-            {eventDetail.related_images.map((img, idx) => (
-              <div key={img._id || idx} className="w-full flex justify-center">
-                <img
-                  src={img.url}
-                  alt={`Related Memory ${idx + 1}`}
-                  className="rounded-lg shadow-lg w-full max-w-xs md:max-w-sm lg:max-w-md aspect-[3/4] object-cover"
-                />
-              </div>
-            ))}
+      {eventDetail?.related_images &&
+        eventDetail.related_images.filter((img) => img && img.url).length > 0 && (
+          <div className="my-10">
+            <h2 className="text-2xl font-giest font-bold mb-4 px-6 md:px-12">
+              Event Related Images
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12">
+              {eventDetail.related_images.map(
+                (img, idx) =>
+                  img &&
+                  img.url && (
+                    <div
+                      key={img._id || idx}
+                      className="w-full flex justify-center"
+                    >
+                      <img
+                        src={img.url}
+                        alt={`Related Memory ${idx + 1}`}
+                        className="rounded-lg shadow-lg w-full max-w-xs md:max-w-sm lg:max-w-md aspect-[3/4] object-cover"
+                      />
+                    </div>
+                  )
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
     </div>
   );
 };
