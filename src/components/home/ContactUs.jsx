@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+
 const initialState = {
   name: "",
   email: "",
@@ -64,12 +65,12 @@ const ContactUs = () => {
 
   return (
     <div className="max-w-2xl mx-auto my-10 p-8 bg-white">
-      <h2 className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center mb-8">
+      <h2 className="text-3xl md:text-4xl font-bold text-tertiary-blue text-center mb-8">
         Contact Us
       </h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label className="block mb-1 font-bold text-gray-700 text-lg">
+          <label className="block mb-1 font-bold font-roboto text-gray-700 text-lg">
             Name
           </label>
           <input
@@ -83,7 +84,7 @@ const ContactUs = () => {
           />
         </div>
         <div>
-          <label className="block mb-1 font-bold text-gray-700 text-lg">
+          <label className="block mb-1 font-bold font-roboto text-gray-700 text-lg">
             Email
           </label>
           <input
@@ -97,7 +98,7 @@ const ContactUs = () => {
           />
         </div>
         <div>
-          <label className="block mb-1 font-bold text-gray-700 text-lg">
+          <label className="block mb-1 font-bold font-roboto text-gray-700 text-lg">
             Phone
           </label>
           <input
@@ -112,7 +113,7 @@ const ContactUs = () => {
           />
         </div>
         <div>
-          <label className="block mb-1 font-bold text-gray-700 text-lg">
+          <label className="block mb-1 font-bold font-roboto text-gray-700 text-lg">
             Your Query / Message
           </label>
           <textarea
@@ -131,7 +132,7 @@ const ContactUs = () => {
         )}
         <button
           type="submit"
-          className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-2 rounded font-bold hover:from-blue-700 hover:to-cyan-600 transition disabled:opacity-60 text-lg shadow"
+          className="w-full bg-tertiary-blue text-white py-2 rounded font-bold hover:bg-dark-blue transition disabled:opacity-60 text-lg shadow"
           disabled={loading}
         >
           {loading ? "Sending..." : "Send Message"}

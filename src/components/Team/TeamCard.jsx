@@ -2,34 +2,38 @@ import React from "react";
 import styled from "styled-components";
 import { FaLinkedin } from "react-icons/fa";
 
-const TeamCard = ({ name, position, image, linkedin }) => {
+const TeamCard = ({ name, position, image, linkedin, title }) => {
   return (
     <StyledWrapper>
-      <div className="card h-[250px] w-[200px] sm:h-[300px] sm:w-[250px]">
-        <img
-          src={
-            image ||
-            "https://images.unsplash.com/photo-1678811116814-26372fcfef1b?q=80&w=3388&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt={name}
-          className="team-card-image min-h-full max-h-[45vh] w-full"
-        />
-        <div
-          className="absolute bottom-0 h-max w-full py-4 px-2 items-center bg-black/60 text-white z-20 flex justify-center mt-2">
-          <h3 className="text-xs sm:text-lg font-bold">{name}</h3>
-          {linkedin && (
-            <a href={`${linkedin}`} target="_blank" rel="noopener">
-              <FaLinkedin className="text-2xl text-white ml-2" />
-            </a>
-          )}
+      <div className="card">
+        {/* Image container */}
+        <div className="image-container">
+          <img
+            src={
+              image ||
+              "https://images.unsplash.com/photo-1678811116814-26372fcfef1b?q=80&w=3388&auto=format&fit=crop"
+            }
+            alt={name}
+            className="team-card-image"
+          />
         </div>
-        <div className="textBox">
-          <p className="text head">{position}</p>
-          <span>at</span>
-          {position === "Principal" ? (
-            <p className="text price">DJSCE</p>
-          ) : (
-            <p className="text price">DJSNSS</p>
+
+        {/* Content area */}
+        <div className="content">
+          <div className="name-section">
+            <h3 className="team-card-name">{name}</h3>
+          </div>
+
+          <div className="position-section">
+            <p className="text head">{position}</p>
+          </div>
+
+          {linkedin && (
+            <div className="linkedin-section">
+              <a href={linkedin} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin className="linkedin-icon" />
+              </a>
+            </div>
           )}
         </div>
       </div>
@@ -39,69 +43,91 @@ const TeamCard = ({ name, position, image, linkedin }) => {
 
 const StyledWrapper = styled.div`
   .card {
-    background: #000;
-    border-radius: 20px;
+    width: 400px;
+    height: max;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 4px 4px 4px 0px #00000040;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    color: white;
-    position: relative;
     overflow: hidden;
-    transition: transform 0.2s ease-in-out;
-    font:family:poppins;
+    transition: transform 0.25s ease-in-out;
   }
-  
+
   .card:hover {
     transform: scale(1.04) rotate(-1deg);
   }
 
-  .team-card-image {
-    object-fit: cover;
-    border-radius: 20px;
-    scale: 0.95;
-    transition: 0.2s ease-in-out;
-  }
-
-  .textBox {
-    position: absolute;
-    inset: 0;
+  /* Image container */
+  .image-container {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    background: transparent;
-    opacity: 0;
-    transition: background 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    border-radius: 20px;
+    align-items: center;
+    padding: 30px 20px 10px;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    overflow: hidden;
   }
 
-  .textBox > .text {
-    font-weight: bold;
-  }
-
-  .textBox > .head {
-    font-size: 20px;
-  }
-
-  .textBox > .price {
-    font-size: 17px;
-  }
-
-  .textBox > span {
-    font-size: 12px;
-    color: lightgrey;
-  }
-
-  .card:hover .textBox {
-    opacity: 1;
-    background: rgba(0, 0, 0, 0.5);
+  .team-card-image {
+    width: 80%;
+    aspect-ratio: 1 / 1;
+    border-radius: 30px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
   }
 
   .card:hover .team-card-image {
-    filter: blur(5px);
     transform: scale(1.1);
+  }
+
+  .content {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .name-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .team-card-name {
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
+    cursor: pointer;
+  }
+
+  .position-section {
+    margin-top: 8px;
+    color: #333;
+  }
+
+  .head {
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  /* Centered LinkedIn icon */
+  .linkedin-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  .linkedin-icon {
+    font-size: 30px;
+    color: #0077b5;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .linkedin-icon:hover {
+    color: #005582;
   }
 `;
 

@@ -13,7 +13,7 @@ const RandomAlumni = () => {
   }, []);
 
   return (
-    <section id="impact" className="py-4 bg-blue-50">
+    <section id="impact" className="py-4 bg-primary-blue">
       <motion.div
         className="max-w-3xl mx-auto text-center"
         initial={{ opacity: 0, y: 20 }}
@@ -21,8 +21,8 @@ const RandomAlumni = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500">Featured Alumni</h2>
-        <p className="text-gray-700 mt-2 text-lg">
+        <h2 className="text-3xl md:text-4xl font-geist font-bold mb-4 text-tertiary-blue">Featured Alumni</h2>
+        <p className="font-roboto text-gray-700 mt-2 text-lg">
           Get inspired by some of our outstanding alumni.
         </p>
       </motion.div>

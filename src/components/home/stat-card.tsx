@@ -1,16 +1,28 @@
-import React from "react"
-import { motion } from "framer-motion"
-import CountUp from './CountUp'
+import React from "react";
+import { motion } from "framer-motion";
+import CountUp from "./CountUp";
 
 interface StatCardProps {
-  number: number
-  label: string
-  bgColor: string
-  textColor: string
-  delay?: number
+  number: number;
+  label: string;
+  bgColor: string;
+  textColor: string;
+  delay?: number;
+  labelColor?: string;
+  labelFont?: string;
+  numberFont?: string;
 }
 
-export default function StatCard({ number, label, bgColor, textColor, delay = 0 }: StatCardProps) {
+export default function StatCard({
+  number,
+  label,
+  bgColor,
+  textColor,
+  delay = 0,
+  labelColor,
+  labelFont,
+  numberFont,
+}: StatCardProps) {
   return (
     <motion.div
       className={`${bgColor} rounded-xl p-6 text-center hover:shadow-md transition-all duration-300 hover:-translate-y-1`}
@@ -19,7 +31,9 @@ export default function StatCard({ number, label, bgColor, textColor, delay = 0 
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
     >
-      <h3 className={`text-3xl sm:text-4xl md:text-5xl font-bold ${textColor} mb-2`}>
+      <h3
+        className={`text-3xl sm:text-4xl md:text-5xl font-bold ${textColor} mb-2`}
+      >
         <CountUp
           from={0}
           to={number}
@@ -29,10 +43,10 @@ export default function StatCard({ number, label, bgColor, textColor, delay = 0 
           className="count-up-text"
           onStart={() => {}}
           onEnd={() => {}}
-        />+
+        />
+        +
       </h3>
-      <p className="text-lg text-gray-700">{label}</p>
+      <p className="text-lg text-white">{label}</p>
     </motion.div>
-  )
+  );
 }
-

@@ -28,7 +28,7 @@ function AlumniDetails() {
                 <p className="text-lg md:text-xl text-gray-500 mt-2 text-center md:text-left">{alumniDetail.position}</p>
             </div>
             <div className="mt-6 md:mt-0 md:ml-10 max-w-2xl">
-                <p className="text-gray-700 text-center md:text-left leading-relaxed">
+                <p className="text-gray-700 text-left md:text-left leading-relaxed">
                     {alumniDetail.details || "No details available."}
                 </p>
                 {alumniDetail.linkedin && (

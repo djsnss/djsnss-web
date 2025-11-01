@@ -18,6 +18,7 @@ export default {
       colors: {
         "primary-blue": "#E7F2FF",
         "secondary-blue": "#CBE3FF",
+        "tertiary-blue": "#0066b2",
         "dark-blue": "#041877",
         "dark-navy": "#000e23",
         "light-navy": "#000e2c",

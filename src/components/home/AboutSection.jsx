@@ -18,10 +18,10 @@ const AboutSection = () => {
           className='w-full md:w-1/2 h-60 md:h-96 object-cover flex-grow rounded-lg mb-4 md:mb-0'
         />
         <div className='w-full md:w-1/2 flex flex-col justify-center items-center lg:space-x-8'>
-          <h2 className='text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center'>
+         <h2 className='text-3xl md:text-4xl font-bold font-geist text-tertiary-blue text-center'>
             About Us
           </h2>
-          <p className='text-lg text-gray-600 mb-4'>
+          <p className='text-lg font-roboto text-gray-600 mb-4 mt-6'>
             DJS NSS, the NSS unit of Dwarkadas J. Sanghvi College of
             Engineering, started in 2005. Our mission is to foster the all-round
             development of society, addressing socio-economic problems and
@@ -29,7 +29,7 @@ const AboutSection = () => {
             individuals into resilient and capable citizens, encouraging both
             technical advancements and societal contributions.
           </p>
-          <p className='text-lg text-gray-600 mb-4'>
+          <p className='text-lg font-roboto text-gray-600 mb-4'>
             Our activities include regular meetings, organizing events, and
             forging lifelong connections among volunteers. We strive to connect
             with nature and rural areas, providing holistic development and
