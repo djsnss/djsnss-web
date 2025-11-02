@@ -47,7 +47,9 @@ const iconMap = {
     import("react-icons/gr").then((module) => ({ default: module.GrArticle }))
   ),
   IoNewspaperOutline: React.lazy(() =>
-    import("react-icons/io5").then((module) => ({ default: module.IoNewspaperOutline }))
+    import("react-icons/io5").then((module) => ({
+      default: module.IoNewspaperOutline,
+    }))
   ),
 };
 
@@ -146,20 +148,22 @@ const Navbar = () => {
         },
       ],
     },
-    
   ];
 
   return (
     <div className="fixed top-0 left-0 right-0 lg:px-4 z-50 flex justify-center pointer-events-none">
+      <Link
+        to="/" 
+        className="hidden lg:block bg-white/70 absolute top-4 left-24 h-16 w-16 items-center no-underline p-2 rounded-full pointer-events-auto "
+      >
+        <img src={logo} alt="Logo" className="h-full w-full " />
+      </Link>
       <nav
         ref={menuRef}
-        className="pointer-events-auto w-full lg:w-full lg:mt-3 lg:max-w-5xl bg-slate-950 lg:bg-slate-950/50 text-white shadow-black/50 lg:border shadow-lg backdrop-blur-md rounded-none lg:rounded-full z-50 px-2 lg:px-8"
+        className="pointer-events-auto w-full  lg:w-full lg:mt-3 lg:max-w-[60rem] bg-slate-950 lg:bg-slate-950/50 text-white shadow-black/50 lg:border shadow-lg backdrop-blur-md rounded-none lg:rounded-full z-50 px-2 lg:px-8"
       >
         {/* Desktop Navbar */}
-        <div className="hidden lg:flex items-center space-x-6 px-6 py-1">
-          <Link to="/" className="flex-shrink-0 h-9 w-9 items-center no-underline">
-            <img src={logo} alt="Logo" className="h-full w-full bg-white rounded-sm" />
-          </Link>
+        <div className="justify-center  hidden lg:flex items-center space-x-6 px-6 py-1">
           {navigationLinks.map(({ Icon, title, path, subLinks }) => {
             const LazyIconComponent = iconMap[Icon];
             return (
@@ -226,7 +230,11 @@ const Navbar = () => {
               className={`flex items-center gap-3 text-white font-semibold text-xl tracking-wide transition-opacity no-underline duration-300
               }`}
             >
-              <img src={logo} alt="Logo" className="h-8 w-8 bg-white rounded-sm flex-shrink-0" />
+              <img
+                src={logo}
+                alt="Logo"
+                className="h-8 w-8 bg-white rounded-sm flex-shrink-0"
+              />
               DJS NSS
             </a>
 

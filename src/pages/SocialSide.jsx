@@ -29,12 +29,12 @@ const SocialSide = () => {
       {/* Toggle Button - At the top */}
       <button 
         onClick={toggleExpanded}
-        className="group z-40 p-2 h-8 w-8 lg:h-10 lg:w-10 bg-[#0066b2] hover:bg-white border-2 border-dark-navy-blue rounded-full flex justify-center items-center transition-all duration-300 hover:scale-110"
+        className="group z-40 p-2 h-8 w-8 lg:h-10 lg:w-10 bg-tertiary-blue hover:bg-white border-2 border-dark-blue rounded-full flex justify-center items-center transition-all duration-300 hover:scale-110"
         aria-label="Toggle social media links"
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
-          className={`h-6 w-6 text-white group-hover:text-[#0066b2] transition-transform duration-300 ${isExpanded ? 'rotate-45' : ''}`} 
+          className={`h-6 w-6 text-white group-hover:text-tertiary-blue transition-transform duration-300 ${isExpanded ? 'rotate-45' : ''}`} 
           fill="none" 
           viewBox="0 0 24 24" 
           stroke="currentColor"
@@ -51,7 +51,7 @@ const SocialSide = () => {
             href={socialLink.link}
             target="_blank" 
             rel="noopener noreferrer"
-            className="p-2 h-8 w-8 lg:h-10 lg:w-10 bg-[#0066b2] hover:bg-white text-white hover:text-[#0066b2] rounded-full flex justify-center items-center border-2 border-dark-navy-blue transition-all duration-300 hover:scale-110"
+            className="p-2 h-8 w-8 lg:h-10 lg:w-10 bg-tertiary-blue hover:bg-white text-white hover:text-tertiary-blue rounded-full flex justify-center items-center border-2 border-dark-navy-blue transition-all duration-300 hover:scale-110"
             aria-label={socialLink.name}
           >
             {getIcon(socialLink.name)}

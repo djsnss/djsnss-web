@@ -57,12 +57,12 @@ const ScrollToTop = () => {
   return (
     <button
       onClick={scrollToTop}
-      className={`group z-40 fixed bottom-6 right-6 p-3 h-8 w-8 lg:h-12 lg:w-12 bg-bright-blue hover:bg-white rounded-full flex justify-center items-center shadow-sm shadow-dark-navy-blue transition-transform duration-300 ${
+      className={`group z-40 fixed bottom-6 right-6 p-3 h-8 w-8 lg:h-12 lg:w-12 bg-tertiary-blue hover:bg-white rounded-full flex justify-center items-center shadow-sm shadow-dark-navy-blue transition-transform duration-300 ${
         isVisible ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       aria-label="Scroll to Top"
     >
-      <FaLongArrowAltUp className='text-dark-navy group-hover:-translate-y-1 duration-300' />
+      <FaLongArrowAltUp className='text-white group-hover:-translate-y-1 duration-300 group-hover:text-dark-blue' />
     </button>
   );
 };

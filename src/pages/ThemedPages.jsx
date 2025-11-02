@@ -57,7 +57,7 @@ const DynamicPage = ({ event }) => {
             
             {years.length > 0 ? (
               <div className='flex flex-col items-center'>
-                <div className='flex items-center justify-center flex-wrap gap-3'>
+                <div className='flex items-center justify-center flex-wrap gap-3 border-b-2 border-white'>
                   {selectedData.date && (
                     <span className='text-white font-roboto text-3xl '>{selectedData.date}</span>
                   )}
@@ -66,7 +66,7 @@ const DynamicPage = ({ event }) => {
                     id='year-select'
                     value={selectedYear}
                     onChange={handleYearChange}
-                    className='text-white bg-transparent text-2xl rounded-lg text-roboto py-2 shadow-sm focus:outline-none '
+                    className='text-white bg-transparent text-[1.7rem] rounded-lg text-roboto py-2 shadow-sm focus:outline-none '
                   >
                     {years.map((year) => (
                       <option
@@ -79,7 +79,7 @@ const DynamicPage = ({ event }) => {
                     ))}
                   </select>
                 </div>
-                <div className='mt-2 text-white/90'>{selectedData.location}</div>
+                <div className='mt-2 text-white/90 font-roboto'>{selectedData.location}</div>
               </div>
             ) : (
               <>
@@ -92,9 +92,9 @@ const DynamicPage = ({ event }) => {
         {/* "What is Camp?" Section */}
         <section className={`bg-${event.backgroundColor} bg-opacity-75 py-16`}>
           <div className='max-w-7xl mx-auto px-6 md:px-12'>
-            <h2 className='text-3xl font-bold mb-8'>What is {event.title}?</h2>
+            <h2 className='text-3xl font-bold mb-8 font-geist'>What is {event.title}?</h2>
             <div className='md:flex items-center'>
-              <p className='text-sm sm:text-lg text-justify leading-relaxed text-gray-300 md:w-2/3 md:mr-6'>
+              <p className='text-sm sm:text-lg text-justify leading-relaxed text-white md:w-2/3 md:mr-6 font-roboto'>
                 <span dangerouslySetInnerHTML={{ __html: event.description }} />
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>
