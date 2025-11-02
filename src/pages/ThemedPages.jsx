@@ -1,12 +1,37 @@
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { motion } from 'framer-motion'
 
 const DynamicPage = ({ event }) => {
+  if (!event) return null
+
+  const years = event.year ? Object.keys(event.year) : []
+
+  // Default to 2025 if available, else first year
+  const initialYear = years.includes('2025') ? '2025' : (years[0] || '')
+  const [selectedYear, setSelectedYear] = useState(initialYear)
+
+  // Re-evaluate default when years list changes (e.g., route change)
+  useEffect(() => {
+    const nextDefault = years.includes('2025') ? '2025' : (years[0] || '')
+    setSelectedYear(nextDefault)
+  }, [JSON.stringify(years)])
+
+  const handleYearChange = (e) => setSelectedYear(e.target.value)
+
+  const selectedData = event.year && selectedYear ? event.year[selectedYear] : {
+    bgImage: event.bgImage,
+    featuredImage: event.featuredImage,
+    location: event.location,
+    date: event.date,
+    images: event.images || []
+  }
+
   return (
     <div
       className={`min-h-screen bg-fixed bg-${event.backgroundColor} text-white`}
       style={{
-        backgroundImage: `url(${event.bgImage})`,
+        backgroundImage: `url(${selectedData.bgImage || event.bgImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}
@@ -15,7 +40,7 @@ const DynamicPage = ({ event }) => {
         {/* Header Section */}
         <header className='text-center py-20 h-screen flex flex-col justify-center'>
           <motion.h1
-            className={`self-center text-white text-4xl md:text-7xl lg:text-9xl font-extrabold tracking-wide mb-4 pt-16`}
+            className={` font-geist self-center text-white text-4xl md:text-7xl lg:text-8xl font-extrabold tracking-wide mb-5 pt-16`}
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5 }}
@@ -29,7 +54,38 @@ const DynamicPage = ({ event }) => {
             transition={{ duration: 1.5 }}
           >
             <span className='w-full border-white my-5 border-b-4'></span>
-            {event.date} | {event.location}
+            
+            {years.length > 0 ? (
+              <div className='flex flex-col items-center'>
+                <div className='flex items-center justify-center flex-wrap gap-3'>
+                  {selectedData.date && (
+                    <span className='text-white font-roboto text-3xl '>{selectedData.date}</span>
+                  )}
+                  <label htmlFor='year-select' className='sr-only'>Select Year</label>
+                  <select
+                    id='year-select'
+                    value={selectedYear}
+                    onChange={handleYearChange}
+                    className='text-white bg-transparent text-2xl rounded-lg text-roboto py-2 shadow-sm focus:outline-none '
+                  >
+                    {years.map((year) => (
+                      <option
+                        key={year}
+                        value={year}
+                        className="text-black bg-secondary-blue"
+                      >
+                        {year}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className='mt-2 text-white/90'>{selectedData.location}</div>
+              </div>
+            ) : (
+              <>
+                {selectedData.date} | {selectedData.location}
+              </>
+            )}
           </motion.div>
         </header>
 
@@ -43,7 +99,7 @@ const DynamicPage = ({ event }) => {
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>
                 <img
-                  src={event.featuredImage}
+                  src={selectedData.featuredImage}
                   alt='Camp highlight'
                   className='rounded-xl shadow-lg'
                 />
@@ -53,12 +109,12 @@ const DynamicPage = ({ event }) => {
         </section>
 
         {/* Memories Section */}
-        <section className='bg-white py-10'>
-          <h3 className='text-center text-3xl font-bold text-black mb-6'>
+        <section className='bg-secondary-blue py-10'>
+          <h3 className='text-center text-4xl font-bold text-black mb-8'>
             Memories from Previous Years
           </h3>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12'>
-            {event.images.map((image, index) => (
+            {selectedData.images.map((image, index) => (
               <div key={index} className="w-full flex justify-center">
                 <img
                   src={image}
