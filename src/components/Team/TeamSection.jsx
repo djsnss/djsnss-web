@@ -4,7 +4,7 @@ import TeamCard from "./TeamCard";
 
 const TeamSection = ({ members }) => {
   return (
-    // <div className="px-auto py-8 my-14 mx-auto h-max w-full max-w-4xl rounded-lg shadow-lg text-black bg-white/10 relative">
+    <div className="w-full flex flex-col items-center py-20 px-4">
       <>
       <div className="h-max w-full max-w-full flex flex-row flex-wrap justify-around items-center gap-4">
         {members.map((member, idx) => (
@@ -13,7 +13,7 @@ const TeamSection = ({ members }) => {
         
       </div>
       </>
-    // </div>
+    </div>
   );
 };
 TeamSection.propTypes = {

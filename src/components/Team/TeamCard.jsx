@@ -96,10 +96,10 @@ const StyledWrapper = styled.div`
   }
 
   .team-card-name {
-    font-size: 22px;
+    font-size: 40px;
     font-weight: 700;
+    font-family: "", sans-serif;
     color: #000;
-    cursor: pointer;
   }
 
   .position-section {
@@ -108,8 +108,9 @@ const StyledWrapper = styled.div`
   }
 
   .head {
+    font-family: "roboto", sans-serif;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 29px;
   }
 
   /* Centered LinkedIn icon */

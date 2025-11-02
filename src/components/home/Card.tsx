@@ -17,12 +17,11 @@ function ProfileCard({ name, imageUrl, link, shortDesc }) {
         className="object-cover object-center w-full h-80"
       />
       <div className="team-card-overlay">
-        <h3 className="team-card-name">{name}</h3>
         <a
           href={link}
-          className="no-underline text-xs sm:text-sm text-white bg-dark-navy px-4 py-1 mt-2 rounded-full"
+          className="team-card-name"
         >
-          View Details
+         {name}
         </a>
       </div>
       <div className="textBox">

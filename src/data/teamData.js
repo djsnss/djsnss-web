@@ -136,8 +136,7 @@ const TeamData = {
           image: ManavBhansali,
           linkedin: "https://www.linkedin.com/in/manav-bhansali-94156227b/",
         },
-      ],
-      "joint Secretary": [
+
         {
           name: "Jaineel Pandya",
           position: "Joint Secretary",
@@ -145,6 +144,9 @@ const TeamData = {
           linkedin: "https://www.linkedin.com/in/jaineel-pandya-3a0982278/",
         },
       ],
+      // "joint Secretary": [
+
+      // ],
       treasurer: [
         {
           name: "Krish Khambhadiya",
@@ -152,8 +154,7 @@ const TeamData = {
           image: KrishKhambhadiya,
           linkedin: "https://www.linkedin.com/in/krish-khambhadiya-334419289/",
         },
-      ],
-      "joint Treasurer": [
+
         {
           name: "Avumm Dedhiaa",
           position: "Joint Treasurer",
@@ -161,6 +162,9 @@ const TeamData = {
           linkedin: "https://www.linkedin.com/in/avumm-dedhiaa-7a8609326/",
         },
       ],
+      // "joint Treasurer": [
+
+      // ],
     },
     leader: {
       "": [
@@ -193,7 +197,8 @@ const TeamData = {
               name: "Pratyaksha Khamkar",
               position: "Head of Publicity",
               image: PratyakshaKhamkar,
-              linkedin: "https://www.linkedin.com/in/pratyaksha-khamkar-056570372/",
+              linkedin:
+                "https://www.linkedin.com/in/pratyaksha-khamkar-056570372/",
             },
             {
               name: "Arya Shah",
@@ -227,7 +232,8 @@ const TeamData = {
               name: "Shrawani Jagtap",
               position: "Head of Events",
               image: ShrawaniJagtap,
-              linkedin: "https://www.linkedin.com/in/shrawani-jagtap-947772353/",
+              linkedin:
+                "https://www.linkedin.com/in/shrawani-jagtap-947772353/",
             },
             {
               name: "Mihir Sanghvi",
@@ -256,7 +262,8 @@ const TeamData = {
               name: "Dhairvi Sangani",
               position: "Head of Creatives",
               image: DhairviSangani,
-              linkedin: "https://www.linkedin.com/in/dhairvi-sangani-3668b4290/",
+              linkedin:
+                "https://www.linkedin.com/in/dhairvi-sangani-3668b4290/",
             },
           ],
         },
@@ -296,7 +303,8 @@ const TeamData = {
               name: "Kaustubh Pansania",
               position: "Head of Editorial",
               image: KaustubhPansania,
-              linkedin: "https://www.linkedin.com/in/kaustubh-pansania-8b3b21323/",
+              linkedin:
+                "https://www.linkedin.com/in/kaustubh-pansania-8b3b21323/",
             },
           ],
         },

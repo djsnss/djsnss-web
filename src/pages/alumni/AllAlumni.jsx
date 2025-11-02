@@ -6,21 +6,21 @@ import alumini from "../../data/alumniData"
 const AllAlumni = () => {
 
   return (
-    <div className=" bg-gradient-to-br from-blue-100 to-sky-300 pt-16">
+    <div className=" bg-secondary-blue pt-16">
       <div className="text-center mb-8">
-        <h1 className="text-3xl md:text-4xl mt-4 font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 text-center">
+        <h1 className="text-3xl md:text-4xl mt-4 font-bold font-geist text-tertiary-blue text-center">
           Alumni Directory
         </h1>
-        <p className="text-light-gray mt-2 text-lg">
+        <p className="text-light-gray font-roboto mt-2 text-lg">
           Explore our complete directory of alumni who have contributed to NSS and are making an impact in various
           fields.
         </p>
-        <a
+        {/* <a
           href="/"
           className="inline-block mt-4 text-blue-600 hover:text-blue-800 hover:underline"
         >
           ← Back to Distinguished Alumni
-        </a>
+        </a> */}
       </div>
 
       <motion.div

@@ -9,7 +9,11 @@ import StemCell from "../assets/Events/Stemcell.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
 import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
 import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
+import { MdBloodtype } from "react-icons/md";
+import { PiGrainsBold } from "react-icons/pi";
 import { GiTreehouse, GiWheat } from "react-icons/gi";
+import { FaChildReaching } from "react-icons/fa6";
+import { GiCampingTent } from "react-icons/gi";
 
 export const common = [
   {
@@ -26,7 +30,7 @@ export const common = [
     duration: "7 days",
     location: "Dahanu",
     date: "21st Jan - 28th Jan 2025",
-    icon: FaFlag,
+    icon: GiCampingTent,
     color: "#4C9D8F",
     direction: "left",
   },
@@ -44,7 +48,7 @@ export const common = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "4th March 2025",
-    icon: FaHeart,
+    icon: MdBloodtype,
     color: "#D72638",
     direction: "right",
   },
@@ -62,7 +66,7 @@ export const common = [
     duration: "1 day",
     location: "DJ Sanghvi College",
     date: "17th Oct - 18th Oct 2024",
-    icon: GiWheat,
+    icon: PiGrainsBold,
     color: "#F4A261",
     direction: "right"
   },
@@ -97,7 +101,7 @@ export const common = [
     duration: "5 days",
     location: "DJ Sanghvi College",
     date: "20th Feb - 24th Feb 2024",
-    icon: FaHandHoldingHeart,
+    icon: FaChildReaching,
     color: "#4CAF50",
     direction: "right",
   },
