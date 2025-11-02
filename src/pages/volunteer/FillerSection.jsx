@@ -19,7 +19,7 @@ const VolunteerFillerSection = () => {
           whileInView={{ opacity: 1, x: 0 }}
           className="bg-primary-blue p-6 md:p-12"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-dark-blue mb-8 font-geist font-lateef">
+          <h2 className="text-3xl md:text-4xl font-bold text-dark-blue mb-8 font-geist ">
             Notable Volunteers & Stories
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 space-y-8">
@@ -63,7 +63,8 @@ const VolunteerFillerSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          className="bg-secondary-blue p-6 md:p-12 hover:bg-primary-blue transition-colors duration-300"
+          className="bg-secondary-blue p-6 md:p-12 transition-colors duration-300"
+          // hover:bg-primary-blue 
         >
           <h3 className="text-2xl font-semibold text-dark-blue mb-6">Rural Development</h3>
           <div className="aspect-square bg-secondary-blue overflow-hidden">
@@ -76,7 +77,7 @@ const VolunteerFillerSection = () => {
           <p className="text-dark-blue mt-6">
             NSS brings you closer to nature and rural communities, offering a wholesome experience that promotes both environmental awareness and rural development. Through hands-on involvement in projects like tree plantations, village development, and clean energy initiatives, volunteers learn the importance of preserving natural resources.
           </p>
-          <p className="text-secondary-blue mt-6">
+          <p className="text-dark-blue mt-6">
             Volunteering in rural areas exposes you to different cultures, traditions, and the beauty of simplicity, fostering personal growth and a deeper understanding of India’s diversity.
           </p>
         </motion.div>
@@ -85,7 +86,8 @@ const VolunteerFillerSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="bg-dark-blue p-6 md:p-12 hover:bg-secondary-blue transition-colors duration-300"
+          className="bg-dark-blue p-6 md:p-12  transition-colors duration-300"
+          //hover:bg-secondary-blue
         >
           <h3 className="text-2xl font-semibold mb-6 text-white">Environmental Impact</h3>
           <div className="aspect-square bg-secondary overflow-hidden">
@@ -95,7 +97,7 @@ const VolunteerFillerSection = () => {
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
           </div>
-          <p className="text-primary-blue mt-6">
+          <p className="text-white mt-6">
             Participate in tree plantations, clean energy initiatives, and environmental awareness campaigns. NSS volunteers contribute to a greener future by organizing eco-friendly events, promoting sustainable practices, and educating communities on the importance of environmental conservation. By engaging in environmental projects, you can make a tangible impact on the planet and inspire others to adopt eco-friendly habits.
             <br />
             <br />
@@ -107,7 +109,8 @@ const VolunteerFillerSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="bg-secondary-blue p-6 md:p-12 hover:bg-primary-blue transition-colors duration-300"
+          className="bg-secondary-blue p-6 md:p-12  transition-colors duration-300"
+          //hover:bg-primary-blue
         >
           <h3 className="text-xl md:text-2xl font-semibold text-dark-blue mb-6">Government Initiatives</h3>
           <div className="aspect-square bg-secondary-blue overflow-hidden">
@@ -127,8 +130,10 @@ const VolunteerFillerSection = () => {
               <div className="font-medium">Encourages youth to volunteer in developing innovative solutions for social challenges.</div>
             </li>
             <li>
-              <span className="text-dark-blue font-semibold">Pradhan Mantri Kaushal Vikas Yojana (PMKVY)</span>
+              <li className="border-b  bg-secondary-blue pb-3">
+              <span className="text-dark-blue  font-semibold">Pradhan Mantri Kaushal Vikas Yojana (PMKVY)</span>
               <div className="font-medium">Volunteers join skill development programs aimed at empowering disadvantaged communities with vocational training.</div>
+            </li>
             </li>
           </ul>
         </motion.div>

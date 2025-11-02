@@ -182,7 +182,7 @@ const VolunteerRegistration = () => {
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
-                className="w-full p-2 mt-2 bg-sky-200 text-dark-blue rounded"
+                className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 required
               />

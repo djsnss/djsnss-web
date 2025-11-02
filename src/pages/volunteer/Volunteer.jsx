@@ -126,7 +126,8 @@ const Volunteer = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="bg-primary-blue p-6 md:p-12 hover:bg-secondary-blue transition-colors duration-300"
+            className="bg-primary-blue p-6 md:p-12 transition-colors duration-300"
+            // hover:bg-secondary-blue 
           >
             <h3 className="text-xl md:text-2xl font-semibold text-[#003366] mb-6">Why Volunteer?</h3>
             <p className="text-[#003b5c] my-6">
@@ -144,7 +145,8 @@ const Volunteer = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="bg-secondary-blue p-6 md:p-12 hover:bg-primary-blue transition-colors duration-300"
+            className="bg-white p-6 md:p-12  transition-colors duration-300"
+            // hover:bg-primary-blue
           >
             <h3 className="text-xl md:text-2xl font-semibold mb-6 text-dark-blue">How to Get Involved</h3>
             <p className="text-dark-blue my-6">

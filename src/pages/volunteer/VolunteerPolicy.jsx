@@ -123,9 +123,11 @@
 
 // export default volunteerPolicy;
 
+
+
 import React from "react";
 import { motion } from "framer-motion";
-import PolicyImg from "../../assets/policy.png"; 
+import PolicyImg from "../../assets/policy.png";
 
 const volunteerPolicy = () => {
   const sections = [
@@ -175,7 +177,7 @@ const volunteerPolicy = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col md:flex-row">
-      {/* Left Half - Volunteer Policy Title */}
+      {/* Left Half */}
       <section
         className="relative w-full md:w-1/2 min-h-[60vh] md:min-h-screen bg-black/60 p-4 flex items-center justify-center bg-cover bg-center"
         style={{ backgroundImage: `url(${PolicyImg})` }}
@@ -185,28 +187,32 @@ const volunteerPolicy = () => {
           <h1 className="text-4xl md:text-7xl font-bold tracking-wide text-white font-geist">
             Volunteer Policy
           </h1>
-          <p className="mt-4 text-lg md:text-2xl text-gray-100 max-w-3xl mx-auto font-lateef">
-            NSS aims to instill a sense of responsibility, leadership, and community development among volunteers.
-            Learn about our mission and impact below.
+          <p className="mt-4 text-2xl md:text-3xl text-gray-100 max-w-3xl mx-auto font-lateef">
+            NSS aims to instill a sense of responsibility, leadership, and
+            community development among volunteers. Learn about our mission and
+            impact below.
           </p>
         </div>
       </section>
 
       {/* Right Half - Scrollable Grid */}
-      <section className="w-full md:w-1/2">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 h-full">
+      <section className="w-full md:w-1/2 overflow-y-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-full">
+            {/* Two blank boxes visible only on md and larger */}
+          <div className="hidden md:flex justify-center items-center min-h-[50px] bg-secondary-blue text-white hover:scale-105 transition-all duration-300 ease-in-out"></div>
+          <div className="hidden md:flex justify-center items-center min-h-[50px] bg-tertiary-blue text-[#041877] hover:scale-105 transition-all duration-300 ease-in-out"></div>
+        
           {sections.map((section, index) => {
             let bgColor = "";
             let textColor = "";
 
-            // group-based styles
             if (index === 1 || index === 2 || index === 5) {
-              // Group 1 (light)
               bgColor = "#CBE3FF";
-              textColor = "#041877";
+              // textColor = "#041877";
+              textColor = "#0066b2";
             } else {
-              // Group 2 (dark)
-              bgColor = "#000e23";
+              // bgColor = "#000e23";
+              bgColor="#0066b2";
               textColor = "#ffffff";
             }
 
@@ -216,30 +222,35 @@ const volunteerPolicy = () => {
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: "easeOut" }}
-                className="relative flex flex-col justify-center items-center p-6 border-none transform transition-all duration-300 ease-in-out hover:scale-105"
+                className="flex flex-col justify-center items-center p-8 transform transition-all duration-300 ease-in-out hover:scale-105 min-h-[250px]"
                 style={{
                   backgroundColor: bgColor,
                   color: textColor,
                 }}
               >
-              <h2 className=" md:text-3xl font-semibold text-center font-lateef">{section.title}</h2>
-              <div className="w-full h-full mt-3">
-                {section.content.includes("-") ? (
-                  <ul className="list-disc pl-5 font-roboto">
-                    {section.content
-                      .split("\n")
-                      .filter((item) => item.trim() !== "")
-                      .map((item, i) => (
-                        <li key={i} className="mb-2">{item.replace("-", "").trim()}</li>
-                      ))}
-                  </ul>
-                ) : (
-                  <p className=" font-roboto">{section.content}</p>
-                )}
-              </div>
+                <h2 className="md:text-5xl font-semibold text-center font-lateef">
+                  {section.title}
+                </h2>
+                <div className="w-full h-full mt-3">
+                  {section.content.includes("-") ? (
+                    <ul className="list-disc pl-5 font-roboto">
+                      {section.content
+                        .split("\n")
+                        .filter((item) => item.trim() !== "")
+                        .map((item, i) => (
+                          <li key={i} className="mb-2">
+                            {item.replace("-", "").trim()}
+                          </li>
+                        ))}
+                    </ul>
+                  ) : (
+                    <p className="font-roboto text-l">{section.content}</p>
+                  )}
+                </div>
               </motion.div>
             );
           })}
+
         </div>
       </section>
     </div>

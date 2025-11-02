@@ -77,7 +77,7 @@ const FAQ = () => {
       {/* Second Div: FAQ Section */}
       <div className="faq-content">
         {/* "FAQ" Label */}
-        <div className="flex mx-auto mt-5 mb-1 py-4 pt-16 font-geist h-max w-full justify-center items-center text-3xl md:text-7xl text-black">
+        <div className="flex mx-auto mt-5 mb-1 py-4 pt-16 font-semibold font-geist h-max w-full justify-center items-center text-3xl md:text-7xl text-black">
           FAQ
         </div>
         {faqs.map((faq, index) => (
