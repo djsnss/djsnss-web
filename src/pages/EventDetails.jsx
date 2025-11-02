@@ -2,13 +2,11 @@ import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { localEventsData } from "../data/areaEvents";
 import { largeEventsData } from "../data/largeEvents";
-// Import other event data arrays
 import { universityEventsData } from "../data/universityEvents";
 import { TechnicalProjects } from "../data/technicalProjects";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
-// Combine all event data arrays
 const staticEventsData = [
   ...largeEventsData,
   ...universityEventsData,
@@ -36,7 +34,6 @@ const EventDetails = () => {
           return;
         }
 
-        // If not found in static data, fetch from API
         const [pastEventsResponse, upcomingEventsResponse] = await Promise.all([
           fetch("https://djsnss-web.onrender.com/events/past-events"),
           fetch("https://djsnss-web.onrender.com/events/upcoming-events"),
@@ -49,7 +46,6 @@ const EventDetails = () => {
         const pastEventsData = await pastEventsResponse.json();
         const upcomingEventsData = await upcomingEventsResponse.json();
 
-        // Handle different response structures
         const pastEvents = Array.isArray(pastEventsData)
           ? pastEventsData
           : pastEventsData.events || pastEventsData.data || [];
@@ -65,16 +61,15 @@ const EventDetails = () => {
           description: event.description,
           longDescription: event.longDescription,
           scale: event.scope,
-          duration: "TBD", // Add duration field to your API if needed
+          duration: "TBD",
           location: event.location,
           date: new Date(event.date).toLocaleDateString(),
-          imageURL: event.photo?.url || "", // Handle the photo object
+          imageURL: event.photo?.url || "",
           slug: event.slug,
-          status: event.status, // Default to 'upcoming' if status is missing
+          status: event.status,
           related_images: event.related_images || [],
         }));
 
-        // Find the event in API data
         const foundEvent = transformedEvents.find(
           (event) => event.slug === slug
         );
@@ -118,10 +113,8 @@ const EventDetails = () => {
 
       if (response.ok) {
         const result = await response.json();
-        console.log(result);
-        toast.success(`${result.message}`); // assuming the response contains eventName
+        toast.success(`${result.message}`);
       } else {
-        // You can add a check here for specific error responses (e.g., 400, 401, etc.)
         const errorData = await response.json();
         toast.success(`${errorData.message}`);
       }
@@ -134,7 +127,7 @@ const EventDetails = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <div className="text-2xl font-bold">Loading...</div>
+        <div className="text-2xl font-geist font-semibold">Loading...</div>
       </div>
     );
   }
@@ -143,8 +136,13 @@ const EventDetails = () => {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-red-500 mb-4">{error}</h1>
-          <Link to="/events" className="text-blue-500 hover:underline">
+          <h1 className="text-3xl font-geist font-semibold text-red-500 mb-4">
+            {error}
+          </h1>
+          <Link
+            to="/events"
+            className="text-blue-500 hover:underline font-roboto"
+          >
             Back to Events
           </Link>
         </div>
@@ -157,7 +155,7 @@ const EventDetails = () => {
       <div>
         {eventDetail ? (
           <motion.div
-            className={`w-full min-h-screen pt-24 p-6 md:p-12 flex flex-col lg:flex-row items-center justify-center bg-primary-blue text-black`}
+            className="w-full min-h-screen pt-24 p-6 md:p-12 flex flex-col lg:flex-row items-center justify-center bg-primary-blue text-black"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
@@ -176,7 +174,7 @@ const EventDetails = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4, duration: 0.5 }}
             >
-              <h1 className="text-4xl lg:text-5xl font-geist font-bold mb-4">
+              <h1 className="text-4xl lg:text-5xl font-geist font-semibold mb-4">
                 {eventDetail.title}
               </h1>
               <p className="text-lg lg:text-xl font-roboto mb-2">
@@ -185,23 +183,32 @@ const EventDetails = () => {
               <p className="text-sm font-roboto text-justify lg:text-base mb-4 opacity-90">
                 {eventDetail.longDescription}
               </p>
-              <div className="font-roboto flex flex-col lg:flex-row justify-between mt-4 ">
+              <div className="font-roboto flex flex-col lg:flex-row justify-between mt-4">
                 <div className="space-y-2 mb-4">
                   <p className="text-base lg:text-lg">
-                    <strong>Scale:</strong> {eventDetail.scale}
+                    <strong className="font-geist font-semibold">
+                      Scale:
+                    </strong>{" "}
+                    {eventDetail.scale}
                   </p>
                   <p className="text-base lg:text-lg">
-                    <strong>Location:</strong> {eventDetail.location}
+                    <strong className="font-geist font-semibold">
+                      Location:
+                    </strong>{" "}
+                    {eventDetail.location}
                   </p>
                   <p className="text-base lg:text-lg">
-                    <strong>Date:</strong> {eventDetail.date}
+                    <strong className="font-geist font-semibold">
+                      Date:
+                    </strong>{" "}
+                    {eventDetail.date}
                   </p>
                 </div>
                 <div>
                   {eventDetail.status === "Upcoming" ? (
                     <button
                       onClick={() => handleRegister(eventDetail._id)}
-                      className="mt-3 w-full bg-blue-500 text-white font-medium py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
+                      className="mt-3 w-full bg-blue-500 text-white font-geist font-semibold py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2"
                     >
                       Register
                     </button>
@@ -210,7 +217,7 @@ const EventDetails = () => {
                       href="https://djsnss-certificate.streamlit.app"
                       target="_blank"
                       rel="noreferrer"
-                      className="bg-white text-gray-800 hover:text-blue-500 px-4 py-2 mt-4 rounded-lg font-bold hover:bg-gray-100 transition-colors no-underline hover:underline"
+                      className="bg-white text-gray-800 font-geist font-semibold hover:text-blue-500 px-4 py-2 mt-4 rounded-lg hover:bg-gray-100 transition-colors no-underline hover:underline"
                     >
                       Generate Certificate &gt;
                     </a>
@@ -221,19 +228,20 @@ const EventDetails = () => {
           </motion.div>
         ) : (
           <div className="flex items-center justify-center h-screen font-roboto">
-            <h1 className="text-3xl font-bold text-red-500">Event Not Found</h1>
-            <Link to="/events" className="ml-4 text-blue-500">
+            <h1 className="text-3xl font-geist font-semibold text-red-500">
+              Event Not Found
+            </h1>
+            <Link to="/events" className="ml-4 text-blue-500 font-roboto">
               Back to Events
             </Link>
           </div>
         )}
       </div>
 
-      {/* Related Images Section */}
       {eventDetail?.related_images &&
         eventDetail.related_images.filter((img) => img && img.url).length > 0 && (
           <div className="my-10">
-            <h2 className="text-2xl font-giest font-bold mb-4 px-6 md:px-12">
+            <h2 className="text-2xl font-geist font-semibold mb-4 px-6 md:px-12">
               Event Related Images
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12">

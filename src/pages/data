@@ -1,0 +1,161 @@
+{
+  "report_section": {
+    "about_us": {
+      "name": "DJS NSS",
+      "college": "Dwarkadas J. Sanghvi College of Engineering",
+      "established": 2005,
+      "mission": "Foster all-round development, address socio-economic and sustainability crises, transform individuals into resilient citizens encouraging technical advancements and societal contributions.",
+      "activities": [
+        "Regular meetings",
+        "Organizing events",
+        "Rural and nature outreach",
+        "Holistic personal and societal growth"
+      ],
+      "impact": {
+        "events_organized": 50,
+        "lives_impacted": 5000,
+        "volunteer_hours": 1000,
+        "active_volunteers": 200
+      }
+    },
+    "initiatives": [
+      {
+        "name": "NSS Camp",
+        "description": "Community service and personal growth camp at Dahanu focusing on cleanliness, team-building, creative activities, educational outreach, medical camp, environmental drives, solar street light installation, concluding with cultural celebrations.",
+        "scale": "Large",
+        "location": "Dahanu",
+        "date": "21st - 28th Jan 2025"
+      },
+      {
+        "name": "Blood Donation Drive",
+        "description": "Blood donation drive with Red Cross Society at DJ Sanghvi College raising awareness and supporting public health, involving over 100 volunteers.",
+        "scale": "Large",
+        "location": "DJ Sanghvi College",
+        "date": "4th March 2025"
+      },
+      {
+        "name": "Grain-a-thon",
+        "description": "Food donation drive supporting underprivileged communities through grain donation, featuring speeches, sessions, and 200+ volunteers.",
+        "scale": "Large",
+        "location": "DJ Sanghvi College",
+        "date": "17th - 18th Oct 2024"
+      },
+      {
+        "name": "Annual Charity Drive",
+        "description": "Fundraiser for specially-abled children supporting NGOs Kshitij, Purnavas, and VDIS, raising Rs 75,000 with handmade products and community celebration.",
+        "scale": "Large",
+        "location": "DJ Sanghvi College",
+        "date": "20th - 24th Feb 2024"
+      },
+      {
+        "name": "Stem Cell Donation Drive",
+        "description": "Drive in collaboration with DATRI registry, informative sessions, interactive activities, 560 swabs donated.",
+        "scale": "Large",
+        "location": "DJ Sanghvi College",
+        "date": "16th Aug 2024"
+      },
+      {
+        "name": "Tree Plantation",
+        "description": "Tree plantation drive promoting environmental responsibility at Aarey Colony.",
+        "scale": "Medium",
+        "location": "Aarey Colony, Mumbai West",
+        "date": "28th June 2025"
+      },
+      {
+        "name": "Voter Registration",
+        "description": "Drive to encourage democratic rights, 300+ registrations, games and discussions.",
+        "scale": "Medium",
+        "location": "DJ Sanghvi College",
+        "date": "15th Sep 2024"
+      },
+      {
+        "name": "Newspaper Collection Drive",
+        "description": "Promoting recycling and sustainability with educational sessions; significant amount of paper waste collected.",
+        "scale": "Medium",
+        "location": "DJ Sanghvi College",
+        "date": "5th June 2024"
+      },
+      {
+        "name": "Independence Day Rally",
+        "description": "Celebrating freedom and unity, march, speeches, cultural performances, flag-hoisting.",
+        "scale": "Large - University Level",
+        "location": "DJ Sanghvi College",
+        "date": "15th Aug 2024"
+      },
+      
+      // Additional major events extracted from pasted file
+      {
+        "name": "Bamboo Products Stall",
+        "description": "Stall supporting tribal women artisans organized at DJ Sanghvi College.",
+        "scale": "Local",
+        "location": "DJ Sanghvi College",
+        "date": "8th April 2025"
+      },
+      {
+        "name": "Old Age Home Visit",
+        "description": "Volunteers visited Borivali old age homes to share joy, companionship, and support.",
+        "scale": "Area",
+        "location": "Mahakali Jan Seva Foundation, Vimalta Devi Foundation, Borivali",
+        "date": "9th Feb 2025"
+      },
+      {
+        "name": "Juhu Beach Cleaning Drive",
+        "description": "84 volunteers removed waste after Ganesh Visarjan, promoting environmental awareness.",
+        "scale": "Area",
+        "location": "Juhu Beach, Mumbai",
+        "date": "9th July 2025"
+      },
+      {
+        "name": "Education Drive 2025",
+        "description": "Education drive with Robin Hood Army fostering creativity and learning for underprivileged children.",
+        "scale": "Area",
+        "location": "Loknete Gopinath Munde Shakti Ground, Dahisar West",
+        "date": "7th March 2025"
+      },
+      {
+        "name": "Paper Bag Distribution Drive",
+        "description": "Distributing paper bags to combat plastic pollution across Mumbai.",
+        "scale": "Area",
+        "location": "Mumbai (multiple locations)",
+        "date": "22nd June 2025"
+      },
+      {
+        "name": "Orphanage Visit",
+        "description": "Spreading joy and organizing activities for children in Andheri orphanage.",
+        "scale": "Area-Level",
+        "location": "Andheri",
+        "date": "14th Jan 2024"
+      }
+      // ... (more events and initiatives can be added in similar structured blocks)
+    ],
+    "messages": [
+      {
+        "role": "Principal",
+        "name": "Dr. Hari Vasudevan",
+        "message": "DJS NSS has shaped students into responsible citizens via health camps, tree plantations, education programs, and disaster management training, making a lasting impact."
+      },
+      {
+        "role": "Program Officer",
+        "name": "Prof. Alisha Banz",
+        "message": "NSS is vital to the institution's commitment to community service, with volunteers actively participating in solar light installations, blood donation, and camp experiences."
+      },
+      {
+        "role": "Program Officer",
+        "name": "Prof. Vyankatesh Bagal",
+        "message": "NSS volunteers are crucial to social programs implementation, including blood donation and awareness drives, consistently driving societal well-being."
+      },
+      {
+        "role": "Program Officer",
+        "name": "Prof. Rahul Taware",
+        "message": "NSS transforms students into leaders and global citizens, encouraging engagement in sustainability, education, and outreach programs."
+      }
+    ],
+    "departments": [
+      "Creatives",
+      "Technical",
+      "Events",
+      "Publicity",
+      "Editorial"
+    ]
+  }
+}

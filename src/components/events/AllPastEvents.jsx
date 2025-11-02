@@ -15,7 +15,6 @@ const AllPastEvents = () => {
         );
         const data = await response.json();
 
-        // Format all events' dates
         const formattedEvents = data.events.map((event) => {
           const eventDate = new Date(event.date);
           const formattedDate = eventDate
@@ -40,7 +39,6 @@ const AllPastEvents = () => {
     fetchData();
   }, []);
 
-  // Filtered data for each event type
   const collegeEvents = eventsData.filter((event) => event.scope === "Local");
   const areaEvents = eventsData.filter(
     (event) => event.scope === "Area" || event.scope === "Area-Level"
@@ -50,7 +48,7 @@ const AllPastEvents = () => {
   );
 
   return (
-    <div>
+    <div className="font-roboto">
       <CollegeEvents loading={loading} localEventsData={collegeEvents} />
       <AreaEvents loading={loading} areaEventsData={areaEvents} />
       <UniversityEvents loading={loading} universityEventsData={universityEvents} />
