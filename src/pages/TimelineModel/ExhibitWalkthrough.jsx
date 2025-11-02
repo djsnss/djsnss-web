@@ -293,7 +293,7 @@ const InfoPanel = styled.div`
   h3 {
     color: #333;
     margin-top: 0;
-    border-bottom: 2px solid ${props => props.color || '#4C9D8F'};
+    border-bottom: 2px solid #CBE3FF;
     padding-bottom: 8px;
   }
   
@@ -311,7 +311,8 @@ const InfoPanel = styled.div`
   }
   
   .view-more-button {
-    background-color: ${props => props.color || '#4C9D8F'};
+    color: #041877;
+    background-color: #CBE3FF;
     transition: all 0.2s ease;
     
     &:hover {

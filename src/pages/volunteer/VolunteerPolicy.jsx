@@ -196,9 +196,9 @@ const volunteerPolicy = () => {
       </section>
 
       {/* Right Half - Scrollable Grid */}
-      <section className="w-full md:w-1/2 overflow-y-auto">
+      <section className="w-full md:w-1/2">
         <div className="grid grid-cols-1 md:grid-cols-2 h-full">
-            {/* Two blank boxes visible only on md and larger */}
+          {/* Two blank boxes visible only on md and larger */}
           <div className="hidden md:flex justify-center items-center min-h-[50px] bg-secondary-blue text-white hover:scale-105 transition-all duration-300 ease-in-out"></div>
           <div className="hidden md:flex justify-center items-center min-h-[50px] bg-tertiary-blue text-[#041877] hover:scale-105 transition-all duration-300 ease-in-out"></div>
         
