@@ -25,6 +25,27 @@ import BDD4 from "../assets/Events/bdd25/bdd6.jpg";
 import BDD5 from "../assets/Events/bdd25/bdd7.jpg";
 import BDD6 from "../assets/Events/bdd25/bdd8.jpg";
 import CampFeatured from "../assets/camp-highlight.jpg";
+import campbg from "../assets/Events/NSSCamp.jpg";
+import camp3 from "../assets/Events/camp/camp3.jpg";
+import camp1 from "../assets/Events/camp/camp1.jpg";
+import camp2 from "../assets/Events/camp/camp2.jpg";
+import camp4 from "../assets/Events/camp/camp4.jpg";
+import camp5 from "../assets/Events/camp/camp5.jpg";
+import camp6 from "../assets/Events/camp/camp6.jpg";
+import grainathonbg from "../assets/Events/grainathon/grainathon1.png";
+import grainathon from "../assets/Events/grainathon/GrainAThon.png";
+import grainathon2 from "../assets/Events/grainathon/grainathon2.png";
+import grainathon3 from "../assets/Events/grainathon/grainathon3.png";
+import grainathon4 from "../assets/Events/grainathon/grainathon4.png";
+import grainathon5 from "../assets/Events/grainathon/grainathon5.png";
+import grainathon6 from "../assets/Events/grainathon/grainathon6.png";
+import bddbg from "../assets/Events/bdd/bdd5.jpg";
+import bdd1 from "../assets/Events/bdd/bdd1.jpg";
+import bdd2 from "../assets/Events/bdd/bdd2.jpg";
+import bdd3 from "../assets/Events/bdd/bdd3.jpg";
+import bdd4 from "../assets/Events/bdd/bdd4.jpg";
+import bdd5 from "../assets/Events/bdd/bdd6.jpg";
+import bdd6 from "../assets/Events/bdd/BDD.jpg";
 
 export const propsData = [
   {
@@ -50,11 +71,11 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
         images: [Camp1, Camp2, Camp3, Camp4, Camp5, Camp6],
       },
       "2024": {
-        bgImage: NSSCamp,
-        featuredImage: Camp7,
-        location: "Vapi",
+        bgImage: campbg,
+        featuredImage: camp3,
+        location: "Vapi", 
         date: "21st Jan - 28th Jan ",
-        images: [Camp1, Camp2, Camp3],
+        images: [camp1, camp2, camp4, camp5, camp6],
       },
     },
   },
@@ -72,11 +93,11 @@ The success of Grain-A-Thon highlighted the power of community-driven initiative
     backgroundColor: "yellow-500",
     year:{
       "2024": {
-        bgImage: GrainAThon,
+        bgImage: grainathonbg, 
         location: "Mumbai",
-        featuredImage: GrainathonPreview,
+        featuredImage: grainathon,
         date: "17th Oct - 18th Oct",
-        images: [Grain1, Grain2, Grain3, Grain4, Grain5, Grain6],
+        images: [grainathon2, grainathon3, grainathon4, grainathon5, grainathon6],
       },
       "2025": {
         bgImage: GrainAThon,
@@ -110,11 +131,11 @@ The success of the blood donation drive reflected the strength of the college co
         images: [BDD1, BDD2, BDD3, BDD4, BDD5, BDD6],
       },
       "2024": {
-        bgImage: BDD,
-        featuredImage: BDDFeature,
+        bgImage: bddbg, 
+        featuredImage: bdd1, 
         location: "Mumbai",
         date: "4 March",
-        images: [BDD1, BDD2, BDD3, BDD4, BDD5, BDD6],
+        images: [bdd2, bdd3, bdd4, bdd5, bdd6],
       }
   },
 },

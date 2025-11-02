@@ -154,7 +154,7 @@ const Navbar = () => {
     <div className="fixed top-0 left-0 right-0 lg:px-4 z-50 flex justify-center pointer-events-none">
       <Link
         to="/" 
-        className="hidden lg:block bg-white/70 absolute top-4 left-24 h-16 w-16 items-center no-underline p-2 rounded-full pointer-events-auto "
+        className="hidden xl:block bg-white/70 absolute top-4 left-24 h-16 w-16 items-center no-underline p-2 rounded-full pointer-events-auto "
       >
         <img src={logo} alt="Logo" className="h-full w-full " />
       </Link>
