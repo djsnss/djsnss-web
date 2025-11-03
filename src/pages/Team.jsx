@@ -26,14 +26,12 @@ const Team = () => {
 
   return (
     <div className="bg-secondary-blue overflow-y-scroll w-full min-h-screen">
-      <div className="h-full w-full text-center px-5 pb-8 md:pb-10 relative">
-        <h1 className="flex mx-auto mb-2 h-max w-full justify-center font-bold items-center text-3xl md:text-7xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-500 pt-16"></h1>
-        <p className="text-lg md:text-2xl text-black"> </p>
-        <a href="/alumni" className="text-blue-500 text-lg md:text-2xl">
-         
-        </a>
+      <div className="h-full w-full text-center pt-20 px-5 pb-8 md:pb-10 relative">
+        <h1 className="mx-auto py-2 lg:py-4 text-center text-4xl md:text-5xl lg:text-6xl font-bold font-geist text-black">
+        TEAM
+        </h1>
         {/* Dropdown to select the year */}
-        <div className="my-6 flex justify-center items-center ">
+        <div className="my-3 flex justify-center items-center">
           <label
             htmlFor="year-select"
             className="text-lg sm:text-2xl font-bold uppercase text-black"
@@ -72,7 +70,7 @@ const Team = () => {
 
         {/* Upper Core Section */}
         <div className="relative">
-          <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center my-4 sm:my-12 text-dark-blue">
+          <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center mt-6 mb-2 sm:mt-8 text-dark-blue">
             Upper Core
           </h2>
           {Object.entries(currentYearData.upperCore).map(([title, members]) => {
@@ -91,7 +89,7 @@ const Team = () => {
         {/* Student Leader Section */}
         {currentYearData.leader && (
           <div className="relative">
-            <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center my-4 sm:my-12 text-dark-blue">
+            <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center mt-6 mb-2 sm:mt-8 text-dark-blue">
               Student Leader
             </h2>
             {Object.entries(currentYearData.leader).map(([title, members]) => {
@@ -110,7 +108,7 @@ const Team = () => {
 
         {/* Heads Section */}
         <div className="relative">
-          <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center my-4 sm:my-12 text-dark-blue">
+          <h2 className="text-2xl md:text-4xl font-geist font-bold uppercase text-center mt-6 mb-2 sm:mt-8 text-dark-blue">
             Heads
           </h2>
           {currentYearData.heads.departments.map((department) => {

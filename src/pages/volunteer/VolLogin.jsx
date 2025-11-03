@@ -48,7 +48,7 @@ const Login = () => {
       localStorage.setItem("authToken", data.token);
       localStorage.setItem("volunteer", JSON.stringify(data.volunteer));
 
-      window.location.href = "/volunteer/checkhours";
+      window.location.href = "/volunteer/checkevent";
     } catch (error) {
       setError(error.message);
     } finally {
