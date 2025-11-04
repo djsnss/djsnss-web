@@ -19,13 +19,24 @@ const DynamicPage = ({ event }) => {
 
   const handleYearChange = (e) => setSelectedYear(e.target.value)
 
-  const selectedData = event.year && selectedYear ? event.year[selectedYear] : {
-    bgImage: event.bgImage,
-    featuredImage: event.featuredImage,
-    location: event.location,
-    date: event.date,
-    images: event.images || []
-  }
+  const selectedData =
+    event.year && selectedYear
+      ? {
+          bgImage: event.year[selectedYear]?.bgImage ?? event.bgImage,
+          featuredImage: event.year[selectedYear]?.featuredImage ?? event.featuredImage,
+          location: event.year[selectedYear]?.location ?? event.location,
+          date: event.year[selectedYear]?.date ?? event.date,
+          images: event.year[selectedYear]?.images ?? event.images ?? [],
+          description: event.year[selectedYear]?.description ?? event.description,
+        }
+      : {
+          bgImage: event.bgImage,
+          featuredImage: event.featuredImage,
+          location: event.location,
+          date: event.date,
+          images: event.images ?? [],
+          description: event.description,
+        }
 
   return (
     <div
@@ -56,17 +67,17 @@ const DynamicPage = ({ event }) => {
             <span className='w-full border-white my-5 border-b-4'></span>
             
             {years.length > 0 ? (
-              <div className='flex flex-col items-center'>
-                <div className='flex items-center justify-center flex-wrap gap-3 border-b-2 border-white'>
+              <div className='flex flex-col items-center p-2'>
+                <div className='flex items-end justify-center flex-wrap gap-2 border-b-2 border-white'>
                   {selectedData.date && (
-                    <span className='text-white font-roboto text-3xl '>{selectedData.date}</span>
+                    <span className='text-white font-roboto text-xl sm:text-3xl  '>{selectedData.date}</span>
                   )}
                   <label htmlFor='year-select' className='sr-only'>Select Year</label>
                   <select
                     id='year-select'
                     value={selectedYear}
                     onChange={handleYearChange}
-                    className='text-white bg-transparent text-[1.7rem] rounded-lg text-roboto py-2 shadow-sm focus:outline-none '
+                    className='text-white bg-transparent  text-[1.4rem] sm:text-[1.7rem]  rounded-lg text-robot shadow-sm focus:outline-none '
                   >
                     {years.map((year) => (
                       <option
@@ -92,10 +103,17 @@ const DynamicPage = ({ event }) => {
         {/* "What is Camp?" Section */}
         <section className={`bg-${event.backgroundColor} bg-opacity-75 py-16`}>
           <div className='max-w-7xl mx-auto px-6 md:px-12'>
-            <h2 className='text-3xl font-bold mb-8 font-geist'>What is {event.title}?</h2>
+            <h2 className='text-3xl font-bold mb-8 font-geist'>
+              Event Overview 
+            </h2>
             <div className='md:flex items-center'>
               <p className='text-sm sm:text-lg text-justify leading-relaxed text-white md:w-2/3 md:mr-6 font-roboto'>
-                <span dangerouslySetInnerHTML={{ __html: event.description }} />
+                {/* year-wise description */}
+                {selectedData?.description ? (
+                  <span dangerouslySetInnerHTML={{ __html: selectedData.description }} />
+                ) : (
+                  <span>No description available for {selectedYear || 'this year'}.</span>
+                )}
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>
                 <img
@@ -139,8 +157,18 @@ DynamicPage.propTypes = {
     location: PropTypes.string,
     description: PropTypes.string,
     featuredImage: PropTypes.string,
-    images: PropTypes.arrayOf(PropTypes.string)
-  }).isRequired
+    images: PropTypes.arrayOf(PropTypes.string),
+    year: PropTypes.objectOf(
+      PropTypes.shape({
+        bgImage: PropTypes.string,
+        featuredImage: PropTypes.string,
+        location: PropTypes.string,
+        date: PropTypes.string,
+        images: PropTypes.arrayOf(PropTypes.string),
+        description: PropTypes.string,
+      })
+    ),
+  }).isRequired,
 }
 
 export default DynamicPage

@@ -45,36 +45,50 @@ import bdd2 from "../assets/Events/bdd/bdd2.jpg";
 import bdd3 from "../assets/Events/bdd/bdd3.jpg";
 import bdd4 from "../assets/Events/bdd/bdd4.jpg";
 import bdd5 from "../assets/Events/bdd/bdd6.jpg";
-import bdd6 from "../assets/Events/bdd/BDD.jpg";
+import grainathon26bg from "../assets/Events/grainathon26/Grain7.jpg";
+import grain6 from "../assets/Events/grainathon26/Grain6.jpg";
+import grain1 from "../assets/Events/grainathon26/Grain1.jpg";
+import grain2 from "../assets/Events/grainathon26/Grain2.jpg";
+import grain3 from "../assets/Events/grainathon26/Grain3.jpg";
+import grain4 from "../assets/Events/grainathon26/Grain4.jpg";
+import grain5 from "../assets/Events/grainathon26/Grain5.jpg";
+import bdd261bg from "../assets/Events/bdd261/bdd1.png";
+import bdd262 from "../assets/Events/bdd261/bdd2.png";
+import bdd263 from "../assets/Events/bdd261/bdd3.png";
+import bdd264 from "../assets/Events/bdd261/bdd4.jpg";
+import bdd265 from "../assets/Events/bdd261/bdd5.jpg";
 
 export const propsData = [
   {
     id: 1,
     title: "7 Days Camp",
-    description: `
-From January 21 to 28, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized an enriching camp at Dahanu, aiming to foster community service and personal growth. The camp began with activities like cleanliness drives, team-building exercises, and creative endeavors such as poster making and wall painting. These initiatives not only encouraged teamwork but also strengthened the participants’ connection to the local community.
-<br/><br/>
-As the week progressed, volunteers engaged in a variety of impactful programs. Educational outreach sessions were conducted to inspire young minds, while a medical camp provided essential health services to the community. Environmental awareness drives emphasized the importance of sustainability and responsible living, aligning with the broader goals of the camp.
-<br/><br/>
-One of the most notable achievements was the installation of solar street lights, a testament to the camp's dedication to sustainable development. This initiative significantly benefited the local residents by enhancing safety and promoting eco-friendly practices.
-<br/><br/>
-The camp concluded with vibrant cultural celebrations, showcasing the talents of the volunteers and fostering a sense of unity. The experience left a profound impact on both the participants and the community, instilling a lasting sense of accomplishment and inspiration to continue making a difference.
-    `,
     slug: "nss-camp",
     backgroundColor: "dark-navy",
     year: {
       "2025": {
+        description: `In January 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized its annual week-long Regular Camp at Dahanu from 21st to 28th January 2025, with the participation of 79 dedicated volunteers. The camp aimed to promote community development, social awareness, and sustainable living through a series of impactful initiatives in nearby villages. Volunteers engaged in cleanliness drives, educational activities, medical camps, and awareness rallies, embodying the NSS motto — “Not Me, But You.”
+<br/><br/>
+Throughout the week, the volunteers worked closely with local communities, conducting health check-up camps, poster-making sessions, sports events for schoolchildren, and door-to-door awareness campaigns on hygiene and government welfare schemes. A major highlight was the installation of solar street lights, promoting renewable energy and enhancing village safety. Each activity fostered teamwork, empathy, and a strong sense of social responsibility among the participants.
+<br/><br/>
+The camp concluded on 28th January 2025 with a thanksgiving ceremony, where volunteers expressed gratitude to the villagers for their hospitality and cooperation. The seven-day camp served as a platform for experiential learning and community engagement, leaving a lasting impact on both volunteers and residents. It reinforced the spirit of service, compassion, and collective growth — key values at the heart of the National Service Scheme (NSS).`,
         bgImage: NSSCamp,
         featuredImage: Camp7,
-        location: "Dahanu",
+        location: "Narpad & Waki Village, Dahanu",
         date: "21st Jan - 28th Jan ",
         images: [Camp1, Camp2, Camp3, Camp4, Camp5, Camp6],
       },
       "2024": {
+        description: `
+In 2024, the <b>NSS unit of Dwarkadas J. Sanghvi College of Engineering</b> organized its <b>Annual Camp</b> at <b>Dahanu</b>, a week-long initiative dedicated to community development, learning, and social responsibility. The camp brought together enthusiastic volunteers who actively participated in various activities that emphasized cleanliness, education, health awareness, and sustainable living. Through collective efforts, the volunteers embraced the true spirit of service while fostering teamwork and empathy.
+<br/><br/>
+Throughout the camp, volunteers engaged in a diverse range of activities including <b>cleanliness drives</b>, <b>awareness rallies</b>, <b>sports and educational sessions</b> with schoolchildren, and <b>creative workshops</b> that promoted learning and community engagement. Initiatives such as wall painting, distribution of educational kits, and interactive sessions with local residents strengthened the bond between the volunteers and the village community. These experiences nurtured leadership, cooperation, and a deeper understanding of social challenges.
+<br/><br/>
+The camp concluded with reflection and feedback sessions that celebrated the achievements of the volunteers and the positive impact created in the community. The <b>DJSNSS Annual Camp 2024</b> served as a platform for experiential learning, encouraging students to contribute meaningfully to society while embodying the NSS motto — <b>“Not Me, But You.”</b> The week-long journey inspired participants to continue working towards building a compassionate, aware, and sustainable society.
+`,
         bgImage: campbg,
         featuredImage: camp3,
-        location: "Vapi", 
-        date: "21st Jan - 28th Jan ",
+        location: "Dahanu", 
+        date: "26th Jan - 31st Jan ",
         images: [camp1, camp2, camp4, camp5, camp6],
       },
     },
@@ -82,60 +96,93 @@ The camp concluded with vibrant cultural celebrations, showcasing the talents of
   {
     id: 2,
     title: "Grain-A-Thon",
-    description: `In October 2024, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a week-long food donation drive, Grain-A-Thon, to combat food insecurity in Mumbai. The event aimed to raise awareness about hunger and food waste while collecting and distributing food to those in need. Volunteers collected donations from students, faculty, and local businesses, distributing over 1000 meals to underprivileged communities.
-<br/><br/>
-Throughout the week, volunteers worked tirelessly to ensure food reached those in need. The event received an overwhelming response, with donations pouring in from all corners, demonstrating a strong sense of community. Collaborations with local NGOs helped identify areas of highest need and coordinate distribution.
-<br/><br/>
-The initiative also raised awareness about food insecurity in urban areas, educating students and faculty on reducing food waste and supporting local food banks. Workshops on sustainable food practices encouraged participants to make more conscious food choices, fostering a culture of giving and responsibility.
-<br/><br/>
-The success of Grain-A-Thon highlighted the power of community-driven initiatives and left a lasting legacy of kindness, generosity, and social responsibility.`,
     slug: "grain-a-thon",
     backgroundColor: "yellow-500",
     year:{
+      "2025":{
+        description:`In 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized <b>Grain-A-Thon 3.0</b>, a five-day initiative dedicated to combating hunger and promoting sustainability. Through an interdepartmental grain donation drive, over <b>11,672 kilograms</b> of grains were collected, packed, and distributed to various NGOs across Mumbai. The drive reflected the college’s unwavering spirit of unity and compassion, as students and faculty came together to make a tangible difference in the lives of those in need.
+<br/><br/>
+<b>Grain-A-Thon 3.0</b> was more than just a donation drive — it was a journey of kindness, teamwork, and shared purpose. What began as a friendly interdepartmental competition soon evolved into a collective movement of empathy and service. Classrooms and corridors buzzed with enthusiasm as students from every department contributed wholeheartedly. Volunteers worked tirelessly to sort, pack, and manage heaps of rice and wheat, ensuring that each grain reached the right hands. In addition to food, clothes and e-waste were also collected, sorted, and packed responsibly, broadening the campaign’s impact.
+<br/><br/>
+The most rewarding moment arrived when volunteers personally visited NGOs across Mumbai to distribute the donations. The smiles, gratitude, and heartfelt interactions shared with beneficiaries left a lasting impression on every participant. <b>Grain-A-Thon 3.0</b> stood as a powerful testament to the NSS motto — <b>“Not Me, But You.”</b> The initiative proved that small acts of compassion, when united by a common purpose, can create a profound and lasting change, nourishing not only lives but also hope for a better tomorrow.
+`,
+        bgImage: grainathon26bg, 
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
+        featuredImage: grain6,
+        date: "8th Oct - 11th Oct",
+        images: [grain1, grain2, grain3, grain4, grain5],
+      }, 
       "2024": {
-        bgImage: grainathonbg, 
-        location: "Mumbai",
-        featuredImage: grainathon,
-        date: "17th Oct - 18th Oct",
-        images: [grainathon2, grainathon3, grainathon4, grainathon5, grainathon6],
-      },
-      "2025": {
+       description: `In October 2024, the <b>NSS unit of Dwarkadas J. Sanghvi College of Engineering</b> organized <b>Grain-A-Thon 2.0</b> on <b>17th and 18th October 2024</b>, from <b>9:00 AM to 4:00 PM</b>, with the noble goal of encouraging students to donate essential grains such as wheat and rice to support charitable causes. This year’s event embraced a vibrant <b>Bollywood theme</b>, transforming the entire canteen area into a colorful and lively celebration of Indian cinema. Each department creatively represented popular Bollywood movies—such as the Computer Engineering Department’s <i>Singham</i> and the IT Department’s <i>Rockstar</i>—adding an element of fun, creativity, and friendly competition that united the campus community.
+<br/><br/>
+Beyond being just an interdepartmental competition, <b>Grain-A-Thon 2.0</b> actively involved numerous student committees and chapters, greatly enhancing participation and expanding its reach. The initiative aimed to foster teamwork, community engagement, and empathy, motivating students to extend a helping hand toward vulnerable sections of society. The enthusiastic response from the student body reflected a strong sense of social responsibility and altruism, showcasing the true spirit of giving.
+<br/><br/>
+The event was a resounding success, collecting an impressive <b>6,272 kilograms of grains</b>—a sixfold increase compared to the previous year. The <b>Computer Engineering Department</b> emerged as the top contributor with <b>2,122 kilograms</b>, while <b>DJCSI</b> made a notable contribution of <b>535 kilograms</b>, exemplifying collaboration and generosity. <b>Grain-A-Thon 2.0</b> stood as a shining example of unity and compassion, reinforcing the belief that collective effort can create a lasting and meaningful impact on society.
+`,
         bgImage: GrainAThon,
-        location: "Mumbai",
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
         featuredImage: GrainathonPreview,
         date: "17th Oct - 18th Oct",
         images: [Grain1, Grain2, Grain3, Grain4, Grain5, Grain6],
+      },
+      "2023": {
+         description:`In November 2023, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a heartfelt food grains drive, <b>Grain-A-Thon</b>, held from <b>7th to 9th November 2023</b> under the theme <b>"Har Ghar Diwali"</b>. The event aimed to spread joy and compassion during the festive season by encouraging students and faculty to donate essential grains such as wheat and rice to support underprivileged communities. With enthusiastic participation from all departments, the initiative successfully collected over <b>1000 kilograms</b> of grains, reflecting the spirit of empathy and togetherness within the college community.
+<br/><br/>
+Over the course of three days, <b>35 volunteers</b> actively managed collection drives from <b>9:00 AM to 4:00 PM</b> each day, transforming Grain-A-Thon into a friendly interdepartmental competition where departments competed to contribute the most. The collected grains were then carefully packaged and distributed on <b>11th November 2023</b> to <b>Daya Vihar Ashram</b>, the <b>streets of Kandivali</b>, and communities near <b>Borivali Railway Station</b>, ensuring that the donations reached those who needed them most.
+<br/><br/>
+The success of Grain-A-Thon 2023 demonstrated how collective effort can bring meaningful change. The initiative not only provided food to the needy but also spread festive cheer and compassion during Diwali. It served as a reminder of the NSS motto — <b>“Not Me, But You”</b> — inspiring everyone to care for others and work towards building a more inclusive and compassionate society.`,
+        bgImage: grainathonbg, 
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
+        featuredImage: grainathon,
+        date: "7th - 9th Nov",
+        images: [grainathon2, grainathon3, grainathon4, grainathon5, grainathon6],
       },
     },
     },
   {
     id: 3,
     title: "Blood Donation Drive",
-    description: `In March 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized a blood donation drive in collaboration with the Bombay Blood Group. The event aimed to raise awareness about the importance of blood donation and encourage students, faculty, and staff to donate blood to save lives. The drive was a resounding success, with over 100 units of blood collected and a significant impact made on the lives of those in need.
-<br/><br/>
-The initiative was designed not only to address the critical need for blood but also to educate participants about the lifesaving power of a single donation. Throughout the day, volunteers assisted in guiding donors through the process, ensuring they were well-informed and comfortable. The atmosphere was filled with a sense of solidarity as individuals from various departments came together for this noble cause.
-<br/><br/>
-The partnership with the Bombay Blood Group added a level of expertise and efficiency to the drive, with medical professionals overseeing the entire process. The event saw participation from students who were first-time donors as well as regular donors, all contributing to the success of the campaign. Many donors expressed their gratitude for the opportunity to contribute to saving lives, reinforcing the importance of community participation in such vital initiatives.
-<br/><br/>
-In addition to the blood donation itself, informational sessions were conducted to dispel myths and raise awareness about the necessity of regular blood donations. These sessions also highlighted how blood donations are crucial in times of medical emergencies, surgeries, and for patients suffering from chronic illnesses.
-<br/><br/>
-The success of the blood donation drive reflected the strength of the college community's commitment to making a positive impact. Not only did it help save lives in the immediate term, but it also set an inspiring example of how simple acts of kindness can have a profound effect on the health and well-being of countless individuals. The drive ended on a high note, with organizers and participants alike feeling a deep sense of accomplishment and pride in contributing to such a meaningful cause.`,
     backgroundColor: "red-500",
     slug: "blood-donation-drive",
     year:{
       "2025": {
+        description: `On <b>26th September 2025</b>, <b>DJSNSS</b>, in association with <b>Federal Bank</b>, organized a remarkable <b>Blood Donation Drive</b> in the <b>AIML Department</b> from <b>10:00 AM to 4:00 PM</b>. Themed around <b>“Space”</b>, the event beautifully symbolized the limitless potential of human kindness and the boundless impact of a single noble act. The drive witnessed enthusiastic participation from students, faculty, and staff members, along with various co-committee members. Through this collective effort, over <b>370 units of blood</b> were collected, making it one of the most impactful service initiatives of the year.
+<br/><br/>
+The day commenced with a <b>lamp-lighting ceremony</b> and a <b>ribbon-cutting</b> by the respected Principal, <b>Dr. Hari Vasudevan</b>, marking the official inauguration of the event. The ceremony also included prayers to <b>Lord Ganpati</b>, invoking blessings for the success of the noble cause. The donation process was conducted systematically under the guidance of doctors and medical professionals. Volunteers assisted donors through each stage — from <b>registration and haemoglobin testing</b> to <b>medical check-ups</b> ensuring eligibility. Eligible participants then proceeded to donate blood under safe, hygienic, and supervised conditions.
+<br/><br/>
+After donation, participants were observed for a short recovery period and provided with <b>refreshments and energy drinks</b> to restore their strength. Each donor received an <b>official certificate of appreciation</b> issued by <b>R.N. Cooper Hospital</b>, acknowledging their selfless contribution. The collaboration with Federal Bank and R.N. Cooper Hospital highlighted DJSNSS’s continued dedication to <b>community service</b> and <b>humanitarian values</b>. The event stood as a powerful reminder that when individuals unite with purpose, their collective impact becomes truly infinite — reaching beyond boundaries to bring hope, healing, and life to many.
+`,
+        bgImage: bdd261bg,
+        featuredImage: bdd264,
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
+        date: "26th September",
+        images: [bdd262, bdd263, bdd265],
+      },
+      "2025": {
+        description: `On <b>4th March 2025</b>, the <b>NSS Unit of Dwarkadas J. Sanghvi College of Engineering</b> successfully organized its <b>19th Annual Blood Donation Drive</b> from <b>8:00 AM to 6:00 PM</b> on campus. This long-standing initiative, now in its 19th year, continues to uphold DJSNSS’s commitment to serving society through compassion and action. The drive aimed to support <b>children suffering from thalassemia</b> — a genetic disorder that requires lifelong blood transfusions every 15 days. Each donation collected during the event played a vital role in improving and sustaining the lives of these children.
+<br/><br/>
+The event witnessed an inspiring turnout of students, faculty, and staff, all contributing selflessly to the noble cause. A total of <b>601 units of blood</b> were collected, marking one of the most successful and impactful drives in DJSNSS history. The event was conducted in collaboration with a <b>recognized blood bank</b>, ensuring all medical and safety protocols were strictly followed. Volunteers efficiently managed <b>donor registration</b>, <b>medical screening</b>, and <b>coordination with doctors</b>, while also overseeing logistics, venue arrangements, and post-donation refreshments to ensure a smooth and comfortable experience for all participants.
+<br/><br/>
+The <b>19th Annual Blood Donation Drive</b> stood as a shining example of solidarity, compassion, and community service. Each drop donated symbolized hope for those battling thalassemia, emphasizing that a single act of kindness can make a lasting difference. Through the dedication of its volunteers and donors, DJSNSS once again demonstrated its unwavering commitment to humanitarian causes, reaffirming the NSS motto — <b>“Not Me, But You.”</b>
+`,
         bgImage: BDD,
         featuredImage: BDDFeature,
-        location: "Mumbai",
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
         date: "4 March",
         images: [BDD1, BDD2, BDD3, BDD4, BDD5, BDD6],
       },
       "2024": {
+        description: `On <b>18th March 2024</b>, the <b>NSS Unit of Dwarkadas J. Sanghvi College of Engineering</b>, in collaboration with the <b>I Love Mumbai Foundation</b> and <b>Mahatma Gandhi Blood Bank</b>, successfully organized the <b>Blood Donation Drive 2024</b>. The event was dedicated to supporting <b>thalassemia patients</b> and promoting the importance of voluntary blood donation. The drive began with a heartfelt invocation ceremony, seeking blessings for the success of this noble cause and marking the start of a meaningful day of service.
+<br/><br/>
+Donors were guided through a systematic and caring process — beginning with <b>registration and health screening</b> to ensure eligibility, followed by the <b>donation</b> itself under the supervision of medical professionals. After donating, participants were served refreshments and personally appreciated for their altruism. Each donor received a <b>certificate of appreciation</b> and a <b>thank-you note</b>, commemorating their contribution. A feedback session and a lively <b>photobooth</b> area added warmth to the experience, creating lasting memories while encouraging continued participation in such social causes.
+<br/><br/>
+The <b>theme</b> for the Blood Donation Drive 2024 was <b>“Stock Market”</b>, creatively linking market concepts with the value of donating blood through inspiring quotes and campus decorations. The event witnessed an <b>overwhelming response</b>, collecting <b>586 bottles of blood</b> — a remarkable achievement reflecting the compassion and unity of the DJSCE community. The initiative not only aided patients in need but also strengthened the spirit of <b>philanthropy and social responsibility</b> among students, standing as a true testament to the transformative power of collective action in service to humanity.
+`,  
         bgImage: bddbg, 
         featuredImage: bdd1, 
-        location: "Mumbai",
-        date: "4 March",
-        images: [bdd2, bdd3, bdd4, bdd5, bdd6],
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
+        date: "18 March",
+        images: [bdd2, bdd3, bdd4, bdd5],
       }
   },
 },
