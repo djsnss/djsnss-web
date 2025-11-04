@@ -144,8 +144,9 @@ The success of Grain-A-Thon 2023 demonstrated how collective effort can bring me
     title: "Blood Donation Drive",
     backgroundColor: "red-500",
     slug: "blood-donation-drive",
-    year:{
-      "2025": {
+    year: [
+      {
+        year: "2025", // Add a 'year' property to each object
         description: `On <b>26th September 2025</b>, <b>DJSNSS</b>, in association with <b>Federal Bank</b>, organized a remarkable <b>Blood Donation Drive</b> in the <b>AIML Department</b> from <b>10:00 AM to 4:00 PM</b>. Themed around <b>“Space”</b>, the event beautifully symbolized the limitless potential of human kindness and the boundless impact of a single noble act. The drive witnessed enthusiastic participation from students, faculty, and staff members, along with various co-committee members. Through this collective effort, over <b>370 units of blood</b> were collected, making it one of the most impactful service initiatives of the year.
 <br/><br/>
 The day commenced with a <b>lamp-lighting ceremony</b> and a <b>ribbon-cutting</b> by the respected Principal, <b>Dr. Hari Vasudevan</b>, marking the official inauguration of the event. The ceremony also included prayers to <b>Lord Ganpati</b>, invoking blessings for the success of the noble cause. The donation process was conducted systematically under the guidance of doctors and medical professionals. Volunteers assisted donors through each stage — from <b>registration and haemoglobin testing</b> to <b>medical check-ups</b> ensuring eligibility. Eligible participants then proceeded to donate blood under safe, hygienic, and supervised conditions.
@@ -158,7 +159,8 @@ After donation, participants were observed for a short recovery period and provi
         date: "26th September",
         images: [bdd262, bdd263, bdd265],
       },
-      "2025": {
+      {
+        year: "2025", // Add a 'year' property to each object
         description: `On <b>4th March 2025</b>, the <b>NSS Unit of Dwarkadas J. Sanghvi College of Engineering</b> successfully organized its <b>19th Annual Blood Donation Drive</b> from <b>8:00 AM to 6:00 PM</b> on campus. This long-standing initiative, now in its 19th year, continues to uphold DJSNSS’s commitment to serving society through compassion and action. The drive aimed to support <b>children suffering from thalassemia</b> — a genetic disorder that requires lifelong blood transfusions every 15 days. Each donation collected during the event played a vital role in improving and sustaining the lives of these children.
 <br/><br/>
 The event witnessed an inspiring turnout of students, faculty, and staff, all contributing selflessly to the noble cause. A total of <b>601 units of blood</b> were collected, marking one of the most successful and impactful drives in DJSNSS history. The event was conducted in collaboration with a <b>recognized blood bank</b>, ensuring all medical and safety protocols were strictly followed. Volunteers efficiently managed <b>donor registration</b>, <b>medical screening</b>, and <b>coordination with doctors</b>, while also overseeing logistics, venue arrangements, and post-donation refreshments to ensure a smooth and comfortable experience for all participants.
@@ -171,7 +173,8 @@ The <b>19th Annual Blood Donation Drive</b> stood as a shining example of solida
         date: "4 March",
         images: [BDD1, BDD2, BDD3, BDD4, BDD5, BDD6],
       },
-      "2024": {
+      {
+        year: "2024", // Add a 'year' property to each object
         description: `On <b>18th March 2024</b>, the <b>NSS Unit of Dwarkadas J. Sanghvi College of Engineering</b>, in collaboration with the <b>I Love Mumbai Foundation</b> and <b>Mahatma Gandhi Blood Bank</b>, successfully organized the <b>Blood Donation Drive 2024</b>. The event was dedicated to supporting <b>thalassemia patients</b> and promoting the importance of voluntary blood donation. The drive began with a heartfelt invocation ceremony, seeking blessings for the success of this noble cause and marking the start of a meaningful day of service.
 <br/><br/>
 Donors were guided through a systematic and caring process — beginning with <b>registration and health screening</b> to ensure eligibility, followed by the <b>donation</b> itself under the supervision of medical professionals. After donating, participants were served refreshments and personally appreciated for their altruism. Each donor received a <b>certificate of appreciation</b> and a <b>thank-you note</b>, commemorating their contribution. A feedback session and a lively <b>photobooth</b> area added warmth to the experience, creating lasting memories while encouraging continued participation in such social causes.
@@ -183,7 +186,7 @@ The <b>theme</b> for the Blood Donation Drive 2024 was <b>“Stock Market”</b>
         location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
         date: "18 March",
         images: [bdd2, bdd3, bdd4, bdd5],
-      }
+      },
+    ],
   },
-},
 ];

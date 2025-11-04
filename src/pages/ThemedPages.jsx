@@ -5,38 +5,24 @@ import { motion } from 'framer-motion'
 const DynamicPage = ({ event }) => {
   if (!event) return null
 
-  const years = event.year ? Object.keys(event.year) : []
+  // Check if event.year is an array, otherwise convert the object for backward compatibility
+  const yearEntries = Array.isArray(event.year)
+    ? event.year
+    : Object.entries(event.year || {}).map(([year, data]) => ({ year, ...data }))
 
-  // Default to 2025 if available, else first year
-  const initialYear = years.includes('2025') ? '2025' : (years[0] || '')
-  const [selectedYear, setSelectedYear] = useState(initialYear)
+  // Default to the index of the first '2025' entry, else the first item
+  const initialIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === '2025'));
+  const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
-  // Re-evaluate default when years list changes (e.g., route change)
+  // Re-evaluate default when the event prop changes
   useEffect(() => {
-    const nextDefault = years.includes('2025') ? '2025' : (years[0] || '')
-    setSelectedYear(nextDefault)
-  }, [JSON.stringify(years)])
+    const nextDefaultIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === '2025'));
+    setSelectedIndex(nextDefaultIndex);
+  }, [event]);
 
-  const handleYearChange = (e) => setSelectedYear(e.target.value)
+  const handleYearChange = (e) => setSelectedIndex(parseInt(e.target.value, 10));
 
-  const selectedData =
-    event.year && selectedYear
-      ? {
-          bgImage: event.year[selectedYear]?.bgImage ?? event.bgImage,
-          featuredImage: event.year[selectedYear]?.featuredImage ?? event.featuredImage,
-          location: event.year[selectedYear]?.location ?? event.location,
-          date: event.year[selectedYear]?.date ?? event.date,
-          images: event.year[selectedYear]?.images ?? event.images ?? [],
-          description: event.year[selectedYear]?.description ?? event.description,
-        }
-      : {
-          bgImage: event.bgImage,
-          featuredImage: event.featuredImage,
-          location: event.location,
-          date: event.date,
-          images: event.images ?? [],
-          description: event.description,
-        }
+  const selectedData = yearEntries[selectedIndex] || {};
 
   return (
     <div
@@ -66,26 +52,23 @@ const DynamicPage = ({ event }) => {
           >
             <span className='w-full border-white my-5 border-b-4'></span>
             
-            {years.length > 0 ? (
+            {yearEntries.length > 0 ? (
               <div className='flex flex-col items-center p-2'>
                 <div className='flex items-end justify-center flex-wrap gap-2 border-b-2 border-white'>
-                  {selectedData.date && (
-                    <span className='text-white font-roboto text-xl sm:text-3xl  '>{selectedData.date}</span>
-                  )}
                   <label htmlFor='year-select' className='sr-only'>Select Year</label>
                   <select
                     id='year-select'
-                    value={selectedYear}
+                    value={selectedIndex}
                     onChange={handleYearChange}
                     className='text-white bg-transparent  text-[1.4rem] sm:text-[1.7rem]  rounded-lg text-robot shadow-sm focus:outline-none '
                   >
-                    {years.map((year) => (
+                    {yearEntries.map((entry, index) => (
                       <option
-                        key={year}
-                        value={year}
-                        className="text-black bg-secondary-blue"
+                        key={index}
+                        value={index}
+                        className="text-black text-center bg-secondary-blue"
                       >
-                        {year}
+                        {entry.date} {entry.year}
                       </option>
                     ))}
                   </select>
@@ -112,12 +95,12 @@ const DynamicPage = ({ event }) => {
                 {selectedData?.description ? (
                   <span dangerouslySetInnerHTML={{ __html: selectedData.description }} />
                 ) : (
-                  <span>No description available for {selectedYear || 'this year'}.</span>
+                  <span>No description available for this year.</span>
                 )}
               </p>
               <div className='mt-6 md:mt-0 md:w-1/3'>
                 <img
-                  src={selectedData.featuredImage}
+                  src={selectedData.featuredImage || event.featuredImage}
                   alt='Camp highlight'
                   className='rounded-xl shadow-lg'
                 />
@@ -132,7 +115,7 @@ const DynamicPage = ({ event }) => {
             Memories from Previous Years
           </h3>
           <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-12'>
-            {selectedData.images.map((image, index) => (
+            {(selectedData.images || []).map((image, index) => (
               <div key={index} className="w-full flex justify-center">
                 <img
                   src={image}
@@ -148,6 +131,7 @@ const DynamicPage = ({ event }) => {
   )
 }
 
+// Update PropTypes to accept an array for the 'year' property
 DynamicPage.propTypes = {
   event: PropTypes.shape({
     backgroundColor: PropTypes.string.isRequired,
@@ -158,16 +142,7 @@ DynamicPage.propTypes = {
     description: PropTypes.string,
     featuredImage: PropTypes.string,
     images: PropTypes.arrayOf(PropTypes.string),
-    year: PropTypes.objectOf(
-      PropTypes.shape({
-        bgImage: PropTypes.string,
-        featuredImage: PropTypes.string,
-        location: PropTypes.string,
-        date: PropTypes.string,
-        images: PropTypes.arrayOf(PropTypes.string),
-        description: PropTypes.string,
-      })
-    ),
+    year: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   }).isRequired,
 }
 
