@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import Image1 from '../../assets/Events/Yaarana/IMG_1628.jpg'
+import Image1 from '../../assets/old-age-home-25.jpg'
 
 const AboutSection = () => {
   return (

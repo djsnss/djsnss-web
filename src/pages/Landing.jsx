@@ -52,7 +52,7 @@ const Landing = () => {
             ))}
           </div> */}
           <motion.h1
-            className={`text-xl md:text-5xl sm:text-3xl font-bold mx-2 mt-4 text-center ${loading ? "text-dark-navy" : "text-white"}`}
+            className={`text-xl md:text-5xl sm:text-3xl font-bold font-geist mx-2 mt-4 text-center ${loading ? "text-dark-navy" : "text-white"}`}
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5 }}
@@ -60,7 +60,7 @@ const Landing = () => {
             NSS Dwarkadas J. Sanghvi College of Engineering
           </motion.h1>
           <motion.div
-            className="text-md md:text-2xl text-center"
+            className="text-md md:text-2xl font-geist text-center"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1.5 }}

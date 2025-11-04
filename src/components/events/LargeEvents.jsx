@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { largeEventsData } from "../../data/largeEvents";
+import { common } from "../../data/common";
 
 const Features = () => {
   const controls = useAnimation();
@@ -43,12 +43,12 @@ const Features = () => {
           animate={controls}
           transition={{ staggerChildren: 0.2 }}
         >
-          {largeEventsData.map((feature, index) => (
+          {common.filter((event) => [1, 2, 3, 4, 5, 6, 7, 8, 9].includes(event.id)).map((feature, index) => (
             <motion.div
               key={feature.id}
               className={`${getWidthClasses(
                 index,
-                largeEventsData.length
+                common.length-1
               )} relative py-24 flex flex-col justify-center items-center transition-all duration-500 ease-in-out group`}
               variants={cardVariants}
               transition={{ duration: 0.5, ease: "easeInOut" }}

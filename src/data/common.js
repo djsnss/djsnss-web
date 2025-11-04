@@ -1,13 +1,13 @@
 import Logo from "../assets/DJSNSSLogo.jpg";
-import GrainAThon from "../assets/Events/grainathon25/grainathon1.jpg";
+import GrainAThon from "../assets/Events/grainathon26/Grain6.jpg";
 import BorivaliTP from "../assets/Events/TreePlantation25.jpg";
 import NSSCamp from "../assets/Events/camp25/camp2.jpeg";
-import AnnualCharity from "../assets/Events/AnnualCharity.png";
+import AnnualCharity from "../assets/Events/AnnualCharity25.png";
 import VoterRegistration from "../assets/Events/VoterRegistration.png";
-import BDD from "../assets/Events/bdd25/bdd2.jpg";
+import BDD from "../assets/Events/bdd261/bdd4.jpg";
 import StemCell from "../assets/Events/Stemcell.jpg";
 import NewspaperCollectionDrive from "../assets/Events/NewspaperCollection.png";
-import IndependenceDayRally from "../assets/Events/TirangaRally/IMG_4530.jpg";
+import IndependenceDayRally from "../assets/Events/IndependenceDayRally25.png";
 import { FaHeart, FaFlag, FaHandHoldingHeart } from "react-icons/fa";
 import { MdBloodtype } from "react-icons/md";
 import { PiGrainsBold } from "react-icons/pi";
@@ -39,7 +39,7 @@ export const common = [
     title: "BLOOD DONATION DRIVE",
     description: "Donate blood, save lives",
     slug: "blood-donation-drive",
-    link: "/eventdetails/blood-donation-drive",
+    link: "/eventdetails/blood-donation-drive-2025",
     background: "bg-red-400",
     imageURL: BDD,
     longDescription:
@@ -57,7 +57,7 @@ export const common = [
     title: "GRAIN-A-THON",
     description: "Our small actions, others' huge aid",
     slug: "grain-a-thon",
-    link: "/eventdetails/grain-a-thon",
+    link: "/eventdetails/grainathon-a-thon-3.0",
     background: "bg-yellow-400",
     imageURL: GrainAThon,
     longDescription:
@@ -161,7 +161,7 @@ export const common = [
     title: "INDEPENDENCE DAY RALLY",
     description: "Celebrating freedom with unity",
     slug: "independence-day-rally",
-    link: "/eventdetails/independence-day-rally",
+    link: "/eventdetails/independence-day-rally-2025",
     background: "bg-orange-400",
     imageURL: IndependenceDayRally,
     longDescription:
