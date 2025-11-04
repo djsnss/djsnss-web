@@ -68,7 +68,7 @@ export const common = [
     date: "17th Oct - 18th Oct 2024",
     icon: PiGrainsBold,
     color: "#F4A261",
-    direction: "right"
+    direction: "left"
   },
   {
     id: 4,

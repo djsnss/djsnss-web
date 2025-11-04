@@ -31,13 +31,13 @@ export default function Activities() {
             .map((activity, index) => (
               <ActivityCard
                 key={index}
-                imageURL={activity.imageURL}
-                title={activity.title}
-                description={activity.description}
-                link={activity.link}
-                icon={activity.icon}
-                color={activity.color}
-                direction={activity.direction}
+                imageURL={activity.imageURL ?? ""}
+                title={activity.title ?? ""}
+                description={activity.description ?? ""}
+                link={activity.link ?? ""}
+                icon={activity.icon ?? ""}
+                color={activity.color ?? ""}
+                direction={activity.direction ?? ""}
               />
             ))}
         </div>
