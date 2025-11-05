@@ -1,5 +1,6 @@
 import express from "express";
 import { authVolunteer } from "../middlewares/authVerify.js";
+import { addVolunteerFeedback, getVolunteerFeedback, deleteFeedback } from "../controllers/feedbackC.js";
 
 import {
   signup,
@@ -45,5 +46,18 @@ router.put("/change-password", changePassword); //route to change password of vo
 router.post("/logout", authVolunteer, logout); //logout API for volunteer
 
 router.get("/verify-token", verifyToken);
+
+// Volunteer feedback routes
+router.post(
+  "/events/:eventId/feedback", 
+  authVolunteer, 
+  addVolunteerFeedback
+); // Submit or update feedback
+
+router.delete(
+  "/events/:eventId/feedback/:feedbackId",
+  authVolunteer,
+  deleteFeedback
+);
 
 export default router;
