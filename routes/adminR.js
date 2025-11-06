@@ -29,6 +29,8 @@ import { authAdmin } from "../middlewares/authVerify.js";
 import { uploadNormal } from "../middlewares/multer.js";
 import { otpLimiter, passwordLimiter } from "../middlewares/rateLimiter.js";
 
+import { getVolunteerFeedback } from "../controllers/feedbackC.js";
+
 const router = express.Router();
 
 router.post("/login", login);
@@ -76,5 +78,11 @@ router.post("/reset-password", passwordLimiter, resetPassword);
 router.post("/logout", authAdmin, logout);
 router.delete("/deleteEvent/:eventId", authAdmin, deleteEvent);
 router.get("/verify-token", verifyToken);
+
+router.get(
+  "/events/:eventId/feedback",  
+  authAdmin,
+  getVolunteerFeedback
+);  // Get volunteer feedback for that event
 
 export default router;

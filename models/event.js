@@ -76,6 +76,30 @@ const EventSchema = new mongoose.Schema({
       attended: { type: Boolean, default: false },
     },
   ],
+
+  feedback: [
+    {
+      volunteerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Volunteer",
+        required: true,
+      },
+      feedbackText: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      rating: {
+        type: Number,
+        default: 5,
+      },
+      submittedAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
+
   related_images: [
     {
       url: {
