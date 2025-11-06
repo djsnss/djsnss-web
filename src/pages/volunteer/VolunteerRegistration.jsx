@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const VolunteerRegistration = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -38,17 +39,20 @@ const VolunteerRegistration = () => {
     e.preventDefault();
     setMessage("");
 
-    const formDataToSend = new FormData();
-    Object.keys(formData).forEach((key) => {
-      formDataToSend.append(key, formData[key]);
-    });
+    // Create a FormData object to handle file uploads
+    const dataToSend = new FormData();
+    for (const key in formData) {
+      if (formData[key]) {
+        dataToSend.append(key, formData[key]);
+      }
+    }
 
     try {
       const response = await fetch(
         "https://djsnss-web.onrender.com/volunteer/signup",
         {
           method: "POST",
-          body: formDataToSend,
+          body: dataToSend,
         }
       );
 
@@ -74,6 +78,7 @@ const VolunteerRegistration = () => {
           description: "",
           passport: null,
         });
+        toast.success("Registration successful");
       } else {
         setMessage(`Error: ${result.message || "Failed to register."}`);
       }
@@ -112,7 +117,7 @@ const VolunteerRegistration = () => {
                 htmlFor="name"
                 className="block text-dark-blue font-semibold"
               >
-                Name
+                Name *
               </label>
               <input
                 type="text"
@@ -129,7 +134,7 @@ const VolunteerRegistration = () => {
                 htmlFor="branch"
                 className="block text-dark-blue font-semibold"
               >
-                Branch
+                Branch *
               </label>
               <select
                 type="text"
@@ -156,7 +161,7 @@ const VolunteerRegistration = () => {
                 htmlFor="sapId"
                 className="block text-dark-blue font-semibold"
               >
-                SAP ID
+                SAP ID *
               </label>
               <input
                 type="number"
@@ -174,7 +179,7 @@ const VolunteerRegistration = () => {
                 htmlFor="phoneNumber"
                 className="block text-dark-blue font-semibold"
               >
-                Phone Number
+                Your Phone Number *
               </label>
               <input
                 type="tel"
@@ -183,7 +188,8 @@ const VolunteerRegistration = () => {
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
-                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                pattern="[0-9]{10}"
+                maxLength="10"
                 required
               />
             </div>
@@ -205,7 +211,7 @@ const VolunteerRegistration = () => {
             </div>
             <div>
               <label htmlFor="gender" className="block text-dark-blue font-semibold">
-                Gender
+                Gender *
               </label>
               <select
                 id="gender"
@@ -213,6 +219,7 @@ const VolunteerRegistration = () => {
                 value={formData.gender}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
+                required
               >
                 <option value="" disabled>Select Gender</option>
                 <option value="Male">Male</option>
@@ -225,16 +232,22 @@ const VolunteerRegistration = () => {
                 htmlFor="caste"
                 className="block text-dark-blue font-semibold"
               >
-                Caste
+                Caste *
               </label>
-              <input
-                type="text"
+              <select
                 id="caste"
                 name="caste"
                 value={formData.caste}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
-              />
+                required
+              >
+                <option value="" disabled>Select Caste</option>
+                <option value="General">General</option>
+                <option value="ST">ST</option>
+                <option value="SC">SC</option>
+                <option value="OBC">OBC</option>
+              </select>
             </div>
           </div>
 
@@ -245,7 +258,7 @@ const VolunteerRegistration = () => {
                 htmlFor="email"
                 className="block text-dark-blue font-semibold"
               >
-                Email
+                Email *
               </label>
               <input
                 type="email"
@@ -262,7 +275,7 @@ const VolunteerRegistration = () => {
                 htmlFor="password"
                 className="block text-dark-blue font-semibold"
               >
-                Password
+                Password *
               </label>
               <div className="relative">
                 <input
@@ -288,7 +301,7 @@ const VolunteerRegistration = () => {
                 htmlFor="motherName"
                 className="block text-dark-blue font-semibold"
               >
-                Mother&apos;s Name
+                Mother&apos;s Name *
               </label>
               <input
                 type="text"
@@ -297,6 +310,7 @@ const VolunteerRegistration = () => {
                 value={formData.motherName}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
+                required
               />
             </div>
             <div>
@@ -304,7 +318,7 @@ const VolunteerRegistration = () => {
                 htmlFor="motherEmail"
                 className="block text-dark-blue font-semibold"
               >
-                Mother&apos;s Email
+                Mother&apos;s Email *
               </label>
               <input
                 type="email"
@@ -313,6 +327,7 @@ const VolunteerRegistration = () => {
                 value={formData.motherEmail}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
+                required
               />
             </div>
             <div>
@@ -320,7 +335,7 @@ const VolunteerRegistration = () => {
                 htmlFor="fatherName"
                 className="block text-dark-blue font-semibold"
               >
-                Father&apos;s Name
+                Father&apos;s Name *
               </label>
               <input
                 type="text"
@@ -329,6 +344,7 @@ const VolunteerRegistration = () => {
                 value={formData.fatherName}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
+                required
               />
             </div>
             <div>
@@ -336,7 +352,7 @@ const VolunteerRegistration = () => {
                 htmlFor="fatherEmail"
                 className="block text-dark-blue font-semibold"
               >
-                Father&apos;s Email
+                Father&apos;s Email *
               </label>
               <input
                 type="email"
@@ -345,6 +361,7 @@ const VolunteerRegistration = () => {
                 value={formData.fatherEmail}
                 onChange={handleChange}
                 className="w-full p-2 mt-2 bg-secondary-blue text-dark-blue rounded"
+                required
               />
             </div>
             <div>
@@ -370,7 +387,7 @@ const VolunteerRegistration = () => {
               htmlFor="passport"
               className="block text-dark-blue font-semibold text-center"
             >
-              Passport Size Photo
+              Passport Size Photo *
             </label>
             <input
               type="file"
