@@ -25,6 +25,8 @@ const signup = async (req, res) => {
       email,
       password,
       hobbies,
+      gender,
+      caste,
     } = req.body;
 
     // Ensure a photo file is provided
@@ -60,6 +62,8 @@ const signup = async (req, res) => {
         sapId,
         phoneNumber,
         email,
+        gender,
+        caste,
       },
       passportPhoto: {
         url: result.secure_url,
