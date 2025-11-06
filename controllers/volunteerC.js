@@ -3,9 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import env from "dotenv";
 import { sendLogin, sendSignup, sendOTP } from "./nodemailerC.js";
-// import EventModel from "../models/event.js";
 import EventModel from "../models/event.js";
-import sharp from "sharp";
 import cloudinary from "../config/cloudinary.js";
 import crypto from "crypto";
 
@@ -28,10 +26,11 @@ const signup = async (req, res) => {
       password,
       hobbies,
     } = req.body;
-    const filePath = req.file.path;
-    const metadata = await sharp(filePath).metadata();
-    const isSquare = metadata.width === metadata.height; // Check if it's square
-    const isValidSize = metadata.width === 300 && metadata.height === 300; // Passport size in pixels
+
+    // Ensure a photo file is provided
+    if (!req.file?.path) {
+      return res.status(400).json({ message: "Photo is required" });
+    }
 
     const ExistingVolunteer = await VolunteerModel.findOne({ sapId });
     if (ExistingVolunteer) {
@@ -42,21 +41,11 @@ const signup = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    if (!isSquare) {
-      return res
-        .status(400)
-        .json({ message: "Image is not square (1:1 aspect ratio required)" });
-    }
-
-    if (!isValidSize) {
-      return res
-        .status(400)
-        .json({ message: "Image dimensions should be 300x300 pixels" });
-    }
-
+    // Accept any normal photo (no 1:1 or 300x300 constraint)
     const result = await cloudinary.uploader.upload(req.file.path, {
-      folder: "PassportPhoto",
+      folder: "passportPhoto",
     });
+
     const newVolunteer = new VolunteerModel({
       description,
       parentDetails: {
@@ -73,6 +62,10 @@ const signup = async (req, res) => {
         email,
       },
       passportPhoto: {
+        url: result.secure_url,
+        public_id: result.public_id,
+      },
+      normalPhoto: {
         url: result.secure_url,
         public_id: result.public_id,
       },
@@ -148,11 +141,9 @@ const registerEvent = async (req, res) => {
 
     if (existingRegistration) {
       const event = await EventModel.findById(eventId);
-      return res
-        .status(400)
-        .json({
-          message: `Already registered for ${event?.name || "this event"}`,
-        });
+      return res.status(400).json({
+        message: `Already registered for ${event?.name || "this event"}`,
+      });
     }
 
     const volunteer = await VolunteerModel.findById(volunteerId);
