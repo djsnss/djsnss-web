@@ -14,11 +14,11 @@ import {
   verifyToken,
 } from "../controllers/volunteerC.js";
 
-import { uploadPassport, uploadNormal } from "../middlewares/multer.js";
+import { uploadNormal } from "../middlewares/multer.js";
 
 const router = express.Router();
 
-router.post("/signup", uploadPassport.single("passport"), signup); //volunteer registration
+router.post("/signup", uploadNormal.single("passport"), signup); //volunteer registration
 router.post("/login", login); //volunteer login
 router.post("/events/:eventId/register", authVolunteer, registerEvent); //register volunteer for a particular event
 

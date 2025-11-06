@@ -7,7 +7,6 @@ import env from "dotenv";
 import { sendLogin, sendOTP } from "./nodemailerC.js";
 import AdminModel from "../models/admin.js";
 import crypto from "crypto";
-import mongoose from "mongoose";
 import {
   redisClient,
   connectRedis,

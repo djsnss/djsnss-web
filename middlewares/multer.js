@@ -11,25 +11,6 @@ const storage = multer.diskStorage({
   },
 });
 
-const uploadPassport = multer({
-  storage: storage,
-  limits: {
-    fileSize: 2 * 1024 * 1024,
-  },
-  fileFilter: (req, file, cb) => {
-    const fileTypes = /jpeg|jpg|png/;
-    const extname = fileTypes.test(
-      path.extname(file.originalname).toLowerCase()
-    );
-    const mimeType = fileTypes.test(file.mimetype);
-    if (extname && mimeType) {
-      cb(null, true);
-    } else {
-      cb(new Error("Only JPEG, JPG, or PNG images are allowed"));
-    }
-  },
-});
-
 const uploadNormal = multer({
   storage: storage,
   limits: {
@@ -70,4 +51,4 @@ const uploadAnnouncement = multer({
   },
 });
 
-export { uploadPassport, uploadNormal, uploadAnnouncement };
+export {uploadNormal, uploadAnnouncement };
