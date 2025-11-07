@@ -150,7 +150,7 @@ const VolunteerRegistration = () => {
                 <option value="IT">IT</option>
                 <option value="Data Science">Data Science</option>
                 <option value="EXTC">EXTC</option>
-                <option value="IOT">IOT</option>
+                <option value="CSE(ISB)">CSE(ICB)</option>
                 <option value="Mechanical">Mechanical</option>
                 <option value="AI&ML">AI&ML</option>
                 <option value="AI&DS">AI&DS</option>
