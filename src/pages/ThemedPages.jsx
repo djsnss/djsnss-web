@@ -11,12 +11,12 @@ const DynamicPage = ({ event }) => {
     : Object.entries(event.year || {}).map(([year, data]) => ({ year, ...data }))
 
   // Default to the index of the first '2025' entry, else the first item
-  const initialIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === '2025'));
+  const initialIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === event.defaultYear));
   const [selectedIndex, setSelectedIndex] = useState(initialIndex);
 
   // Re-evaluate default when the event prop changes
   useEffect(() => {
-    const nextDefaultIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === '2025'));
+    const nextDefaultIndex = Math.max(0, yearEntries.findIndex(entry => entry.year === event.defaultYear));
     setSelectedIndex(nextDefaultIndex);
   }, [event]);
 

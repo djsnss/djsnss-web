@@ -78,6 +78,7 @@ export const propsData = [
     title: "7 Days Camp",
     slug: "nss-camp",
     backgroundColor: "dark-navy",
+    defaultYear: "2026",
     year: {
       "2026":{
         description: `In January 2026, the NSS Unit of Dwarkadas J. Sanghvi College of Engineering successfully conducted its annual week-long Regular Camp at Dahanu from 16th to 22nd January 2026, with the enthusiastic participation of 65 committed volunteers. The camp focused on fostering social responsibility, community involvement, and sustainable development, in alignment with the NSS motto, "Not Me, But You."
@@ -127,6 +128,7 @@ The camp concluded with reflection and feedback sessions that celebrated the ach
     title: "Grain-A-Thon",
     slug: "grain-a-thon",
     backgroundColor: "yellow-500",
+    defaultYear: "2025",
     year:{
       "2025":{
         description:`In 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized <b>Grain-A-Thon 3.0</b>, a five-day initiative dedicated to combating hunger and promoting sustainability. Through an interdepartmental grain donation drive, over <b>11,672 kilograms</b> of grains were collected, packed, and distributed to various NGOs across Mumbai. The drive reflected the college’s unwavering spirit of unity and compassion, as students and faculty came together to make a tangible difference in the lives of those in need.
@@ -173,6 +175,7 @@ The success of Grain-A-Thon 2023 demonstrated how collective effort can bring me
     title: "Blood Donation Drive",
     backgroundColor: "red-500",
     slug: "blood-donation-drive",
+    defaultYear: "2025",
     year: [
       {
         year: "2025", // Add a 'year' property to each object
