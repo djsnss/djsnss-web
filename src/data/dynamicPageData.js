@@ -57,6 +57,20 @@ import bdd262 from "../assets/Events/bdd261/bdd2.png";
 import bdd263 from "../assets/Events/bdd261/bdd3.png";
 import bdd264 from "../assets/Events/bdd261/bdd4.jpg";
 import bdd265 from "../assets/Events/bdd261/bdd5.jpg";
+import cmp0 from "../assets/Events/camp26/img0.jpeg"
+import cmp1 from "../assets/Events/camp26/img1.jpg"
+import cmp2 from "../assets/Events/camp26/img2.jpg"
+import cmp3 from "../assets/Events/camp26/img3.jpg"
+import cmp4 from "../assets/Events/camp26/img4.jpg"
+import cmp5 from "../assets/Events/camp26/img5.jpg"
+import cmp6 from "../assets/Events/camp26/img6.jpeg"
+import cmp7 from "../assets/Events/camp26/img7.jpeg"
+import cmp8 from "../assets/Events/camp26/img8.jpg"
+import cmp11 from "../assets/Events/camp26/img11.jpg"
+import cmpbg from "../assets/Events/camp26/img10.jpeg"
+import cmp12 from "../assets/Events/camp26/img12.jpg"
+import cmp13 from "../assets/Events/camp26/img13.jpg"
+import cmp14 from "../assets/Events/camp26/img14.jpg"
 
 export const propsData = [
   {
@@ -65,6 +79,21 @@ export const propsData = [
     slug: "nss-camp",
     backgroundColor: "dark-navy",
     year: {
+      "2026":{
+        description: `In January 2026, the NSS Unit of Dwarkadas J. Sanghvi College of Engineering successfully conducted its annual week-long Regular Camp at Dahanu from 16th to 22nd January 2026, with the enthusiastic participation of 65 committed volunteers. The camp focused on fostering social responsibility, community involvement, and sustainable development, in alignment with the NSS motto, "Not Me, But You."
+<br/><br/>
+Throughout the seven days, volunteers actively engaged with the local community through a diverse range of social, environmental, and educational initiatives. Key activities included awareness rallies, a sports day for school children, origami-based learning sessions, seed bombing, tree plantation, and cleanliness drives, all aimed at promoting environmental consciousness, teamwork, and healthy lifestyles. These initiatives strengthened the bond between the volunteers and the villagers while addressing grassroots-level social issues.
+<br/><br/>
+A distinctive feature of this year's camp was the execution of three technology-driven projects designed to support sustainable rural development. These included the development and demonstration of a water purifier system, a solar battery setup, and a drip irrigation model, highlighting the practical application of engineering knowledge to solve real-world problems. These projects emphasized innovation, sustainability, and self-reliance within the community.
+<br/><br/>
+The camp concluded on 22nd January 2026 with a heartfelt thanksgiving ceremony, where volunteers and villagers reflected on the shared experiences and mutual learning. The Regular Camp proved to be a meaningful journey of service and growth, instilling values of empathy, leadership, and collective responsibility among the volunteers while leaving a positive and lasting impact on the community.`,
+        bgImage: cmpbg,
+        featuredImage:cmp0,
+        location: "Kosbad & Waki Village, Dahanu",
+        date: "16st Jan - 22th Jan ",
+        images: [cmp13,cmp12,cmp14,cmp1, cmp2,cmp4,cmp3, cmp5, cmp6, cmp7, cmp11, cmp8],
+
+      },
       "2025": {
         description: `In January 2025, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized its annual week-long Regular Camp at Dahanu from 21st to 28th January 2025, with the participation of 79 dedicated volunteers. The camp aimed to promote community development, social awareness, and sustainable living through a series of impactful initiatives in nearby villages. Volunteers engaged in cleanliness drives, educational activities, medical camps, and awareness rallies, embodying the NSS motto — “Not Me, But You.”
 <br/><br/>

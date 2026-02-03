@@ -1,6 +1,6 @@
 import GrainAThon from "../assets/Events/grainathon25/grainathon4.jpg";
 import BorivaliTP from "../assets/Events/TreePlantation25.jpg";
-import NSSCamp from "../assets/Events/camp25/camp2.jpeg";
+import NSSCamp from "../assets/Events/camp26/img9.jpeg";
 import AnnualCharity from "../assets/Events/AnnualCharity25.png";
 import VoterRegistration from "../assets/Events/VoterRegistration.png";
 import BDD from "../assets/Events/bdd25/bdd8.jpg";
@@ -20,11 +20,11 @@ export const largeEventsData = [
     background: "bg-teal-400",
     imageURL: NSSCamp,
     longDescription:
-      "From January 21 to 28, the NSS unit of Dwarkadas J. Sanghvi College of Engineering organized an enriching camp at Dahanu, focusing on community service and personal growth. The camp kicked off with cleanliness drives, team-building activities, and creative tasks like poster making and wall painting, all fostering a spirit of teamwork and community engagement. Throughout the week, volunteers participated in impactful initiatives, including educational outreach, a medical camp, and environmental awareness drives. The installation of solar street lights highlighted the camp's commitment to sustainability. The camp concluded with cultural celebrations and a strong sense of accomplishment among participants, leaving a lasting impact on the community and volunteers alike.",
+      "In January 2026, the NSS Unit of Dwarkadas J. Sanghvi College of Engineering successfully conducted its annual week-long Regular Camp at Dahanu from 16th to 22nd January 2026, with 65 committed volunteers. The camp focused on fostering social responsibility and sustainable development, in alignment with the NSS motto, 'Not Me, But You.' Volunteers actively engaged with the local community through awareness rallies, sports day for school children, origami sessions, seed bombing, tree plantation, and cleanliness drives. A distinctive feature was the execution of three technology-driven projects—a water purifier system, solar battery setup, and drip irrigation model—highlighting practical application of engineering knowledge to solve real-world problems. The camp concluded with a heartfelt thanksgiving ceremony, proving to be a meaningful journey of service and growth that instilled values of empathy, leadership, and collective responsibility while leaving a lasting impact on the community.",
     scale: "Large",
     duration: "7 days",
-    location: "Dahanu",
-    date: "21st Jan - 28th Jan 2025",
+    location: "Kosbad, Dahanu",
+    date: "16th Jan - 22nd Jan 2026",
     icon: FaFlag,
     color: "#4C9D8F",
   },
