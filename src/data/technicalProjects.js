@@ -5,6 +5,7 @@ import WaterPumpAmbewadi from "../assets/Technical/Water Pump.jpg"
 import SolarBatteryWaki from "../assets/Technical/solarbattery.jpeg"
 import DripIrrigationWaki from "../assets/Technical/dripirrigation.jpeg"
 import WaterPurifierWaki from "../assets/Technical/waterpurifier.jpeg"
+import grillPainting from "../assets/Technical/grillPainting.jpg"
 export const TechnicalProjects = [
     {
   id: 1,
@@ -15,11 +16,11 @@ export const TechnicalProjects = [
   background: "bg-blue-400",
   imageURL: WaterPurifierWaki,
   longDescription:
-    "On January 20, 2026, DJS NSS successfully installed a water purifier in Waki village, Dahanu. This initiative aimed to provide access to safe and clean drinking water, improving health and hygiene standards for the villagers. The project highlighted the importance of clean water in rural development and enhanced the overall quality of life of the local community.",
+    "On January 19, 2026, DJS NSS successfully installed a water purifier in Waki village, Dahanu. This initiative aimed to provide access to safe and clean drinking water, improving health and hygiene standards for the villagers. The project highlighted the importance of clean water in rural development and enhanced the overall quality of life of the local community.",
   scale: "Medium",
   duration: "2 days",
   location: "Waki Village, Dahanu",
-  date: "20th Jan 2026",
+  date: "19th Jan 2026",
   icon: FaWater,
   color: "#60A5FA"
 },
@@ -49,16 +50,33 @@ export const TechnicalProjects = [
   background: "bg-yellow-400",
   imageURL: SolarBatteryWaki,
   longDescription:
-    "On January 18, 2026, DJS NSS successfully installed a solar battery system in Waki village, Dahanu. This initiative aimed to provide sustainable energy storage solutions to ensure continuous power supply for the villagers. The project reinforced the importance of renewable energy storage in rural development and enhanced the quality of life for the local community.",
+    "On January 19, 2026, DJS NSS successfully installed a solar battery system in Waki village, Dahanu. This initiative aimed to provide sustainable energy storage solutions to ensure continuous power supply for the villagers. The project reinforced the importance of renewable energy storage in rural development and enhanced the quality of life for the local community.",
   scale: "Medium",
   duration: "1 day",
   location: "Waki Village, Dahanu",
-  date: "18th Jan 2026",
+  date: "19th Jan 2026",
   icon: FaSun,
   color: "#FACC15"
 },
+{
+      id:4,
+      title: "Grill Painting - Waki Village",
+      description: "Reviving Grills with Fresh Coats of Paint",
+      slug: "grill-painting-waki",
+      link: "/eventdetails/grill-painting-waki",
+      background: "bg-orange-400",
+      imageURL: grillPainting,
+      longDescription:
+        "In Waki village, DJS NSS undertook a grill painting project to enhance safety and aesthetics in the community. This initiative focused on maintaining and improving the visibility and durability of public infrastructure, contributing to a safer and more visually appealing environment for the residents.",
+      scale: "Medium",
+      duration: "1 day",
+      location: "Waki Village",
+      date: "19th Jan 2026",
+      icon: FaLightbulb,
+      color: "#FB923C"
+},
     {
-      id: 4,
+      id: 5,
       title: "Solar Light Installation - Waki Village",
       description: "Enhancing Safety & Navigation with Solar Lights",
       slug: "solar-lights-waki",
@@ -75,7 +93,7 @@ export const TechnicalProjects = [
       color: "#FB923C"
     },
     {
-      id: 5,
+      id: 6,
       title: "Solar Light Installation - Narpad Village",
       description: "Illuminating Narpad with Solar Power",
       slug: "solar-lights-narpad",
@@ -92,7 +110,7 @@ export const TechnicalProjects = [
       color: "#FBBF24"
     },
     {
-      id: 6,
+      id: 7,
       title: "Water Pump Installation - Ambewadi",
       description: "Providing Reliable Water Access",
       slug: "water-pump-ambewadi",

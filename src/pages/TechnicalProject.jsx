@@ -15,10 +15,9 @@ const TechnicalProject = () => {
           transition={{ duration: 0.8, type: "spring" }}
           className="inline-block mb-6"
         >
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-geist text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-200 to-purple-300 drop-shadow-2xl mb-4">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-geist text-white drop-shadow-2xl mb-4">
             TECHNICAL PROJECTS
           </h1>
-          <div className="h-1.5 w-full bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 rounded-full animate-pulse"></div>
         </motion.div>
         <motion.p 
           initial={{ opacity: 0, y: 20 }}

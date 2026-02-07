@@ -42,10 +42,9 @@ const Team = () => {
           transition={{ duration: 0.8, type: "spring" }}
           className="mb-12"
         >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold font-geist text-black drop-shadow-lg mb-6">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold font-geist text-[#041877] drop-shadow-lg mb-6">
             OUR TEAM
           </h1>
-          <div className="h-1 w-2/3 md:w-1/2 mx-auto bg-gradient-to-r from-transparent via-gray-800 to-transparent rounded-full mb-8"></div>
           <p className="text-lg md:text-2xl text-gray-800 font-roboto max-w-3xl mx-auto leading-relaxed font-semibold">
             Meet the incredible minds behind NSS - Driven by passion, united by purpose
           </p>
