@@ -1,3 +1,11 @@
+// 2026-27
+import DhruviShah_CP from "../assets/Team26-27/DhruviShah_CP.jpg";
+import RutviSanura from "../assets/Team26-27/RutviSanura.jpg";
+import TirthSheth from "../assets/Team26-27/TirthSheth.jpg";
+import DhruviPatel from "../assets/Team26-27/DhruviPatel.jpg";
+import AnikaitNair from "../assets/Team26-27/AnikaitNair.jpg";
+import ph from "../assets/Team26-27/ph.svg";
+
 // 2025-26
 import DhvanilShah from "../assets/Team25-26/Dhvanil Shah.jpg";
 import ZeelBhadra from "../assets/Team25-26/Zeel Bhadra.jpg";
@@ -75,6 +83,79 @@ import LabdhiShah from "../assets/alumini/LabdhiShah.webp";
 import ShaileeGala from "../assets/alumini/ShaileeGala.webp";
 
 const TeamData = {
+  "2026-27": {
+    upperCore: {
+      chairperson: [
+        { name: "Dhruvi Shah", position: "Chairperson", image: DhruviShah_CP, linkedin: "" }
+      ],
+      "vice Chairpersons": [
+        { name: "Rutvi Sanura", position: "Vice Chairperson", image: RutviSanura, linkedin: "" },
+        { name: "Tirth Sheth", position: "Vice Chairperson", image: TirthSheth, linkedin: "" }
+      ],
+      secretary: [
+        { name: "Kripa Shah", position: "Secretary", image: ph, linkedin: "" },
+        { name: "Hiya Shah", position: "Joint Secretary", image: ph, linkedin: "" },
+        { name: "Om Patel", position: "Joint Secretary", image: ph, linkedin: "" }
+      ],
+      treasurer: [
+        { name: "Dhruv Patel", position: "Treasurer", image: ph, linkedin: "" },
+        { name: "Jaimin Rajput", position: "Joint Treasurer", image: ph, linkedin: "" },
+        { name: "Raj Bhanushali", position: "Treasurer Member", image: ph, linkedin: "" }
+      ]
+    },
+    leader: {
+      "": [
+        { name: "Dhruvi Patel", position: "Student Leader", image: DhruviPatel, linkedin: "" },
+        { name: "Anikait Nair", position: "Student Leader", image: AnikaitNair, linkedin: "" }
+      ]
+    },
+    heads: {
+      departments: [
+        {
+          name: "Events",
+          members: [
+            { name: "Vaishnavi Ramasubramaniam", position: "Head of Events", image: ph, linkedin: "" },
+            { name: "Harsh Gaggar", position: "Head of Events", image: ph, linkedin: "" },
+            { name: "Yug Shah", position: "Head of Events", image: ph, linkedin: "" }
+          ]
+        },
+
+        {
+          name: "Editorial",
+          members: [
+            { name: "Rushil Baheti", position: "Head of Editorial", image: ph, linkedin: "" },
+            { name: "Rishabh Rathi", position: "Head of Editorial", image: ph, linkedin: "" }
+          ]
+        },
+
+        {
+          name: "Publicity",
+          members: [
+            { name: "Muskan Ranka", position: "Head of Publicity", image: ph, linkedin: "" },
+            { name: "Umang Satra", position: "Head of Publicity", image: ph, linkedin: "" },
+            { name: "Shreya Mehta", position: "Head of Publicity", image: ph, linkedin: "" },
+            { name: "Anant Charla", position: "Head of Publicity", image: ph, linkedin: "" },
+            { name: "Raman Dargad", position: "Head of Publicity", image: ph, linkedin: "" }
+          ]
+        },
+        {
+          name: "Social Media & Creatives",
+          members: [
+            { name: "Marmik Shah", position: "Head of Social Media", image: ph, linkedin: "" },
+            { name: "Harsh Patel", position: "Head of Social media", image: ph, linkedin: "" },
+            { name: "Vedant Rathod", position: "Head of Creatives", image: ph, linkedin: "" }
+          ]
+        },
+        {
+          name: "Technical",
+          members: [
+            { name: "Riddhi Savla", position: "H  ead of Technical", image: ph, linkedin: "" },
+            { name: "Toyam Shah", position: "Head of Technical", image: ph, linkedin: "" }
+          ]
+        }
+      ]
+    }
+  },
   "2025-26": {
     faculty: {
       principal: [
@@ -762,4 +843,156 @@ const TeamData = {
   },
 };
 
+export const YEARS = Object.keys(TeamData);
+
+export function normalizeTeamData(selectedYear) {
+  const yearData = TeamData[selectedYear] || TeamData["2025-26"] || Object.values(TeamData)[0];
+  if (!yearData) return null;
+
+  const upperCore = yearData.upperCore || {};
+
+  // Chairperson
+  const cpList = upperCore.chairperson || upperCore["Chairperson"] || [];
+  const chairperson = cpList[0]
+    ? {
+      name: cpList[0].name,
+      photo: cpList[0].image || cpList[0].photo || null,
+      role: cpList[0].position || "Chairperson",
+      linkedin: cpList[0].linkedin || "",
+    }
+    : null;
+
+  // Vice Chairpersons
+  const vcList =
+    upperCore["vice Chairpersons"] ||
+    upperCore["Vice Chairpersons"] ||
+    upperCore.viceChairpersons ||
+    [];
+  const viceChairpersons = vcList.map((m) => ({
+    name: m.name,
+    photo: m.image || m.photo || null,
+    role: m.position || "Vice Chairperson",
+    linkedin: m.linkedin || "",
+  }));
+
+  // Secretary & Joint Secretary
+  const secList = upperCore.secretary || upperCore["Secretary"] || [];
+  const jSecList =
+    upperCore["joint Secretaries"] ||
+    upperCore["joint Secretary"] ||
+    upperCore["Joint Secretary"] ||
+    [];
+
+  let secMember = null;
+  let jSecMember = null;
+
+  if (secList.length > 0) {
+    secMember = {
+      name: secList[0].name,
+      photo: secList[0].image || secList[0].photo || null,
+      role: "Secretary",
+      linkedin: secList[0].linkedin || "",
+    };
+    if (secList.length > 1) {
+      jSecMember = {
+        name: secList[1].name,
+        photo: secList[1].image || secList[1].photo || null,
+        role: "Joint Secretary",
+        linkedin: secList[1].linkedin || "",
+      };
+    }
+  }
+  if (!jSecMember && jSecList.length > 0) {
+    jSecMember = {
+      name: jSecList[0].name,
+      photo: jSecList[0].image || jSecList[0].photo || null,
+      role: "Joint Secretary",
+      linkedin: jSecList[0].linkedin || "",
+    };
+  }
+
+  // Treasurer & Joint Treasurer
+  const treasList = upperCore.treasurer || upperCore["Treasurer"] || [];
+  const jTrList =
+    upperCore["joint Treasurers"] ||
+    upperCore["joint Treasurer"] ||
+    upperCore["Joint Treasurer"] ||
+    [];
+
+  let treasMember = null;
+  let jTreasMember = null;
+
+  if (treasList.length > 0) {
+    treasMember = {
+      name: treasList[0].name,
+      photo: treasList[0].image || treasList[0].photo || null,
+      role: "Treasurer",
+      linkedin: treasList[0].linkedin || "",
+    };
+    if (treasList.length > 1) {
+      jTreasMember = {
+        name: treasList[1].name,
+        photo: treasList[1].image || treasList[1].photo || null,
+        role: "Joint Treasurer",
+        linkedin: treasList[1].linkedin || "",
+      };
+    }
+  }
+  if (!jTreasMember && jTrList.length > 0) {
+    jTreasMember = {
+      name: jTrList[0].name,
+      photo: jTrList[0].image || jTrList[0].photo || null,
+      role: "Joint Treasurer",
+      linkedin: jTrList[0].linkedin || "",
+    };
+  }
+
+  // Student Leaders
+  let studentLeaders = [];
+  if (yearData.leader) {
+    Object.values(yearData.leader).forEach((list) => {
+      if (Array.isArray(list)) {
+        list.forEach((m) => {
+          studentLeaders.push({
+            name: m.name,
+            photo: m.image || m.photo || null,
+            role: m.position || "Student Leader",
+            linkedin: m.linkedin || "",
+          });
+        });
+      }
+    });
+  }
+
+  // Department Heads
+  const departmentSections = [];
+  if (yearData.heads && yearData.heads.departments) {
+    yearData.heads.departments.forEach((dept, idx) => {
+      departmentSections.push({
+        id: `dept-${dept.name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`,
+        title: idx === 0 ? "Heads" : "",
+        subTitle: `${dept.name} Heads`,
+        members: (dept.members || []).map((m) => ({
+          name: m.name,
+          photo: m.image || m.photo || null,
+          role: m.position || `${dept.name} Head`,
+          linkedin: m.linkedin || "",
+        })),
+      });
+    });
+  }
+
+  return {
+    chairperson: chairperson || { name: "", photo: null, role: "Chairperson" },
+    viceChairpersons,
+    secretary: secMember || { name: "", photo: null, role: "Secretary" },
+    jointSecretary: jSecMember || { name: "", photo: null, role: "Joint Secretary" },
+    treasurer: treasMember || { name: "", photo: null, role: "Treasurer" },
+    jointTreasurer: jTreasMember || { name: "", photo: null, role: "Joint Treasurer" },
+    studentLeaders,
+    departments: departmentSections,
+  };
+}
+
 export default TeamData;
+

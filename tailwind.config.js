@@ -9,11 +9,29 @@ export default {
         opensans: ["Open Sans", "sans-serif"],
         lateef: ["Lateef", "serif"],
         geist: ["Geist", "sans-serif"],
+        serif: ['"Playfair Display"', "Georgia", "serif"],
+        script: ["Itim", "cursive"],
       },
       backgroundImage: {
         timeline: "url('./src/assets/Timeline/waves.gif')",
       },
+      boxShadow: {
+        polaroid:
+          "0 8px 24px -4px rgba(59, 78, 124, 0.15), 0 4px 12px -2px rgba(0, 0, 0, 0.08)",
+        "polaroid-hover":
+          "0 16px 32px -6px rgba(59, 78, 124, 0.22), 0 8px 16px -4px rgba(0, 0, 0, 0.12)",
+        oval: "0 4px 15px rgba(0, 0, 0, 0.15)",
+      },
       colors: {
+        "nss-navy": "#3B4E7C",
+        "nss-navy-dark": "#2D3D63",
+        "nss-heading": "#4A5C86",
+        "nss-oval": "#4E5D78",
+        "nss-sage": "#7FA88F",
+        "nss-sage-dark": "#699479",
+        "nss-polaroid": "#F7F5F0",
+        "nss-wash-light": "#DCEBFA",
+        "nss-wash-sky": "#BFDFF7",
         "primary-blue": "#E7F2FF",
         "secondary-blue": "#CBE3FF",
         "tertiary-blue": "#0066b2",

@@ -1,174 +1,178 @@
-import React, { useState } from "react";
-import { motion } from "framer-motion";
-import TeamSection from "../components/Team/TeamSection";
-import teamData from "../data/teamData";
-import Loader from "../components/Loaders/CustomLoader2";
+import React, { useState, useEffect, useRef } from "react";
+import { YEARS, normalizeTeamData } from "../data/teamData";
+import SectionNav from "../components/Team/SectionNav";
+import CoverSlide from "../components/Team/CoverSlide";
+import SingleMemberSection from "../components/Team/SingleMemberSection";
+import MemberPairSection from "../components/Team/MemberPairSection";
+import MemberGridSection from "../components/Team/MemberGridSection";
 import "../styles/team.css";
 
-const Team = () => {
-  // State to handle the selected year
-  const [selectedYear, setSelectedYear] = useState("2025-26");
+export default function Team() {
+  const [selectedYear, setSelectedYear] = useState(YEARS[0] || "2025-26");
+  const [activeSection, setActiveSection] = useState("cover");
+  const containerRef = useRef(null);
 
-  // Handler for the dropdown change
-  const handleYearChange = (event) => {
-    setSelectedYear(event.target.value);
+  // Normalized team structure for current selected year
+  const currentTeam = normalizeTeamData(selectedYear);
+
+  // Build dynamic section list for SectionNav
+  const sections = [
+    { id: "cover", title: "Cover" },
+    ...(currentTeam?.chairperson?.name
+      ? [{ id: "chairperson", title: "Chairperson" }]
+      : []),
+    ...(currentTeam?.viceChairpersons?.length > 0
+      ? [{ id: "vice-chairpersons", title: "Vice Chairpersons" }]
+      : []),
+    ...(currentTeam?.secretary?.name
+      ? [{ id: "secretary", title: "Secretary & Joint Sec" }]
+      : []),
+    ...(currentTeam?.treasurer?.name
+      ? [{ id: "treasurer", title: "Treasurer & Joint Treas" }]
+      : []),
+    ...(currentTeam?.studentLeaders?.length > 0
+      ? [{ id: "student-leaders", title: "Student Leaders" }]
+      : []),
+    ...(currentTeam?.departments || []).map((dept) => ({
+      id: dept.id,
+      title: dept.subTitle || dept.title || "Department",
+    })),
+  ];
+
+  // Smooth scroll to target section by ID within our snap-container
+  const handleNavigate = (id) => {
+    const targetElement = document.getElementById(id);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
-  // Check if team data exists for the selected year
-  const currentYearData = teamData[selectedYear];
-  if (!currentYearData)
-    return (
-      <div className="min-h-screen max-w-screen flex items-center justify-center bg-cream">
-        <Loader />
-      </div>
-    );
+  // IntersectionObserver to auto-update active nav dot on scroll
+  useEffect(() => {
+    const observerOptions = {
+      root: containerRef.current,
+      threshold: 0.5,
+    };
 
-  let sectionIndex = 0;
+    const observerCallback = (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    sections.forEach((section) => {
+      const el = document.getElementById(section.id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, [selectedYear, sections.length]);
 
   return (
-    <div className="bg-secondary-blue overflow-y-scroll w-full min-h-screen relative">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/3 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
-      </div>
+    <div className="team-page-wrapper">
+      {/* Fixed Right-Edge Section Dots Navigator */}
+      <SectionNav
+        sections={sections}
+        activeSection={activeSection}
+        onNavigate={handleNavigate}
+      />
 
-      <div className="h-full w-full text-center pt-20 px-5 pb-8 md:pb-10 relative z-10">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, type: "spring" }}
-          className="mb-12"
-        >
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold font-geist text-[#041877] drop-shadow-lg mb-6">
-            OUR TEAM
-          </h1>
-          <p className="text-lg md:text-2xl text-gray-800 font-roboto max-w-3xl mx-auto leading-relaxed font-semibold">
-            Meet the incredible minds behind NSS - Driven by passion, united by purpose
-          </p>
-        </motion.div>
+      {/* Main Snap Container for Full Viewport Slides */}
+      <div ref={containerRef} className="snap-container relative w-full">
+        {/* Slide 1: Cover Hero */}
+        <CoverSlide
+          years={YEARS}
+          selectedYear={selectedYear}
+          onSelectYear={setSelectedYear}
+        />
 
-        {/* Year Selector */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="my-8 flex flex-col sm:flex-row justify-center items-center gap-4 mb-16"
-        >
-          <label
-            htmlFor="year-select"
-            className="text-xl sm:text-2xl font-bold uppercase text-black tracking-wider"
-          >
-            Select Year:
-          </label>
-          <div className="relative">
-            <select
-              id="year-select"
-              value={selectedYear}
-              onChange={handleYearChange}
-              className="text-lg sm:text-2xl font-bold uppercase text-white bg-gradient-to-r from-blue-700 to-indigo-700 rounded-2xl px-8 py-4 cursor-pointer focus:outline-none focus:ring-4 focus:ring-blue-500 shadow-xl hover:shadow-2xl transition-all duration-300 appearance-none pr-12 hover:scale-105 transform"
-            >
-              {Object.keys(teamData).map((year) => (
-                <option key={year} value={year} className="text-black bg-white">
-                  {year}
-                </option>
-              ))}
-            </select>
-            <div className="absolute right-4 top-1/2 transform -translate-y-1/2 pointer-events-none">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Upper Core Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative mb-16"
-        >
-          <div className="relative inline-block mb-8">
-            <h2 className="text-4xl md:text-6xl font-geist font-bold uppercase text-dark-blue drop-shadow-md">
-              Upper Core
-            </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-dark-blue to-transparent rounded-full"></div>
-          </div>
-          {Object.entries(currentYearData.upperCore).map(([title, members]) => {
-            sectionIndex++;
-            return (
-              <TeamSection
-                key={sectionIndex}
-                index={sectionIndex}
-                title={title}
-                members={members}
-              />
-            );
-          })}
-        </motion.div>
-
-        {/* Student Leader Section */}
-        {currentYearData.leader && (
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative mb-16"
-          >
-            <div className="relative inline-block mb-8">
-            <h2 className="text-4xl md:text-6xl font-geist font-bold uppercase text-dark-blue drop-shadow-md">
-              Student Leader
-            </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-dark-blue to-transparent rounded-full"></div>
-            </div>
-            {Object.entries(currentYearData.leader).map(([title, members]) => {
-              sectionIndex++;
-              return (
-                <TeamSection
-                  key={sectionIndex}
-                  index={sectionIndex}
-                  title={title}
-                  members={members}
-                />
-              );
-            })}
-          </motion.div>
+        {/* Slide 2: Chairperson */}
+        {currentTeam?.chairperson?.name && (
+          <SingleMemberSection
+            id="chairperson"
+            sectionTitle="Upper Core"
+            roleTitle={currentTeam.chairperson.role || "Chairperson"}
+            member={currentTeam.chairperson}
+            decoration="tape"
+          />
         )}
 
-        {/* Heads Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="relative mb-16"
-        >
-          <div className="relative inline-block mb-8">
-            <h2 className="text-4xl md:text-6xl font-geist font-bold uppercase text-dark-blue drop-shadow-md">
-              Heads
-            </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-dark-blue to-transparent rounded-full"></div>
-          </div>
-          {currentYearData.heads.departments.map((department) => {
-            sectionIndex++;
-            return (
-              <TeamSection
-                key={sectionIndex}
-                index={sectionIndex}
-                title={department.name}
-                members={department.members}
-              />
-            );
-          })}
-        </motion.div>
+        {/* Slide 3: Vice Chairpersons */}
+        {currentTeam?.viceChairpersons?.length > 0 && (
+          <MemberPairSection
+            id="vice-chairpersons"
+            sectionTitle="Vice Chairpersons"
+            members={currentTeam.viceChairpersons}
+            layoutStyle="centered-title"
+            decoration="pin"
+            rotations={[-6, 4]}
+            leafCorner="top-left-bottom-right"
+          />
+        )}
+
+        {/* Slide 4: Secretary & Joint Secretary */}
+        {currentTeam?.secretary?.name && (
+          <MemberPairSection
+            id="secretary"
+            sectionTitle="Secretary"
+            members={[
+              { ...currentTeam.secretary, role: currentTeam.secretary.role || "Secretary" },
+              { ...currentTeam.jointSecretary, role: currentTeam.jointSecretary.role || "Joint Secretary" },
+            ]}
+            layoutStyle="split-roles"
+            decoration="clip"
+            rotations={[-2, 6]}
+            leafCorner="top-left-bottom-right"
+          />
+        )}
+
+        {/* Slide 5: Treasurer & Joint Treasurer */}
+        {currentTeam?.treasurer?.name && (
+          <MemberPairSection
+            id="treasurer"
+            sectionTitle="TREASURER"
+            showTopTitle={true}
+            members={[
+              { ...currentTeam.treasurer, role: currentTeam.treasurer.role || "Treasurer" },
+              { ...currentTeam.jointTreasurer, role: currentTeam.jointTreasurer.role || "Joint Treasurer" },
+            ]}
+            layoutStyle="split-roles"
+            decoration="pin"
+            rotations={[-5, -2]}
+            leafCorner="top-right-bottom-left"
+          />
+        )}
+
+        {/* Slide 6: Student Leaders */}
+        {currentTeam?.studentLeaders?.length > 0 && (
+          <MemberGridSection
+            id="student-leaders"
+            sectionTitle="Student Leaders"
+            members={currentTeam.studentLeaders}
+            leafCorner="top-left-bottom-right"
+          />
+        )}
+
+        {/* Slides 7+: Department Heads */}
+        {(currentTeam?.departments || []).map((dept, index) => (
+          <MemberGridSection
+            key={dept.id}
+            id={dept.id}
+            sectionTitle={dept.title}
+            subTitle={dept.subTitle}
+            members={dept.members}
+            leafCorner={
+              index % 2 === 0
+                ? "top-right-bottom-left"
+                : "top-left-bottom-right"
+            }
+          />
+        ))}
       </div>
     </div>
   );
-};
-
-export default Team;
+}

@@ -1,12 +1,67 @@
+/* Google Fonts: Playfair Display, Itim, Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Itim&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600&family=Poppins:wght@400;500;600;700&display=swap');
+
+/* Scoped Team Page Container */
+.team-page-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  color: #3b4e7c;
+  font-family: 'Poppins', sans-serif;
+  overflow: hidden;
+}
+
+.team-page-wrapper::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../assets/team/background.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Custom scroll snap container for full-viewport slide navigation */
+.snap-container {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+  height: 100vh;
+  scroll-behavior: smooth;
+}
+
+.snap-slide {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+}
+
+/* Custom scrollbar styling */
+.snap-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.snap-container::-webkit-scrollbar-track {
+  background: rgba(220, 235, 250, 0.3);
+}
+
+.snap-container::-webkit-scrollbar-thumb {
+  background: rgba(78, 93, 120, 0.4);
+  border-radius: 4px;
+}
+
+.snap-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(78, 93, 120, 0.7);
+}
+
+/* Legacy fallback if needed */
 .team-page-bg {
-  font-family: "Poppins", sans-serif;
-  margin: 0;
-  padding: 0;
   background-color: #d9d9d9;
-  background-image: url("/team.svg");
-  background-size: cover; /* ensures the whole image is visible */
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-attachment: fixed;  /* fixes the background to the viewport */
   color: #212121;
 }

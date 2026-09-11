@@ -4,6 +4,8 @@ import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal new.jpg";
 import AlishaBanz from "../assets/Faculty/Alisha Banz.jpg";
 import RahulTaware from "../assets/Faculty/Rahul Taware.jpg";
+import MonikaMangla from "../assets/Faculty/Monika Mangla.jpeg";
+import FullName from "../assets/Faculty/Name_Unknown.jpeg";
 
 const AboutUs = () => {
   const principal = [
@@ -13,11 +15,11 @@ const AboutUs = () => {
       name: "Dr. Hari Vasudevan",
       role: "Principal",
       image: HariVasudevan,
-       message: [
-                'DJS NSS, the NSS unit of Dwarkadas J. Sanghvi College of Engineering commenced their journey in the year 2005 towards making each member of the unit a better citizen and therefore making India a better nation. It is a proud moment for all of us to witness the participation of students in various activities that are undertaken by NSS volunteers. We have been striving towards the social upliftment and well-being of society.',
-                'The NSS unit has been actively involved in numerous activities such as health camps, tree plantations, education programs for underprivileged children, and disaster management training. These activities have shaped the lives of our students, making them more socially aware and responsible citizens. I am proud of the progress that our students continue to make, and I look forward to seeing their efforts bring about a positive change in the world.',
-                'We have always believed in making a difference through action, and I am confident that the NSS unit will continue to grow and contribute to our nation\'s development in the years to come.',
-            ],
+      message: [
+        'DJS NSS, the NSS unit of Dwarkadas J. Sanghvi College of Engineering commenced their journey in the year 2005 towards making each member of the unit a better citizen and therefore making India a better nation. It is a proud moment for all of us to witness the participation of students in various activities that are undertaken by NSS volunteers. We have been striving towards the social upliftment and well-being of society.',
+        'The NSS unit has been actively involved in numerous activities such as health camps, tree plantations, education programs for underprivileged children, and disaster management training. These activities have shaped the lives of our students, making them more socially aware and responsible citizens. I am proud of the progress that our students continue to make, and I look forward to seeing their efforts bring about a positive change in the world.',
+        'We have always believed in making a difference through action, and I am confident that the NSS unit will continue to grow and contribute to our nation\'s development in the years to come.',
+      ],
     },
   ]
   const desks = [
@@ -27,11 +29,11 @@ const AboutUs = () => {
       name: "Prof. Alisha Banz",
       role: "Program Officer",
       image: AlishaBanz,
-       message: [
-                'Dear Students, As the Program Officer of the NSS unit at Dwarkadas J. Sanghvi College of Engineering, I am honored to address the profound ethos encapsulated in our motto: "Not Me But You." The activities of NSS are',
-                'The volunteers of NSS play a crucial role in the implementation of various social programs and projects. From organizing blood donation camps to participating in awareness drives, our students consistently work towards the well-being of the society. The true spirit of volunteering lies in the desire to make a positive impact on the community, and it is truly heartening to see our students display this commitment.',
-                'As a Program Officer, my role is to guide and support these volunteers, ensuring they make the most of their experiences. Together, we will continue to strive for excellence in service and work towards a society that is just, equitable, and compassionate.',
-            ],
+      message: [
+        'Dear Students, As the Program Officer of the NSS unit at Dwarkadas J. Sanghvi College of Engineering, I am honored to address the profound ethos encapsulated in our motto: "Not Me But You." The activities of NSS are',
+        'The volunteers of NSS play a crucial role in the implementation of various social programs and projects. From organizing blood donation camps to participating in awareness drives, our students consistently work towards the well-being of the society. The true spirit of volunteering lies in the desire to make a positive impact on the community, and it is truly heartening to see our students display this commitment.',
+        'As a Program Officer, my role is to guide and support these volunteers, ensuring they make the most of their experiences. Together, we will continue to strive for excellence in service and work towards a society that is just, equitable, and compassionate.',
+      ],
     },
     {
       index: 3,
@@ -40,10 +42,8 @@ const AboutUs = () => {
       role: "Program Officer",
       image: VyankateshBagal,
       message: [
-                'It gives me immense pleasure to be a part of the National Service Scheme (NSS) wing of our institute. DJS NSS has been an integral part of our institution\'s commitment to community service and social responsibility. Over the years, our NSS volunteers have actively participated in various community development programs, environmental initiatives, and social welfare activities like the solar lights installation at Narpad and the Blood Donation drive in DJSCE.',
-                'Their dedication and enthusiasm have not only benefited the communities around us but have also enriched their own lives with valuable experiences and life lessons of living at a campsite with bare essentials and thriving. I encourage all students to actively',
-                'I extend my heartfelt appreciation to all NSS volunteers, past and present, for their unwavering commitment to the service of others.',
-            ],
+        'It gives me immense pleasure to be a part of the National Service Scheme (NSS) wing of our institute. DJS NSS has always reflected our commitment to community service through initiatives such as the solar light installation at Narpad and the Blood Donation Drive at DJSCE. These experiences not only benefit society but also help students develop teamwork, responsibility, and valuable life skills. I sincerely appreciate all NSS volunteers, past and present, for their dedication and commitment to serving others.',
+      ],
     },
     {
       index: 4,
@@ -52,10 +52,30 @@ const AboutUs = () => {
       role: "Program Officer",
       image: RahulTaware,
       message: [
-                'NSS is an extraordinary experience that allows students to contribute meaningfully to society while developing themselves as leaders. As the Program Officer for the NSS unit, it has been a privilege to guide young minds who are eager to make a difference.',
-                'Through our activities, such as environmental sustainability campaigns, education drives, and community outreach programs, students engage with social issues and work toward their resolution. We encourage participation in national and international events, fostering global citizenship among our volunteers.',
-                'It is truly fulfilling to witness the transformation in our volunteers as they embrace leadership roles and develop a strong sense of social responsibility. I look forward to their continued growth and contributions to society.',
-            ],
+        'NSS is an enriching experience that enables students to serve society while developing leadership and a strong sense of responsibility. As the Program Officer, it has been a privilege to guide enthusiastic volunteers through environmental, educational, and community outreach initiatives. It is truly rewarding to witness their growth, and I look forward to their continued contribution to society.'
+      ],
+    },
+
+    {
+      index: 5,
+      link: "/messages/dr-monika-mangla",
+      name: "Dr. Monika Mangla",
+      role: "Program Officer",
+      image: MonikaMangla,
+      message: [
+        "Being a part of NSS is a meaningful opportunity to inspire students to contribute positively to society while developing important life skills. I am delighted to join the NSS team and support our volunteers in various social, environmental, and community outreach activities. I look forward to a journey filled with learning, service, and positive impact."
+      ],
+    },
+
+    {
+      index: 6,
+      link: "/messages/prof-enter-name",
+      name: "Prof. Enter Name",
+      role: "Program Officer",
+      image: FullName,
+      message: [
+        "It is a privilege to be associated with the NSS unit and to work with students who are passionate about serving society. NSS provides a wonderful platform to develop leadership, teamwork, and social awareness through meaningful community initiatives. I look forward to guiding our volunteers and contributing to their growth as responsible and compassionate citizens."
+      ],
     },
   ];
 
@@ -118,9 +138,9 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
-      
+
       <div className="h-1  bg-black m-6"></div>
-      
+
 
       {/* Principal's Desk Section */}
       <motion.section
