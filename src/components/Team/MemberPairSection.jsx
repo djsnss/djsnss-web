@@ -11,13 +11,23 @@ export default function MemberPairSection({
   sectionTitle = "",
   showTopTitle = false,
   members = [],
+  roleGroups = null,
   layoutStyle = "centered-title", // "centered-title" (Vice Chair) | "split-roles" (Secretary/Treasurer)
   decoration = 'pin',
   rotations = [-5, 4],
   leafCorner = 'top-left-bottom-right'
 }) {
-  const member1 = members[0] || { name: '', photo: null, role: '', linkedin: '' };
-  const member2 = members[1] || { name: '', photo: null, role: '', linkedin: '' };
+  // Determine role groups if passed, or fallback to legacy members array
+  const primaryRole = roleGroups?.primary?.role || members[0]?.role || "Secretary";
+  const primaryMembers = roleGroups?.primary?.members || (members[0] ? [members[0]] : []);
+
+  const secondaryRole = roleGroups?.secondary?.role || members[1]?.role || "Joint Secretary";
+  const secondaryMembers = roleGroups?.secondary?.members || (members[1] ? [members[1]] : []);
+
+  // For centered-title (Vice Chairpersons), keep member1 & member2:
+  const flatMembers = members.length > 0 ? members : [...primaryMembers, ...secondaryMembers];
+  const member1 = flatMembers[0] || { name: '', photo: null, role: '', linkedin: '' };
+  const member2 = flatMembers[1] || { name: '', photo: null, role: '', linkedin: '' };
 
   return (
     <SlideShell id={id} leafCorner={leafCorner}>
@@ -39,19 +49,45 @@ export default function MemberPairSection({
 
         <div className="relative flex items-center justify-center w-full py-1">
           
-          {/* Main 2-Card Layout */}
+          {/* Main Card Layout */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 md:gap-8 lg:gap-12 w-full">
             
-            {/* Left Polaroid Card */}
-            <div className="relative flex flex-col items-center">
-              <PolaroidCard 
-                photo={member1.photo || member1.image}
-                name={member1.name}
-                role=""
-                linkedin={member1.linkedin}
-                decoration={decoration}
-                rotate={rotations[0]}
-              />
+            {/* Left Column: Primary Role (or member1 in centered-title) */}
+            <div className="relative flex items-center justify-center">
+              {layoutStyle === 'centered-title' ? (
+                <PolaroidCard 
+                  photo={member1.photo || member1.image}
+                  name={member1.name}
+                  role=""
+                  linkedin={member1.linkedin}
+                  decoration={decoration}
+                  rotate={rotations[0]}
+                />
+              ) : primaryMembers.length > 1 ? (
+                <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
+                  {primaryMembers.map((m, idx) => (
+                    <PolaroidCard 
+                      key={m.name || idx}
+                      photo={m.photo || m.image}
+                      name={m.name}
+                      role=""
+                      linkedin={m.linkedin}
+                      decoration={decoration}
+                      rotate={idx % 2 === 0 ? rotations[0] : -rotations[0]}
+                      size="compact"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <PolaroidCard 
+                  photo={primaryMembers[0]?.photo || primaryMembers[0]?.image}
+                  name={primaryMembers[0]?.name}
+                  role=""
+                  linkedin={primaryMembers[0]?.linkedin}
+                  decoration={decoration}
+                  rotate={rotations[0]}
+                />
+              )}
             </div>
 
             {/* CENTER AREA: Script title + Loopy Arrows + Clean Doodles */}
@@ -113,7 +149,7 @@ export default function MemberPairSection({
                   {/* Role 1 (Top Left): "Secretary" / "Treasurer" */}
                   <div className="relative flex flex-col items-start -ml-3 sm:-ml-6 md:-ml-8">
                     <span className="font-script text-3xl sm:text-4xl md:text-5xl font-bold text-nss-navy drop-shadow-xs whitespace-nowrap">
-                      {member1.role || "Secretary"}
+                      {primaryRole}
                     </span>
                     <div className="-mt-2 -ml-2 pointer-events-none z-30">
                       <LoopyArrow variant="sec-top-left" color="#7FA88F" />
@@ -123,7 +159,7 @@ export default function MemberPairSection({
                   {/* Role 2 (Bottom Right): "Joint Secretary" / "Joint Treasurer" */}
                   <div className="relative flex flex-col items-end -mr-3 sm:-mr-6 md:-mr-8">
                     <span className="font-script text-3xl sm:text-4xl md:text-5xl font-bold text-nss-navy text-right leading-tight drop-shadow-xs whitespace-nowrap">
-                      {member2.role || "Joint Secretary"}
+                      {secondaryRole}
                     </span>
                     <div className="-mt-2 -mr-2 pointer-events-none z-30">
                       <LoopyArrow variant="sec-bottom-right" color="#7FA88F" />
@@ -134,16 +170,42 @@ export default function MemberPairSection({
 
             </div>
 
-            {/* Right Polaroid Card */}
-            <div className="relative flex flex-col items-center">
-              <PolaroidCard 
-                photo={member2.photo || member2.image}
-                name={member2.name}
-                role=""
-                linkedin={member2.linkedin}
-                decoration={decoration}
-                rotate={rotations[1]}
-              />
+            {/* Right Column: Secondary Role (or member2 in centered-title) */}
+            <div className="relative flex items-center justify-center">
+              {layoutStyle === 'centered-title' ? (
+                <PolaroidCard 
+                  photo={member2.photo || member2.image}
+                  name={member2.name}
+                  role=""
+                  linkedin={member2.linkedin}
+                  decoration={decoration}
+                  rotate={rotations[1]}
+                />
+              ) : secondaryMembers.length > 1 ? (
+                <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
+                  {secondaryMembers.map((m, idx) => (
+                    <PolaroidCard 
+                      key={m.name || idx}
+                      photo={m.photo || m.image}
+                      name={m.name}
+                      role=""
+                      linkedin={m.linkedin}
+                      decoration={decoration}
+                      rotate={idx % 2 === 0 ? -3 : rotations[1]}
+                      size="compact"
+                    />
+                  ))}
+                </div>
+              ) : (
+                <PolaroidCard 
+                  photo={secondaryMembers[0]?.photo || secondaryMembers[0]?.image}
+                  name={secondaryMembers[0]?.name}
+                  role=""
+                  linkedin={secondaryMembers[0]?.linkedin}
+                  decoration={decoration}
+                  rotate={rotations[1]}
+                />
+              )}
             </div>
 
           </div>

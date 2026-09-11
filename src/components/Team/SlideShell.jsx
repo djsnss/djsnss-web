@@ -7,7 +7,8 @@ export default function SlideShell({
   children, 
   leafCorner = 'top-left-bottom-right',
   showStars = true,
-  className = ""
+  className = "",
+  contentClassName = ""
 }) {
   return (
     <section 
@@ -52,7 +53,7 @@ export default function SlideShell({
       )}
 
       {/* Main Slide Content Container */}
-      <div className="w-full max-w-6xl flex-1 flex flex-col justify-center items-center z-20 my-auto -translate-y-4 md:-translate-y-5">
+      <div className={`w-full max-w-6xl flex-1 flex flex-col justify-center items-center z-20 my-auto -translate-y-4 md:-translate-y-5 ${contentClassName}`}>
         {children}
       </div>
     </section>

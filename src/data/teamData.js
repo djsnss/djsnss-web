@@ -901,33 +901,43 @@ export function normalizeTeamData(selectedYear) {
     upperCore["Joint Secretary"] ||
     [];
 
-  let secMember = null;
-  let jSecMember = null;
+  const secPrimary = [];
+  const secSecondary = [];
 
-  if (secList.length > 0) {
-    secMember = {
-      name: secList[0].name,
-      photo: secList[0].image || secList[0].photo || null,
-      role: "Secretary",
-      linkedin: secList[0].linkedin || "",
+  secList.forEach((m, idx) => {
+    const isJoint = /joint/i.test(m.position || "") || (idx > 0 && !/secretary/i.test(m.position || ""));
+    const memberObj = {
+      name: m.name,
+      photo: m.image || m.photo || null,
+      role: m.position || (isJoint ? "Joint Secretary" : "Secretary"),
+      linkedin: m.linkedin || "",
     };
-    if (secList.length > 1) {
-      jSecMember = {
-        name: secList[1].name,
-        photo: secList[1].image || secList[1].photo || null,
-        role: "Joint Secretary",
-        linkedin: secList[1].linkedin || "",
-      };
+    if (isJoint) {
+      secSecondary.push(memberObj);
+    } else {
+      secPrimary.push(memberObj);
     }
-  }
-  if (!jSecMember && jSecList.length > 0) {
-    jSecMember = {
-      name: jSecList[0].name,
-      photo: jSecList[0].image || jSecList[0].photo || null,
-      role: "Joint Secretary",
-      linkedin: jSecList[0].linkedin || "",
-    };
-  }
+  });
+
+  jSecList.forEach((m) => {
+    secSecondary.push({
+      name: m.name,
+      photo: m.image || m.photo || null,
+      role: m.position || "Joint Secretary",
+      linkedin: m.linkedin || "",
+    });
+  });
+
+  const secretaries = {
+    primary: {
+      role: secPrimary[0]?.role || "Secretary",
+      members: secPrimary,
+    },
+    secondary: {
+      role: secSecondary[0]?.role || "Joint Secretary",
+      members: secSecondary,
+    },
+  };
 
   // Treasurer & Joint Treasurer
   const treasList = upperCore.treasurer || upperCore["Treasurer"] || [];
@@ -937,33 +947,43 @@ export function normalizeTeamData(selectedYear) {
     upperCore["Joint Treasurer"] ||
     [];
 
-  let treasMember = null;
-  let jTreasMember = null;
+  const treasPrimary = [];
+  const treasSecondary = [];
 
-  if (treasList.length > 0) {
-    treasMember = {
-      name: treasList[0].name,
-      photo: treasList[0].image || treasList[0].photo || null,
-      role: "Treasurer",
-      linkedin: treasList[0].linkedin || "",
+  treasList.forEach((m, idx) => {
+    const isJoint = /joint|member/i.test(m.position || "") || (idx > 0 && !/treasurer/i.test(m.position || ""));
+    const memberObj = {
+      name: m.name,
+      photo: m.image || m.photo || null,
+      role: m.position || (isJoint ? "Joint Treasurer" : "Treasurer"),
+      linkedin: m.linkedin || "",
     };
-    if (treasList.length > 1) {
-      jTreasMember = {
-        name: treasList[1].name,
-        photo: treasList[1].image || treasList[1].photo || null,
-        role: "Joint Treasurer",
-        linkedin: treasList[1].linkedin || "",
-      };
+    if (isJoint) {
+      treasSecondary.push(memberObj);
+    } else {
+      treasPrimary.push(memberObj);
     }
-  }
-  if (!jTreasMember && jTrList.length > 0) {
-    jTreasMember = {
-      name: jTrList[0].name,
-      photo: jTrList[0].image || jTrList[0].photo || null,
-      role: "Joint Treasurer",
-      linkedin: jTrList[0].linkedin || "",
-    };
-  }
+  });
+
+  jTrList.forEach((m) => {
+    treasSecondary.push({
+      name: m.name,
+      photo: m.image || m.photo || null,
+      role: m.position || "Joint Treasurer",
+      linkedin: m.linkedin || "",
+    });
+  });
+
+  const treasurers = {
+    primary: {
+      role: treasPrimary[0]?.role || "Treasurer",
+      members: treasPrimary,
+    },
+    secondary: {
+      role: treasSecondary[0]?.role || "Joint Treasurer",
+      members: treasSecondary,
+    },
+  };
 
   // Student Leaders
   let studentLeaders = [];
@@ -1003,10 +1023,12 @@ export function normalizeTeamData(selectedYear) {
   return {
     chairperson: chairperson || { name: "", photo: null, role: "Chairperson" },
     viceChairpersons,
-    secretary: secMember || { name: "", photo: null, role: "Secretary" },
-    jointSecretary: jSecMember || { name: "", photo: null, role: "Joint Secretary" },
-    treasurer: treasMember || { name: "", photo: null, role: "Treasurer" },
-    jointTreasurer: jTreasMember || { name: "", photo: null, role: "Joint Treasurer" },
+    secretary: secPrimary[0] || { name: "", photo: null, role: "Secretary" },
+    jointSecretary: secSecondary[0] || { name: "", photo: null, role: "Joint Secretary" },
+    treasurer: treasPrimary[0] || { name: "", photo: null, role: "Treasurer" },
+    jointTreasurer: treasSecondary[0] || { name: "", photo: null, role: "Joint Treasurer" },
+    secretaries,
+    treasurers,
     studentLeaders,
     departments: departmentSections,
   };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import { YEARS, normalizeTeamData } from "../data/teamData";
 import SectionNav from "../components/Team/SectionNav";
 import CoverSlide from "../components/Team/CoverSlide";
@@ -12,8 +12,8 @@ export default function Team() {
   const [activeSection, setActiveSection] = useState("cover");
   const containerRef = useRef(null);
 
-  // Normalized team structure for current selected year
-  const currentTeam = normalizeTeamData(selectedYear);
+  // Normalized team structure for current selected year (memoized to prevent re-renders on scroll)
+  const currentTeam = useMemo(() => normalizeTeamData(selectedYear), [selectedYear]);
 
   // Build dynamic section list for SectionNav
   const sections = [
@@ -115,10 +115,11 @@ export default function Team() {
         )}
 
         {/* Slide 4: Secretary & Joint Secretary */}
-        {currentTeam?.secretary?.name && (
+        {(currentTeam?.secretaries?.primary?.members?.length > 0 || currentTeam?.secretary?.name) && (
           <MemberPairSection
             id="secretary"
             sectionTitle="Secretary"
+            roleGroups={currentTeam.secretaries}
             members={[
               { ...currentTeam.secretary, role: currentTeam.secretary.role || "Secretary" },
               { ...currentTeam.jointSecretary, role: currentTeam.jointSecretary.role || "Joint Secretary" },
@@ -131,11 +132,12 @@ export default function Team() {
         )}
 
         {/* Slide 5: Treasurer & Joint Treasurer */}
-        {currentTeam?.treasurer?.name && (
+        {(currentTeam?.treasurers?.primary?.members?.length > 0 || currentTeam?.treasurer?.name) && (
           <MemberPairSection
             id="treasurer"
             sectionTitle="TREASURER"
             showTopTitle={true}
+            roleGroups={currentTeam.treasurers}
             members={[
               { ...currentTeam.treasurer, role: currentTeam.treasurer.role || "Treasurer" },
               { ...currentTeam.jointTreasurer, role: currentTeam.jointTreasurer.role || "Joint Treasurer" },
