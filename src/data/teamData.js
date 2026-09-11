@@ -4,6 +4,24 @@ import RutviSanura from "../assets/Team26-27/RutviSanura.jpg";
 import TirthSheth from "../assets/Team26-27/TirthSheth.jpg";
 import DhruviPatel from "../assets/Team26-27/DhruviPatel.jpg";
 import AnikaitNair from "../assets/Team26-27/AnikaitNair.jpg";
+import Anant from "../assets/Team26-27/Anant.jpg";
+import DhruvPatel from "../assets/Team26-27/DhruvPatel.jpg";
+import HarshGaggar from "../assets/Team26-27/HarshGaggar.jpg";
+import HarshPatel from "../assets/Team26-27/HarshPatel.jpg";
+import jaimin from "../assets/Team26-27/jaimin.jpg";
+import MarmikShah from "../assets/Team26-27/MarmikShah.jpg";
+import muskan from "../assets/Team26-27/muskan.jpg";
+import OmPatel from "../assets/Team26-27/OmPatel.jpg";
+import RajBhanushali from "../assets/Team26-27/RajBhanushali.jpg";
+import RamanDargad from "../assets/Team26-27/RamanDargad.jpg";
+import RiddhiSavla from "../assets/Team26-27/RiddhiSavla.jpg";
+import RishabhRathi from "../assets/Team26-27/RishabRathi.jpg";
+import RushilBaheti from "../assets/Team26-27/RushilBaheti.jpg";
+import shreya from "../assets/Team26-27/shreya.jpg";
+import ToyamShah from "../assets/Team26-27/ToyamShah.jpg";
+import UmangSatra from "../assets/Team26-27/UmangSatra.jpg";
+import vaishnavi from "../assets/Team26-27/vaishnavi.jpg";
+import VedantRathod from "../assets/Team26-27/VedantRathod.jpg";
 import ph from "../assets/Team26-27/ph.svg";
 
 // 2025-26
@@ -95,12 +113,12 @@ const TeamData = {
       secretary: [
         { name: "Kripa Shah", position: "Secretary", image: ph, linkedin: "" },
         { name: "Hiya Shah", position: "Joint Secretary", image: ph, linkedin: "" },
-        { name: "Om Patel", position: "Joint Secretary", image: ph, linkedin: "" }
+        { name: "Om Patel", position: "Joint Secretary", image: OmPatel, linkedin: "" }
       ],
       treasurer: [
-        { name: "Dhruv Patel", position: "Treasurer", image: ph, linkedin: "" },
-        { name: "Jaimin Rajput", position: "Joint Treasurer", image: ph, linkedin: "" },
-        { name: "Raj Bhanushali", position: "Treasurer Member", image: ph, linkedin: "" }
+        { name: "Dhruv Patel", position: "Treasurer", image: DhruvPatel, linkedin: "" },
+        { name: "Jaimin Rajput", position: "Joint Treasurer", image: jaimin, linkedin: "" },
+        { name: "Raj Bhanushali", position: "Treasurer Member", image: RajBhanushali, linkedin: "" }
       ]
     },
     leader: {
@@ -114,8 +132,8 @@ const TeamData = {
         {
           name: "Events",
           members: [
-            { name: "Vaishnavi Ramasubramaniam", position: "Head of Events", image: ph, linkedin: "" },
-            { name: "Harsh Gaggar", position: "Head of Events", image: ph, linkedin: "" },
+            { name: "Vaishnavi Ramasubramaniam", position: "Head of Events", image: vaishnavi, linkedin: "" },
+            { name: "Harsh Gaggar", position: "Head of Events", image: HarshGaggar, linkedin: "" },
             { name: "Yug Shah", position: "Head of Events", image: ph, linkedin: "" }
           ]
         },
@@ -123,34 +141,34 @@ const TeamData = {
         {
           name: "Editorial",
           members: [
-            { name: "Rushil Baheti", position: "Head of Editorial", image: ph, linkedin: "" },
-            { name: "Rishabh Rathi", position: "Head of Editorial", image: ph, linkedin: "" }
+            { name: "Rushil Baheti", position: "Head of Editorial", image: RushilBaheti, linkedin: "" },
+            { name: "Rishabh Rathi", position: "Head of Editorial", image: RishabhRathi, linkedin: "" }
           ]
         },
 
         {
           name: "Publicity",
           members: [
-            { name: "Muskan Ranka", position: "Head of Publicity", image: ph, linkedin: "" },
-            { name: "Umang Satra", position: "Head of Publicity", image: ph, linkedin: "" },
-            { name: "Shreya Mehta", position: "Head of Publicity", image: ph, linkedin: "" },
-            { name: "Anant Charla", position: "Head of Publicity", image: ph, linkedin: "" },
-            { name: "Raman Dargad", position: "Head of Publicity", image: ph, linkedin: "" }
+            { name: "Muskan Ranka", position: "Head of Publicity", image: muskan, linkedin: "" },
+            { name: "Umang Satra", position: "Head of Publicity", image: UmangSatra, linkedin: "" },
+            { name: "Shreya Mehta", position: "Head of Publicity", image: shreya, linkedin: "" },
+            { name: "Anant Charla", position: "Head of Publicity", image: Anant, linkedin: "" },
+            { name: "Raman Dargad", position: "Head of Publicity", image: RamanDargad, linkedin: "" }
           ]
         },
         {
           name: "Social Media & Creatives",
           members: [
-            { name: "Marmik Shah", position: "Head of Social Media", image: ph, linkedin: "" },
-            { name: "Harsh Patel", position: "Head of Social media", image: ph, linkedin: "" },
-            { name: "Vedant Rathod", position: "Head of Creatives", image: ph, linkedin: "" }
+            { name: "Marmik Shah", position: "Head of Social Media", image: MarmikShah, linkedin: "" },
+            { name: "Harsh Patel", position: "Head of Social media", image: HarshPatel, linkedin: "" },
+            { name: "Vedant Rathod", position: "Head of Creatives", image: VedantRathod, linkedin: "" }
           ]
         },
         {
           name: "Technical",
           members: [
-            { name: "Riddhi Savla", position: "H  ead of Technical", image: ph, linkedin: "" },
-            { name: "Toyam Shah", position: "Head of Technical", image: ph, linkedin: "" }
+            { name: "Riddhi Savla", position: "Head of Technical", image: RiddhiSavla, linkedin: "" },
+            { name: "Toyam Shah", position: "Head of Technical", image: ToyamShah, linkedin: "" }
           ]
         }
       ]
