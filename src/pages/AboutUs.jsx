@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import Aboutusimg from "../assets/Events/IndependenceDay.png";
 import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal new.jpg";
-import AlishaBanz from "../assets/Faculty/Alisha Banz.jpg";
 import RahulTaware from "../assets/Faculty/Rahul Taware.jpg";
 import MonikaMangla from "../assets/Faculty/Monika Mangla.jpeg";
 import FullName from "../assets/Faculty/Name_Unknown.jpeg";
@@ -23,18 +22,6 @@ const AboutUs = () => {
     },
   ]
   const desks = [
-    {
-      index: 2,
-      link: "/messages/prof-alisha-banz",
-      name: "Prof. Alisha Banz",
-      role: "Program Officer",
-      image: AlishaBanz,
-      message: [
-        'Dear Students, As the Program Officer of the NSS unit at Dwarkadas J. Sanghvi College of Engineering, I am honored to address the profound ethos encapsulated in our motto: "Not Me But You." The activities of NSS are',
-        'The volunteers of NSS play a crucial role in the implementation of various social programs and projects. From organizing blood donation camps to participating in awareness drives, our students consistently work towards the well-being of the society. The true spirit of volunteering lies in the desire to make a positive impact on the community, and it is truly heartening to see our students display this commitment.',
-        'As a Program Officer, my role is to guide and support these volunteers, ensuring they make the most of their experiences. Together, we will continue to strive for excellence in service and work towards a society that is just, equitable, and compassionate.',
-      ],
-    },
     {
       index: 3,
       link: "/messages/prof-vyankatesh-bagal",
