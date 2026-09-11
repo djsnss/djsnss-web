@@ -56,8 +56,8 @@ const AboutUs = () => {
 
     {
       index: 6,
-      link: "/messages/prof-enter-name",
-      name: "Prof. Enter Name",
+      link: "/messages/prof-hezal-lopes",
+      name: "Prof. Hezal Lopes",
       role: "Program Officer",
       image: FullName,
       message: [
