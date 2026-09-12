@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useNavigate,
 } from "react-router-dom";
 import Loader from "./components/Loaders/CustomLoader2";
@@ -65,7 +66,7 @@ const App = () => {
       <Toaster position="top-right" reverseOrder={false} />
 
       <div className="justify-start min-h-screen w-screen bg-white">
-      {/* <div className="flex flex-row justify-start min-h-screen w-screen bg-white"> */}
+        {/* <div className="flex flex-row justify-start min-h-screen w-screen bg-white"> */}
         {/* Sidebar */}
         {/* <Sidebar /> */}
         <Navbar />
@@ -101,9 +102,10 @@ const App = () => {
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPage />} />
 
+              <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
               <Route path="/admin/login" element={<AdminLogin />} />
               {/* Protected admin routes */}
-              <Route element={<ProtectedRoute authTokenKey="adminAuthToken" userType="admin"/>}>
+              <Route element={<ProtectedRoute authTokenKey="adminAuthToken" userType="admin" />}>
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
                 <Route path="/admin/create-event" element={<CreateEvent />} />
                 <Route path="/admin/update-event" element={<UpdateEvent />} />
@@ -115,11 +117,11 @@ const App = () => {
                 <Route path="/admin/edit-details" element={<EditVolunteerDetails />} />
                 <Route path="/admin/change-email" element={<AdminEmail />} />
               </Route>
-              
+
               <Route path="/volunteer/volunteer-login" element={<VolunteerLogin />} />
               <Route path="/volunteer/change-password" element={<VolunteerPass />} />
               {/* Protected volunteer routes */}
-              <Route element={<ProtectedRoute authTokenKey="authToken" userType="volunteer"/>}>
+              <Route element={<ProtectedRoute authTokenKey="authToken" userType="volunteer" />}>
                 <Route path="/volunteer/checkevent" element={<CheckEvent />} />
               </Route>
               <Route path="/alumni" element={<AllAlumni />} />
@@ -127,8 +129,8 @@ const App = () => {
               <Route path="/nss-format" element={<NSSFormat />} />
               <Route path="/alumni-details/:name" element={<VolunteerDetails />} />
 
-              
-            
+
+
 
 
               {/* Dynamic routes for events */}

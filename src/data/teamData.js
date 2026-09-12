@@ -8,7 +8,9 @@ import Anant from "../assets/Team26-27/Anant.jpg";
 import DhruvPatel from "../assets/Team26-27/DhruvPatel.jpg";
 import HarshGaggar from "../assets/Team26-27/HarshGaggar.jpg";
 import HarshPatel from "../assets/Team26-27/HarshPatel.jpg";
+import HiyaShah from "../assets/Team26-27/HiyaShah.jpg";
 import jaimin from "../assets/Team26-27/jaimin.jpg";
+import KripaShah from "../assets/Team26-27/KripaShah.jpg";
 import MarmikShah from "../assets/Team26-27/MarmikShah.jpg";
 import muskan from "../assets/Team26-27/muskan.jpg";
 import OmPatel from "../assets/Team26-27/OmPatel.jpg";
@@ -22,6 +24,7 @@ import ToyamShah from "../assets/Team26-27/ToyamShah.jpg";
 import UmangSatra from "../assets/Team26-27/UmangSatra.jpg";
 import vaishnavi from "../assets/Team26-27/vaishnavi.jpg";
 import VedantRathod from "../assets/Team26-27/VedantRathod.jpg";
+import YugShah from "../assets/Team26-27/YugShah.jpeg";
 import ph from "../assets/Team26-27/ph.svg";
 
 // 2025-26
@@ -111,8 +114,8 @@ const TeamData = {
         { name: "Tirth Sheth", position: "Vice Chairperson", image: TirthSheth, linkedin: "" }
       ],
       secretary: [
-        { name: "Kripa Shah", position: "Secretary", image: ph, linkedin: "" },
-        { name: "Hiya Shah", position: "Joint Secretary", image: ph, linkedin: "" },
+        { name: "Kripa Shah", position: "Secretary", image: KripaShah, linkedin: "" },
+        { name: "Hiya Shah", position: "Joint Secretary", image: HiyaShah, linkedin: "" },
         { name: "Om Patel", position: "Joint Secretary", image: OmPatel, linkedin: "" }
       ],
       treasurer: [
@@ -134,7 +137,7 @@ const TeamData = {
           members: [
             { name: "Vaishnavi Ramasubramaniam", position: "Head of Events", image: vaishnavi, linkedin: "" },
             { name: "Harsh Gaggar", position: "Head of Events", image: HarshGaggar, linkedin: "" },
-            { name: "Yug Shah", position: "Head of Events", image: ph, linkedin: "" }
+            { name: "Yug Shah", position: "Head of Events", image: YugShah, linkedin: "" }
           ]
         },
 
