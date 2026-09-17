@@ -3,7 +3,7 @@ import React from 'react';
 export default function CurvedArrow({ 
   className = "", 
   color = "#3B4E7C",
-  direction = "right", // "right" | "left" | "down-left" | "down-right"
+  direction = "right", // "right" | "left" | "down" | "down-left" | "down-right" | "up-left" | "up-right"
 }) {
   return (
     <svg 
@@ -17,14 +17,14 @@ export default function CurvedArrow({
           <path 
             d="M 10 40 Q 50 10 85 30" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             fill="none"
           />
           <path 
             d="M 75 22 L 87 31 L 78 38" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
           />
@@ -35,14 +35,32 @@ export default function CurvedArrow({
           <path 
             d="M 90 40 Q 50 10 15 30" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             fill="none"
           />
           <path 
             d="M 25 22 L 13 31 L 22 38" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </>
+      )}
+      {direction === 'down' && (
+        <>
+          <path 
+            d="M 50 10 Q 60 30 50 48" 
+            stroke={color} 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          <path 
+            d="M 40 38 L 50 50 L 60 38" 
+            stroke={color} 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
           />
@@ -53,14 +71,14 @@ export default function CurvedArrow({
           <path 
             d="M 70 10 Q 40 45 20 50" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             fill="none"
           />
           <path 
             d="M 32 44 L 18 51 L 22 36" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
           />
@@ -71,14 +89,50 @@ export default function CurvedArrow({
           <path 
             d="M 30 10 Q 60 45 80 50" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             fill="none"
           />
           <path 
             d="M 68 44 L 82 51 L 78 36" 
             stroke={color} 
-            strokeWidth="2" 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </>
+      )}
+      {direction === 'up-left' && (
+        <>
+          <path 
+            d="M 70 50 Q 40 15 20 10" 
+            stroke={color} 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          <path 
+            d="M 32 16 L 18 9 L 22 24" 
+            stroke={color} 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </>
+      )}
+      {direction === 'up-right' && (
+        <>
+          <path 
+            d="M 30 50 Q 60 15 80 10" 
+            stroke={color} 
+            strokeWidth="2.2" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          <path 
+            d="M 68 16 L 82 9 L 78 24" 
+            stroke={color} 
+            strokeWidth="2.2" 
             strokeLinecap="round" 
             strokeLinejoin="round" 
           />

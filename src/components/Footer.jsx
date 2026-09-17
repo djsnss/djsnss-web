@@ -59,7 +59,7 @@ function FooterComponent() {
 
           <div className="text-sm md:text-base text-white font-roboto">
             <p>📍 Address: DJSCE, Sector 5, Vile Parle West, Mumbai, India</p>
-            <p>📞 Contact: +91 99691 94915</p>
+            <p>📞 Contact: +91 8591854806</p>
           </div>
         </div>
 
@@ -85,8 +85,8 @@ function FooterComponent() {
               </div>
             </FooterLinkGroup> */}
             <FooterLinkGroup col>
-              <div  className="flex flex-col gap-1">
-                 {MenuLinks.map((link) => {
+              <div className="flex flex-col gap-1">
+                {MenuLinks.map((link) => {
                   const isExternal = link.external === true || link.link.startsWith("http");
 
                   return isExternal ? (
@@ -119,7 +119,7 @@ function FooterComponent() {
               className="text-xl md:text-2xl font-extrabold text-sky-300"
               title="Reports and Forms"
             /> */}
-            {/* <FooterLinkGroup col>
+          {/* <FooterLinkGroup col>
               <div className="flex flex-wrap gap-4">
                 {ReportLinks.map((report) => (
                   <div key={report.year}>

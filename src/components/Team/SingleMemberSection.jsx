@@ -51,11 +51,14 @@ export default function SingleMemberSection({
             </div>
           </motion.div>
 
-          {/* Mobile Role Label */}
-          <div className="md:hidden mb-3 text-center">
+          {/* Mobile Role Label with Downward Arrow */}
+          <div className="md:hidden mb-2 flex flex-col items-center text-center">
             <span className="font-script text-3xl text-nss-navy font-bold tracking-wide">
               {roleTitle}
             </span>
+            <div className="-mt-1 pointer-events-none">
+              <CurvedArrow direction="down" color="#3B4E7C" className="w-10 h-7" />
+            </div>
           </div>
 
           {/* Perfectly Centered Polaroid Card */}
@@ -65,6 +68,7 @@ export default function SingleMemberSection({
             role=""
             linkedin={member?.linkedin}
             decoration={decoration}
+            cornerAccent="diamond-tr"
             rotate={-3}
           />
         </div>

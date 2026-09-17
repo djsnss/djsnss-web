@@ -6,6 +6,8 @@ import BinderClip from '../../assets/team/doodles/BinderClip';
 import PinBrad from '../../assets/team/doodles/PinBrad';
 import RayBurst from '../../assets/team/doodles/RayBurst';
 import SparkleSwirl from '../../assets/team/doodles/SparkleSwirl';
+import DiamondDoodle from '../../assets/team/doodles/DiamondDoodle';
+import HeartDoodle from '../../assets/team/doodles/HeartDoodle';
 import { FaLinkedin } from 'react-icons/fa';
 
 // Cache for already-loaded image sources to prevent re-flashing or re-rendering on scroll
@@ -20,11 +22,12 @@ function PolaroidCard({
   cornerAccent = 'none', // 'burst-br' | 'swirl-tl' | 'sparkle-tr' | 'none'
   rotate = -3,
   className = "",
-  size = "default" // 'default' | 'compact'
+  size = "default" // 'default' | 'medium' | 'compact'
 }) {
   const imageSrc = photo || defaultPhoto;
   const imgRef = React.useRef(null);
   const isCompact = size === 'compact';
+  const isMedium = size === 'medium';
 
   const [isLoaded, setIsLoaded] = React.useState(() => {
     return imageSrc === defaultPhoto || loadedImagesCache.has(imageSrc);
@@ -47,8 +50,10 @@ function PolaroidCard({
       style={{ rotate: `${rotate}deg` }}
       className={`relative bg-[#F7F5F0] rounded-xs shadow-polaroid border border-amber-100/50 flex flex-col items-center transition-shadow duration-300 hover:shadow-polaroid-hover ${
         isCompact 
-          ? 'w-32 min-[400px]:w-36 sm:w-40 md:w-44 lg:w-48 p-2 sm:p-2.5 md:p-3 pb-2.5 sm:pb-3 md:pb-3.5' 
-          : 'w-48 sm:w-56 md:w-60 p-3 md:p-3.5 pb-4 md:pb-5'
+          ? 'w-38 min-[380px]:w-42 min-[440px]:w-46 sm:w-50 md:w-54 lg:w-60 p-2 sm:p-2.5 md:p-3 pb-2.5 sm:pb-3 md:pb-3.5' 
+          : isMedium
+            ? 'w-42 min-[380px]:w-46 min-[440px]:w-50 sm:w-54 md:w-60 lg:w-66 p-2.5 sm:p-3 md:p-3.5 pb-3 sm:pb-3.5 md:pb-4'
+            : 'w-44 min-[380px]:w-48 min-[440px]:w-52 sm:w-56 md:w-64 lg:w-72 p-2.5 sm:p-3 md:p-3.5 pb-3.5 sm:pb-4 md:pb-5'
       } ${className}`}
     >
       {/* Top Center Decorations */}
@@ -109,6 +114,22 @@ function PolaroidCard({
         </div>
       )}
 
+      {cornerAccent === 'diamond-tr' && (
+        <div className={`absolute pointer-events-none ${
+          isCompact ? '-top-3.5 -right-3.5 scale-75' : '-top-5 -right-5'
+        } z-20`}>
+          <DiamondDoodle color="#3B4E7C" className={isCompact ? "w-7 h-7" : "w-9 h-9"} />
+        </div>
+      )}
+
+      {cornerAccent === 'heart-tl' && (
+        <div className={`absolute pointer-events-none ${
+          isCompact ? '-top-3.5 -left-3.5 scale-75' : '-top-5 -left-5'
+        } z-20`}>
+          <HeartDoodle color="#7FA88F" className={isCompact ? "w-7 h-7" : "w-9 h-9"} />
+        </div>
+      )}
+
       {/* Polaroid Photo Frame Inner */}
       <div className="w-full aspect-[4/5] bg-slate-100 rounded-xs overflow-hidden border border-slate-300/40 shadow-inner relative group">
         {/* Placeholder background sits BEHIND the image (z-0) and fades out once loaded */}
@@ -151,7 +172,9 @@ function PolaroidCard({
             <h3 className={`font-script font-semibold text-nss-navy tracking-wide leading-tight ${
               isCompact 
                 ? 'text-sm sm:text-base md:text-lg lg:text-xl' 
-                : 'text-xl sm:text-2xl'
+                : isMedium
+                  ? 'text-lg sm:text-xl md:text-2xl'
+                  : 'text-xl sm:text-2xl'
             }`}>
               {name}
             </h3>

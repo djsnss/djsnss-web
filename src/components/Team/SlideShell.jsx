@@ -13,7 +13,7 @@ export default function SlideShell({
   return (
     <section 
       id={id} 
-      className={`snap-slide relative w-full h-screen flex flex-col justify-between items-center pt-14 md:pt-16 pb-3 md:pb-4 px-4 md:px-12 overflow-hidden select-none ${className}`}
+      className={`snap-slide relative w-full min-h-screen flex flex-col justify-between items-center pt-12 md:pt-16 pb-6 px-3 sm:px-6 md:px-12 pr-12 sm:pr-14 md:pr-12 select-none ${className}`}
     >
       {/* Corner Leaf Branch Doodles - Positioned safely in extreme corners */}
       {(leafCorner === 'top-left-bottom-right' || leafCorner === 'all-four') && (
@@ -53,7 +53,7 @@ export default function SlideShell({
       )}
 
       {/* Main Slide Content Container */}
-      <div className={`w-full max-w-6xl flex-1 flex flex-col justify-center items-center z-20 my-auto -translate-y-4 md:-translate-y-5 ${contentClassName}`}>
+      <div className={`w-full max-w-6xl flex-1 flex flex-col justify-center items-center z-20 my-auto py-3 sm:py-5 md:py-6 -translate-y-1 md:-translate-y-3 ${contentClassName}`}>
         {children}
       </div>
     </section>

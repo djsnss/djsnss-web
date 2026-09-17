@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function LoopyArrow({ 
-  variant = "vice-top-left", // "vice-top-left" | "vice-bottom-right" | "sec-top-left" | "sec-bottom-right"
+  variant = "vice-top-left", // "vice-top-left" | "vice-bottom-right" | "sec-top-left" | "sec-bottom-right" | "vertical-down-right" | "vertical-down-left"
   color = "#7FA88F",
   className = "" 
 }) {
@@ -88,6 +88,48 @@ export default function LoopyArrow({
           />
           <path 
             d="M 132 34 L 147 41 L 136 53" 
+            stroke={color} 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </g>
+      )}
+
+      {/* 5. Vertical Down-Right: loops playfully from top and points directly DOWN-RIGHT into polaroid */}
+      {variant === 'vertical-down-right' && (
+        <g>
+          <path 
+            d="M 25 15 C 55 10 85 22 75 42 C 65 58 48 44 65 62 C 72 68 78 72 84 75" 
+            stroke={color} 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          {/* Arrowhead pointing downward-right */}
+          <path 
+            d="M 68 70 L 86 76 L 85 60" 
+            stroke={color} 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            strokeLinejoin="round" 
+          />
+        </g>
+      )}
+
+      {/* 6. Vertical Down-Left: loops playfully from top and points directly DOWN-LEFT into polaroid */}
+      {variant === 'vertical-down-left' && (
+        <g>
+          <path 
+            d="M 135 15 C 105 10 75 22 85 42 C 95 58 112 44 95 62 C 88 68 82 72 76 75" 
+            stroke={color} 
+            strokeWidth="2.5" 
+            strokeLinecap="round" 
+            fill="none"
+          />
+          {/* Arrowhead pointing downward-left */}
+          <path 
+            d="M 92 70 L 74 76 L 75 60" 
             stroke={color} 
             strokeWidth="2.5" 
             strokeLinecap="round" 

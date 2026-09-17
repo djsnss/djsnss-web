@@ -36,8 +36,8 @@
 
 .snap-slide {
   scroll-snap-align: start;
-  scroll-snap-stop: always;
   min-height: 100vh;
+  position: relative;
 }
 
 /* Custom scrollbar styling */

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import SlideShell from './SlideShell';
 import PolaroidCard from './PolaroidCard';
 import LoopyArrow from '../../assets/team/doodles/LoopyArrow';
+import CurvedArrow from '../../assets/team/doodles/CurvedArrow';
 import RayBurst from '../../assets/team/doodles/RayBurst';
 import SwirlFlourish from '../../assets/team/doodles/SwirlFlourish';
 
@@ -33,28 +34,29 @@ export default function MemberPairSection({
     <SlideShell id={id} leafCorner={leafCorner}>
       <div className="flex flex-col items-center justify-center w-full max-w-5xl my-auto">
         
-        {/* Optional Top Section Heading (e.g. TREASURER) */}
+        {/* Optional Top Section Heading */}
         {showTopTitle && sectionTitle && (
           <motion.div 
             initial={{ opacity: 0, y: -15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-2 md:mb-4 z-20"
+            className="text-center mb-1 sm:mb-2 z-20"
           >
-            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-black text-nss-navy tracking-tight uppercase">
+            <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-black text-nss-navy tracking-tight uppercase">
               {sectionTitle}
             </h2>
           </motion.div>
         )}
 
-        <div className="relative flex items-center justify-center w-full py-1">
-          
-          {/* Main Card Layout */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 md:gap-8 lg:gap-12 w-full">
-            
-            {/* Left Column: Primary Role (or member1 in centered-title) */}
-            <div className="relative flex items-center justify-center">
-              {layoutStyle === 'centered-title' ? (
+        {layoutStyle === 'centered-title' ? (
+          /* ============================================================ */
+          /* LAYOUT 1: Vice Chairpersons (Horizontal Side-by-Side + Center Title) */
+          /* ============================================================ */
+          <div className="relative flex items-center justify-center w-full py-1">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 md:gap-8 lg:gap-12 w-full">
+              
+              {/* Left Column: Vice Chairperson 1 */}
+              <div className="relative flex items-center justify-center">
                 <PolaroidCard 
                   photo={member1.photo || member1.image}
                   name={member1.name}
@@ -63,57 +65,29 @@ export default function MemberPairSection({
                   decoration={decoration}
                   rotate={rotations[0]}
                 />
-              ) : primaryMembers.length > 1 ? (
-                <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
-                  {primaryMembers.map((m, idx) => (
-                    <PolaroidCard 
-                      key={m.name || idx}
-                      photo={m.photo || m.image}
-                      name={m.name}
-                      role=""
-                      linkedin={m.linkedin}
-                      decoration={decoration}
-                      rotate={idx % 2 === 0 ? rotations[0] : -rotations[0]}
-                      size="compact"
-                    />
-                  ))}
-                </div>
-              ) : (
-                <PolaroidCard 
-                  photo={primaryMembers[0]?.photo || primaryMembers[0]?.image}
-                  name={primaryMembers[0]?.name}
-                  role=""
-                  linkedin={primaryMembers[0]?.linkedin}
-                  decoration={decoration}
-                  rotate={rotations[0]}
-                />
-              )}
-            </div>
+              </div>
 
-            {/* CENTER AREA: Script title + Loopy Arrows + Clean Doodles */}
-            <div className="flex flex-col items-center justify-center my-2 sm:my-0 px-2 sm:px-4 z-20 text-center min-w-[200px] md:min-w-[250px] relative">
-              
-              {/* LAYOUT 1: Centered Title (Vice Chairpersons) */}
-              {layoutStyle === 'centered-title' && (
+              {/* Center Script Title + Prominent Loopy Arrows Pointing to Both VCPs */}
+              <div className="flex flex-col items-center justify-center my-2 sm:my-0 px-2 sm:px-4 z-20 text-center min-w-[200px] md:min-w-[250px] relative">
                 <motion.div 
                   initial={{ opacity: 0, scale: 0.9 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
-                  className="relative flex flex-col items-center py-4"
+                  className="relative flex flex-col items-center py-4 sm:py-6"
                 >
                   {/* Ray Burst positioned in open space top-right of center title */}
-                  <div className="absolute -top-8 -right-16 md:-right-24 pointer-events-none opacity-80 z-10">
+                  <div className="absolute -top-8 -right-8 sm:-right-14 md:-right-20 pointer-events-none opacity-80 z-10">
                     <RayBurst color="#3B4E7C" />
                   </div>
 
                   {/* Swirl Flourish positioned in open space bottom-left of center title */}
-                  <div className="absolute -bottom-8 -left-16 md:-left-24 pointer-events-none opacity-80 z-10">
+                  <div className="absolute -bottom-8 -left-8 sm:-left-14 md:-left-20 pointer-events-none opacity-80 z-10">
                     <SwirlFlourish color="#3B4E7C" />
                   </div>
 
-                  {/* Arrow curving UP and LEFT towards left polaroid */}
-                  <div className="absolute -top-8 -left-10 md:-left-14 pointer-events-none z-30">
-                    <LoopyArrow variant="vice-top-left" color="#7FA88F" />
+                  {/* Top Arrow Pointing to Left Vice Chairperson (or Top VCP on mobile) */}
+                  <div className="absolute -top-7 sm:-top-9 -left-8 sm:-left-12 md:-left-16 pointer-events-none z-30">
+                    <LoopyArrow variant="vice-top-left" color="#7FA88F" className="w-24 sm:w-28 md:w-36 h-12 sm:h-14 md:h-18" />
                   </div>
 
                   {/* Hand-drawn Script Title */}
@@ -121,58 +95,15 @@ export default function MemberPairSection({
                     {sectionTitle}
                   </h2>
 
-                  {/* Arrow curving DOWN and RIGHT towards right polaroid */}
-                  <div className="absolute -bottom-8 -right-10 md:-right-14 pointer-events-none z-30">
-                    <LoopyArrow variant="vice-bottom-right" color="#7FA88F" />
+                  {/* Bottom Arrow Pointing to Right Vice Chairperson (or Bottom VCP on mobile) */}
+                  <div className="absolute -bottom-7 sm:-bottom-9 -right-8 sm:-right-12 md:-right-16 pointer-events-none z-30">
+                    <LoopyArrow variant="vice-bottom-right" color="#7FA88F" className="w-24 sm:w-28 md:w-36 h-12 sm:h-14 md:h-18" />
                   </div>
                 </motion.div>
-              )}
+              </div>
 
-              {/* LAYOUT 2: Split Roles (Secretary & Joint Secretary / Treasurer & Joint Treasurer) */}
-              {layoutStyle === 'split-roles' && (
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  className="flex flex-col justify-between py-1 gap-8 md:gap-12 w-full relative"
-                >
-                  {/* Swirl Flourish top-right of title column */}
-                  <div className="absolute -top-6 -right-12 md:-right-20 pointer-events-none opacity-80 z-10">
-                    <SwirlFlourish color="#3B4E7C" />
-                  </div>
-
-                  {/* Ray Burst bottom-left of title column */}
-                  <div className="absolute -bottom-6 -left-12 md:-left-20 pointer-events-none opacity-80 z-10">
-                    <RayBurst color="#3B4E7C" />
-                  </div>
-
-                  {/* Role 1 (Top Left): "Secretary" / "Treasurer" */}
-                  <div className="relative flex flex-col items-start -ml-3 sm:-ml-6 md:-ml-8">
-                    <span className="font-script text-3xl sm:text-4xl md:text-5xl font-bold text-nss-navy drop-shadow-xs whitespace-nowrap">
-                      {primaryRole}
-                    </span>
-                    <div className="-mt-2 -ml-2 pointer-events-none z-30">
-                      <LoopyArrow variant="sec-top-left" color="#7FA88F" />
-                    </div>
-                  </div>
-
-                  {/* Role 2 (Bottom Right): "Joint Secretary" / "Joint Treasurer" */}
-                  <div className="relative flex flex-col items-end -mr-3 sm:-mr-6 md:-mr-8">
-                    <span className="font-script text-3xl sm:text-4xl md:text-5xl font-bold text-nss-navy text-right leading-tight drop-shadow-xs whitespace-nowrap">
-                      {secondaryRole}
-                    </span>
-                    <div className="-mt-2 -mr-2 pointer-events-none z-30">
-                      <LoopyArrow variant="sec-bottom-right" color="#7FA88F" />
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-
-            </div>
-
-            {/* Right Column: Secondary Role (or member2 in centered-title) */}
-            <div className="relative flex items-center justify-center">
-              {layoutStyle === 'centered-title' ? (
+              {/* Right Column: Vice Chairperson 2 */}
+              <div className="relative flex items-center justify-center">
                 <PolaroidCard 
                   photo={member2.photo || member2.image}
                   name={member2.name}
@@ -181,38 +112,101 @@ export default function MemberPairSection({
                   decoration={decoration}
                   rotate={rotations[1]}
                 />
-              ) : secondaryMembers.length > 1 ? (
-                <div className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6">
-                  {secondaryMembers.map((m, idx) => (
-                    <PolaroidCard 
-                      key={m.name || idx}
-                      photo={m.photo || m.image}
-                      name={m.name}
-                      role=""
-                      linkedin={m.linkedin}
-                      decoration={decoration}
-                      rotate={idx % 2 === 0 ? -3 : rotations[1]}
-                      size="compact"
-                    />
-                  ))}
+              </div>
+
+            </div>
+          </div>
+        ) : (
+          /* ============================================================ */
+          /* LAYOUT 2: Split Roles (Vertical Stack: Secretary on Top, Joint Sec Below) */
+          /* ============================================================ */
+          <div className="flex flex-col items-center justify-center w-full max-w-4xl py-0 sm:py-0.5 gap-2 sm:gap-3 md:gap-3.5">
+            
+            {/* Top Tier: Primary Role (Secretary / Treasurer) */}
+            <div className="relative flex flex-col items-center">
+              {/* Script Title for Primary Role with its dedicated LoopyArrow */}
+              <motion.div 
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center justify-center gap-2 mb-1 sm:mb-1.5 relative z-20"
+              >
+                <div className="hidden sm:block absolute right-full mr-3 top-1/2 -translate-y-1/2 transform -rotate-12 pointer-events-none">
+                  <RayBurst color="#3B4E7C" className="w-7 h-7" />
                 </div>
-              ) : (
-                <PolaroidCard 
-                  photo={secondaryMembers[0]?.photo || secondaryMembers[0]?.image}
-                  name={secondaryMembers[0]?.name}
-                  role=""
-                  linkedin={secondaryMembers[0]?.linkedin}
-                  decoration={decoration}
-                  rotate={rotations[1]}
-                />
-              )}
+                
+                <span className="font-script text-3xl sm:text-4xl md:text-5xl font-bold text-nss-navy tracking-wide drop-shadow-xs">
+                  {primaryRole}
+                </span>
+
+                {/* Vertical LoopyArrow pointing from Secretary label directly DOWNWARD into the Secretary polaroid */}
+                <div className="-mt-1 pointer-events-none z-30">
+                  <LoopyArrow variant="vertical-down-right" color="#7FA88F" className="w-16 sm:w-20 md:w-24 h-10 sm:h-12 md:h-14" />
+                </div>
+              </motion.div>
+
+              {/* Primary Card(s) */}
+              <div className="relative flex items-center justify-center gap-4">
+                {primaryMembers.map((m, idx) => (
+                  <PolaroidCard 
+                    key={m.name || idx}
+                    photo={m.photo || m.image}
+                    name={m.name}
+                    role=""
+                    linkedin={m.linkedin}
+                    decoration={decoration}
+                    rotate={idx % 2 === 0 ? rotations[0] : -rotations[0]}
+                    size="default"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Bottom Tier: Secondary Role (Joint Secretary / Joint Treasurer) */}
+            <div className="relative flex flex-col items-center mt-1 sm:mt-1.5">
+              {/* Script Title for Secondary Role with its dedicated LoopyArrow */}
+              <motion.div 
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="flex items-center justify-center gap-2 mb-1 sm:mb-1.5 relative z-20"
+              >
+                {/* Vertical LoopyArrow pointing from Joint Secretary label directly DOWNWARD into the Joint Secretary polaroid(s) */}
+                <div className="-mt-1 pointer-events-none z-30">
+                  <LoopyArrow variant="vertical-down-left" color="#7FA88F" className="w-16 sm:w-20 md:w-24 h-10 sm:h-12 md:h-14" />
+                </div>
+
+                <span className="font-script text-2xl sm:text-3xl md:text-4xl font-bold text-nss-navy tracking-wide drop-shadow-xs">
+                  {secondaryRole}
+                </span>
+
+                <div className="hidden sm:block absolute left-full ml-3 top-1/2 -translate-y-1/2 transform rotate-12 pointer-events-none">
+                  <SwirlFlourish color="#3B4E7C" className="w-7 h-6" />
+                </div>
+              </motion.div>
+
+              {/* Secondary Card(s) - Side-by-Side if 2+, Centered if 1 */}
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-5 md:gap-8">
+                {secondaryMembers.map((m, idx) => (
+                  <PolaroidCard 
+                    key={m.name || idx}
+                    photo={m.photo || m.image}
+                    name={m.name}
+                    role=""
+                    linkedin={m.linkedin}
+                    decoration={decoration}
+                    rotate={idx % 2 === 0 ? -2 : rotations[1]}
+                    size="medium"
+                  />
+                ))}
+              </div>
             </div>
 
           </div>
-
-        </div>
+        )}
 
       </div>
     </SlideShell>
   );
 }
+

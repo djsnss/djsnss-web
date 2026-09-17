@@ -3,20 +3,32 @@ import { motion } from 'framer-motion';
 import SlideShell from './SlideShell';
 import YearSelector from './YearSelector';
 import SparkleSwirl from '../../assets/team/doodles/SparkleSwirl';
+import DiamondDoodle from '../../assets/team/doodles/DiamondDoodle';
+import TwinHeartDoodle from '../../assets/team/doodles/TwinHeartDoodle';
 
 export default function CoverSlide({ years = [], selectedYear, onSelectYear }) {
   return (
     <SlideShell id="cover" leafCorner="top-left-bottom-right" showStars={true}>
-      <div className="flex flex-col items-center text-center my-auto max-w-3xl">
-        {/* Script Header "Meet The" */}
-        <motion.span 
+      <div className="flex flex-col items-center text-center my-auto max-w-3xl relative">
+        {/* Diamond Doodle Top Accent */}
+        <div className="absolute -top-10 left-2 sm:left-8 w-8 h-8 opacity-70 pointer-events-none">
+          <DiamondDoodle color="#3B4E7C" />
+        </div>
+
+        {/* Script Header "Meet The" with Twin Hearts */}
+        <motion.div 
           initial={{ opacity: 0, y: -15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="font-script text-3xl sm:text-4xl md:text-5xl text-nss-navy font-medium tracking-wide mb-1"
+          className="flex items-center justify-center gap-2 mb-1"
         >
-          Meet The
-        </motion.span>
+          <span className="font-script text-3xl sm:text-4xl md:text-5xl text-nss-navy font-medium tracking-wide">
+            Meet The
+          </span>
+          <div className="w-8 h-6 sm:w-10 sm:h-7 opacity-80 -mt-1">
+            <TwinHeartDoodle color="#7FA88F" />
+          </div>
+        </motion.div>
 
         {/* Main Title "CORE TEAM" */}
         <motion.h1 
@@ -33,7 +45,7 @@ export default function CoverSlide({ years = [], selectedYear, onSelectYear }) {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.25 }}
-          className="font-script text-2xl sm:text-3xl md:text-4xl text-nss-sage-dark italic font-medium mt-3 md:mt-5 max-w-xl"
+          className="font-script text-2xl sm:text-3xl md:text-4xl text-nss-sage-dark italic font-medium mt-3 md:mt-5 max-w-xl px-2"
         >
           "Driven by passion, united by purpose"
         </motion.p>
@@ -43,7 +55,7 @@ export default function CoverSlide({ years = [], selectedYear, onSelectYear }) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-8 md:mt-10 relative"
+          className="mt-6 sm:mt-8 md:mt-10 relative"
         >
           <YearSelector 
             years={years}
@@ -51,8 +63,8 @@ export default function CoverSlide({ years = [], selectedYear, onSelectYear }) {
             onSelectYear={onSelectYear} 
           />
           
-          {/* Sparkle Swirl Accent near YearSelector */}
-          <div className="absolute -right-14 -bottom-6 w-16 opacity-80 pointer-events-none">
+          {/* Sparkle Swirl Accent near YearSelector (Mobile Safe) */}
+          <div className="absolute -right-6 sm:-right-12 -bottom-5 w-12 sm:w-16 opacity-80 pointer-events-none">
             <SparkleSwirl color="#7FA88F" />
           </div>
         </motion.div>

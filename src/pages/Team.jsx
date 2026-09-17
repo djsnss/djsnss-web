@@ -51,7 +51,7 @@ export default function Team() {
   useEffect(() => {
     const observerOptions = {
       root: containerRef.current,
-      threshold: 0.5,
+      threshold: 0.3,
     };
 
     const observerCallback = (entries) => {
