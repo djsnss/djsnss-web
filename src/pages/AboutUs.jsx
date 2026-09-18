@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import Aboutusimg from "../assets/Events/IndependenceDay.png";
+import Aboutusimg from "../assets/Events/IndependenceDay26.jpg";
 import HariVasudevan from "../assets/Faculty/Hari Vasudevan.jpg";
 import VyankateshBagal from "../assets/Faculty/Vyankatesh Bagal new.jpg";
 import RahulTaware from "../assets/Faculty/Rahul Taware.jpg";
