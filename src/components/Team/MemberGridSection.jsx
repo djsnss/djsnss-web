@@ -4,8 +4,8 @@ import SlideShell from './SlideShell';
 import PolaroidCard from './PolaroidCard';
 import DiamondDoodle from '../../assets/team/doodles/DiamondDoodle';
 
-export default function MemberGridSection({ 
-  id, 
+export default function MemberGridSection({
+  id,
   sectionTitle = "", // e.g. "Heads"
   subTitle = "",     // e.g. "Event Heads", "Publicity Heads", "Creatives Head", "Technical Heads"
   members = [],
@@ -29,9 +29,9 @@ export default function MemberGridSection({
   return (
     <SlideShell id={id} leafCorner={leafCorner} contentClassName={isTwoRow ? "-translate-y-1 md:-translate-y-2" : ""}>
       <div className={`flex flex-col items-center justify-center w-full max-w-6xl my-auto ${isTwoRow ? 'py-0.5' : ''}`}>
-        
+
         {/* Section Header with Diamond Accent */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -42,17 +42,15 @@ export default function MemberGridSection({
           </div>
 
           {sectionTitle && (
-            <h2 className={`font-serif font-extrabold text-nss-navy tracking-tight mb-0.5 ${
-              isTwoRow ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl mb-1'
-            }`}>
+            <h2 className={`font-serif font-extrabold text-nss-navy tracking-tight mb-0.5 ${isTwoRow ? 'text-3xl sm:text-4xl md:text-5xl' : 'text-4xl sm:text-5xl md:text-6xl mb-1'
+              }`}>
               {sectionTitle}
             </h2>
           )}
 
           {subTitle && (
-            <p className={`font-script font-bold text-nss-navy tracking-wide ${
-              isTwoRow ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-3xl sm:text-4xl md:text-5xl'
-            }`}>
+            <p className={`font-script font-bold text-nss-navy tracking-wide ${isTwoRow ? 'text-2xl sm:text-3xl md:text-4xl' : 'text-3xl sm:text-4xl md:text-5xl'
+              }`}>
               {subTitle}
             </p>
           )}
@@ -60,13 +58,13 @@ export default function MemberGridSection({
 
         {isTwoRow ? (
           /* 2 Separate Rows for 5+ members (3 on top row, 2 on bottom row) */
-          <div className="flex flex-col items-center justify-center gap-1.5 sm:gap-2.5 md:gap-3 w-full">
+          <div className="flex flex-col items-center justify-center gap-3 sm:gap-2.5 md:gap-3 w-full">
             {/* Row 1: 3 polaroids */}
-            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2.5 sm:gap-4 md:gap-6 lg:gap-8 w-full">
+            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-4 md:gap-6 lg:gap-8 w-full py-3">
               {row1.map((member, index) => {
                 const config = cardConfigs[index % cardConfigs.length];
                 return (
-                  <PolaroidCard 
+                  <PolaroidCard
                     key={member.name || index}
                     photo={member.photo || member.image}
                     name={member.name}
@@ -75,18 +73,18 @@ export default function MemberGridSection({
                     decoration={config.decoration}
                     cornerAccent={config.cornerAccent}
                     rotate={config.rotate}
-                    size="compact"
+                    size="default"
                   />
                 );
               })}
             </div>
 
             {/* Row 2: 2 polaroids */}
-            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-2.5 sm:gap-4 md:gap-6 lg:gap-8 w-full">
+            <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-4 sm:gap-4 md:gap-6 lg:gap-8 w-full py-3">
               {row2.map((member, index) => {
                 const config = cardConfigs[(index + row1.length) % cardConfigs.length];
                 return (
-                  <PolaroidCard 
+                  <PolaroidCard
                     key={member.name || (index + row1.length)}
                     photo={member.photo || member.image}
                     name={member.name}
@@ -95,7 +93,7 @@ export default function MemberGridSection({
                     decoration={config.decoration}
                     cornerAccent={config.cornerAccent}
                     rotate={config.rotate}
-                    size="compact"
+                    size="default"
                   />
                 );
               })}
@@ -103,11 +101,11 @@ export default function MemberGridSection({
           </div>
         ) : (
           /* Single Row of Polaroid Cards for 1-4 members */
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-10 w-full my-auto">
+          <div className="flex flex-wrap items-center justify-center gap-5 sm:gap-6 md:gap-8 lg:gap-10 w-full my-auto py-3">
             {members.map((member, index) => {
               const config = cardConfigs[index % cardConfigs.length];
               return (
-                <PolaroidCard 
+                <PolaroidCard
                   key={member.name || index}
                   photo={member.photo || member.image}
                   name={member.name}

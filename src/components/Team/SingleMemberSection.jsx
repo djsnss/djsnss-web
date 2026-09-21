@@ -33,7 +33,7 @@ export default function SingleMemberSection({
         </motion.div>
 
         {/* Main Card Wrapper */}
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex flex-col items-center justify-center gap-2 py-3">
           
           {/* Role Label anchored to the left of the centered card */}
           <motion.div 

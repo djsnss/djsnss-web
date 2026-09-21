@@ -56,7 +56,7 @@ export default function MemberPairSection({
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6 sm:gap-4 md:gap-8 lg:gap-12 w-full">
               
               {/* Left Column: Vice Chairperson 1 */}
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center px-3 sm:px-4 py-3">
                 <PolaroidCard 
                   photo={member1.photo || member1.image}
                   name={member1.name}
@@ -91,7 +91,7 @@ export default function MemberPairSection({
                   </div>
 
                   {/* Hand-drawn Script Title */}
-                  <h2 className="font-script text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-nss-navy tracking-wide leading-tight max-w-[220px] text-center my-1 drop-shadow-xs">
+                  <h2 className="font-script text-4xl sm:text-4xl md:text-5xl lg:text-5xl font-bold text-nss-navy tracking-wide leading-tight max-w-[280px] sm:max-w-xs text-center my-1 drop-shadow-xs">
                     {sectionTitle}
                   </h2>
 
@@ -103,7 +103,7 @@ export default function MemberPairSection({
               </div>
 
               {/* Right Column: Vice Chairperson 2 */}
-              <div className="relative flex items-center justify-center">
+              <div className="relative flex items-center justify-center px-3 sm:px-4 py-3">
                 <PolaroidCard 
                   photo={member2.photo || member2.image}
                   name={member2.name}
@@ -146,7 +146,7 @@ export default function MemberPairSection({
               </motion.div>
 
               {/* Primary Card(s) */}
-              <div className="relative flex items-center justify-center gap-4">
+              <div className="relative flex items-center justify-center gap-4 px-2 py-3">
                 {primaryMembers.map((m, idx) => (
                   <PolaroidCard 
                     key={m.name || idx}
@@ -186,7 +186,7 @@ export default function MemberPairSection({
               </motion.div>
 
               {/* Secondary Card(s) - Side-by-Side if 2+, Centered if 1 */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-5 md:gap-8">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-center gap-3 sm:gap-5 md:gap-8 px-2 py-3">
                 {secondaryMembers.map((m, idx) => (
                   <PolaroidCard 
                     key={m.name || idx}
@@ -196,7 +196,7 @@ export default function MemberPairSection({
                     linkedin={m.linkedin}
                     decoration={decoration}
                     rotate={idx % 2 === 0 ? -2 : rotations[1]}
-                    size="medium"
+                    size="default"
                   />
                 ))}
               </div>
