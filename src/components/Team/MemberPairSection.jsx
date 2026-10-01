@@ -60,7 +60,7 @@ export default function MemberPairSection({
                 <PolaroidCard 
                   photo={member1.photo || member1.image}
                   name={member1.name}
-                  role=""
+                  role={member1.role || member1.position || "Vice Chairperson"}
                   linkedin={member1.linkedin}
                   decoration={decoration}
                   rotate={rotations[0]}
@@ -107,7 +107,7 @@ export default function MemberPairSection({
                 <PolaroidCard 
                   photo={member2.photo || member2.image}
                   name={member2.name}
-                  role=""
+                  role={member2.role || member2.position || "Vice Chairperson"}
                   linkedin={member2.linkedin}
                   decoration={decoration}
                   rotate={rotations[1]}
@@ -152,7 +152,7 @@ export default function MemberPairSection({
                     key={m.name || idx}
                     photo={m.photo || m.image}
                     name={m.name}
-                    role=""
+                    role={m.role || m.position || primaryRole}
                     linkedin={m.linkedin}
                     decoration={decoration}
                     rotate={idx % 2 === 0 ? rotations[0] : -rotations[0]}
@@ -192,7 +192,7 @@ export default function MemberPairSection({
                     key={m.name || idx}
                     photo={m.photo || m.image}
                     name={m.name}
-                    role=""
+                    role={m.role || m.position || secondaryRole}
                     linkedin={m.linkedin}
                     decoration={decoration}
                     rotate={idx % 2 === 0 ? -2 : rotations[1]}

@@ -65,7 +65,7 @@ export default function SingleMemberSection({
           <PolaroidCard 
             photo={member?.photo || member?.image}
             name={member?.name}
-            role=""
+            role={member?.role || member?.position || roleTitle || ""}
             linkedin={member?.linkedin}
             decoration={decoration}
             cornerAccent="diamond-tr"
