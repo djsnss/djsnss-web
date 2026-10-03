@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import DJSLogo from "../assets/DJSLogo.png";
 import DJSNSSLogo from "../assets/DJSNSSLogo.png";
 import NSSLogo from "../assets/NSSLogo.png";
-import Background from "../assets/Events/EducationDrive25.jpg";
+import Background from "../assets/Events/BDDAug26.jpg";
 import About from "../components/home/About";
 import { useState, useEffect } from "react";
 import SocialSide from "./SocialSide";
