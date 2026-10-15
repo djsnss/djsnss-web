@@ -1,4 +1,4 @@
-// propsData.js
+// dynamicPageData.js
 
 import NSSCamp from "../assets/Events/camp25/camp2.jpeg";
 import GrainAThon from "../assets/Events/grainathon25/grainathon1.jpg";
@@ -71,6 +71,11 @@ import cmpbg from "../assets/Events/camp26/img10.jpeg"
 import cmp12 from "../assets/Events/camp26/img12.jpg"
 import cmp13 from "../assets/Events/camp26/img13.jpg"
 import cmp14 from "../assets/Events/camp26/img14.jpg"
+import bdd26bg from "../assets/Events/bdd262/Bckgrnd_BDDAug26.jpg";
+import bdd26Feature from "../assets/Events/bdd262/Featured_BDDAug26.jpg";
+import bdd26_1 from "../assets/Events/bdd262/Glry1_BDDAug26.jpg";
+import bdd26_2 from "../assets/Events/bdd262/Glry2_BDDAug26.jpg";
+import bdd26_3 from "../assets/Events/bdd262/GlrY3_BDDAug26.JPG";
 
 export const propsData = [
   {
@@ -175,8 +180,24 @@ The success of Grain-A-Thon 2023 demonstrated how collective effort can bring me
     title: "Blood Donation Drive",
     backgroundColor: "red-500",
     slug: "blood-donation-drive",
-    defaultYear: "2025",
+    defaultYear: "2026",
     year: [
+      {
+        year: "2026",
+        description: `On <b>13th August 2026</b>, <b>DJSNSS</b>, in collaboration with <b>Lions Club of Bombay Millennium</b>, <b>Lions Club of Bombay Cuffe Parade</b>, <b>Sion Hospital</b>, and <b>Mahatma Gandhi Blood Bank</b>, organized a <b>Blood Donation Drive</b> at <b>Dwarkadas J. Sanghvi College of Engineering</b> from <b>8:00 AM to 6:00 PM</b>.
+<br/><br/>
+The event witnessed enthusiastic participation from <b>over 650 students</b>, faculty, staff, and NSS volunteers. The drive successfully collected <b>506 units of blood</b>, making a significant contribution towards supporting patients requiring blood transfusions.
+<br/><br/>
+The event was graced by the presence of <b>Dr. Hari Vasudevan</b>, College Principal, and <b>Lion Ravindra Kadel</b> as the Chief Guests, whose presence added to the spirit of service and social responsibility among participants. The drive was conducted smoothly under the supervision of experienced doctors and medical staff, with eligible donors proceeding through registration, health checks, and medical clearance in a safe and well-organized environment.
+<br/><br/>
+Post-donation, participants were kept under observation and provided with refreshments to ensure their well-being. Each donor received an <b>official certificate</b> from <b>Mahatma Gandhi Blood Bank</b> and <b>Sion Hospital</b> as a token of appreciation, reaffirming the NSS motto — <b>"Not Me, But You."</b>
+`,
+        bgImage: bdd26bg,
+        featuredImage: bdd26Feature,
+        location: "Dwarkadas J. Sanghvi College Of Engineering, Mumbai",
+        date: "13 August",
+        images: [bdd26_1, bdd26_2, bdd26_3],
+      },
       {
         year: "2025", // Add a 'year' property to each object
         description: `On <b>26th September 2025</b>, <b>DJSNSS</b>, in association with <b>Federal Bank</b>, organized a remarkable <b>Blood Donation Drive</b> in the <b>AIML Department</b> from <b>10:00 AM to 4:00 PM</b>. Themed around <b>“Space”</b>, the event beautifully symbolized the limitless potential of human kindness and the boundless impact of a single noble act. The drive witnessed enthusiastic participation from students, faculty, and staff members, along with various co-committee members. Through this collective effort, over <b>370 units of blood</b> were collected, making it one of the most impactful service initiatives of the year.
